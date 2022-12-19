@@ -1,0 +1,49 @@
+/* styles.css */
+
+/* Add styles here to customize the appearance of your app */
+.container-fluid{
+    /*background-image: url(../icon/bergers.jpg);*/
+    background-size: cover; 
+    background-repeat:no-repeat;
+    
+}
+
+.container{
+    background: rgba(123, 23, 15 , 0.8);
+    border-radius: 10px;
+}
+
+#formFloatingLog{
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+
+h1{
+    font-weight: bold;
+    font-family: sans-serif;
+    letter-spacing: 2px;
+    padding: 3px;
+    color: white;
+    
+}
+
+.btnlog{
+    font-family: sans-serif;
+    border: none;
+    outline: none;
+    place-self: end;
+    height: 50px;
+    width: 50%;
+    background: #F0F0F0;
+    color: black;
+    letter-spacing: 2px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.btnlog:hover{
+    background: rgb(230, 229, 229);
+    border: 1px solid;
+    color: rgb(123, 23, 15);
+  }

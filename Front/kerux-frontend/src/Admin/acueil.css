@@ -1,0 +1,139 @@
+body{
+    background-image: url();
+}
+.spanUser {
+    margin-left: 15px;
+    font-weight: bold;
+}
+.spanID {
+    margin-left: 15px;
+    color: rgb(123, 124, 126);
+}
+.spanRole {
+    margin-left: 15px;
+    color: rgb(123, 124, 126);
+}
+
+.sidebar {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    padding: 64 0 0 10;
+    border-right: 2px solid #adb5bd;
+}
+
+.sidebar-left {
+    position: fixed;
+    top: 0;
+    height: calc(100vh-70px);
+    width: calc(10%);
+}
+
+.sidebar li .nav-link {
+    color: black;
+}
+
+.sidebar li .nav-link:hover{
+    color: rgb(123, 23, 15);
+}
+
+main{
+    margin-left: calc(20%);
+    margin-top: 50px;
+   
+    
+    
+}
+
+.containerMain h1{
+    margin-left: 0px;
+    color: rgb(123, 23, 15);
+}
+
+.section{
+    margin-top: 30px;
+    margin-left: 50px;
+    margin-right: 50px;
+    
+    
+
+}
+
+.btnModify{
+    font-family: sans-serif;
+    border: none;
+    outline: none;
+    place-self: end;
+    height: 35px;
+    width: 35%;
+    background: #4f8b2a;
+    color: white;
+    letter-spacing: 3px;
+    border-radius: 10px;
+    font-weight: normal;
+
+}
+
+.btnModify:hover{
+    background: #5f9b3a;
+    border: 1px solid;
+    color: white;
+  }
+
+.agent .form-select{
+    width: 100px;
+}
+.agent .input-group{
+    width: 70%;
+    border-radius: 10px;
+}
+
+
+
+
+.table{
+    margin-top: 20px;
+   
+    width: calc(97%);
+    
+}
+
+.table thead{
+background-color: #f0f0f0 ;
+color: black;
+font-weight: normal;
+font-family: sans-serif;
+overflow-y: scroll; 
+}
+
+
+
+tbody {
+   
+    height: 200px;
+    overflow: scroll;
+    width: 100%;
+    
+}
+
+
+
+
+.nav-link .down {
+    color:white;
+}
+
+
+.form{
+    border: 2px solid #f0f0f0;
+    border-radius: 10px;
+}
+.form .form-select{
+    width: 100%;
+    height: 50;
+}
+
+
+

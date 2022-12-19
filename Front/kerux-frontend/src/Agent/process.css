@@ -1,0 +1,98 @@
+.spanUser {
+    margin-left: 15px;
+    font-weight: bold;
+}
+.spanID {
+    margin-left: 15px;
+    color: rgb(123, 124, 126);
+}
+.spanRole {
+    margin-left: 15px;
+    color: rgb(123, 124, 126);
+}
+
+#divContainer{
+    background-image: url();
+}
+
+.reception1{
+    margin-left: 50px;
+    margin-top: 100px;
+}
+
+#stepComponant {
+    background-color: rgb(255, 255, 255);
+    margin-top: 50px;
+    height: auto;
+}
+
+.etape {
+    text-align:center;
+}
+#reception_etape{
+    color: #D3D3D3 ;
+} 
+.etape div{
+    color: #D3D3D3;
+}
+
+#mainprocess{
+    margin-left: 100px;
+    margin-right: 50px;
+}
+#etape_section{
+    margin-top: 30px;
+    
+}
+
+#etape_section .container {
+    padding: 30px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    height: auto;
+    
+}
+
+.btn1{
+    font-family: sans-serif;
+    border: none;
+    outline: none;
+    place-self: end;
+    height: 35px;
+    width: 20%;
+    background: #4f8b2a;
+    color: white;
+    letter-spacing: 3px;
+    border-radius: 10px;
+    font-weight: normal;
+}
+
+.btn1:hover{
+    background: #5f9b3a;
+    border: 1px solid;
+    color: white;
+  }
+
+  .btn2{
+    font-family: sans-serif;
+    border: none;
+    outline: none;
+    place-self: end;
+    height: 35px;
+    width: 20%;
+    background: #DF4235;
+    color: white;
+    letter-spacing: 3px;
+    border-radius: 10px;
+    font-weight: normal;
+}
+.btn2:hover{
+    background: #e95548;
+    border: 1px solid;
+    color: white;
+  }
+
+
+
+
+ 
