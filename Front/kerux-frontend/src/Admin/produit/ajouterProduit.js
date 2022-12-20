@@ -39,7 +39,7 @@ const AjouterProduit = (props) => {
                 <h1 id="titre" >Ajouter Produit</h1>
                 
                 <section className="section" id="ajouterAgent">
-                    <form className="needs-validation" name="formModify" novalidate>
+                    <form className="needs-validation" name="formModify" noValidate>
                     <div className="mb-3 row">
                             <label for="roleAgentAjout" className="col-sm-2 col-form-label">Categorie</label>
                             <div className="col-sm-10">
@@ -68,10 +68,33 @@ const AjouterProduit = (props) => {
                         </div>
  
 
-                    </form>
+                    
                     <div className="d-grid gap-2 my-4">
-                        <button className="btn1" type="submit" id="ajouterbtn" onClick={fonctionAjouter} >AJOUTER</button>
+                        <button className="btn1" type="submit" id="ajouterbtn" >AJOUTER</button>
                     </div>
+                    </form>
+                    {
+                        (function () {
+                            'use strict'
+                          
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.querySelectorAll('.needs-validation')
+                          
+                            // Loop over them and prevent submission
+                            Array.prototype.slice.call(forms)
+                              .forEach(function (form) {
+                                form.addEventListener('submit', function (event) {
+                                  if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                  }
+                                  if (form.checkValidity()) fonctionAjouter(event)
+                          
+                                  form.classList.add('was-validated')
+                                }, false)
+                              })
+                          })()
+                    }
                 </section>
     
             </div>

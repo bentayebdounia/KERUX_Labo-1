@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 export default function BoxCoupage(props){
-    console.log(props.id_box);
+    //console.log(props.id_box);
 
     return (
         <>

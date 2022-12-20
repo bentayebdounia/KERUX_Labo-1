@@ -48,16 +48,16 @@ ajouterProcessSortie =(req, res) => {
     
         //console.log(id[i]);
        
-     /*   
+        
     pool.query(queries.ajouterProcessSortie, [ categorie, nom_produit, etape, poids, nombre, datee, heure, id_enregistrement, id_nettoyage, id_coupage, id_conditionnement,  fk_proditFourni, id_gnerate ] ,
          (error, result) =>{
             if (error) throw error
             res.status(200).json(result.rows[0])
-         }) */
+         }) 
     pool.query(queries.ajouterProcessSortieHist, [ categorie, nom_produit, etape, poids, nombre, datee, heure, id_enregistrement, id_nettoyage, id_coupage, id_conditionnement, fk_proditFourni, id_gnerate ] ,
     (error, result) =>{
         if (error) throw error
-        res.status(200).json(result.rows[0])
+        res.status(200)
     })
 }
 

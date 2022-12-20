@@ -147,8 +147,8 @@ const Coupage = (props) => {
         const annuler = () => {
             setTypeProd('')
             setIdAgent([])
-            setPoids(0)
-            setNombre(0)
+            setPoids('')
+            setNombre('')
            
         }
 
@@ -208,7 +208,7 @@ const Coupage = (props) => {
         <div>
             <section id="etape_section">
                 <div className="container">
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" noValidate>
                         <div className="mb-3 row">
                             <label for="id_box"  className="col-sm-2 col-form-label">ID Box</label>
                             <div className="col-sm-10">
@@ -266,10 +266,7 @@ const Coupage = (props) => {
                         <div className="d-grid gap-3 d-md-flex justify-content-md-end" >
                             
                             <button className="btn2" type="submit" onClick={annuler} >Annuler</button>
-                            <button className="btn1" type="submit" 
-                           
-                            
-                            >Valider</button>
+                            <button className="btn1" type="submit" >Valider</button>
                         
                         </div>
                 </form>
@@ -317,20 +314,20 @@ const Coupage = (props) => {
 
                  />
 
-            <ModelReponse 
+            {show3 && <ModelReponse 
                                     show={show3} 
                                     handleClose={handleClose3} 
                                     handleShow={handleShow3}
                                     message={message} 
                                     titre={"coupage"} 
-                                    />
+                                    />}
 
-            <ModalListAgent             show={show2} 
+            {show2 && <ModalListAgent             show={show2} 
                                         handleClose={handleClose2} 
                                         handleShow={handleShow2} 
                                         id={idAgent}
                                         nom={nomAgent}
-                                        />
+                                        />}
             </section>
            
 

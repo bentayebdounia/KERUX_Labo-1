@@ -77,7 +77,7 @@ const Nettoyage = (props) => {
         <>
             <section id="etape_section">
                 <div className="container">
-                    <form class="needs-validation" novalidate>
+                    <form class="needs-validation" noValidate>
                         <div className="mb-3 row">
                             <label htmlFor="id_box"  className="col-sm-2 col-form-label">ID Box</label>
                             <div className="col-sm-10">
@@ -167,7 +167,7 @@ const Nettoyage = (props) => {
                             nom={nomAgent}
                             />}
                             
-            {show2 && <ModalConfirmNet show2={show2} handleClose2={handleClose2} handleShow2={handleShow2}
+             <ModalConfirmNet show2={show2} handleClose2={handleClose2} handleShow2={handleShow2}
                              id_enregistrement={props.id}  
                              categorie={props.process.categorie}  
                              typeProd={props.process.nom_produit}
@@ -179,7 +179,7 @@ const Nettoyage = (props) => {
                              toggleDisplay={props.toggleDisplay}
                              agents= {idAgent}
             />
-}
+
             {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
                                     message={message} 
                                     titre={"nettoyage"} 

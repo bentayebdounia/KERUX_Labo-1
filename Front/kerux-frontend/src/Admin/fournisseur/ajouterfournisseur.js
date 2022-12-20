@@ -100,34 +100,34 @@ const AjouterFournisseur = (props) => {
                 <h1 id="titre" >Ajouter un fournisseur</h1>
                 
                 <section className="section" id="ajouterAgent">
-                    <form className="needs-validation" name="formModify" novalidate>
+                    <form className="needs-validation" noValidate>
                         <div className="mb-3 row">
-                            <label for="nomAgent"  className="col-sm-2 col-form-label ">Nom Fournisseur</label>
+                            <label htmlFor="nomFournisseur"  className="col-sm-2 col-form-label ">Nom Fournisseur</label>
                             <div className="col-sm-10">
-                            <input  type="text"  className="form-control" id="nomAgent" value={nomFournisseur} onChange={(e)=> setNomFournisseur(e.target.value)}  required/>
+                            <input  type="text"  className="form-control" id="nomFournisseur" value={nomFournisseur} onChange={(e)=> setNomFournisseur(e.target.value)}  required/>
                             </div>
                             
                         </div>
 
                         <div className="mb-3 row">
-                            <label for="adresseAgent" className="col-sm-2 col-form-label ">Activite</label>
+                            <label htmlFor="activite" className="col-sm-2 col-form-label ">Activite</label>
                             <div className="col-sm-10">
-                            <input type="text"  className="form-control" id="adresseAgent" value={activite} onChange={(e)=> setActivite(e.target.value)} required/>
+                            <input type="text"  className="form-control" id="activite" value={activite} onChange={(e)=> setActivite(e.target.value)} required/>
                             </div>
                         </div>
 
                         <div className="mb-3 row">
-                            <label for="prenomAgent" className="col-sm-2 col-form-label " >Adresse fournisseur</label>
+                            <label htmlFor="adrFournisseur" className="col-sm-2 col-form-label " >Adresse fournisseur</label>
                             <div className="col-sm-10">
-                            <input type="text"  className="form-control" id="prenomAgent" value={adresse} onChange={(e)=> setAdresse(e.target.value)} required/>
+                            <input type="text"  className="form-control" id="adrFournisseur" value={adresse} onChange={(e)=> setAdresse(e.target.value)} required/>
                             </div>
                         </div>
 
 
                         <div className="mb-3 row">
-                            <label for="roleAgentAjout" className="col-sm-2 col-form-label">Forme juridique</label>
+                            <label htmlFor="formeJuridique" className="col-sm-2 col-form-label">Forme juridique</label>
                             <div className="col-sm-10">
-                                <select className="form-select" aria-label="Default select example" id="roleAgentAjout" value={formJuridique} onChange={(e)=> setFormJuridique(e.target.value)} required>
+                                <select className="form-select" aria-label="Default select example" id="formeJuridique" value={formJuridique} onChange={(e)=> setFormJuridique(e.target.value)} required>
                                     <option selected></option>
                                     <option value="SARL">SARL</option>
                                     <option value="EURL">EURL</option>
@@ -138,25 +138,25 @@ const AjouterFournisseur = (props) => {
                         
 
                         <div className="mb-3 row">
-                            <label for="numAgent" className="col-sm-2 col-form-label ">Contact</label>
+                            <label htmlFor="contact" className="col-sm-2 col-form-label ">Contact</label>
                             <div className="col-sm-10">
                                     {contact_}
                             </div>
                         </div>
                         
                         <div className="mb-3 row">
-                            <label for="adresseAgent" className="col-sm-2 col-form-label ">Email</label>
+                            <label htmlFor="email" className="col-sm-2 col-form-label ">Email</label>
                             <div className="col-sm-10">
-                            <input type="text"  className="form-control" id="adresseAgent" value={email} onChange={(e)=> setEmail(e.target.value)}  required/>
+                            <input type="text"  className="form-control" id="email" value={email} onChange={(e)=> setEmail(e.target.value)}  required/>
                             </div>
                         </div>
                         
 
                         <div className="mb-3 row">
-                            <label for="adresseAgent" className="col-sm-2 col-form-label ">Modalite de paiement</label>
+                            <label htmlFor="modalitePaiement" className="col-sm-2 col-form-label ">Modalite de paiement</label>
                             <div className="col-sm-10">
                             
-                                    <select className="form-select" aria-label="Default select example" id="roleAgentAjout" value={modalite} onChange={(e)=> setModalite(e.target.value)} required>
+                                    <select className="form-select" aria-label="Default select example" id="modalitePaiement" value={modalite} onChange={(e)=> setModalite(e.target.value)} required>
                                             <option selected></option>
                                             <option value="versement a l'avance">versement à l'avance</option>
                                             <option value="versement par tranche">versement par tranche</option>
@@ -166,10 +166,10 @@ const AjouterFournisseur = (props) => {
                         </div>
 
                         <div className="mb-3 row">
-                            <label for="adresseAgent" className="col-sm-2 col-form-label ">Type de paiement</label>
+                            <label htmlFor="typePaiement" className="col-sm-2 col-form-label ">Type de paiement</label>
                             <div className="col-sm-10">
                             
-                                    <select className="form-select" aria-label="Default select example" id="roleAgentAjout" value={typePaiement} onChange={(e)=> setTypePaiement(e.target.value)} required>
+                                    <select className="form-select" aria-label="Default select example" id="typePaiement" value={typePaiement} onChange={(e)=> setTypePaiement(e.target.value)} required>
                                             <option selected></option>
                                             <option value="par cheque">par chèque</option>
                                             <option value="par espece">par espèce</option>
@@ -180,16 +180,16 @@ const AjouterFournisseur = (props) => {
 
 
                         <div className="mb-3 row">
-                            <label for="adresseAgent" className="col-sm-2 col-form-label ">Nature de livraison</label>
+                            <label htmlFor="natureLivraison" className="col-sm-2 col-form-label ">Nature de livraison</label>
                             <div className="col-sm-10">
-                            <input type="text"  className="form-control" id="adresseAgent" value={natureLivraison} onChange={(e)=> setNaturelivraison(e.target.value)}  required/>
+                            <input type="text"  className="form-control" id="natureLivraison" value={natureLivraison} onChange={(e)=> setNaturelivraison(e.target.value)}  required/>
                             </div>
                         </div>
                         
                         <div className="mb-3 row">
-                            <label for="adresseAgent" className="col-sm-2 col-form-label ">Categorie </label>
+                            <label htmlFor="categorie" className="col-sm-2 col-form-label ">Categorie </label>
                             <div className="col-sm-10">
-                                    <select className="form-select" aria-label="Default select example" id="roleAgentAjout" value={categorie} onChange={(e)=> setCategorie(e.target.value)} required>
+                                    <select className="form-select" aria-label="Default select example" id="categorie" value={categorie} onChange={(e)=> setCategorie(e.target.value)} required>
                                             <option selected></option>
                                             <option value="fournisseur de poulet">Fournisseur de poulet</option>
                                             <option value="fournisseur des legumes">Fournisseur des legumes</option>
@@ -197,14 +197,36 @@ const AjouterFournisseur = (props) => {
                             </div>
                         </div>
                         
-                        
+                        <div className="d-grid gap-2 my-4">
+                        <button className="btn1" type="submit" id="ajouterbtn"  >AJOUTER</button>
+                    </div>
                           
                         
 
                     </form>
-                    <div className="d-grid gap-2 my-4">
-                        <button className="btn1" type="submit" id="ajouterbtn" onClick={fonctionAjouter} >AJOUTER</button>
-                    </div>
+                    {
+                        (function () {
+                            'use strict'
+                          
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.querySelectorAll('.needs-validation')
+                          
+                            // Loop over them and prevent submission
+                            Array.prototype.slice.call(forms)
+                              .forEach(function (form) {
+                                form.addEventListener('submit', function (event) {
+                                  if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+                                  }
+                                  if (form.checkValidity()) fonctionAjouter(event)
+                          
+                                  form.classList.add('was-validated')
+                                }, false)
+                              })
+                          })()
+                    }
+                    
                 </section>
     
             </div>

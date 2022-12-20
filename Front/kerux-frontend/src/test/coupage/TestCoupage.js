@@ -105,7 +105,7 @@ const TestCoupage = () => {
     }
     const generateId = (fk_proditFourni) =>{
         var id = (fk_proditFourni+"id"+dateNow()+""+TimeNow())  
-        console.log("id_generate= "+id);
+        //console.log("id_generate= "+id);
     return id
     }
     var id_generate
@@ -147,8 +147,8 @@ const TestCoupage = () => {
         console.log("box.id_box== "+boxes[0].id_box);
 
         CoupageService.getProcessById(boxes[0].id_box).then((res) => {
-            console.log(res.data)
-            console.log(res.data.fk_proditfourni) 
+            //console.log(res.data)
+           // console.log(res.data.fk_proditfourni) 
             setProcess(res.data)
             if (res.data === "ID n'existe pas"){
                 setMessage("ID n'existe pas pour cette etape ")
@@ -168,7 +168,7 @@ const TestCoupage = () => {
                                 //ajouter le box couper et generer un identifiant
                               
                                 ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
-                                console.log("nombre= "+res.data.nombre);
+                                //console.log("nombre= "+res.data.nombre);
                                 setPoids(poids+res.data.poids)
                                 setNombre(nombre+res.data.nombre)
                                 ajouterBox() 
@@ -178,10 +178,9 @@ const TestCoupage = () => {
                         else{
                             //ajouter le box couper et generer un identifiant
                             ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
-                            console.log("nombre= "+res.data.nombre);
+                          //  console.log("nombre= "+res.data.nombre);
                             setPoids(poids+res.data.poids)
                             setNombre(nombre+res.data.nombre)
-                            
                             ajouterBox()
 
                         }                     
@@ -202,9 +201,9 @@ const TestCoupage = () => {
 
 
     var coupage , testNet
-    console.log(process)
-    console.log(id_generate);
-    console.log(boxes);
+    //console.log(process)
+    //console.log(id_generate);
+    //console.log(boxes);
 
 
 
@@ -220,11 +219,11 @@ const TestCoupage = () => {
                 enStock.splice("") 
                 for ( var i=0 ; i<tableNettoyage.length ; i++) { 
                     // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
-                     var j=0
+                     
                      var a = false
                      
                      for (var j=0 ; j<tableCoupage.length ; j++){
-                         if ( tableCoupage[j].id_coupage === tableNettoyage[i].id_gnerate   )   {
+                         if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate   )   {
                              
                              a = true
                              console.log(a);
@@ -233,7 +232,7 @@ const TestCoupage = () => {
                          
                          if (a ===false){
                               EnAttente.push(tableNettoyage[i])
-                              console.log( EnAttente);
+                              console.log( "EnAttente");
                               }
               
     }
@@ -270,10 +269,7 @@ const TestCoupage = () => {
                  if(tableDonneesStocker[i].date_sortie === null)
                      enStock.push(tableDonneesStocker[i]) 
               }
-              
-              
-   
-      
+       
 }
 setEnstock(
     enStock.map(p => {
@@ -330,11 +326,11 @@ setEnstock(
                                                 EnAttente.map(data => {
                                                     if (p.id_gnerate === data.id_gnerate) {
                                                         data.select = checked;
+                                                        boxes[0].id_box=p.id_gnerate
                                                          
                                                     }
                                                     else 
                                                         data.select=""
-                                                        
                                                     
                                                     return data;
                                                 })
@@ -398,7 +394,7 @@ if(buttonColor2)
                                                 enStock.map(data => {
                                                 if (p.id_gnerate === data.id_gnerate) {
                                                     data.select = checked;
-                                                    setId(p.id_gnerate)
+                                                    boxes[0].id_box=p.id_gnerate
                                                 }
                                                 else  data.select=""
                                                     
@@ -430,107 +426,97 @@ if(buttonColor2)
 }
 
 
-    
-      if(toggle){
-        coupage = (
-                    <Coupage 
+    return ( 
+        <>
+            {!toggle &&
+                 <section id="etape_section">
+                 <div className="container">
+                     <div className="mb-3 row">
+                     <label htmlFor="id_etape"  className="col-sm-2 col-form-label">ID Box</label>
+                     <div className="col-sm-7">
+                     {boxes.map((box,key) => {
+                         return ( 
+                             <div className="input-group col-sm-10" key={key}>
+                                     <BoxCoupage id_box = {box.id_box} onIdChange={newId_box => {
+                                         const newBoxes = [...boxes]
+                                         newBoxes[key].id_box = newId_box
+                                         setBoxes(newBoxes)
+                                     }} />
+                                 {key === 0 && <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2"
+                                                  onClick={(e) => plusId(e)} >
+                                                 <i className="bi bi-plus-lg" style={{color: "white"}}></i>
+                                                  </button>
+                                                  
+                                                  }
+                                     
+                         </div>
+                             
+                         ) })} 
+                                                   
+                         
+                     </div>
+                     <div className='col-sm-3'>
+                             <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2" onClick={(e)=> confirmer(e)}>
+                                             <i className="bi bi-check-lg" style={{color: "white"}}> Confirmer</i>
+                             </button> 
+                         </div>
+                      
+                 </div>
+     
+                 <div style={{width:"90%", height:"600px", marginLeft:"5%", marginRight:"15%" , marginTop:"30px", backgroundColor: "white" , borderRadius:"10px" }}>
+                         <label 
+                                 style={{  padding: "5px", marginRight:"20px" , borderBottom: `${(buttonColor===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor===true) ? '#7B170F' : 'white'  }`}}
+                                 onClick={chargerData} >
+                             <a class="nav-link "  style={{ color: `${(buttonColor===true) ? '#7B170F' : 'black'  }`}} href='#'>Produits en attente</a> 
+                         </label>
+     
+                         <label 
+                                 style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }` , padding: "5px" , borderBottom: `${(buttonColor2===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor2===true) ? '7B170F' : 'white'  }`}}
+                                 onClick={chargerDataEnStock}
+                                 >
+                                    <a class="nav-link " style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }`}} href='#'> Produits en Stock</a></label>
+     
+                         <p style={{ borderBottom:  '1px solid' , borderBottomColor: "#BBBABA"}}/>
+     
+                     
+                     
+                         <div className="divTab" style={{width:"100%", height:"500px" , margin:"0px" , overflow : 'auto'}}> 
+                         
+                                 {table}
+                                 {table2}
+      
+          
+                     </div> 
+     
+                     </div>
+         
+                 </div>
+                 {show && <ModelReponse 
+                                 show={show} 
+                                 handleClose={handleClose} 
+                                 handleShow={handleShow} 
+                                 titre={'coupage'} 
+                                 message={message}
+                                 />}
+     
+                 {show2 && <ModalSortieStock 
+                                     show2={show2} 
+                                     handleClose2={handleClose2} 
+                                     handleShow2={handleShow2} 
+                                     id={process.id_gnerate} 
+                                     process={process}
+                                     etape={'coupage'}
+                                     toggleSortieTrue = {toggleSortieTrue}  
+                                     />}
+             </section>
+            }
+            {toggle && <Coupage 
                             id={id_generateNet} 
                             poids={poids} 
                             nombre={nombre}
                             process={process}  
                             toggleDisplay = {toggleDisplay}
-                             />)
-      }
-
-      if(!toggle){
-        testNet = (
-            <section id="etape_section">
-            <div className="container">
-                <div className="mb-3 row">
-                <label htmlFor="id_etape"  className="col-sm-2 col-form-label">ID Box</label>
-                <div className="col-sm-7">
-                {boxes.map((box,key) => {
-                    return ( 
-                        <div className="input-group col-sm-10" key={key}>
-                                <BoxCoupage id_box = {box.id_box} onIdChange={newId_box => {
-                                    const newBoxes = [...boxes]
-                                    newBoxes[key].id_box = newId_box
-                                    setBoxes(newBoxes)
-                                }} />
-                            {key === 0 && <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2"
-                                             onClick={(e) => plusId(e)} >
-                                            <i className="bi bi-plus-lg" style={{color: "white"}}></i>
-                                             </button>
-                                             
-                                             }
-                                
-                    </div>
-                        
-                    ) })} 
-                                              
-                    
-                </div>
-                <div className='col-sm-3'>
-                        <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2" onClick={(e)=> confirmer(e)}>
-                                        <i className="bi bi-check-lg" style={{color: "white"}}> Confirmer</i>
-                        </button> 
-                    </div>
-                 
-            </div>
-
-            <div style={{width:"90%", height:"600px", marginLeft:"5%", marginRight:"15%" , marginTop:"30px", backgroundColor: "white" , borderRadius:"10px" }}>
-                    <label 
-                            style={{  padding: "5px", marginRight:"20px" , borderBottom: `${(buttonColor===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor===true) ? '#7B170F' : 'white'  }`}}
-                            onClick={chargerData} >
-                        <a class="nav-link "  style={{ color: `${(buttonColor===true) ? '#7B170F' : 'black'  }`}} href='#'>Produits en attente</a> 
-                    </label>
-
-                    <label 
-                            style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }` , padding: "5px" , borderBottom: `${(buttonColor2===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor2===true) ? '7B170F' : 'white'  }`}}
-                            onClick={chargerDataEnStock}
-                            >
-                               <a class="nav-link " style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }`}} href='#'> Produits en Stock</a></label>
-
-                    <p style={{ borderBottom:  '1px solid' , borderBottomColor: "#BBBABA"}}/>
-
-                
-                
-                    <div className="divTab" style={{width:"100%", height:"500px" , margin:"0px" , overflow : 'auto'}}> 
-                    
-                            {table}
-                            {table2}
- 
-     
-                </div> 
-
-                </div>
-    
-            </div>
-            <ModelReponse 
-                            show={show} 
-                            handleClose={handleClose} 
-                            handleShow={handleShow} 
-                            titre={'coupage'} 
-                            message={message}
-                            />
-
-            <ModalSortieStock 
-                                show2={show2} 
-                                handleClose2={handleClose2} 
-                                handleShow2={handleShow2} 
-                                id={process.id_gnerate} 
-                                process={process}
-                                etape={'coupage'}
-                                toggleSortieTrue = {toggleSortieTrue}  
-                                />
-        </section>
-        )
-     }
-  
-    return ( 
-        <>
-            {testNet}
-            {coupage}
+                             />}
             
             
         </>

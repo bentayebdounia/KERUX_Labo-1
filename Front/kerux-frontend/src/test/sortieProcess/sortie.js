@@ -17,8 +17,8 @@ const Sortie = (props) => {
     const handleClose3 = () => setShow3(false)
     const handleShow3 = () => setShow3(true)
 
-    const [poids , setPoids] = useState(0)
-    const [nombre , setNombre] = useState(0)
+    const [poids , setPoids] = useState()
+    const [nombre , setNombre] = useState()
     const [agent , setAgent] = useState('')
 
     const [idAgent, setIdAgent]= useState([])
@@ -53,12 +53,17 @@ const Sortie = (props) => {
         console.log(agent)
         
     }
+    const valider = (e) => {
+        e.preventDefault()
+        handleShow()
+    }
 
 
     return ( 
         <div>
             <section id="etape_section">
                 <div class="container">
+                <form class="needs-validation" noValidate>
                 <div class="mb-3 row">
                     <label for="id_box"  class="col-sm-2 col-form-label label">ID Box</label>
                     <div class="col-sm-10">
@@ -107,11 +112,38 @@ const Sortie = (props) => {
                 <div class="d-grid gap-3 d-md-flex justify-content-md-end" >
                     
                     <button class="btn2" type="submit" onClick={props.toggleDisplay}  >Annuler</button>
-                    <button class="btn1" type="submit"onClick={handleShow} >Valider</button>
+                    <button class="btn1" type="submit" >Valider</button>
                 
                 </div>
+                </form>
+                {
+                  (function () {
+                            'use strict'
+                        
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.querySelectorAll('.needs-validation')
+                        
+                            // Loop over them and prevent submission
+                            Array.prototype.slice.call(forms)
+                            .forEach(function (form) {
+                                form.addEventListener('submit', function (event) {
+                                if (!form.checkValidity()) {
+                                    event.preventDefault()
+                                    event.stopPropagation()
+
+                                    
+                                    
+                                }
+                                if (form.checkValidity()) valider(event)
+                                
+                        
+                                form.classList.add('was-validated')
+                                }, false)
+                            })
+                        })()
+                }
             </div>
-            {handleShow && <ModalConfirmSortie show2={show} handleClose2={handleClose} 
+            <ModalConfirmSortie show2={show} handleClose2={handleClose} 
                                 id_box={props.id}  
                                 categorie={props.process.categorie}
                                 typeProd={props.process.nom_produit}
@@ -124,14 +156,14 @@ const Sortie = (props) => {
                                 fk_proditfourni={props.process.fk_proditfourni}
                                 test={props.test}
                                 toggleDisplay = {props.toggleDisplay}
-            />}
+            />
 
-            {handleShow3 && <ModelReponse   show={show3} handleClose={handleClose3} 
+            {show3 && <ModelReponse   show={show3} handleClose={handleClose3} 
                                             message={message} 
                                             titre={"sortie"} 
                                             />}
 
-            {handleShow2 && <ModalListAgent     show={show2} 
+            {show2 && <ModalListAgent     show={show2} 
                                                 handleClose={handleClose2} 
                                                 id={idAgent}
                                                 nom={nomAgent}

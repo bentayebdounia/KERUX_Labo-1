@@ -124,7 +124,7 @@ const TestCondit = () => {
                     // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
                      var j=0
                      var a = false
-                     console.log(tableconditionnement[j].id_coupage);
+                     console.log(tableconditionnement[j]);
                      for (var j=0 ; j<tableconditionnement.length ; j++){
                          if ( tableconditionnement[j].id_coupage === tableCoupage[i].id_gnerate   )   {
                              

@@ -50,7 +50,7 @@ const ModalSortieStock = (props) => {
                 </div>
 
                 <div className="mb-3 row">
-                    <label htmlFor="poids"  className="col-sm-2 col-form-label">Poids</label>
+                    <label htmlFor="poids"  className="col-sm-2 col-form-label">Poids de sortie</label>
                     <div className="col-sm-10">
                         <input type="text"  className="form-control" id="poids"  value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
                     </div>

@@ -133,7 +133,7 @@ const Reception = (props) => {
     
         reception = (
             <>
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" noValidate>
                 <div>
                 
                     <div className="mb-3 row ">

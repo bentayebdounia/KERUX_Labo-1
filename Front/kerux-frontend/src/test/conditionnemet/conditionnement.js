@@ -101,11 +101,12 @@ const Conditionnement = (props) => {
         e.preventDefault()
         handleShow()
     }
+
     const annuler = () => {
         
         setIdAgent([])
-        setPoids(0)
-        setNombre(0)
+        setPoids('')
+        setNombre('')
        
     }
     
@@ -139,7 +140,7 @@ const Conditionnement = (props) => {
         <div>
             <section id="etape_section">
                 <div className="container">
-                <form class="needs-validation" novalidate>
+                <form class="needs-validation" noValidate>
                 <div className="mb-3 row">
                 
                     <label for="id_box"  className="col-sm-2 col-form-label">ID Box</label>
@@ -194,7 +195,7 @@ const Conditionnement = (props) => {
                 
                 <div class="d-grid gap-3 d-md-flex justify-content-md-end" >
                     
-                    <button className="btn2" type="submit" onClick={annuler} >Annuler</button>
+                    <button className="btn2" onClick={annuler} >Annuler</button>
                     <button className="btn1" type="submit" >Valider</button>
                 
                 </div>
@@ -213,9 +214,7 @@ const Conditionnement = (props) => {
                                 if (!form.checkValidity()) {
                                     event.preventDefault()
                                     event.stopPropagation()
-
-                                    
-                                    
+    
                                 }
                                 if (form.checkValidity()) valider(event)
                                 
@@ -226,11 +225,11 @@ const Conditionnement = (props) => {
                         })()
                 }
             </div>
-            <ModalMarinade show2={show2} handleClose2={handleClose2} handleShow2={handleShow2} id_box={props.id}
+            {show2 && <ModalMarinade show2={show2} handleClose2={handleClose2} handleShow2={handleShow2} id_box={props.id}
              process={props.process}
-              />
+              />}
             
-            <ModalConfirmCondit     show={show} 
+             <ModalConfirmCondit    show={show} 
                                     handleClose={handleClose} 
                                     handleShow={handleShow}
                                     id_box={props.id}
@@ -241,17 +240,17 @@ const Conditionnement = (props) => {
                                     toggleDisplay = {props.toggleDisplay} 
                                     PorcentagePoids = {PorcentagePoids}
             />
-            <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
+            {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
                                     message={message} 
                                     titre={"conditionnement"} 
-                                    />
+                                    />}
             
-            <ModalListAgent             show={show4} 
+            {show4 && <ModalListAgent             show={show4} 
                                         handleClose={handleClose4} 
                                         handleShow={handleShow4} 
                                         id={idAgent}
                                         nom={nomAgent}
-                                        />
+                                        />}
 
             </section>
  

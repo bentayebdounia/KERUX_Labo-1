@@ -157,9 +157,7 @@ CREATE TABLE box_couper (
     id_nettoyage VARCHAR (200),
     id_generate VARCHAR (200),
     datee DATE,
-    heure DATE
-
-
+    heure TIME
 ) 
 
 
