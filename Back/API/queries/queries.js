@@ -17,7 +17,7 @@ const getRoleById = "SELECT nom_role FROM role WHERE id_role = $1"
 const getRoleByNom = "SELECT id_role FROM role WHERE nom_role = $1"
 
 /////// Entrepot *********************************
-const ajouterEntrepot = "INSERT INTO entrepot ( nom_entrepot, type_entrepot, air_stockage, capacite, adresse, exist ,date_entrepot)"
+const ajouterEntrepot = "INSERT INTO entrepot ( nom_entrepot, type_entrepot, air_stockage, capacite, adresse, exist ,date_enregistrement_entrepot)"
                         +"VALUES ( $1, $2, $3, $4, $5, $6, $7 )"
 const getEnrepot = "SELECT id_entrepot, nom_entrepot FROM entrepot WHERE exist=TRUE"
 /////// Stock *********************************

@@ -169,12 +169,12 @@ const ModalAjoutBoxes = (props) => {
             </Modal.Footer>
       </Modal>
 
-        {showQstock && <ModalQStock 
+      <ModalQStock 
                         show = {showQstock}
                         handleClose = {handleCloseQstock}
                         handleShow = {handleShowQstock}
                         tableBox = {tableboxe}
-                        />}
+                        />
       
 </>
     )

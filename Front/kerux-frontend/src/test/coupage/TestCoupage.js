@@ -200,7 +200,7 @@ const TestCoupage = () => {
       }
 
 
-    var coupage , testNet
+    
     //console.log(process)
     //console.log(id_generate);
     //console.log(boxes);
@@ -221,19 +221,20 @@ const TestCoupage = () => {
                     // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
                      
                      var a = false
-                     
+                     console.log(tableNettoyage[i].fk_stock);
                      for (var j=0 ; j<tableCoupage.length ; j++){
-                         if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate   )   {
+                         if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate )   {
                              
                              a = true
                              console.log(a);
                          }
                      }
                          
-                         if (a ===false){
+                         if (a ===false && tableNettoyage[i].fk_stock===null){
                               EnAttente.push(tableNettoyage[i])
                               console.log( "EnAttente");
                               }
+                              
               
     }
        setEnattente(
@@ -245,7 +246,7 @@ const TestCoupage = () => {
                 nom_produit:p.nom_produit,
                 poids:p.poids ,
                 nombre:p.nombre, 
-                datee :moment.utc(p.datee).format('DD/MM/YYYY'),
+                datee :p.datee,
                 heure:p.heure,
                 etape:p.etape ,
                
@@ -263,13 +264,25 @@ const TestCoupage = () => {
         setButtoncolor2(!buttonColor2)
         EnAttente.splice("") 
         enStock.splice("") 
-        for ( var i=0 ; i<tableDonneesStocker.length ; i++) { 
-            if(tableDonneesStocker[i].id_coupage === null  ) { 
-                 if(tableDonneesStocker[i].fk_stock !== null)
-                 if(tableDonneesStocker[i].date_sortie === null)
-                     enStock.push(tableDonneesStocker[i]) 
-              }
-       
+        for ( var i=0 ; i<tableNettoyage.length ; i++) { 
+            // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
+             
+             var a = false
+             console.log(tableNettoyage[i].fk_stock);
+             for (var j=0 ; j<tableCoupage.length ; j++){
+                 if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate )   {
+                     
+                     a = true
+                     console.log(a);
+                 }
+             }
+                 
+                 
+                      if (a ===false && tableNettoyage[i].fk_stock!==null){
+                        enStock.push(tableNettoyage[i])
+                        console.log( "EnStock");
+                        }
+      
 }
 setEnstock(
     enStock.map(p => {
@@ -280,7 +293,7 @@ setEnstock(
              nom_produit:p.nom_produit,
              poids:p.poids ,
              nombre:p.nombre, 
-             datee :moment.utc(p.datee).format('DD/MM/YYYY'),
+             datee :p.datee,
              heure:p.heure,
              etape:p.etape ,
              nom_entrepot :p.nom_entrepot ,
@@ -345,7 +358,7 @@ setEnstock(
                                         <td>{p.nom_produit}</td> 
                                         <td>{p.poids}</td> 
                                         <td>{p.nombre}</td> 
-                                        <td>{p.datee}</td> 
+                                        <td>{moment.utc(p.datee).format('DD/MM/YYYY')}</td> 
                                         <td>{p.heure}</td> 
                                         
                                         
@@ -412,7 +425,7 @@ if(buttonColor2)
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids}</td> 
                                     <td>{p.nombre}</td> 
-                                    <td>{p.datee}</td> 
+                                    <td>{moment.utc(p.datee).format('DD/MM/YYYY')}</td> 
                                     <td>{p.heure}</td> 
                                     <td>{p.nom_entrepot}</td>  
                                 

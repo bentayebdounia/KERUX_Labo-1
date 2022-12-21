@@ -68,7 +68,7 @@ const TestSortie = () => {
             setTableSortie(res.data) 
         })
 
-            serviceProcess.getActualProcesssStock()
+        serviceProcess.getActualProcesssStock()
 
         .then((res)=>{ 
             setTabledonneesstocker(res.data) 
@@ -129,7 +129,7 @@ const TestSortie = () => {
                              }
                          }
                              
-                             if (a ===false){
+                             if (a ===false && tableconditionnement[i].fk_stock === null){
                                   EnAttente.push(tableconditionnement[i])
                                   console.log( EnAttente);
                                   }
@@ -145,7 +145,7 @@ const TestSortie = () => {
                 nom_produit:p.nom_produit,
                 poids:p.poids ,
                 nombre:p.nombre, 
-                datee :moment.utc(p.datee).format('DD/MM/YYYY'),
+                datee :p.datee,
                 heure:p.heure,
                 etape:p.etape ,
                
@@ -164,7 +164,7 @@ const TestSortie = () => {
         EnAttente.splice("") 
         enStock.splice("") 
         for ( var i=0 ; i<tableDonneesStocker.length ; i++) { 
-            if(tableDonneesStocker[i].id_enregistrement === null && tableDonneesStocker[i].fk_stock !== null && tableDonneesStocker[i].date_sortie === null) { 
+            if(tableDonneesStocker[i].id_enregistrement === null  && tableDonneesStocker[i].date_sortie === null) { 
                  
                   
                      enStock.push(tableDonneesStocker[i]) 
@@ -183,7 +183,7 @@ setEnstock(
              nom_produit:p.nom_produit,
              poids:p.poids ,
              nombre:p.nombre, 
-             datee :moment.utc(p.datee).format('DD/MM/YYYY'),
+             datee :p.datee,
              heure:p.heure,
              etape:p.etape ,
              nom_entrepot :p.nom_entrepot ,
@@ -382,13 +382,13 @@ if(buttonColor2)
                 </div>
                 
             </div>
-            <ModelReponse 
+            {show && <ModelReponse 
                             show={show} 
                             handleClose={handleClose} 
                             handleShow={handleShow}  
                             titre={"sortie"} 
                             message={message} 
-                            />
+                            />}
         </section>
         )
       }
@@ -396,7 +396,7 @@ if(buttonColor2)
     return ( 
         <>
             {testSortie}
-            {sortie}
+            {toggle && <Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} /> }
             
             
         </>

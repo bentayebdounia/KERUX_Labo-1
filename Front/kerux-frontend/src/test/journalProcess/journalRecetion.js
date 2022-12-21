@@ -36,6 +36,7 @@ const JournalReception = (props) => {
                 process.map(
                     (p, key) =>
                         <tr key={key}>
+                            <td>{key +1}</td>
                             <td>{p.id_bon}</td>
                             <td>{p.nom_fournisseur}</td>
                             <td>{p.acheteur}</td>
@@ -53,14 +54,15 @@ const JournalReception = (props) => {
                 processRecherche.map(
                     (p, key) =>
                     <tr key={key}>
-                    <td>{p.id_bon}</td>
-                    <td>{p.nom_fournisseur}</td>
-                    <td>{p.acheteur}</td>
-                    <td>{p.type_bon}</td>
-                    <td>{p.recepteur}</td>
-                    <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
-                    <td>{p.heure}</td>
-                </tr>
+                        <td>{key +1}</td>
+                        <td>{p.id_bon}</td>
+                        <td>{p.nom_fournisseur}</td>
+                        <td>{p.acheteur}</td>
+                        <td>{p.type_bon}</td>
+                        <td>{p.recepteur}</td>
+                        <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
+                        <td>{p.heure}</td>
+                    </tr>
                 )
             )
         }
@@ -90,7 +92,7 @@ const JournalReception = (props) => {
                         <div className="divTab" style={{width:"100%" , margin:"0px"}}>
                             <table className="table table-bordered"  >
                             <thead>
-                                <tr>
+                                <tr><th scope="col">#</th>
                                 <th scope="col">ID bon</th>
                                 <th scope="col">Fournisseur</th>
                                 <th scope="col">Acheteur</th>

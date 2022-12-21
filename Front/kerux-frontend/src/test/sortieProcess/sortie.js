@@ -62,57 +62,61 @@ const Sortie = (props) => {
     return ( 
         <div>
             <section id="etape_section">
-                <div class="container">
-                <form class="needs-validation" noValidate>
-                <div class="mb-3 row">
-                    <label for="id_box"  class="col-sm-2 col-form-label label">ID Box</label>
-                    <div class="col-sm-10">
-                        <input type="text"  class="form-control" id="id_box" readOnly={props.readonly} defaultValue={props.id} required/>
+                <div className="container">
+                <form className="needs-validation" noValidate>
+                <div className="mb-3 row">
+                    <label for="id_box"  className="col-sm-2 col-form-label label">ID Box</label>
+                    <div className="col-sm-10">
+                        <input type="text"  className="form-control" id="id_box" readOnly={props.id} defaultValue={props.id} required/>
                     </div>
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="categorie"  class="col-sm-2 col-form-label">Categorie de produit</label>
-                    <div class="col-sm-10">
-                        <input type="text"  class="form-control" id="categorie" readOnly={props.readonly} defaultValue={props.process.categorie} required/>
+                <div className="mb-3 row">
+                    <label for="categorie"  className="col-sm-2 col-form-label">Categorie de produit</label>
+                    <div className="col-sm-10">
+                        <input type="text"  className="form-control" id="categorie" readOnly={props.id} defaultValue={props.process.categorie} required/>
                     </div>
                 </div>
 
-                <div class="mb-3 row">
-                    <label for="typeprod" class="col-sm-2 col-form-label">Type de produit</label>
-                    <div class="col-sm-10">
-                        <input type="text"  class="form-control" id="typeprod" readOnly={props.readonly} defaultValue={props.process.nom_produit} required/>
+                <div className="mb-3 row">
+                    <label for="typeprod" className="col-sm-2 col-form-label">Type de produit</label>
+                    <div className="col-sm-10">
+                        <input type="text"  className="form-control" id="typeprod" readOnly={props.process.nom_produit} defaultValue={props.process.nom_produit} required/>
                     </div>
                 </div>
 
-                <div class="mb-3 row">
+                <div className="mb-3 row">
                     <label for="recepteur"  class="col-sm-2 col-form-label">Agent de sortie</label>
-                    <div class="col-sm-10">
-                    <div class="input-group">
-                        <input type="number" class="form-control" id="agentIdNettoyage" placeholder="" aria-label="Recipient's username with two button addons" value={agent} onChange={(e)=> setAgent(e.target.value)}/>
-                        <button className="btn btn-dark btn-outline-dark" type="button" onClick={(e)=>ajouterAgent(e)} ><i className="bi bi-plus" style={{color: "white"}}></i></button>
-                        <button className="btn btn-dark btn-outline-dark" type="button" ><i className="bi bi-person-lines-fill" style={{color: "white"}} onClick={handleShow2} ></i></button>
+                    <div className="col-sm-10">
+                        <div className="input-group">
+                            <input type="number" className="form-control" id="agentIdNettoyage" placeholder="" aria-label="Recipient's username with two button addons" value={agent} onChange={(e)=> setAgent(e.target.value)}/>
+                            <button className="btn btn-dark btn-outline-dark" type="button" onClick={(e)=>ajouterAgent(e)} >
+                                <i className="bi bi-plus" style={{color: "white"}}></i>
+                            </button>
+                            <button className="btn btn-dark btn-outline-dark" type="button" >
+                                <i className="bi bi-person-lines-fill" style={{color: "white"}} onClick={handleShow2} ></i>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label for="poids" class="col-sm-2 col-form-label">Poids</label>
-                    <div class="col-sm-10">
-                    <input type="number"  class="form-control" id="poids" value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
+                <div className="mb-3 row">
+                    <label for="poids" className="col-sm-2 col-form-label">Poids</label>
+                    <div className="col-sm-10">
+                    <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
                     </div>
                 </div>
-                <div class="mb-3 row">
-                    <label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
-                    <div class="col-sm-10">
+                <div className="mb-3 row">
+                    <label for="nombre" className="col-sm-2 col-form-label">Nombre</label>
+                    <div className="col-sm-10">
                     <input type="number"  class="form-control" id="nombre" value={nombre} onChange={(e)=> setNombre(e.target.value)} required/>
                     </div>
                 </div>
 
                 
-                <div class="d-grid gap-3 d-md-flex justify-content-md-end" >
+                <div className="d-grid gap-3 d-md-flex justify-content-md-end" >
                     
-                    <button class="btn2" type="submit" onClick={props.toggleDisplay}  >Annuler</button>
-                    <button class="btn1" type="submit" >Valider</button>
+                    <button className="btn2" type="submit" onClick={props.toggleDisplay}  >Annuler</button>
+                    <button className="btn1" type="submit" >Valider</button>
                 
                 </div>
                 </form>

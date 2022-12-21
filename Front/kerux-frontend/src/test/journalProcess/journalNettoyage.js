@@ -227,6 +227,7 @@ const JournalNettoyage = (props) => {
                 process.map(
                     (p, key) =>
                         <tr key={key}>
+                            <td>{key +1}</td>
                             <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
@@ -243,7 +244,8 @@ const JournalNettoyage = (props) => {
             tableCondition = (
                 processRecherche.map(
                     (p, key) =>
-                        <tr key={key}>
+                        <tr key={key+1}>
+                            <td>{key}</td>
                             <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
@@ -283,6 +285,7 @@ const JournalNettoyage = (props) => {
                             <table className="table table-bordered"  >
                             <thead>
                                 <tr>
+                                <th scope="col">#</th>
                                 <th scope="col">ID</th>
                                 <th scope="col">Categorie</th>
                                 <th scope="col">Nom produit</th>

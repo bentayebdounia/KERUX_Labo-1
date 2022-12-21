@@ -21,6 +21,8 @@ const MouvementStock = (props) => {
     })
      
     const StockFunction = () => {
+        enStock.splice  ("")
+        sortieStock.splice("")
         for (var i=0; i< stock.length; i++) {
             if (stock[i].date_sortie === null){
                 enStock.push(stock[i])
@@ -34,6 +36,7 @@ const MouvementStock = (props) => {
 
     const recherche = (e) => {
         e.preventDefault();
+        stockRecherche.splice("")
         if (comboBox === 'etape' ) {
             serviceStock.getStockByEtape(serchValue)
             .then((res) => {
@@ -63,6 +66,7 @@ const MouvementStock = (props) => {
                 stock.map(
                     (p, key) =>
                         <tr key={key}>
+                            <td>{key+1}</td>
                             <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
@@ -100,7 +104,8 @@ const MouvementStock = (props) => {
                 stockRecherche.map(
                     (p, key) =>
                     <tr key={key}>
-                       <td>{p.id_gnerate}</td>
+                            <td>{key+1}</td>
+                            <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
@@ -131,7 +136,8 @@ const MouvementStock = (props) => {
                 stockRecherche.map(
                     (p, key) =>
                     <tr key={key}>
-                       <td>{p.id_gnerate}</td>
+                             <td>{key+1}</td>
+                            <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
@@ -156,7 +162,8 @@ const MouvementStock = (props) => {
                 enStock.map(
                     (p, key) =>
                     <tr key={key}>
-                       <td>{p.id_gnerate}</td>
+                            <td>{key+1}</td>
+                            <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
@@ -166,8 +173,8 @@ const MouvementStock = (props) => {
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
                             <td>{moment.utc(p.date_entree).format('DD/MM/YY')}</td>
-                            <td>{moment.utc(p.date_sortie).format('DD/MM/YY')}</td>
-                            <td>{p.poids_sortie}</td>
+                            
+                            
                     
                     </tr>
                 )
@@ -180,7 +187,8 @@ const MouvementStock = (props) => {
                 sortieStock.map(
                     (p, key) =>
                     <tr key={key}>
-                       <td>{p.id_gnerate}</td>
+                            <td>{key+1}</td>
+                            <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
@@ -229,6 +237,7 @@ const MouvementStock = (props) => {
                             <table className="table table-bordered"  >
                             <thead>
                                 <tr>
+                                <th scope="col"># </th>
                                 <th scope="col">ID </th>
                                 <th scope="col">Categorie</th>
                                 <th scope="col">Nom_produit</th>
@@ -239,8 +248,8 @@ const MouvementStock = (props) => {
                                 <th scope="col">Heure</th>
                                 <th scope="col">ID enrepot</th>
                                 <th scope="col">Date entre au stock</th>
-                                <th scope="col">Date sortie de stock</th>
-                                <th scope="col">Poids des sortie</th>
+                                {comboBox!== 'en stock' && <th scope="col">Date sortie de stock</th>}
+                                {comboBox!== 'en stock' && <th scope="col">Poids des sortie</th>}
                                 
                                 </tr>
                             </thead>

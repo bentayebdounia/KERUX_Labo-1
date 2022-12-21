@@ -1,14 +1,21 @@
 import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import ServiceStock from '../../service/service.stock'
-
+import ServiceEntrepot from '../../service/service.entrepot'
 const ModalAjouterStock = (props) => {
     
 
+    const [entrepots, setEntrepots] = useState([])
     const [entrepot, setEntrepot] = useState()
     const [stock , setStock] = useState()
     
-
+    useEffect(()=> {
+        ServiceEntrepot.getEntrepot()
+        .then ((res)=> {
+            setEntrepots(res.data)
+            
+        })
+    })
     const  ajouterauStock = async() =>{
         console.log(props.entrepot[0].id_entrepot)
         //var fk_entrepot =  props.entrepot[0].id_entrepot
@@ -45,8 +52,13 @@ const ModalAjouterStock = (props) => {
 
             <Modal.Body>
 
-                <select className="form-select" aria-label="Default select example" id="typeBon"  required>
-                        <option value="1">frigo1</option>
+                <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)}  required>
+                                <option defaultValue={""}></option>
+                                {entrepots.map( (entrepot,key) =>
+                                    
+                                    <option value={entrepot.id_entrepot}> {entrepot.nom_entrepot} </option>
+                                )}
+                                            
                 </select>
                    
             </Modal.Body>

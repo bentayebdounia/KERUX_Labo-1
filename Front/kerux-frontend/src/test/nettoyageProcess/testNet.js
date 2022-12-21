@@ -137,7 +137,7 @@ const TestNet = () => {
                             }
                         }
                             
-                            if (a ===false){
+                            if (a ===false && tableEnregistrement[i].fk_stock === null){
                                  EnAttente.push(tableEnregistrement[i])
                                  console.log( EnAttente);
                                  }
@@ -208,6 +208,7 @@ setEnstock(
                             <thead style={{backgroundColor: "#16161"}}> 
                                 <tr> 
                                 <th scope="col"></th>
+                                
                                 <th scope="col">ID </th> 
                                 <th scope="col">Categorie</th> 
                                 <th scope="col">Nom produit</th> 
@@ -249,6 +250,7 @@ setEnstock(
                                             checked={p.select}
                                             ></input>
                                             </td> 
+                                        
                                         <td>{p.id_gnerate}</td> 
                                         <td>{p.categorie}</td> 
                                         <td>{p.nom_produit}</td> 
@@ -276,6 +278,7 @@ table2=(
                             <thead style={{backgroundColor: "#16161"}}> 
                                 <tr> 
                                 <th scope="col"></th>
+                                <th scope="col">#</th>
                                 <th scope="col">ID </th> 
                                 <th scope="col">Categorie</th> 
                                 <th scope="col">Nom produit</th> 
@@ -312,6 +315,7 @@ table2=(
                                         checked={p.select}
                                         ></input>
                                         </td> 
+                                    
                                     <td>{p.id_gnerate}</td> 
                                     <td>{p.categorie}</td> 
                                     <td>{p.nom_produit}</td> 

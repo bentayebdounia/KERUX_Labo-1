@@ -70,14 +70,14 @@ const ModalConfirmNet = (props) => {
                 </Modal.Footer>    
             </Modal>
 
-            {show3 && <ModalQStock    
+            <ModalQStock    
                             show3={show3} 
                             handleClose3={handleClose3} 
                             handleShow3={handleShow3} 
                             result={result} 
                             toggleDisplay={props.toggleDisplay} 
                         />
-            }
+            
             
         </>
      );

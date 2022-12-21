@@ -124,7 +124,7 @@ const TestCondit = () => {
                     // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
                      var j=0
                      var a = false
-                     console.log(tableconditionnement[j]);
+                    
                      for (var j=0 ; j<tableconditionnement.length ; j++){
                          if ( tableconditionnement[j].id_coupage === tableCoupage[i].id_gnerate   )   {
                              
@@ -133,7 +133,7 @@ const TestCondit = () => {
                          }
                      }
                          
-                         if (a ===false){
+                         if (a ===false && tableCoupage[i].fk_stock === null){
                               EnAttente.push(tableCoupage[i])
                               console.log( EnAttente);
                               }
@@ -148,7 +148,7 @@ const TestCondit = () => {
                 nom_produit:p.nom_produit,
                 poids:p.poids ,
                 nombre:p.nombre, 
-                datee :moment.utc(p.datee).format('DD/MM/YYYY'),
+                datee :p.datee,
                 heure:p.heure,
                 etape:p.etape ,
                
@@ -186,7 +186,7 @@ setEnstock(
              nom_produit:p.nom_produit,
              poids:p.poids ,
              nombre:p.nombre, 
-             datee :moment.utc(p.datee).format('DD/MM/YYYY'),
+             datee :p.datee,
              heure:p.heure,
              etape:p.etape ,
              nom_entrepot :p.nom_entrepot ,

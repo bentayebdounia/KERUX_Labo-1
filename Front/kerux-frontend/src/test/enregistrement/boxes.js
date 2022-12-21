@@ -21,7 +21,7 @@ export default function Boxes(props){
                            value={props.poids} 
                            onChange={event => { props.onPoidsChange(event.target.value) }}
                     />
-                    <label for="poids" style={{color:"#000", fontWeight:"bold"}}>Poids fourni</label>
+                    <label for="poids" style={{color:"#000", fontWeight:"bold"}}>Poids </label>
                 </div>
                 <div className="form-floating col-6 mb-3">
                     <input type="text" class="form-control" id="nbr"
@@ -29,7 +29,7 @@ export default function Boxes(props){
                            onChange={event => { props.onNombreChange(event.target.value) }}
                     
                     />
-                    <label for="nbr" style={{color:"#000" , fontWeight:"bold"}}>Nombre fourni</label>
+                    <label for="nbr" style={{color:"#000" , fontWeight:"bold"}}>Nombre </label>
                 </div>
                     
                     
