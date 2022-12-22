@@ -22,10 +22,10 @@ const Stock = (props) => {
     return ( 
         <Modal show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>Message </Modal.Title>
+                <Modal.Title> Message </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <select className="form-select" aria-label="Default select example" id="typeBon" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)}  required>
+                <select className="form-select" aria-label="Default select example" id="typeBon" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)}  required>
                                     <option defaultValue={""}></option>
                                     {entrepots.map( (entrepot,key) =>
                                         

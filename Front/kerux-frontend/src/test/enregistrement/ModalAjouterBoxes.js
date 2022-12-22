@@ -90,20 +90,23 @@ const ModalAjoutBoxes = (props) => {
     const annuler = () => {
         setBoxe([...nboxe])
         props.handleClose()
-       
-        
+      
     }
-    
-    var ajouterBox
-    
-        ajouterBox = (
-            
-                <div className="mb-3 row">
+   
+    return (
+        <>
+      <Modal size="lg" scrollable={true} show={props.show} onHide={props.handleClose}>
+            <Modal.Header closeButton>
+            <Modal.Title>Ajouter des boxes</Modal.Title>
+            </Modal.Header>
+            <Modal.Body >
+            <div className="mb-3 row">
                 
                 <div>
                 {boxe.map((box,key) => {
                     return ( 
                         <>
+                        
                         <div className="col-sm-10 mb-3" id= "produitFourni" key={key}>
                                 <Boxes 
                                     
@@ -121,8 +124,8 @@ const ModalAjoutBoxes = (props) => {
                                         newProduits[key].nombre = newNombre
                                         setBoxe(newProduits)
                                         }} 
-                             
-                                />
+                              />
+
                             {key === 0 && (<>
                                             <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
                                              onClick={(e) => plusId(e)} >
@@ -133,34 +136,21 @@ const ModalAjoutBoxes = (props) => {
                                                 </span>
                                              </button>
                                              
-                                             
                                                 </> )
                                              }
-                                             
-
+                               
                     </div>
+                    
                     {key===0 && <p style={{borderBottom :'5px solid', borderRadius:"3px" , borderColor:'#a6a6a6'}}></p>}
                     
                     </>
                         
                     ) })} 
-                                              
-                    
+             
                 </div>
                 
                  
-            </div>  
-           
-        )
- 
-    return (
-        <>
-      <Modal size="lg" scrollable={true} show={props.show} onHide={props.handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title>Ajouter des boxes</Modal.Title>
-            </Modal.Header>
-            <Modal.Body >
-                   {ajouterBox}
+            </div>
                    
             </Modal.Body>
             <Modal.Footer>
@@ -169,12 +159,11 @@ const ModalAjoutBoxes = (props) => {
             </Modal.Footer>
       </Modal>
 
-      <ModalQStock 
-                        show = {showQstock}
-                        handleClose = {handleCloseQstock}
-                        handleShow = {handleShowQstock}
-                        tableBox = {tableboxe}
-                        />
+       <ModalQStock 
+                                                show = {showQstock}
+                                                handleClose = {handleCloseQstock}
+                                                tableBox = {tableboxe}
+                                                />
       
 </>
     )

@@ -9,9 +9,6 @@ const ModalQStock = (props) => {
     const handleShowAjouterStock  = () => setShowAjouterStock(true)
 
     
-    
-
-    
     const oui = () =>{
         
         handleShowAjouterStock()
@@ -24,28 +21,25 @@ const ModalQStock = (props) => {
         props.handleClose()
         
     }
-    
-   console.log(props.tableBox);
-
+  
     return (  
         <>
             <Modal show={props.show} onHide={props.handleClose}>
-            <Modal.Header closeButton>
-            <Modal.Title>Message de stock</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                   <h3> Voulez-vous vraiment ajouter ces boxes au stock? </h3>
-                   
-            </Modal.Body>
-            <Modal.Footer>
-                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={ ()=> non ()}>Non</button>
-                    <button type="button" className="btn btn-success" onClick={ ()=>oui() } >Oui</button>
-            </Modal.Footer>
-             </Modal>
+                <Modal.Header closeButton>
+                    <Modal.Title>Message de stock</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <h3> Voulez-vous vraiment ajouter ces boxes au stock? </h3>
+                    
+                </Modal.Body>
+                <Modal.Footer>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={ ()=> non ()}>Non</button>
+                        <button type="button" className="btn btn-success" onClick={ ()=>oui() } >Oui</button>
+                </Modal.Footer>
+            </Modal>
 
-             {showAjouterStock && <AjouterStock 
+            {showAjouterStock && props.show===false && <AjouterStock 
                                  show= {showAjouterStock}
-                                 handeshow = {handleShowAjouterStock}
                                  handleClose = {handleCloseAjouterStock}
                                  tableBox = {props.tableBox}
 

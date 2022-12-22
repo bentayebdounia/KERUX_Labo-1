@@ -165,14 +165,13 @@ const Enregistrement = (props) => {
                  
             </div>}
             
-            {show && <ModalAjoutBoxes   
+             <ModalAjoutBoxes   
                                 show={show} 
                                 handleClose={handleClose} 
                                 handleShow={handleShow}
-                                
                                 produitFourni={produitFourni}
                                                    
-                 />}
+                 />
            
             { showRecepion && <Reception />
 
