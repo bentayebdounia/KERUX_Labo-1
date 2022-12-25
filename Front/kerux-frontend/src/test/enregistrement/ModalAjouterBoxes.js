@@ -12,6 +12,8 @@ const ModalAjoutBoxes = (props) => {
     const handleShowQstock = () => setShowQstock(true)
 
     const [conteur, setConteur] = useState (0)
+    const [poidsRester, setPoisrester] = useState(0)
+    const [nbrRester, setNbrrester] = useState(props.produitFourni.nombre_fourni)
 
     const [boxe,setBoxe] = useState([{
         nom_produit: "",
@@ -42,7 +44,8 @@ const ModalAjoutBoxes = (props) => {
     const  plusId = () => {
         setConteur(conteur+1)
         const newBoxe = [...boxe]
-                            
+        console.log('poids= '+poidsRester+boxe[0].poids);
+        setPoisrester(poidsRester-boxe[0].poids)         
         newBoxe.push({
             categorie:'',
             nom_produit:'',
@@ -101,6 +104,8 @@ const ModalAjoutBoxes = (props) => {
             </Modal.Header>
             <Modal.Body >
             <div className="mb-3 row">
+                <p>POIDS: {props.produitFourni.poids_fourni-poidsRester} </p>
+                <p>NOMBRE: {nbrRester} </p>
                 
                 <div>
                 {boxe.map((box,key) => {

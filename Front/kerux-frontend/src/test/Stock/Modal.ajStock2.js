@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import ServiceStock from '../../service/service.stock'
 import ServiceEntrepot from '../../service/service.entrepot'
 const ModalAjouterStock = (props) => {
-   //hello 
+   
 
     const [entrepots, setEntrepots] = useState([])
     const [entrepot, setEntrepot] = useState()

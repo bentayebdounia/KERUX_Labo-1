@@ -40,7 +40,7 @@ const getProdByNomFourniseur ="SELECT * FROM bon , fournisseur, produit_fourni W
 
 // -- Produit fourni *****************
 const ajouterProduitFourni = "INSERT INTO produit_fourni (categorie, nom_produit, poids_fourni, nombre_fourni, datee, heure, fk_bon )"
-                                +" VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING categorie, nom_produit, id_produit"
+                                +" VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *"
 
                                 // -- process enregistrement ******************
 const ajouterProcessEnreg = "INSERT INTO process (categorie, nom_produit, etape, poids, nombre, datee, heure,  fk_proditFourni, id_gnerate)"
