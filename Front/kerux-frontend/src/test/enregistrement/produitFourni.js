@@ -51,41 +51,42 @@ export default function ProduitFourni(props){
             
             <div className="row gy-2 gx-2 align-items-left">
                 
-                <div className="form-floating col-12 ">
-                    <select className="form-select" aria-label="Default select example" id="categorie"
-                            value={props.categorie} 
-                            onChange={event => { props.onCategorieChange(event.target.value)}} 
-                    required>
-                      <option selected></option>
-                      <option value="poulet">Poulet</option>
-                      <option value="legume">Legume</option>
-                      <option value="autre">Autre</option>
-                    </select>
-                    <label for="categorie" style={{color:"#000" , fontWeight:"bold"}} >  Categorie  </label>
-                  </div>
-                  <div className="form-floating col-12 ">
-                    <select className="form-select" aria-label="Default select example" id="produit"
-                            value={props.nom_produit} 
-                            onChange={event => { props.onNom_produitChange(event.target.value) }}
-                    required>
-                      {TypePoulet}
-                      {TypeLegume}
+                
+                    <div className="form-floating col-12 ">
+                        <select className="form-select" aria-label="Default select example" id="categorie"
+                                value={props.categorie} 
+                                onChange={event => { props.onCategorieChange(event.target.value)}} 
+                        required>
+                        <option selected></option>
+                        <option value="poulet">Poulet</option>
+                        <option value="legume">Legume</option>
+                        <option value="autre">Autre</option>
+                        </select>
+                        <label for="categorie" style={{color:"#000" , fontWeight:"bold"}} >  Categorie  </label>
+                    </div>
+                    <div className="form-floating col-12 ">
+                        <select className="form-select" aria-label="Default select example" id="produit"
+                                value={props.nom_produit} 
+                                onChange={event => { props.onNom_produitChange(event.target.value) }}
+                        required>
+                        {TypePoulet}
+                        {TypeLegume}
 
-                    </select>
-                    <label for="produit" style={{color:"#000", fontWeight:"bold"}} >Type de produit</label>
-                  </div>
-                  <div className="form-floating col-6 ">
-                    <input type="text" class="form-control" id="poids"
-                           value={props.poids} 
-                           onChange={event => { props.onPoidsChange(event.target.value) }}
-                    />
-                    <label for="poids" style={{color:"#000", fontWeight:"bold"}}>Poids fourni</label>
-                </div>
-                <div className="form-floating col-6 mb-3">
-                    {nbr}
-                </div>
+                        </select>
+                        <label for="produit" style={{color:"#000", fontWeight:"bold"}} >Type de produit</label>
+                    </div>
+                    <div className="form-floating col-6 ">
+                        <input type="text" class="form-control" id="poids"
+                            value={props.poids} 
+                            onChange={event => { props.onPoidsChange(event.target.value) }}
+                        />
+                        <label for="poids" style={{color:"#000", fontWeight:"bold"}}>Poids fourni</label>
+                    </div>
+                    <div className="form-floating col-6 mb-3">
+                        {nbr}
+                    </div>
                     
-                    
+            
             </div>
 
         </>

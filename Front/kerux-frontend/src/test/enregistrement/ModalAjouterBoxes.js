@@ -13,7 +13,10 @@ const ModalAjoutBoxes = (props) => {
 
     const [conteur, setConteur] = useState (0)
     const [poidsRester, setPoisrester] = useState(0)
-    const [nbrRester, setNbrrester] = useState(props.produitFourni.nombre_fourni)
+    const [nbrRester, setNbrrester] = useState(0)
+
+    const [erreurPoids, setErreurpoids] = useState(false)
+    const [erreurNombre, setErreurnombre] = useState(false)
 
     const [boxe,setBoxe] = useState([{
         nom_produit: "",
@@ -38,14 +41,28 @@ const ModalAjoutBoxes = (props) => {
         
     }])
 
-       //console.log("produitFourni: "+ props.produitFourni);
+       //console.log("produitFourni: "+ props.produitFourni);  props.produitFourni.nombre_fourni
        //console.log("categorier= "+props.produitFourni.categorie+ "\n id produit " +props.produitFourni.id_produit);
 
+    
+
     const  plusId = () => {
-        setConteur(conteur+1)
+        if(boxe[0].poids ===0 || boxe[0].poids ===''  ){
+            
+            if (boxe[0].categorie==="poulet"){
+                setErreurpoids(true)
+                setErreurnombre(true)
+            } 
+            else setErreurpoids(true)
+            
+        }
+        //poids de nombre
+        else if (boxe[0].poids !==0 && boxe[0].poids !==''  ) {
+            setConteur(conteur+1)
         const newBoxe = [...boxe]
-        console.log('poids= '+poidsRester+boxe[0].poids);
-        setPoisrester(poidsRester-boxe[0].poids)         
+        
+        setPoisrester(parseFloat(poidsRester)+parseFloat(boxe[0].poids)) 
+        setNbrrester (parseFloat(nbrRester)+parseFloat(boxe[0].nombre))        
         newBoxe.push({
             categorie:'',
             nom_produit:'',
@@ -53,7 +70,7 @@ const ModalAjoutBoxes = (props) => {
             nombre:0,
             date:new Date()
         })
-        
+        console.log('poids= '+boxe[0].poids)
         setBoxe(newBoxe.sort((a,b) => {
             if(a.date < b.date)
                 return 1
@@ -61,6 +78,8 @@ const ModalAjoutBoxes = (props) => {
                 return -1
             return 0
         }))
+        }
+        
        // console.log("box=  "+boxe[0].product);
         
     }
@@ -87,12 +106,16 @@ const ModalAjoutBoxes = (props) => {
             handleShowQstock()
             props.handleClose()
             tableboxe.splice("")
-    
+            setConteur(0)
     }
 
     const annuler = () => {
+        tableboxe.splice("")
         setBoxe([...nboxe])
         props.handleClose()
+        setPoisrester(0)
+        setNbrrester(0)
+        setConteur(0)
       
     }
    
@@ -103,10 +126,20 @@ const ModalAjoutBoxes = (props) => {
             <Modal.Title>Ajouter des boxes</Modal.Title>
             </Modal.Header>
             <Modal.Body >
-            <div className="mb-3 row">
-                <p>POIDS: {props.produitFourni.poids_fourni-poidsRester} </p>
-                <p>NOMBRE: {nbrRester} </p>
+                <div className="mb-3 row">
                 
+                    
+                    <label htmlFor="poids" className="col-sm-3 form-label">
+                                    <div className="progress"> POIDS
+                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.produitFourni.poids_fourni-poidsRester)*100/props.produitFourni.poids_fourni)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.produitFourni.poids_fourni-poidsRester} </div>
+                                    </div>
+                    </label>
+
+                    <label htmlFor="poids" className="col-sm-3 form-label">
+                                    <div className="progress"> NOMBRE
+                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.produitFourni.nombre_fourni-nbrRester)*100/props.produitFourni.nombre_fourni)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.produitFourni.nombre_fourni-nbrRester} </div>
+                                    </div>
+                    </label>
                 <div>
                 {boxe.map((box,key) => {
                     return ( 
@@ -114,7 +147,7 @@ const ModalAjoutBoxes = (props) => {
                         
                         <div className="col-sm-10 mb-3" id= "produitFourni" key={key}>
                                 <Boxes 
-                                    
+                                    categorie = {props.produitFourni.categorie}
                                     n_produit={props.produitFourni.nom_produit}
                                     nom_produit = {box.nom_produit} 
 
@@ -123,7 +156,8 @@ const ModalAjoutBoxes = (props) => {
                                         newProduits[key].poids = newPoids
                                         setBoxe(newProduits)
                                         }} 
-                                    
+                                    erreurPoids = {erreurPoids}
+                                    erreurNombre ={erreurNombre}
                                     nombre = {box.nombre} onNombreChange={newNombre => {
                                         const newProduits = [...boxe]
                                         newProduits[key].nombre = newNombre

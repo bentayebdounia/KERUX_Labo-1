@@ -38,6 +38,11 @@ const Coupage = (props) => {
     const [PorcentageLegs, setPorcentageLegs] = useState()
     const [PorcentageTenders, setPorcentageTenders] = useState()
 
+    const [calculPoids, setCalculPoids] = useState([])
+    const [calculNombreWings, setCalculNombreWings] = useState([])
+    const [calculNombreTenders, setCalculNombreTenders] = useState([])
+    const [calculNombreLegs, setCalculNombreLegs] = useState([])
+    
     const ajouterAgent=(e) => {
         e.preventDefault()
         ServiceAdmin.getPersonneById(agent)
@@ -62,10 +67,7 @@ const Coupage = (props) => {
         
     }
 
-    const [calculPoids, setCalculPoids] = useState([])
-    const [calculNombreWings, setCalculNombreWings] = useState([])
-    const [calculNombreTenders, setCalculNombreTenders] = useState([])
-    const [calculNombreLegs, setCalculNombreLegs] = useState([])
+   
     
     useEffect(()=>{
         if(confirmeCoupage){
