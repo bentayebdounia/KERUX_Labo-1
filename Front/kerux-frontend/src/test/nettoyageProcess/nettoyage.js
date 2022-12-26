@@ -124,21 +124,21 @@ const Nettoyage = (props) => {
                         </div>
 
                         
+                        <div className="col-10">
+                            <div className="col-10">
+                                <label id="categorie"> Categorie de produit: </label>
+                                
+                                <label  id="categorieValue" >{props.process.categorie} </label>
+                                
+                            </div>
 
-                        <div className="contenaireBox">
-                            <label id="categorie"> Categorie de produit: </label>
-                            
-                            <label  id="id_boxValue" >{props.process.categorie} </label>
-                            
+                            <div className="col-5">
+                                <label id="produit"> Type de produit: </label>
+                                
+                                <label  id="produitValue" >{props.process.nom_produit} </label>
+                                
+                            </div>
                         </div>
-
-                        <div className="contenaireBox">
-                            <label id="produit"> Type de produit: </label>
-                            
-                            <label  id="id_boxValue" >{props.process.nom_produit} </label>
-                            
-                        </div>
-
                         
 
                         

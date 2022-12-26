@@ -5,22 +5,40 @@
     margin-right: 20px;
     color: black;
     font-weight: bold;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: sans-serif;
+    
+}
+.contenaireCategorie{
+    width: 20%;
+}
+.contenaireCategorie{
+    width: 20%;
+}.contenaireProd{
+    width: 20%;
+}
+#categorie{
+   
+    color: black;
+    font-weight: bold;
+    font-family:  sans-serif;
     
 }
 
-#categorie{
-    margin-right: 70%;
-    color: black;
-    font-weight: bold;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+#categorieValue{
+    margin-left: 5px;
+    font-family: sans-serif;
     
 }
 
 #produit{
-    margin-right: 20px;
+    
     color: black;
     font-weight: bold;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: sans-serif;
     text-align:left;
+}
+#produitValue{
+    margin-left: 5px;
+    font-family: sans-serif;
+    
 }
