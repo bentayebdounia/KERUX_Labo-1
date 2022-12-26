@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal';
 import EnregistrementService from '../../service/service.enregistrement'
 import ModalQStock from './stockEnregistrement/questStock'
+import ModelReponse from '../../Models/Model.repense'
 import Boxes from './boxes'
 
 const ModalAjoutBoxes = (props) => {
@@ -10,6 +11,10 @@ const ModalAjoutBoxes = (props) => {
     const [showQstock, setShowQstock] = useState(false)
     const handleCloseQstock = () => setShowQstock(false)
     const handleShowQstock = () => setShowQstock(true)
+
+    const [show, setShow] = useState(false)
+    const handleClose = () => setShow(false)
+    const handleShow = () => setShow(true)
 
     const [conteur, setConteur] = useState (0)
     const [poidsRester, setPoisrester] = useState(0)
@@ -92,6 +97,7 @@ const ModalAjoutBoxes = (props) => {
                     plus()
                      }}
         }
+        else {handleShow()  }
         
         
     }
@@ -217,6 +223,13 @@ const ModalAjoutBoxes = (props) => {
                                                 handleClose = {handleCloseQstock}
                                                 tableBox = {tableboxe}
                                                 />
+        <ModelReponse
+                show={show} 
+                handleClose={handleClose} 
+                handleShow={handleShow} 
+                message={"Le poids ou le nombre est incorrect"} 
+                titre={"d'erreur"} 
+                />
       
 </>
     )
