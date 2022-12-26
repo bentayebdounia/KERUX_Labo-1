@@ -50,6 +50,9 @@ const Conditionnement = (props) => {
     useEffect(()=>{
         if(confirmeConditionnement){
                 setPorcentagePoids(ControlerPoids()); 
+                setIdAgent([])
+                setPoids('')
+                setNombre('')
                 confirmeConditionnemetFalse()
         }
     })
@@ -100,6 +103,7 @@ const Conditionnement = (props) => {
     const valider = (e) => {
         e.preventDefault()
         handleShow()
+        
     }
 
     const annuler = () => {

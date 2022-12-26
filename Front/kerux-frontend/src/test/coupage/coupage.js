@@ -34,14 +34,10 @@ const Coupage = (props) => {
     const [nomAgent, setNomAgent ] = useState([])
 
     const [PorcentagePoids, setPorcentagePoids] = useState()
-    const [PorcentageWings, setPorcentageWings] = useState()
-    const [PorcentageLegs, setPorcentageLegs] = useState()
-    const [PorcentageTenders, setPorcentageTenders] = useState()
+   
 
     const [calculPoids, setCalculPoids] = useState([])
-    const [calculNombreWings, setCalculNombreWings] = useState([])
-    const [calculNombreTenders, setCalculNombreTenders] = useState([])
-    const [calculNombreLegs, setCalculNombreLegs] = useState([])
+    
     
     const ajouterAgent=(e) => {
         e.preventDefault()
@@ -72,9 +68,10 @@ const Coupage = (props) => {
     useEffect(()=>{
         if(confirmeCoupage){
                 setPorcentagePoids(ControlerPoids()); 
-                setPorcentageWings(ControleNombreW());
-                setPorcentageLegs(ControleNombreL());
-                setPorcentageTenders(ControleNombreT());
+                setTypeProd('')
+                setIdAgent([])
+                setPoids('')
+                setNombre('')
 
                 confirmeCoupageFalse()
         }
@@ -83,7 +80,7 @@ const Coupage = (props) => {
     function myFunction(total, value, index, array) {
         return total + value;
       }
-    let porcentagePoids , porcentageWings, porcentageLegs, porcentageTenders
+    let porcentagePoids 
 
         const ControlerPoids = () => {
             console.log("nombreTotale= "+props.nombre)
@@ -101,49 +98,11 @@ const Coupage = (props) => {
         }
 
 
-        
-        const ControleNombreW = () => {
-            if (props.process.categorie==="poulet") {
-                if (typeProd==="wings"){
-                    calculNombreWings.push(parseFloat(nombre))
-                    let sum = calculNombreWings.reduce(myFunction)
-                    porcentageWings = sum*100/(props.nombre*2)
-                    console.log("porcentage Wings= " +porcentageWings);
-                    return porcentageWings
-                }
-                
-            }
-        }
-
-        const ControleNombreL = () => {
-            if (props.process.categorie==="poulet") {
-                if (typeProd==="legs"){
-                    calculNombreLegs.push(parseFloat(nombre))
-                    let sum = calculNombreLegs.reduce(myFunction)
-                    porcentageLegs = sum*100/(props.nombre*2)
-                    console.log("porcentage Legs= " +porcentageLegs);
-                    return porcentageLegs
-                }
-            }
-        }
-
-        const ControleNombreT = () => {
-            if (props.process.categorie==="poulet") {
-                if (typeProd==="tendres"){
-                    calculNombreTenders.push(parseFloat(nombre))
-                    let sum = calculNombreTenders.reduce(myFunction)
-                    porcentageTenders = sum*100/(props.nombre*2)
-                    console.log("porcentage Tenders= " +porcentageTenders);
-                    return porcentageTenders
-                }
-            }
-
-
-        }
 
         const valider = (e) => {
             e.preventDefault()
             handleShow()
+            
         }
 
         const annuler = () => {
@@ -176,20 +135,7 @@ const Coupage = (props) => {
                     <label htmlFor="nombre" className="col-sm-2 col-form-label">Nombre</label>
                     <div className="col-sm-10">
                     <input type="number"  className="form-control" id="nombre" value={nombre} onChange={(e)=> setNombre(e.target.value)} required/>
-                    <label htmlFor="poids" className="col-sm-3 col-form-label">
                     
-                         <div className="progress mb-2 "> Wings
-                            <div className="progress-bar " role="progressbar" aria-label="Example with label" style={{width: PorcentageWings+"%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {PorcentageWings} </div>
-                            
-                        </div>
-                        <div className="progress mb-2"> Legs 
-                            <div className="progress-bar " role="progressbar" aria-label="Example with label" style={{width: PorcentageLegs+"%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {PorcentageLegs} </div>
-                             </div>
-                        <div className="progress"> Tenders
-                            <div className="progress-bar " role="progressbar" aria-label="Example with label" style={{width: PorcentageTenders+"%"}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {PorcentageTenders} </div>
-                        </div>
-
-                         </label>
                     </div>
                 </>
                    
@@ -211,12 +157,7 @@ const Coupage = (props) => {
             <section id="etape_section">
                 <div className="container">
                     <form class="needs-validation" noValidate>
-                        <div className="mb-3 row">
-                            <label for="id_box"  className="col-sm-2 col-form-label">ID Box</label>
-                            <div className="col-sm-10">
-                                <input type="text"  className="form-control" id="id_box" readOnly={props.id} defaultValue={props.id} required/>
-                            </div>
-                        </div>
+                        
 
                         <div className="mb-3 row">
                             <label htmlFor="categorie"  className="col-sm-2 col-form-label">Categorie de produit</label>
@@ -252,13 +193,14 @@ const Coupage = (props) => {
                             <label htmlFor="poids" className="col-sm-2 col-form-label">Poids</label>
                             <div className="col-sm-10">
                             <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> {setPoids(e.target.value);}} required/>
+                            
+                            </div>
                             <label htmlFor="poids" className="col-sm-3 col-form-label">
                                 <div className="progress"> Poids
                                 
                                     <div className="progress-bar " role="progressbar" aria-label="Example with label" style={{width: PorcentagePoids+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {PorcentagePoids} </div>
                                 </div>
                                 </label>
-                            </div>
                         </div>
                         <div className="mb-3 row">
                             {nbr}
