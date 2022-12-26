@@ -16,6 +16,8 @@ const getRoleById = "SELECT nom_role FROM role WHERE id_role = $1"
 
 const getRoleByNom = "SELECT id_role FROM role WHERE nom_role = $1"
 
+const getPersonneByNomOrPrenom = "SELECT id_personne, nom , prenom  FROM personne WHERE nom ILIKE $1 OR prenom ILIKE $2"
+
 /////// Entrepot *********************************
 const ajouterEntrepot = "INSERT INTO entrepot ( nom_entrepot, type_entrepot, air_stockage, capacite, adresse, exist ,date_enregistrement_entrepot)"
                         +"VALUES ( $1, $2, $3, $4, $5, $6, $7 )"
@@ -31,12 +33,12 @@ const ModifyStock = "UPDATE stock SET date_sortie= $1 , poids_sortie= $2 WHERE i
 const ajouterReception = "INSERT INTO bon ( fk_fournisseur, acheteur, type_bon, datee, heure, recepteur, livreur )VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING id_bon"
 const getBonBydateHeure = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur ORDER BY datee DESC , heure DESC"
 const getbonByFournisseur = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur ORDER BY fk_fournisseur"
-const getBonByNomFournisseur = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur AND nom_fournisseur=$1  ORDER BY datee DESC, heure DESC"
+const getBonByNomFournisseur = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur AND nom_fournisseur ILIKE $1  ORDER BY datee DESC, heure DESC"
 
 const getProdFourni = " SELECT * FROM bon , fournisseur, produit_fourni WHERE fk_fournisseur=id_fournisseur AND id_bon = fk_bon   ORDER BY fk_fournisseur;"
 //const getBonByNomFournisseur = "SELECT * FROM bon, fournisseur WHERE "
 
-const getProdByNomFourniseur ="SELECT * FROM bon , fournisseur, produit_fourni WHERE fk_fournisseur=id_fournisseur AND nom_fournisseur=$1  AND id_bon = fk_bon  ORDER BY fk_fournisseur"
+const getProdByNomFourniseur ="SELECT * FROM bon , fournisseur, produit_fourni WHERE fk_fournisseur=id_fournisseur AND nom_fournisseur ILIKE $1  AND id_bon = fk_bon  ORDER BY fk_fournisseur"
 
 // -- Produit fourni *****************
 const ajouterProduitFourni = "INSERT INTO produit_fourni (categorie, nom_produit, poids_fourni, nombre_fourni, datee, heure, fk_bon )"
@@ -59,10 +61,10 @@ const ModifyProcessHist = "UPDATE process_historique SET fk_stock=$1 WHERE id_gn
 
 const getProcessBydateHeure = "SELECT * FROM process_historique WHERE etape=$1 ORDER BY datee DESC , heure DESC;"
 //GET process by etape and categorie order by date and heure
-const getProcessByEtapes_categorie= "SELECT * FROM process_historique WHERE etape=$1 AND  categorie=$2 ORDER BY datee DESC , heure DESC"
+const getProcessByEtapes_categorie= "SELECT * FROM process_historique WHERE etape=$1 AND  categorie ILIKE $2 ORDER BY datee DESC , heure DESC"
 
 //GET process by etape and nom_produit order by date and heure
-const getProcessByEtapes_produit= "SELECT * FROM process_historique WHERE etape=$1 AND  nom_produit=$2 ORDER BY datee DESC , heure DESC"
+const getProcessByEtapes_produit= "SELECT * FROM process_historique WHERE etape=$1 AND  nom_produit ILIKE $2 ORDER BY datee DESC , heure DESC"
 
 //GET process by etape annd id generate
 const getProcessByEtapes_idGnerate=  "SELECT * FROM process_historique WHERE etape=$1 AND id_gnerate=$2"
@@ -79,7 +81,7 @@ const ModifyProcessMarinadeHist = "UPDATE process_historique SET fk_stock = $1 W
 
 
 //ajouter un agent de process *****************************
-const ajouterAgentProcess = "INSERT INTO agentprocess (  id_process, id_personne) VALUES( $1, $2 )"
+const ajouterAgentProcess = "INSERT INTO agentprocess (  id_gnerateprocess, id_personne) VALUES( $1, $2 )"
 
 const getProcessById = "SELECT fk_proditfourni , fk_stock, categorie, nom_produit, etape FROM process WHERE id_gnerate= $1"
 
@@ -93,6 +95,7 @@ module.exports={
     getRoleByNom,
     getPersonneByNom,
     getPersonneByPrenom,
+    getPersonneByNomOrPrenom,
 
     ajouterReception,
 

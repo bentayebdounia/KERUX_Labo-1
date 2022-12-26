@@ -6,6 +6,7 @@ const AGENT_API_GETALL = "http://localhost:8080/agent/getPersonne/"
 const AGENT_API_GETBYID = "http://localhost:8080/agent/getPersonne/id/"
 const AGENT_API_GETBYNOM = "http://localhost:8080/agent/getPersonne/nom/"
 const AGENT_API_GETBYPRENOM = "http://localhost:8080/agent/getPersonne/prenom/"
+const AGENT_API_GETBYNOMORPRENOM = "http://localhost:8080/agent/getByNomOrPrenom/"
 
 class ServiceAdmin {
      ajouterAgent(agent){
@@ -26,6 +27,9 @@ class ServiceAdmin {
 
      getPersonneByPrenom(prenom){
       return axios.get(AGENT_API_GETBYPRENOM+prenom)
+     }
+     getPersonneByNomOrPrenom (nom, prenom) {
+      return axios.get(AGENT_API_GETBYNOMORPRENOM+nom+"/"+prenom)
      }
      
 }

@@ -1,4 +1,4 @@
-.dataResult {
+.dataResults {
     display: none;
     position: absolute;
     margin-top: 0px;
@@ -9,29 +9,27 @@
     overflow: hidden;
     overflow-y: auto;
   }
-  .dataResult::-webkit-scrollbar {
-   /* display: none;*/
-  }
   
-  .dataResult .dataItem {
+  
+  .dataResults .dataItems {
     display: block;
     position: relative;
     width: 100%;
-    height: 30px;
+    height: 25px;
     
     align-items: center;
     color: black;
   }
   
-  .dataItem p {
+  .dataItems p {
     margin-left: 10px;
   }
-  .dataResult a {
+  .dataResults a {
     display: block;
     text-decoration: none;
   }
   
-  .dataResult a:hover {
+  .dataResults a:hover {
     background-color: lightgrey;
   }
 
@@ -41,6 +39,6 @@
     
   }
 
-  .dropdown:hover .dataResult {
+  .dropdown:hover .dataResults {
     display: block;
   }

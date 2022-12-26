@@ -31,8 +31,8 @@ const ModalConfirmNet = (props) => {
             
             //ajouter les agents  de nettoyage au bdd
             for(var i=0 ; i<props.agents.length ;i++) {
-                console.log(props.agents[i]);
-                Service_AgentProcess.ajouterAgentProcess(res.data.id_gnerate , props.agents[i])
+                console.log(props.agents[i].id_personne);
+                Service_AgentProcess.ajouterAgentProcess(result.id_gnerate , props.agents[i].id_personne)
                 .then((result)=>{
                     console.log(result.data)
                             })
@@ -45,7 +45,8 @@ const ModalConfirmNet = (props) => {
        props.handleClose2()  
     }
 
-    //console.log(result.id_gnerate);
+    
+    console.log(props.agents);
 
     return ( 
         <>
@@ -54,10 +55,18 @@ const ModalConfirmNet = (props) => {
                 <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+
                     <p style = {{fontWeight: "bold"}} > ID box: </p> {props.id_enregistrement}
                     <p style = {{fontWeight: "bold"}} > Categorie: </p> {props.categorie}
                     <p style = {{fontWeight: "bold"}} > Type de produit: </p> {props.typeProd}
-                    <p style = {{fontWeight: "bold"}} > Agent: </p> {props.agent}
+                    <p style = {{fontWeight: "bold"}} > Agent: </p> {props.agents.id_personne}
+                    {props.agents.map((value, key) => {
+                                     return (
+                                         
+                                     <p > {value.id_personne} . {value.nom} {value.prenom} </p>
+                                        
+                                     )
+                                 })}
                     <p style = {{fontWeight: "bold"}} > Poids: </p> {props.poids}
                     <p style = {{fontWeight: "bold"}} > Nombre: </p> {props.nombre} 
                     <br/>  

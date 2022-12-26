@@ -81,7 +81,7 @@ getProcessByDateHeure = (req, res) => {
 
 getProcessByEtapes_categorie = (req, res) => {
     const categorie = req.params.categorie
-    pool.query(q.getProcessByEtapes_categorie, ['marinade', categorie], 
+    pool.query(q.getProcessByEtapes_categorie, ['marinade', categorie+'%'], 
         (error, result) => {
             res.status(200).json(result.rows)
     }
@@ -90,7 +90,7 @@ getProcessByEtapes_categorie = (req, res) => {
 
 getProcessByEtapes_produit = (req, res) => {
     const nom_produit = req.params.nom_produit
-    pool.query(q.getProcessByEtapes_produit, ['marinade', nom_produit], 
+    pool.query(q.getProcessByEtapes_produit, ['marinade', nom_produit+'%'], 
         (error, result) => {
             res.status(200).json(result.rows)
     }

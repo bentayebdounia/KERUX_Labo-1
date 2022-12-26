@@ -3,8 +3,9 @@ import ModalListAgent from '../../Models/modalListAgent'
 import ModalConfirmNet from './ModalConfirmNet'
 import ModelReponse from '../../Models/Model.repense'
 import ServiceAdmin from '../../service/serviceAdmin'
-
-
+import './agentBarRecherch.css'
+import Tableau from './tableau'
+import './process.css'
 
 const Nettoyage = (props) => {
 
@@ -22,28 +23,52 @@ const Nettoyage = (props) => {
     const [show3, setShow3] = useState(false)
     const handleClose3 = () => setShow3(false)
     const handleShow3 = () => setShow3(true)
+
+
+    const [poids , setPoids] = useState()
+    const [nombre , setNombre] = useState()
+    const [agent , setAgent] = useState('')
+    //const [datee, setDatee]= useState()
+    //const [heure, setHeure]= useState()
+
+    const [toggleRecomendation, setToggleRecomendation] = useState(true)
+    const toggleRecomendationTrue = () => setToggleRecomendation (true)
+    const toggleRecomendationFalse = () => setToggleRecomendation(false)
+
+    var nbr, agents
     
     const [idAgent, setIdAgent]= useState([])
     const [nomAgent, setNomAgent ] = useState([])
+    const [id_personne, setIdpersonne] = useState()
+    const [nom, setNom] = useState()
+    const [prenom, setPrenom] = useState()
+
+    const [agentNettoyage, setAgentNettoyage] = useState([{
+        id_personne:"",
+        nom: "",
+        prenom: ""
+    }])
+    const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
+    //get personnes
+    useEffect(()=>{
+        ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
+        .then((res) => {
+            setAgentNettoyage(res.data)
+            console.log(agentNettoyage);
+        })
+    })
 
     const ajouterAgent=(e) => {
         e.preventDefault()
-        ServiceAdmin.getPersonneById(agent)
-        .then ( (res)=> {
-            if(res.data==="ID n'existe pas"){
-                console.log(res.data);
-                setMessage("ID n'existe pas")
-                handleShow3()
+      
+        agentNettoyageSelect.push({
+        id_personne: id_personne,
+        nom:  agent,
+        
+       })
+        handleShow()
+        setAgent('')
             
-            }
-                
-            else{
-                setNomAgent(current => [...current , res.data[0].nom +" "+ res.data[0].prenom]) 
-                setIdAgent(current => [...current, agent]);
-                console.log("ajouter agent "+ idAgent)
-                setAgent('')
-            }
-        })
         
         
         
@@ -55,13 +80,7 @@ const Nettoyage = (props) => {
         handleShow2()
     }
 
-    const [poids , setPoids] = useState()
-    const [nombre , setNombre] = useState()
-    const [agent , setAgent] = useState('')
-    //const [datee, setDatee]= useState()
-    //const [heure, setHeure]= useState()
-
-    var nbr
+   
     if(props.process.categorie==="poulet"){
         nbr=(<>
                     <label htmlFor="nombre" className="col-sm-2 col-form-label">Nombre</label>
@@ -73,45 +92,76 @@ const Nettoyage = (props) => {
         )
     }
 
+    function select () {
+        
+        toggleRecomendationFalse()
+       
+    }
+
+    agents= (
+        <>
+            <div className='dataResults'>
+                         {agentNettoyage.map((value, key) => {
+                                     return (
+                                         <a className='dataItems'  onClick={()=>{setAgent(value.nom+ " " + value.prenom); setIdpersonne(value.id_personne) }}>
+                                             <p > {value.id_personne} . {value.nom} {value.prenom} </p>
+                                         </a>
+                                     )
+                                 })}
+                     </div>
+        </>
+    )
     return ( 
         <>
             <section id="etape_section">
                 <div className="container">
                     <form class="needs-validation" noValidate>
-                        <div className="mb-3 row">
-                            <label htmlFor="id_box"  className="col-sm-2 col-form-label">ID Box</label>
-                            <div className="col-sm-10">
-                                <input type="text"  className="form-control" id="id_box" readOnly={props.id} defaultValue={props.id}  required/>
-                            </div>
+                        <div className="contenaireBox">
+                            <label id="id_box"> ID Box: </label>
+                            
+                            <label  id="id_boxValue" >{props.id} </label>
+                            
                         </div>
 
-                        <div className="mb-3 row">
-                            <label htmlFor="categorie"  className="col-sm-2 col-form-label">Categorie de produit</label>
-                            <div className="col-sm-10">
-                                <input type="text"  className="form-control" id="categorie" readOnly={props.process.categorie} defaultValue={props.process.categorie}  required/>
-                            </div>
+                        
+
+                        <div className="contenaireBox">
+                            <label id="categorie"> Categorie de produit: </label>
+                            
+                            <label  id="id_boxValue" >{props.process.categorie} </label>
+                            
                         </div>
 
-                        <div className="mb-3 row">
-                            <label htmlFor="typeprod" className="col-sm-2 col-form-label">Type de produit</label>
-                            <div className="col-sm-10">
-                                <input type="text"  className="form-control" id="typeprod" readOnly={props.process.nom_produit} defaultValue={props.process.nom_produit}  required/>
-                            </div>
+                        <div className="contenaireBox">
+                            <label id="produit"> Type de produit: </label>
+                            
+                            <label  id="id_boxValue" >{props.process.nom_produit} </label>
+                            
                         </div>
+
+                        
+
+                        
 
                         <div className="mb-3 row">
                             <label htmlFor="recepteur"  className="col-sm-2 col-form-label">Agent de Nettoyage</label>
-                            <div className="col-sm-10">
+                            <div className="col-sm-10 dropdown">
                             <div className="input-group">
-                                <input type="number" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)}/>
-                                <button className="btn btn-dark btn-outline-dark" type="button" onClick={(e)=>ajouterAgent(e)}>
-                                    <i className="bi bi-plus" style={{color: "white"}}> </i>
-                                </button>
-                                <button className="btn btn-dark btn-outline-dark" type="button" onClick={handleShow}>
-                                    <i className="bi bi-person-lines-fill" style={{color: "white"}}> </i>
-                                </button>
-                                </div>
+                                <input type="text" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
+                                <button className="btn btn-dark btn-outline-dark" type="button" onClick={(e)=>ajouterAgent(e)} >
+                                <i className="bi bi-plus" style={{color: "white"}}></i>
+                                 </button>
+                             </div>
+                                    {agents}
+
                             </div>
+                                    {show && <Tableau show={show} 
+                                        handleClose={handleClose} 
+                                        handleShow={handleShow} 
+                                        agentNettoyage={agentNettoyageSelect}
+                                        
+                                    />}
+                            
                         </div>
                         <div className="mb-3 row">
                             <label htmlFor="poids" className="col-sm-2 col-form-label">Poids</label>
@@ -126,7 +176,7 @@ const Nettoyage = (props) => {
                         
                         <div className="d-grid gap-3 d-md-flex justify-content-md-end" >
                             
-                            <button className="btn2" type="submit" onClick={props.toggleDisplay}  >Annuler</button>
+                            <button className="btn2" type="submit" onClick={props.toggleDisplay} > Annuler </button>
                             <button className="btn1" type="submit" >Valider</button>
                         
                         </div>
@@ -160,12 +210,7 @@ const Nettoyage = (props) => {
                 }
 
             </div>
-            {show && <ModalListAgent show={show} 
-                            handleClose={handleClose} 
-                            handleShow={handleShow} 
-                            id={idAgent}
-                            nom={nomAgent}
-                            />}
+            
                             
              <ModalConfirmNet show2={show2} handleClose2={handleClose2} handleShow2={handleShow2}
                              id_enregistrement={props.id}  
@@ -177,7 +222,7 @@ const Nettoyage = (props) => {
                              fk_proditfourni={props.process.fk_proditfourni}
                              test={props.test}
                              toggleDisplay={props.toggleDisplay}
-                             agents= {idAgent}
+                             agents= {agentNettoyageSelect}
             />
 
             {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}

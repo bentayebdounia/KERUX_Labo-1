@@ -47,6 +47,26 @@ const Reception = (props) => {
         id_fournisseur: ""
     }])
 
+    function getFournisseur(){
+        serviceFournisseur.getAllFournisseur()
+        .then((res) => {
+            setFournisseur(res.data)
+        })
+    }
+
+    const getVlue =() =>{
+        serviceFournisseur.getFournisseurByNomOrCategorie(nom_fournisseur,nom_fournisseur)
+        .then((res) => {
+            setFournisseur2(res.data)
+        })
+    }
+
+     //get all fournisseur
+     useEffect(()=>{
+        getFournisseur()
+        getVlue()
+    })
+
     useEffect(()=>{
         toggleTrue()
 
@@ -73,32 +93,12 @@ const Reception = (props) => {
 
     }
 
-    //get all fournisseur
-    useEffect(()=>{
-        getFournisseur()
-        getVlue()
-    })
-
-    function getFournisseur(){
-        serviceFournisseur.getAllFournisseur()
-        .then((res) => {
-            setFournisseur(res.data)
-        })
-    }
-
-    const getVlue =() =>{
-        serviceFournisseur.getFournisseurByNomOrCategorie(nom_fournisseur,nom_fournisseur)
-        .then((res) => {
-            setFournisseur2(res.data)
-        })
-    }
     function select () {
         
         toggleRecomendationFalse()
        
     }
-
-    
+ 
         Fournisseur=(
                         <>
                         {nom_fournisseur ==='' && 

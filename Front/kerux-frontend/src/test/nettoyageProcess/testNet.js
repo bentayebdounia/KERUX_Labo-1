@@ -340,17 +340,16 @@ table2=(
             {!toggle && 
                 <section id="etape_section"> 
                 <div className="container"> 
-                    <div className="mb-3 row"> 
-                        <label htmlFor="id_etape"  className="col-sm-2 col-form-label label" style={{width:"100px" , marginLeft:"20px"}}>ID Box</label> 
-                        <div className="col-sm-10"> 
-                            <div className="input-group col-sm-10"> 
-                                <input type="text" className="form-control" placeholder=""  aria-describedby="button-addon2" value={id} onChange={(e)=> setId(e.target.value)}/> 
+                     
+                        
+                            <div className="input-group col-sm-10" style={{width:"90%", marginLeft:"5%", marginRight:"15%"  }}> 
+                                <input type="text" className="form-control" placeholder="ID boxe"  aria-describedby="button-addon2" value={id} onChange={(e)=> setId(e.target.value)}/> 
                                 <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2" onClick={(e) => getProcess(e)} > 
                                     <i className="bi bi-check-lg" style={{color: "white"}}></i> 
                                 </button> 
                             </div> 
-                        </div> 
-                    </div> 
+                         
+                     
                     <div style={{width:"90%", height:"600px", marginLeft:"5%", marginRight:"15%" , marginTop:"30px", backgroundColor: "white" , borderRadius:"10px" }}>
                         <label 
                                 style={{  padding: "5px", marginRight:"20px" , borderBottom: `${(buttonColor===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor===true) ? '#7B170F' : 'white'  }`}}

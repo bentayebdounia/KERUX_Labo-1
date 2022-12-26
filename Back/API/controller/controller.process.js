@@ -110,7 +110,7 @@ getbonByFournisseur = (req, res) => {
 
 getBon_NomFournisseur = (req, res) => {
     const nom_fournisseur = req.params.nom_fournisseur
-     pool.query (queries.getBonByNomFournisseur, [nom_fournisseur],
+     pool.query (queries.getBonByNomFournisseur, [nom_fournisseur+'%'],
         (error, result) => {
             if (error) throw error
             res.status(200).json(result.rows)
@@ -129,7 +129,7 @@ getProdFourni = (req, res) => {
 
 getProdByNomFourniseur = (req, res) => {
     const nom_fournisseur = req.params.nom_fournisseur
-    pool.query (queries.getProdByNomFourniseur, [nom_fournisseur] , 
+    pool.query (queries.getProdByNomFourniseur, [nom_fournisseur+'%'] , 
         (error, result) => {
             if (error) throw error
             res.status(200).json(result.rows)

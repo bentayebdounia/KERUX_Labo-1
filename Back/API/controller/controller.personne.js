@@ -69,6 +69,16 @@ Login = (req, res) => {
     
 }
 
+getPersonneByNomOrPnom = (req, res) => {
+    const nom = req.params.nom
+    const prenom = req.params.prenom
+    pool.query(queries.getPersonneByNomOrPrenom, [nom+'%' ,  prenom+'%'],
+     (error, result) => {
+        if (error) throw error 
+        res.status(200).json(result.rows)
+    } )
+}
+
 
 module.exports = {
     AjouterPersonne,
@@ -76,5 +86,6 @@ module.exports = {
     Login,
     getAllPersonne,
     getNom,
-    getPrenom
+    getPrenom,
+    getPersonneByNomOrPnom
 }
