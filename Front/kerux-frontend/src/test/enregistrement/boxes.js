@@ -13,7 +13,8 @@ export default function Boxes(props){
                    <label for="produit" style={{color:"#000", fontWeight:"bold"}} >Type de produit: </label>
                     <label for="produit" style={{color:"#000"}} > {props.n_produit} </label>
                   </div>
-                  <div className="form-floating col-6 ">
+                  <div className="col-6">
+                  <div className="form-floating  ">
                     <input type="number" class="form-control" id="poids"
                            value={props.poids}  
                            onChange={event => { props.onPoidsChange(event.target.value) }}
@@ -23,9 +24,10 @@ export default function Boxes(props){
                     
                  </div>
                  
-                 {(props.erreurPoids===true && (props.poids===0 || props.poids==='') ) && <p style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le poids </p>}
-
-                {props.categorie === "poulet" && <div className="form-floating col-6 mb-3">
+                 {(props.erreurPoids===true && (props.poids=== 0 || props.poids=== '0' || props.poids==='') ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le poids </p>}
+                 </div>
+                 <div className="col-6  mb-3">
+                {props.categorie === "poulet" && <div className="form-floating ">
                     <input type="number" class="form-control" id="nbr"
                            value={props.nombre} 
                            onChange={event => { props.onNombreChange(event.target.value) }}
@@ -34,8 +36,8 @@ export default function Boxes(props){
                     <label for="nbr" style={{color:"#000" , fontWeight:"bold"}}> Nombre </label>
                 </div>}
                 
-                {props.categorie === "poulet" && (props.erreurNombre===true && (props.nombre===0 || props.nombre==='') ) && <p style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre </p>}
-                    
+                {props.categorie === "poulet" &&  (props.nombre===0 || props.nombre==='0' || props.nombre==='')  && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre </p>}
+                </div>
                     
             </div>
 

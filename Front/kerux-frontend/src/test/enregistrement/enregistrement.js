@@ -52,9 +52,13 @@ const Enregistrement = (props) => {
     
     const [conteur, setConteur] = useState (0)
 
+    const [erreurCategorie, setErreurcategorie] = useState(false)
+    const [erreurProduit, setErreurproduit] = useState(false)
+    const [erreurPoids, setErreurpoids] = useState(false)
+    const [erreurNombre, setErreurnombre] = useState(false)
 
-    const  plusId = () => {
-       
+    function plus () {
+
         setConteur(conteur+1)
         const newProduits = [...produits]
         EnregistrementService.ajouterProduitFournit(produits[0].categorie, produits[0].nom_produit, produits[0].poids, produits[0].nombre, props.id_bon)
@@ -82,6 +86,28 @@ const Enregistrement = (props) => {
                 return -1
             return 0
         }))
+
+    }
+
+    const  plusId = () => {
+
+        if (produits[0].categorie !== '' && produits[0].nom_produit!== '' && (produits[0].poids !== '' && produits[0].poids !== '0' && produits[0].poids !== 0) ){
+            if (produits[0].categorie === 'poulet' ){
+                if(produits[0].nombre !== '' && produits[0].nombre !== '0' && produits[0].nombre !== 0){
+                    plus()
+                }
+                else setErreurnombre(true)
+            } 
+            else plus()
+
+        }
+        else {
+            setErreurcategorie(true)
+            setErreurproduit(true)
+            setErreurpoids(true)
+        }
+       
+        
        // console.log("box=  "+produits[0].product);
         
     }
@@ -132,7 +158,10 @@ const Enregistrement = (props) => {
                                         setProduits(newProduits)
                                         }} 
                                 
-                                
+                                        erreurCategorie = {erreurCategorie}
+                                        erreurProduit = {erreurProduit}
+                                        erreurPoids = { erreurPoids}
+                                        erreurNombre = {erreurNombre}
                                 
                                 />
                             {key === 0 && (<>
