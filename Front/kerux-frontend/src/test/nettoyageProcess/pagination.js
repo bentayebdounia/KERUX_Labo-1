@@ -1,27 +1,32 @@
-import React  , {useState} from 'react';
+import React  , {useState,useEffect} from 'react';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
   const [number , setNumber] = useState(1)
+  const [updatenumber , setUpdatenumber] = useState()
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
 
+  useEffect(() =>{
+    setUpdatenumber(number)
+  })
   function suivant () {
     if (number< pageNumbers.length+1){
-        console.log(number)
+        
         setNumber(number+1)
-        paginate(number)
+        console.log(updatenumber)
+        paginate(updatenumber)
     }
   }
 
   function precident () {
     if (number> 0){
-        console.log(number)
+        console.log(updatenumber)
         
         setNumber(number-1)
-        paginate(number)
+        paginate(updatenumber)
     }
   }
 
@@ -30,7 +35,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
       <ul className='pagination'>
        
 
-       
+
             {number>0 && <li className='page-item'>
                 <a onClick={precident} href='#' className='page-link' style={{color: "#7B170F"}}>
                     precident
@@ -39,12 +44,12 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
              }
  
             <li className='page-item'>
-                <a onClick={() =>{setNumber(1); paginate(number); }} href='#' className='page-link' style={{color: "#7B170F"}}>
+                <a onClick={() =>{setNumber(1); paginate(updatenumber); }} href='#' className='page-link' style={{color: "#7B170F"}}>
                 {(pageNumbers.length-(pageNumbers.length-1))}
                 </a>
             </li>
             <li  className='page-item'>
-                <a onClick={() => {setNumber(2); paginate(number)}} href='#' className='page-link' style={{color: "#7B170F"}}>
+                <a onClick={() => {setNumber(2); paginate(updatenumber)}} href='#' className='page-link' style={{color: "#7B170F"}}>
                 {(pageNumbers.length-(pageNumbers.length-2))}
                 </a>
             </li>
