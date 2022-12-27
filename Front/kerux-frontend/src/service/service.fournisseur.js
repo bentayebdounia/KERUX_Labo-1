@@ -27,9 +27,9 @@ class ServiceFournisseur {
         return axios.get(GET_ALL_FOURNISSEUR)
     }
 
-    getFournisseurByNomOrCategorie (nom_fournisseur, categoroie) {
+     getFournisseurByNomOrCategorie (nom_fournisseur, categoroie) {
 
-        return axios.get(GET_FOURNISSEUR_BY_NOM_CATEGORIE+nom_fournisseur +"/"+ categoroie )
+        return  axios.get(GET_FOURNISSEUR_BY_NOM_CATEGORIE+nom_fournisseur +"/"+ categoroie )
     }
 
 

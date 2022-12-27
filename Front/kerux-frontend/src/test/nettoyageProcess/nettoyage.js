@@ -37,11 +37,9 @@ const Nettoyage = (props) => {
 
     var nbr, agents
     
-    const [idAgent, setIdAgent]= useState([])
-    const [nomAgent, setNomAgent ] = useState([])
+    
     const [id_personne, setIdpersonne] = useState()
-    const [nom, setNom] = useState()
-    const [prenom, setPrenom] = useState()
+   
 
     const [agentNettoyage, setAgentNettoyage] = useState([{
         id_personne:"",

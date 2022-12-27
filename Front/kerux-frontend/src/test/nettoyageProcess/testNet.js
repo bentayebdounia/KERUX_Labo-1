@@ -2,7 +2,8 @@ import React ,{useState,useEffect} from 'react'
 import serviceNettoyage from '../../service/service.nettoyage' 
 import Nettoyage from './nettoyage' 
 import ModelReponse from '../../Models/Model.repense' 
-import ModalSortieStock from '../Stock/Modal.sortieStock' 
+import ModalSortieStock from '../Stock/Modal.sortieStock'
+import Pagination from './pagination' 
 import moment from 'moment'; 
 const TestNet = () => { 
  
@@ -53,9 +54,22 @@ const TestNet = () => {
     const [toggle2, setToggle2] = useState ()  
     const toggleshow2 = () => setToggle2(true) 
     const toggleDisplay2 = () => setToggle2 (false) 
- 
+
+    const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(8);
+    
     const [message,setMessage] = useState() 
      
+
+    //les operation de pagination 
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = EnAttente.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = enStock.slice(indexOfFirstPost, indexOfLastPost);
+
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
      useEffect(()=>{ 
        /* serviceNettoyage.getActualProcess() 
             .then((res)=>{ 
@@ -123,42 +137,42 @@ const TestNet = () => {
                 console.log("hello1"); 
                 EnAttente.splice("") 
                 enStock.splice("") 
-                console.log(tablenettoyage);
-                    for ( var i=0 ; i<tableEnregistrement.length ; i++) { 
-                       // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
-                        var j=0
-                        var a = false
-                        console.log(tablenettoyage[j].id_enregistrement);
-                        for (var j=0 ; j<tablenettoyage.length ; j++){
-                            if ( tablenettoyage[j].id_enregistrement === tableEnregistrement[i].id_gnerate   )   {
-                                
-                                a = true
-                                console.log(a);
-                            }
-                        }
+               // console.log(tablenettoyage);
+                for ( var i=0 ; i<tableEnregistrement.length ; i++) { 
+                    // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
+                    var j=0
+                    var a = false
+                    //console.log(tablenettoyage[j].id_enregistrement);
+                    for (var j=0 ; j<tablenettoyage.length ; j++){
+                        if ( tablenettoyage[j].id_enregistrement === tableEnregistrement[i].id_gnerate   )   {
                             
-                            if (a ===false && tableEnregistrement[i].fk_stock === null){
-                                 EnAttente.push(tableEnregistrement[i])
-                                 console.log( EnAttente);
-                                 }
+                            a = true
+                            //console.log(a);
+                        }
+                    }
+                        
+                        if (a ===false && tableEnregistrement[i].fk_stock === null){
+                                EnAttente.push(tableEnregistrement[i])
+                                //console.log( EnAttente);
+                                }
                  
-       }
-       setEnattente(
-        EnAttente.map(p => {
-            return {
-                select: false,
-                id_gnerate:p.id_gnerate,
-                categorie: p.categorie,
-                nom_produit:p.nom_produit,
-                poids:p.poids ,
-                nombre:p.nombre, 
-                datee :moment.utc(p.datee).format('DD/MM/YYYY'),
-                heure:p.heure,
-                etape:p.etape ,
-               
-            
-            };
-        })
+                }
+                setEnattente(
+                    EnAttente.map(p => {
+                        return {
+                            select: false,
+                            id_gnerate:p.id_gnerate,
+                            categorie: p.categorie,
+                            nom_produit:p.nom_produit,
+                            poids:p.poids ,
+                            nombre:p.nombre, 
+                            datee :moment.utc(p.datee).format('DD/MM/YYYY'),
+                            heure:p.heure,
+                            etape:p.etape ,
+                        
+                        
+                        };
+                    })
     )
     } 
      
@@ -225,7 +239,7 @@ setEnstock(
                             </thead> 
                             <tbody >
                             { 
-                                EnAttente.map( 
+                                currentPosts.map( 
                                     (p, key) => 
                                     <tr key={key}> 
                                         <td>
@@ -264,7 +278,14 @@ setEnstock(
                                     </tr>    )} 
                                 </tbody> 
                                 </table> 
-    
+                                
+                                <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={EnAttente.length}
+                                    paginate={paginate}
+                                />
+                                
+                                
             </>
 
     
@@ -291,7 +312,7 @@ table2=(
                                 </tr> 
                             </thead> 
                             <tbody >
-                            {  enStock.map( 
+                            {  currentPosts2.map( 
                                 (p, key) => 
                                 <tr key={key}> 
                                     <td>
@@ -372,8 +393,8 @@ table2=(
                                 {buttonColor && table}
                                 {buttonColor2 && table2}
      
-         
-                    </div> 
+                                
+                        </div> 
     
                     </div> 
                              
@@ -382,12 +403,12 @@ table2=(
                 </div>
                 
      
-                {handleShow &&<ModelReponse show={show} handleClose={handleClose} handleShow={handleShow} 
+                {show &&<ModelReponse show={show} handleClose={handleClose} handleShow={handleShow} 
                               message={message}  
                               titre={"nettoyage"}  
                               />} 
      
-                {handleShow2 && <ModalSortieStock  
+                {show2 && <ModalSortieStock  
                                     show2={show2}  
                                     handleClose2={handleClose2}  
                                     handleShow2={handleShow2}  
