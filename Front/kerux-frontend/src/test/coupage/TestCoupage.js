@@ -444,9 +444,9 @@ if(buttonColor2)
             {!toggle &&
                  <section id="etape_section">
                  <div className="container">
-                     <div className="mb-3 row">
-                     <label htmlFor="id_etape"  className="col-sm-2 col-form-label">ID Box</label>
-                     <div className="col-sm-7">
+                     
+                     
+                     <div className="col-sm-10" style={{width:"90%", marginLeft:"5%", marginRight:"15%"  }}>
                      {boxes.map((box,key) => {
                          return ( 
                              <div className="input-group col-sm-10" key={key}>
@@ -455,12 +455,15 @@ if(buttonColor2)
                                          newBoxes[key].id_box = newId_box
                                          setBoxes(newBoxes)
                                      }} />
-                                 {key === 0 && <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2"
+                                 {key === 0 && <>
+                                            <button className="btn" style={{background: '#7B170F' }} type="button" id="button-addon2"
                                                   onClick={(e) => plusId(e)} >
-                                                 <i className="bi bi-plus-lg" style={{color: "white"}}></i>
-                                                  </button>
-                                                  
-                                                  }
+                                                 <i className="bi bi-plus-lg" style={{color: "white" , fontSize:"15px"}}></i>
+                                            </button>
+                                           <button className="btn" style={{background: '#4F8B2A',marginLeft:'2px' ,color: "white" }} type="button" id="button-addon2" onClick={(e)=> confirmer(e)}>
+                                                   <i className="bi bi-check-lg" > </i> Confirmer
+                                            </button> 
+                                            </> }
                                      
                          </div>
                              
@@ -468,26 +471,22 @@ if(buttonColor2)
                                                    
                          
                      </div>
-                     <div className='col-sm-3'>
-                             <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2" onClick={(e)=> confirmer(e)}>
-                                             <i className="bi bi-check-lg" style={{color: "white"}}> Confirmer</i>
-                             </button> 
-                         </div>
+                     
                       
-                 </div>
+                 
      
                  <div style={{width:"90%", height:"600px", marginLeft:"5%", marginRight:"15%" , marginTop:"30px", backgroundColor: "white" , borderRadius:"10px" }}>
                          <label 
                                  style={{  padding: "5px", marginRight:"20px" , borderBottom: `${(buttonColor===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor===true) ? '#7B170F' : 'white'  }`}}
                                  onClick={chargerData} >
-                             <a class="nav-link "  style={{ color: `${(buttonColor===true) ? '#7B170F' : 'black'  }`}} href='#'>Produits en attente</a> 
+                             <a className="nav-link "  style={{ color: `${(buttonColor===true) ? '#7B170F' : 'black'  }`}} href='#'>Produits en attente</a> 
                          </label>
      
                          <label 
                                  style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }` , padding: "5px" , borderBottom: `${(buttonColor2===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor2===true) ? '7B170F' : 'white'  }`}}
                                  onClick={chargerDataEnStock}
                                  >
-                                    <a class="nav-link " style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }`}} href='#'> Produits en Stock</a></label>
+                                    <a className="nav-link " style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }`}} href='#'> Produits en Stock</a></label>
      
                          <p style={{ borderBottom:  '1px solid' , borderBottomColor: "#BBBABA"}}/>
      

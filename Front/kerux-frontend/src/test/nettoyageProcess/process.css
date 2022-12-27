@@ -1,6 +1,11 @@
 .contenaireBox {
     text-align: center;
 }
+.contenerProd{
+    text-align: center;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
 #id_box{
     margin-right: 20px;
     color: black;
@@ -8,14 +13,8 @@
     font-family: sans-serif;
     
 }
-.contenaireCategorie{
-    width: 20%;
-}
-.contenaireCategorie{
-    width: 20%;
-}.contenaireProd{
-    width: 20%;
-}
+
+
 #categorie{
    
     color: black;

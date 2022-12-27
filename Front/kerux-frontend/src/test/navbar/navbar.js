@@ -57,7 +57,7 @@ const Navbar = () => {
 
     return (
         <div>
-          <nav className="navbar navbar-dark bg-dark fixed-top flex-md-nowrap p-0 shadow">
+          <nav className="navbar   fixed-top flex-md-nowrap p-0 shadow" style={{background: "#7B170F"}}>
             <div className="container-fluid" id='divContainer'>
           
           <Link className="nav-link active me-auto mx-3" style={{color: "white" , fontSize: "13px" }} aria-current="page" to="#"  >
@@ -69,7 +69,7 @@ const Navbar = () => {
             <i className="bi bi-journals" style={{fontSize: "1rem", color:"white"}}></i>
             Journal
           </Link>
-          <ul className="dropdown-menu" style={{marginLeft:'35%'}}>
+          <ul className="dropdown-menu" style={{marginLeft:'40%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalReception() } } >Journal de reception</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalProduitFourni() } } >Journal de produits fournis</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalNettoyage(); setJournalProcess('enregistrement') } }>Journal de enregistrement</button> </li>
@@ -84,7 +84,7 @@ const Navbar = () => {
           <Link className="nav-link active me-auto mx-3" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{color: "white", fontSize: "13px"}}   href="#">
               Stock   
           </Link>
-          <ul className="dropdown-menu" style={{marginLeft:'50%'}}>
+          <ul className="dropdown-menu" style={{marginLeft:'60%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={handleShow4}>Entrepot</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={handleShowMouvementStock}>Movement de stock</button> </li>
             

@@ -344,8 +344,8 @@ table2=(
                         
                             <div className="input-group col-sm-10" style={{width:"90%", marginLeft:"5%", marginRight:"15%"  }}> 
                                 <input type="text" className="form-control" placeholder="ID boxe"  aria-describedby="button-addon2" value={id} onChange={(e)=> setId(e.target.value)}/> 
-                                <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2" onClick={(e) => getProcess(e)} > 
-                                    <i className="bi bi-check-lg" style={{color: "white"}}></i> 
+                                <button className="btn" style={{background: '#7B170F'}} type="button" id="button-addon2" onClick={(e) => getProcess(e)} > 
+                                    <i className="bi bi-check-lg" style={{color: "white" , fontSize:"20px"}}></i> 
                                 </button> 
                             </div> 
                          
@@ -354,7 +354,7 @@ table2=(
                         <label 
                                 style={{  padding: "5px", marginRight:"20px" , borderBottom: `${(buttonColor===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor===true) ? '#7B170F' : 'white'  }`}}
                                 onClick={chargerData} >
-                            <a class="nav-link "  style={{ color: `${(buttonColor===true) ? '#7B170F' : 'black'  }`}} href='#'>Produits en attente</a> 
+                            <a className="nav-link "  style={{ color: `${(buttonColor===true) ? '#7B170F' : 'black'  }`}} href='#'>Produits en attente</a> 
                         </label>
     
                         <label 

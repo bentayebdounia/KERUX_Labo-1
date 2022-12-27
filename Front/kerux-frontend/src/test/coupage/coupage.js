@@ -1,5 +1,4 @@
 import React ,{useState,useEffect} from 'react'
-import Modal from 'react-bootstrap/Modal'
 import ModalConfirmCoup from './ModalConfirmCoup'
 import ModelReponse from '../../Models/Model.repense'
 import ModalListAgent from '../../Models/modalListAgent'
@@ -209,8 +208,8 @@ const Coupage = (props) => {
                         
                         <div className="d-grid gap-3 d-md-flex justify-content-md-end" >
                             
-                            <button className="btn2" type="submit" onClick={annuler} >Annuler</button>
-                            <button className="btn1" type="submit" >Valider</button>
+                            <button className="btn2" type="submit" onClick={annuler} >ANNULER</button>
+                            <button className="btn1" type="submit" >VALIDER</button>
                         
                         </div>
                 </form>

@@ -116,31 +116,32 @@ const Nettoyage = (props) => {
             <section id="etape_section">
                 <div className="container">
                     <form class="needs-validation" noValidate>
-                        <div className="contenaireBox">
-                            <label id="id_box"> ID Box: </label>
-                            
-                            <label  id="id_boxValue" >{props.id} </label>
-                            
-                        </div>
-
-                        
-                        <div className="col-10">
-                            <div className="col-10">
-                                <label id="categorie"> Categorie de produit: </label>
+                        <div className='row gy-2 gx-2'>
+                            <div className="contenaireBox">
+                                <label id="id_box"> ID Box: </label>
                                 
-                                <label  id="categorieValue" >{props.process.categorie} </label>
+                                <label  id="id_boxValue" >{props.id} </label>
                                 
                             </div>
 
-                            <div className="col-5">
-                                <label id="produit"> Type de produit: </label>
-                                
-                                <label  id="produitValue" >{props.process.nom_produit} </label>
-                                
-                            </div>
-                        </div>
-                        
+                            
+                            
+                                <div className="contenerProd col-6" >
+                                    <label id="categorie"> Categorie de produit: </label>
+                                    
+                                    <label  id="categorieValue" >{props.process.categorie} </label>
+                                    
+                                </div>
 
+                                <div className="contenerProd col-6" >
+                                    <label id="produit"> Type de produit: </label>
+                                    
+                                    <label  id="produitValue" >{props.process.nom_produit} </label>
+                                    
+                                </div>
+                            
+                        
+                        </div>
                         
 
                         <div className="mb-3 row">
@@ -148,8 +149,8 @@ const Nettoyage = (props) => {
                             <div className="col-sm-10 dropdown">
                             <div className="input-group">
                                 <input type="text" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
-                                <button className="btn btn-dark btn-outline-dark" type="button" onClick={(e)=>ajouterAgent(e)} >
-                                <i className="bi bi-plus" style={{color: "white"}}></i>
+                                <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
+                                <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
                                  </button>
                              </div>
                                     {agents}
@@ -176,8 +177,8 @@ const Nettoyage = (props) => {
                         
                         <div className="d-grid gap-3 d-md-flex justify-content-md-end" >
                             
-                            <button className="btn2" type="submit" onClick={props.toggleDisplay} > Annuler </button>
-                            <button className="btn1" type="submit" >Valider</button>
+                            <button className="btn2" type="submit" onClick={props.toggleDisplay} > ANNULER </button>
+                            <button className="btn1" type="submit" >VALIDER</button>
                         
                         </div>
                 </form>
