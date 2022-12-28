@@ -5,7 +5,8 @@ import ModalConfirmCondit from './ModalConfirmCondit'
 import ModelReponse from '../../Models/Model.repense'
 import ModalListAgent from '../../Models/modalListAgent'
 import ServiceAdmin from '../../service/serviceAdmin'
-
+import Tableau from '../nettoyageProcess/tableau'
+import '../nettoyageProcess/process.css'
 const Conditionnement = (props) => {
 
     const [show, setShow] = useState(false)
@@ -33,7 +34,7 @@ const Conditionnement = (props) => {
     const [note , setNote] = useState(false)
 
     
-    var  bouttonMarinade
+    var  bouttonMarinade, agents
 
     const [confirmeConditionnement, setConfirmeConditionnemet] = useState(false)
     const confirmeConditionnemetTrue = () => setConfirmeConditionnemet(true)
@@ -46,6 +47,25 @@ const Conditionnement = (props) => {
     const [calculPoids, setCalculPoids] = useState([])
     const [PorcentagePoids, setPorcentagePoids] = useState()
     
+    const [toggleRecomendation, setToggleRecomendation] = useState(true)
+    const toggleRecomendationTrue = () => setToggleRecomendation (true)
+    const toggleRecomendationFalse = () => setToggleRecomendation(false)
+
+    const [id_personne, setIdpersonne] = useState()
+    const [agentNettoyage, setAgentNettoyage] = useState([{
+        id_personne:"",
+        nom: "",
+        prenom: ""
+    }])
+    const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
+    //get personnes
+    useEffect(()=>{
+        ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
+        .then((res) => {
+            setAgentNettoyage(res.data)
+            console.log(agentNettoyage);
+        })
+    })
 
     useEffect(()=>{
         if(confirmeConditionnement){
@@ -77,28 +97,21 @@ const Conditionnement = (props) => {
             return porcentagePoids
         }
 
-    const ajouterAgent=(e) => {
-        e.preventDefault()
-        ServiceAdmin.getPersonneById(agent)
-        .then ( (res)=> {
-            if(res.data==="ID n'existe pas"){
-                console.log(res.data);
-                setMessage("ID n'existe pas")
-                handleShow3()
+        const ajouterAgent=(e) => {
+            e.preventDefault()
+          
+            agentNettoyageSelect.push({
+            id_personne: id_personne,
+            nom:  agent,
             
-            }
-  
-            else{
-                setNomAgent(current => [...current , res.data[0].nom +" "+ res.data[0].prenom])
-                setIdAgent(current => [...current, agent]);
-                console.log("ajouter agent "+ idAgent)
-                setAgent('')
-            }
-        })
-        
-        console.log(agent)
-        
-    }
+           })
+            handleShow()
+            setAgent('')
+                
+            
+            
+            
+        }
 
     const valider = (e) => {
         e.preventDefault()
@@ -138,7 +151,24 @@ const Conditionnement = (props) => {
         )
      
     }
-
+    function select () {
+        
+        toggleRecomendationFalse()
+       
+    }
+    agents= (
+        <>
+            <div className='dataResults'>
+                         {agentNettoyage.map((value, key) => {
+                                     return (
+                                         <a className='dataItems'  onClick={()=>{setAgent(value.nom+ " " + value.prenom); setIdpersonne(value.id_personne) }}>
+                                             <p > {value.id_personne} . {value.nom} {value.prenom} </p>
+                                         </a>
+                                     )
+                                 })}
+                     </div>
+        </>
+    )
 
     return ( 
         <div>
@@ -172,13 +202,22 @@ const Conditionnement = (props) => {
 
                 <div className="mb-3 row">
                     <label for="recepteur"  className="col-sm-2 col-form-label">Agent de Conditionnemt</label>
-                    <div className="col-sm-10">
-                    <div className="input-group">
-                        <input type="number" className="form-control" id="agentIdNettoyage" placeholder="" aria-label="Recipient's username with two button addons" value={agent} onChange={(e)=> setAgent(e.target.value)}/>
-                        <button className="btn btn-dark btn-outline-dark" type="button" ><i className="bi bi-plus" style={{color: "white"}} onClick={(e)=>ajouterAgent(e)}></i></button>
-                        <button className="btn btn-dark btn-outline-dark" type="button" ><i className="bi bi-person-lines-fill" style={{color: "white"}} onClick={handleShow4}></i></button>
-                        </div>
-                    </div>
+                    <div className="col-sm-10 dropdown">
+                            <div className="input-group">
+                                <input type="text" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
+                                <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
+                                <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
+                                 </button>
+                             </div>
+                                    {agents}
+
+                            </div>
+                                    {show && <Tableau show={show} 
+                                        handleClose={handleClose} 
+                                        handleShow={handleShow} 
+                                        agentNettoyage={agentNettoyageSelect}
+                                        
+                                    />}
                 </div>
                 <div className="mb-3 row">
                     <label for="poids" className="col-sm-2 col-form-label">Poids</label>

@@ -379,7 +379,7 @@ setEnstock(
 
                                 <Pagination
                                     postsPerPage={postsPerPage}
-                                    totalPosts={enStock.length}
+                                    totalPosts={EnAttente.length}
                                     paginate={paginate}
                                 />
     
@@ -412,7 +412,7 @@ if(buttonColor2)
                                 </tr> 
                             </thead> 
                             <tbody >
-                            {  currentPosts.map( 
+                            {  currentPosts2.map( 
                                 (p, key) => 
                                 <tr key={key}> 
                                     <td>
@@ -449,6 +449,11 @@ if(buttonColor2)
                                   )} 
                                 </tbody> 
                                 </table> 
+                                <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={enStock.length}
+                                    paginate={paginate}
+                                />
     
             </>
     )
