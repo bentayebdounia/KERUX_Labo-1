@@ -8,6 +8,7 @@ import JournalReception from '../journalProcess/journalRecetion'
 import JournalProduitsFournis from '../journalProcess/journalProduitFourni'
 import MouvementStock from '../Stock/mouvementStock'
 import AcueilBoutton from '../acueil_boutton'
+import StatistiqueProduitFourni from '../statistique/statistiqueProduitFourni'
 
 
 
@@ -47,6 +48,10 @@ const Navbar = () => {
 
     const [entrepot, setEntrepot] = useState()
     const location = useLocation();
+
+    const [showStatistiqueProd, setShowstatistique_prod] = useState(false)
+    const handleCloseStatistiqueProd = () => setShowstatistique_prod(false)
+    const handleShowStatistiqueProd = () => setShowstatistique_prod(true)
   let etape
 
   
@@ -91,7 +96,13 @@ const Navbar = () => {
           </ul>
 
 
-          <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  aria-current="page" to="#">Statistique</Link>
+          <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">Statistique</Link>
+          <ul className="dropdown-menu" style={{marginLeft:'77%'}}>
+            <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowStatistiqueProd() } } >Statistique des produits </button> </li>
+            <li> <button className="dropdown-item"  type="button"  >Statistique des process  </button> </li>
+            <li> <button className="dropdown-item"  type="button" >Statistique des stock </button> </li>
+            
+          </ul>
         
           <Link className="nav-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i className="bi bi-person-fill" style={{fontSize: "1.25rem", color:"white"}}></i>
@@ -146,9 +157,12 @@ const Navbar = () => {
                                                         handleClose={handleCloseMouvementStock} 
                                                         
 
-                                          />
-
-          }
+                                          />}
+                                  
+          {showStatistiqueProd && <StatistiqueProduitFourni
+                                          show={showStatistiqueProd}
+                                          handleClose={handleCloseStatistiqueProd}
+                  />}
         
         </div>
     

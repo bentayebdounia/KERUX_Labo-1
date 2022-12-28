@@ -5,7 +5,8 @@ import MarinadeService from '../../service/service.marinade'
 import ModelReponse from '../../Models/Model.repense'
 import ModalListAgent from '../../Models/modalListAgent'
 import ServiceAdmin from '../../service/serviceAdmin'
-
+import Tableau from '../nettoyageProcess/tableau';
+import '../nettoyageProcess/process.css'
 
 const ModalMarinade = (props) => {
     const [idAgent, setIdAgent]= useState([])
@@ -17,6 +18,27 @@ const ModalMarinade = (props) => {
     const [show2, setShow2] = useState(false)
     const handleClose2 = () => setShow2(false)
     const handleShow2 = () => setShow2(true)
+
+    const [toggleRecomendation, setToggleRecomendation] = useState(true)
+    const toggleRecomendationTrue = () => setToggleRecomendation (true)
+    const toggleRecomendationFalse = () => setToggleRecomendation(false)
+    var mi_cuissan, agents
+    const [id_personne, setIdpersonne] = useState()
+    const [agentNettoyage, setAgentNettoyage] = useState([{
+        id_personne:"",
+        nom: "",
+        prenom: ""
+    }])
+    const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
+    //get personnes
+    useEffect(()=>{
+        ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
+        .then((res) => {
+            setAgentNettoyage(res.data)
+            console.log(agentNettoyage);
+        })
+    })
+
 
     const handleChange = (data) => {
         if(data === 'marine'){
@@ -63,28 +85,18 @@ const ModalMarinade = (props) => {
 
     const ajouterAgent=(e) => {
         e.preventDefault()
-        ServiceAdmin.getPersonneById(agent)
-        .then ( (res)=> {
-            if(res.data==="ID n'existe pas"){
-                console.log(res.data);
-                setMessage("ID n'existe pas")
-                handleShow3()
-            
-            }
-                
-
-            else{
-                setNomAgent(current => [...current , res.data[0].nom +" "+ res.data[0].prenom])
-                setIdAgent(current => [...current, agent]);
-                console.log("ajouter agent "+ idAgent)
-                setAgent('')
-            }
-        })
+      
+        agentNettoyageSelect.push({
+        id_personne: id_personne,
+        nom:  agent,
         
-        console.log(agent)
+       })
+       handleShow2()
+        setAgent('') 
+        
         
     }
-        var mi_cuissan
+      
 
         if(props.process.nom_produit !== 'tendres'){
             mi_cuissan =(
@@ -96,6 +108,25 @@ const ModalMarinade = (props) => {
             )
         }
 
+        function select () {
+        
+            toggleRecomendationFalse()
+           
+        }
+        agents= (
+            <>
+                <div className='dataResults'>
+                             {agentNettoyage.map((value, key) => {
+                                         return (
+                                             <a className='dataItems'  onClick={()=>{setAgent(value.nom+ " " + value.prenom); setIdpersonne(value.id_personne) }}>
+                                                 <p > {value.id_personne} . {value.nom} {value.prenom} </p>
+                                             </a>
+                                         )
+                                     })}
+                         </div>
+            </>
+        )
+    
     return ( 
         <>
             <Modal show={props.show2} onHide={props.handleClose2}> 
@@ -111,17 +142,22 @@ const ModalMarinade = (props) => {
                     </div>
                     <div className="mb-3 row">
                         <label htmlFor="recepteur"  className="col-sm-2 col-form-label">Agent de marinade</label>
-                        <div className="col-sm-10">
-                        <div className="input-group">
-                            <input type="number" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)}/>
-                            <button className="btn btn-dark btn-outline-dark" type="button" onClick={(e)=>ajouterAgent(e)}>
-                                <i className="bi bi-plus" style={{color: "white"}}> </i>
-                            </button>
-                            <button className="btn btn-dark btn-outline-dark" type="button" onClick={handleShow2} >
-                                <i className="bi bi-person-lines-fill" style={{color: "white"}}> </i>
-                            </button>
+                        <div className="col-sm-10 dropdown">
+                            <div className="input-group">
+                                <input type="text" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
+                                <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
+                                <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
+                                 </button>
+                             </div>
+                                    {agents}
+
                             </div>
-                        </div>
+                                    {show2 && <Tableau show={show2} 
+                                        handleClose={handleClose2} 
+                                        handleShow={handleShow2} 
+                                        agentNettoyage={agentNettoyageSelect}
+                                        
+                                    />}
                     </div>
                     <div>
                         <Form.Check aria-label="option 1" label="Marinade" value={marine} onChange= {()=> handleChange('marine')} />
@@ -140,12 +176,7 @@ const ModalMarinade = (props) => {
                                     titre={"marinade"} 
                                     />
 
-            <ModalListAgent             show={show2} 
-                                        handleClose={handleClose2} 
-                                        handleShow={handleShow2} 
-                                        id={idAgent}
-                                        nom={nomAgent}
-                                        />
+            
 
            
         </>

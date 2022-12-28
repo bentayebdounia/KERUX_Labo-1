@@ -612,7 +612,7 @@ if(toggleProduitBar){
 
     return(
         <div>
-            <nav className="navbar navbar-dark bg-dark fixed-top flex-md-nowrap p-0 shadow">
+            <nav className="navbar  fixed-top flex-md-nowrap p-0 shadow" style={{background: "#7B170F"}}>
                 
                     <Link className="nav-link active me-auto mx-3" link="#" aria-current="page" style={{color:"white", fontSize: "13px"}}
                                    to={{pathname:"/test", state:{nom: nomUser , prenom: prenomUser , id: idUser}}} >

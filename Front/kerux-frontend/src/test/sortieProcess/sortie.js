@@ -3,6 +3,8 @@ import ModalConfirmSortie from './ModalConfirmSortie'
 import ModelReponse from '../../Models/Model.repense'
 import ModalListAgent from '../../Models/modalListAgent'
 import ServiceAdmin from '../../service/serviceAdmin'
+import Tableau from '../nettoyageProcess/tableau'
+import '../nettoyageProcess/process.css'
 
 const Sortie = (props) => {
     const [show, setShow] = useState(false)
@@ -23,41 +25,72 @@ const Sortie = (props) => {
 
     const [idAgent, setIdAgent]= useState([])
 
-    
-
     const [message,setMessage] = useState()
     const [nomAgent, setNomAgent ] = useState([])
-
+    const [id_personne, setIdpersonne] = useState()
+    const [toggleRecomendation, setToggleRecomendation] = useState(true)
+    const toggleRecomendationTrue = () => setToggleRecomendation (true)
+    const toggleRecomendationFalse = () => setToggleRecomendation(false)
+    var agents
     
+    const [agentNettoyage, setAgentNettoyage] = useState([{
+        id_personne:"",
+        nom: "",
+        prenom: ""
+    }])
+
+    const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
+    //get personnes
+    useEffect(()=>{
+        ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
+        .then((res) => {
+            setAgentNettoyage(res.data)
+            console.log(agentNettoyage);
+        })
+    })
 
     const ajouterAgent=(e) => {
         e.preventDefault()
-        ServiceAdmin.getPersonneById(agent)
-        .then ( (res)=> {
-            if(res.data==="ID n'existe pas"){
-                console.log(res.data);
-                setMessage("ID n'existe pas")
-                handleShow3()
-            
-            }
-                
-
-            else{
-                setNomAgent(current => [...current , res.data[0].nom +" "+ res.data[0].prenom])
-                setIdAgent(current => [...current, agent]);
-                console.log("ajouter agent "+ idAgent)
-                setAgent('')
-            }
-        })
+      
+        agentNettoyageSelect.push({
+        id_personne: id_personne,
+        nom:  agent,
         
-        console.log(agent)
+       })
+        handleShow2()
+        setAgent('')
+            
+        
+        
         
     }
+                
+
+           
     const valider = (e) => {
         e.preventDefault()
         handleShow()
     }
 
+    function select () {
+        
+        toggleRecomendationFalse()
+       
+    }
+
+    agents= (
+        <>
+            <div className='dataResults'>
+                         {agentNettoyage.map((value, key) => {
+                                     return (
+                                         <a className='dataItems'  onClick={()=>{setAgent(value.nom+ " " + value.prenom); setIdpersonne(value.id_personne) }}>
+                                             <p > {value.id_personne} . {value.nom} {value.prenom} </p>
+                                         </a>
+                                     )
+                                 })}
+                     </div>
+        </>
+    )
 
     return ( 
         <div>
@@ -87,17 +120,23 @@ const Sortie = (props) => {
 
                 <div className="mb-3 row">
                     <label for="recepteur"  class="col-sm-2 col-form-label">Agent de sortie</label>
-                    <div className="col-sm-10">
-                        <div className="input-group">
-                            <input type="number" className="form-control" id="agentIdNettoyage" placeholder="" aria-label="Recipient's username with two button addons" value={agent} onChange={(e)=> setAgent(e.target.value)}/>
-                            <button className="btn btn-dark btn-outline-dark" type="button" onClick={(e)=>ajouterAgent(e)} >
-                                <i className="bi bi-plus" style={{color: "white"}}></i>
-                            </button>
-                            <button className="btn btn-dark btn-outline-dark" type="button" >
-                                <i className="bi bi-person-lines-fill" style={{color: "white"}} onClick={handleShow2} ></i>
-                            </button>
-                        </div>
-                    </div>
+                    <div className="col-sm-10 dropdown">
+                            <div className="input-group">
+                                <input type="text" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
+                                <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
+                                <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
+                                 </button>
+                             </div>
+                                    {agents}
+
+                            </div>
+                                    {show2 && <Tableau show={show2} 
+                                        handleClose={handleClose2} 
+                                        handleShow={handleShow2} 
+                                        agentNettoyage={agentNettoyageSelect}
+                                        
+                                    />}
+                            
                 </div>
                 <div className="mb-3 row">
                     <label for="poids" className="col-sm-2 col-form-label">Poids</label>
@@ -167,11 +206,7 @@ const Sortie = (props) => {
                                             titre={"sortie"} 
                                             />}
 
-            {show2 && <ModalListAgent     show={show2} 
-                                                handleClose={handleClose2} 
-                                                id={idAgent}
-                                                nom={nomAgent}
-                                                />}
+          
 
             </section>
             

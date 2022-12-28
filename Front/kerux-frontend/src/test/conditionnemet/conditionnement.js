@@ -3,7 +3,6 @@ import Modal from 'react-bootstrap/Modal'
 import ModalMarinade from './marinad'
 import ModalConfirmCondit from './ModalConfirmCondit'
 import ModelReponse from '../../Models/Model.repense'
-import ModalListAgent from '../../Models/modalListAgent'
 import ServiceAdmin from '../../service/serviceAdmin'
 import Tableau from '../nettoyageProcess/tableau'
 import '../nettoyageProcess/process.css'
@@ -105,7 +104,7 @@ const Conditionnement = (props) => {
             nom:  agent,
             
            })
-            handleShow()
+           handleShow4()
             setAgent('')
                 
             
@@ -212,9 +211,9 @@ const Conditionnement = (props) => {
                                     {agents}
 
                             </div>
-                                    {show && <Tableau show={show} 
-                                        handleClose={handleClose} 
-                                        handleShow={handleShow} 
+                                    {show4 && <Tableau show={show4} 
+                                        handleClose={handleClose4} 
+                                        handleShow={handleShow4} 
                                         agentNettoyage={agentNettoyageSelect}
                                         
                                     />}
@@ -288,12 +287,7 @@ const Conditionnement = (props) => {
                                     titre={"conditionnement"} 
                                     />}
             
-            {show4 && <ModalListAgent             show={show4} 
-                                        handleClose={handleClose4} 
-                                        handleShow={handleShow4} 
-                                        id={idAgent}
-                                        nom={nomAgent}
-                                        />}
+            
 
             </section>
  

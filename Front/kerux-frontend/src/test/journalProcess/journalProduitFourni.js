@@ -140,6 +140,9 @@ const JournalProduitsFournis = (props) => {
                                 <th scope="col">Produit</th>
                                 <th scope="col">Poids</th>
                                 <th scope="col">Nombre</th>
+
+
+                                
                                 <th scope="col">Date</th>
                                 <th scope="col">Heure</th>
                                 </tr>
@@ -162,5 +165,8 @@ const JournalProduitsFournis = (props) => {
       </Modal>
      );
 }
- 
 export default JournalProduitsFournis;
+
+
+
+
