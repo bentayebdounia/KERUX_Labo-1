@@ -299,7 +299,6 @@ table2=(
                             <thead style={{backgroundColor: "#16161"}}> 
                                 <tr> 
                                 <th scope="col"></th>
-                                <th scope="col">#</th>
                                 <th scope="col">ID </th> 
                                 <th scope="col">Categorie</th> 
                                 <th scope="col">Nom produit</th> 
@@ -350,6 +349,12 @@ table2=(
                                   )} 
                                 </tbody> 
                                 </table> 
+
+                                <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={enStock.length}
+                                    paginate={paginate}
+                                />
     
             </>
     )

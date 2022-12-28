@@ -40,6 +40,8 @@ const getProdFourni = " SELECT * FROM bon , fournisseur, produit_fourni WHERE fk
 
 const getProdByNomFourniseur ="SELECT * FROM bon , fournisseur, produit_fourni WHERE fk_fournisseur=id_fournisseur AND nom_fournisseur ILIKE $1  AND id_bon = fk_bon  ORDER BY fk_fournisseur"
 
+
+
 // -- Produit fourni *****************
 const ajouterProduitFourni = "INSERT INTO produit_fourni (categorie, nom_produit, poids_fourni, nombre_fourni, datee, heure, fk_bon )"
                                 +" VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *"
@@ -137,6 +139,7 @@ module.exports={
     getbonByFournisseur,
     getProdFourni,
     getProdByNomFourniseur,
-    getBonByNomFournisseur
+    getBonByNomFournisseur,
+
 
 }

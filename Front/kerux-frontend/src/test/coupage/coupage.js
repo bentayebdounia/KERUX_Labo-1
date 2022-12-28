@@ -3,6 +3,8 @@ import ModalConfirmCoup from './ModalConfirmCoup'
 import ModelReponse from '../../Models/Model.repense'
 import ModalListAgent from '../../Models/modalListAgent'
 import ServiceAdmin from '../../service/serviceAdmin'
+import Tableau from '../nettoyageProcess/tableau'
+import '../nettoyageProcess/process.css'
 
 const Coupage = (props) => {
     const [show, setShow] = useState(false)
@@ -34,9 +36,26 @@ const Coupage = (props) => {
 
     const [PorcentagePoids, setPorcentagePoids] = useState()
    
+    const [toggleRecomendation, setToggleRecomendation] = useState(true)
+    const toggleRecomendationTrue = () => setToggleRecomendation (true)
+    const toggleRecomendationFalse = () => setToggleRecomendation(false)
 
     const [calculPoids, setCalculPoids] = useState([])
-    
+    const [id_personne, setIdpersonne] = useState()
+    const [agentNettoyage, setAgentNettoyage] = useState([{
+        id_personne:"",
+        nom: "",
+        prenom: ""
+    }])
+    const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
+    //get personnes
+    useEffect(()=>{
+        ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
+        .then((res) => {
+            setAgentNettoyage(res.data)
+            console.log(agentNettoyage);
+        })
+    })
     
     const ajouterAgent=(e) => {
         e.preventDefault()
@@ -114,7 +133,7 @@ const Coupage = (props) => {
 
     
 
-    var nbr, TypePoulet, TypeLegume
+    var nbr, TypePoulet, TypeLegume, agents
     if(props.process.categorie === "poulet"){
         TypePoulet=(
             <>
@@ -150,6 +169,25 @@ const Coupage = (props) => {
             </>
         )}
 
+        function select () {
+        
+            toggleRecomendationFalse()
+           
+        }
+        agents= (
+            <>
+                <div className='dataResults'>
+                             {agentNettoyage.map((value, key) => {
+                                         return (
+                                             <a className='dataItems'  onClick={()=>{setAgent(value.nom+ " " + value.prenom); setIdpersonne(value.id_personne) }}>
+                                                 <p > {value.id_personne} . {value.nom} {value.prenom} </p>
+                                             </a>
+                                         )
+                                     })}
+                         </div>
+            </>
+        )
+
     return ( 
 
         <div>
@@ -176,17 +214,24 @@ const Coupage = (props) => {
 
                         <div className="mb-3 row">
                             <label htmlFor="recepteur"  className="col-sm-2 col-form-label">Agent de Coupage</label>
-                            <div className="col-sm-10">
+                            <div className="col-sm-10 dropdown">
                             <div className="input-group">
-                                <input type="number" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)}/>
-                                <button className="btn btn-dark btn-outline-dark" type="button" onClick={(e)=>ajouterAgent(e)}>
-                                    <i className="bi bi-plus" style={{color: "white"}}> </i>
-                                </button>
-                                <button className="btn btn-dark btn-outline-dark" type="button" onClick={handleShow2} >
-                                    <i className="bi bi-person-lines-fill" style={{color: "white"}}> </i>
-                                </button>
-                                </div>
+                                <input type="text" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
+                                <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
+                                <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
+                                 </button>
+                             </div>
+                                    {agents}
+
                             </div>
+                                    {show && <Tableau show={show} 
+                                        handleClose={handleClose} 
+                                        handleShow={handleShow} 
+                                        agentNettoyage={agentNettoyageSelect}
+                                        
+                                    />}
+                            
+                        
                         </div>
                         <div className="mb-3 row">
                             <label htmlFor="poids" className="col-sm-2 col-form-label">Poids</label>

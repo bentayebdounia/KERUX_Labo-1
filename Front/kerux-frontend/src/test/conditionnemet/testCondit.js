@@ -3,6 +3,7 @@ import ConditService from '../../service/service.condit'
 import Conditionnement from './conditionnement'
 import ModelReponse from '../../Models/Model.repense'
 import ModalSortieStock from '../Stock/Modal.sortieStock'
+import Pagination from '../nettoyageProcess/pagination'
 import moment from 'moment'
 
 const TestCondit = () => {
@@ -55,6 +56,14 @@ const TestCondit = () => {
     const [tableCoupage, setTableCoupage] = useState([])
     const [tableconditionnement, setTableconditionnement] = useState([]) 
     
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(8);
+    //les operation de pagination 
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = EnAttente.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = enStock.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
      
      useEffect(()=>{ 
         ConditService.getCoupageTable() 
@@ -221,7 +230,7 @@ setEnstock(
                             </thead> 
                             <tbody >
                             { 
-                                EnAttente.map( 
+                                currentPosts2.map( 
                                     (p, key) => 
                                     <tr key={key}> 
                                         <td>
@@ -258,7 +267,12 @@ setEnstock(
                                     
                                     </tr>    )} 
                                 </tbody> 
-                                </table> 
+                                </table>
+                                <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={EnAttente.length}
+                                    paginate={paginate}
+                                /> 
     
             </>
 
@@ -289,7 +303,7 @@ if(buttonColor2)
                                 </tr> 
                             </thead> 
                             <tbody >
-                            {  enStock.map( 
+                            {  currentPosts2.map( 
                                 (p, key) => 
                                 <tr key={key}> 
                                     <td>
@@ -326,7 +340,11 @@ if(buttonColor2)
                                   )} 
                                 </tbody> 
                                 </table> 
-    
+                                <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={enStock.length}
+                                    paginate={paginate}
+                                />
             </>
     )
 }
