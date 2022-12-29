@@ -3,11 +3,12 @@ const statistique = require ('../queries/querieStatistique')
 
 getCategorieProduitFourni = (req, res) =>{
     const categorie = req.params.categorie
-    const date_debut = req.params.datee
-   // const date_fin = req.params.datee
+    const debut = req.params.debut
+   const fin = req.params.fin
     
 
-    pool.query(statistique.getCategorieProduitFourni, [categorie, date_debut ] ,
+
+    pool.query(statistique.getCategorieProduitFourni, [categorie, debut , fin] ,
         (error, result) => {
             if (error) throw error
             res.status(200).json(result.rows)
