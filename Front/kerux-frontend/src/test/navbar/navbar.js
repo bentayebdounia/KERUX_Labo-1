@@ -8,7 +8,9 @@ import JournalReception from '../journalProcess/journalRecetion'
 import JournalProduitsFournis from '../journalProcess/journalProduitFourni'
 import MouvementStock from '../Stock/mouvementStock'
 import AcueilBoutton from '../acueil_boutton'
-import StatistiqueProduitFourni from '../statistique/statistiqueProduitFourni'
+import StatistiqueProduitFourni from '../statistique/MstatistiqueProduitFourni'
+import StatistiqueTypeProduit from '../statistique/MstatistiqueType'
+import StatistiqueProcess from '../statistique/MstatistiqueProcessProd'
 
 
 
@@ -52,6 +54,14 @@ const Navbar = () => {
     const [showStatistiqueProd, setShowstatistique_prod] = useState(false)
     const handleCloseStatistiqueProd = () => setShowstatistique_prod(false)
     const handleShowStatistiqueProd = () => setShowstatistique_prod(true)
+
+    const [showStatistiqueProdType, setShowstatistique_prodtype] = useState(false)
+    const handleCloseStatistiqueProdType = () => setShowstatistique_prodtype(false)
+    const handleShowStatistiqueProdType = () => setShowstatistique_prodtype(true)
+
+    const [showStatProcessProd, setShowstatprocess_prod] = useState(false)
+    const handleCloseStatProcessProd = () => setShowstatprocess_prod(false)
+    const handleShowStatProcessProd = () => setShowstatprocess_prod(true)
   let etape
 
   
@@ -98,9 +108,9 @@ const Navbar = () => {
 
           <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">Statistique</Link>
           <ul className="dropdown-menu" style={{marginLeft:'77%'}}>
-            <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowStatistiqueProd() } } >Statistique des produits </button> </li>
-            <li> <button className="dropdown-item"  type="button"  >Statistique des process  </button> </li>
-            <li> <button className="dropdown-item"  type="button" >Statistique des stock </button> </li>
+            <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowStatistiqueProd() } } >Statistique des categories produits </button> </li>
+            <li> <button className="dropdown-item"  type="button"  onClick={()=> { handleShowStatistiqueProdType ()}}>Statistique des types produits  </button> </li>
+            <li> <button className="dropdown-item"  type="button" onClick={()=> { handleShowStatProcessProd ()}}>Statistique des process </button> </li>
             
           </ul>
         
@@ -163,6 +173,15 @@ const Navbar = () => {
                                           show={showStatistiqueProd}
                                           handleClose={handleCloseStatistiqueProd}
                   />}
+
+          {showStatistiqueProdType && <StatistiqueTypeProduit
+                                                    show={showStatistiqueProdType}
+                                                    handleClose={handleCloseStatistiqueProdType}
+                            />}
+          {showStatProcessProd && <StatistiqueProcess
+                                                    show={showStatProcessProd}
+                                                    handleClose={handleCloseStatProcessProd}
+                            />}
         
         </div>
     

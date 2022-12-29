@@ -93,12 +93,23 @@ const Acueil = (props) => {
             console.log('agent =>' + JSON.stringify(agent));
             ServiceAdmin.ajouterAgent(agent).then((res)=>{
                 console.log(res.data)
+                if(res.data==='Agent bien ajouter'){
+                  setNom('')
+                  setPrenom('')
+                  setDateN('')
+                  setAdr('')
+                  setTel('')
+                  setFk_role('')
+
+
+
+
+                  
+                }
              })}
+
         )
         
-        
-
-         
     }
 
     const getAllPersonne = () => {

@@ -41,7 +41,7 @@ export default function ProduitFourni(props){
                             <option value="frite"> Frite</option>
                             <option value="laitue">Laitue</option>
                             <option value="tomate">Tomate</option>
-                            <option value="oignin">oignin</option>
+                            <option value="oignon">oignon</option>
                             <option value="choux">Coux</option>
                             <option value="carotte">Carotte</option>
                             

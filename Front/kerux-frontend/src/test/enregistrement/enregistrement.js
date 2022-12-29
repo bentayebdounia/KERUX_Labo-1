@@ -189,7 +189,7 @@ const Enregistrement = (props) => {
                                               
                     
                 </div>
-                <button type="button" className="btn1"  style={{width: "35%", marginLeft: "65%"}} onClick={ terminerProcess}>Process terminee</button>
+                
                 
                  
             </div>}

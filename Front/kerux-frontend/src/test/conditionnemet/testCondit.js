@@ -230,7 +230,7 @@ setEnstock(
                             </thead> 
                             <tbody >
                             { 
-                                currentPosts2.map( 
+                                currentPosts.map( 
                                     (p, key) => 
                                     <tr key={key}> 
                                         <td>
@@ -358,17 +358,12 @@ if(buttonColor2)
         testCondit = (
             <section id="etape_section">
             <div className="container">
-                <div className="mb-3 row">
-                <label htmlFor="id_etape"  className="col-sm-2 col-form-label label">ID Box</label>
-                <div className="col-sm-10">
-                    <div className="input-group col-sm-10">
-                        <input type="text" className="form-control" placeholder=""  aria-describedby="button-addon2" value={id} onChange={(e)=> setId(e.target.value)}/>
-                        <button className="btn btn-dark btn-outline-dark" type="button" id="button-addon2" onClick={(e) => getProcess(e)} >
-                            <i className="bi bi-check-lg" style={{color: "white"}}></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            <div className="input-group col-sm-10" style={{width:"90%", marginLeft:"5%", marginRight:"15%"  }}> 
+                                <input type="text" className="form-control" placeholder="ID boxe"  aria-describedby="button-addon2" value={id} onChange={(e)=> setId(e.target.value)}/> 
+                                <button className="btn" style={{background: '#7B170F'}} type="button" id="button-addon2" onClick={(e) => getProcess(e)} > 
+                                    <i className="bi bi-check-lg" style={{color: "white" , fontSize:"20px"}}></i> 
+                                </button> 
+                            </div> 
 
             <div style={{width:"90%", height:"600px", marginLeft:"5%", marginRight:"15%" , marginTop:"30px", backgroundColor: "white" , borderRadius:"10px" }}>
                     <label 

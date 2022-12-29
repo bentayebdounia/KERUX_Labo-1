@@ -16,18 +16,32 @@ getCategorieProduitFourni = (req, res) =>{
 }
 
 getTypeProduitFourni = (req, res) =>{
-    const type = req.params.nom_produit
-    const date_debut = req.params.datee
-    const date_fin = req.params.datee
+    const nom_produit = req.params.nom_produit
+    const debut = req.params.debut
+    const fin = req.params.fin
 
-    pool.query(statistique.getTypeProduitFourni, [type, date_debut, date_fin ] ,
+    pool.query(statistique.getTypeProduitFourni, [nom_produit, debut, fin ] ,
         (error, result) => {
             if (error) throw error
             res.status(200).json(result.rows)
         } )
 }
+getstatProduitProcess = (req,res) =>{
+    const nom_produit = req.params.nom_produit
+    const etape = req.params.etape
+    const debut = req.params.debut
+    const fin = req.params.fin
+
+    pool.query(statistique.getEtapeProcessProd, [nom_produit,etape, debut, fin ] ,
+        (error, result) => {
+            if (error) throw error
+            res.status(200).json(result.rows)
+        } )
+
+}
 
 module.exports = {
     getCategorieProduitFourni,
-    getTypeProduitFourni
+    getTypeProduitFourni,
+    getstatProduitProcess
 }

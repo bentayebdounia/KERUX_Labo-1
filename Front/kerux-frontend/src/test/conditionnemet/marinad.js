@@ -134,17 +134,21 @@ const ModalMarinade = (props) => {
                 <Modal.Title>Marinade </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                
+                            
+
+                                <div className="contenerProd " >
+                                    <label id="produit"> Type de produit: </label>
+                                    
+                                    <label  id="produitValue" >{props.process.nom_produit} </label>
+                                    
+                                </div>
+                            
                     <div className="mb-3 row">
-                        <label for="categorie"  className="col-sm-2 col-form-label"> Type de produit</label>
-                        <div className="col-sm-10">
-                            <input type="text"  className="form-control" id="categorie" readOnly={props.process.nom_produit} defaultValue={props.process.nom_produit}  required/>
-                        </div>
-                    </div>
-                    <div className="mb-3 row">
-                        <label htmlFor="recepteur"  className="col-sm-2 col-form-label">Agent de marinade</label>
-                        <div className="col-sm-10 dropdown">
+                        <label htmlFor="recepteur"  className="col-sm-4 col-form-label">Agent de marinade</label>
+                        <div className="col-sm-7 dropdown">
                             <div className="input-group">
-                                <input type="text" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
+                                <input type="text" className="form-control " id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
                                 <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
                                 <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
                                  </button>

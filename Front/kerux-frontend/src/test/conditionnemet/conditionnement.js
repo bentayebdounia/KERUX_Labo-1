@@ -173,31 +173,36 @@ const Conditionnement = (props) => {
         <div>
             <section id="etape_section">
                 <div className="container">
-                <form class="needs-validation" noValidate>
-                <div className="mb-3 row">
                 
-                    <label for="id_box"  className="col-sm-2 col-form-label">ID Box</label>
-                    <div className="col-sm-10">
-                        <input type="text"  className="form-control" id="id_box" readOnly={props.id} defaultValue={props.id}  required/>
-                    </div>
-                </div>
+                <div className='row gy-2 gx-2'>
+                            <div className="contenaireBox">
+                                <label id="id_box"> ID Box: </label>
+                                
+                                <label  id="id_boxValue" >{props.id} </label>
+                                
+                            </div>
 
-                <div className="mb-3 row">
-                    <label for="categorie"  className="col-sm-2 col-form-label">Categorie de produit</label>
-                    <div className="col-sm-10">
-                        <input type="text"  className="form-control" id="categorie" readOnly={props.process.categorie} defaultValue={props.process.categorie} required/>
-                    </div>
-                </div>
+                            
+                            
+                                <div className="contenerProd col-6" >
+                                    <label id="categorie"> Categorie de produit: </label>
+                                    
+                                    <label  id="categorieValue" >{props.process.categorie} </label>
+                                    
+                                </div>
 
-                <div className="mb-3 row">
-                    <label for="typeprod" className="col-sm-2 col-form-label">Type de produit</label>
-                    <div className="col-sm-10">
-                        <input type="text"  className="form-control" id="typeprod" readOnly={props.process.nom_produit} defaultValue={props.process.nom_produit} required/>
-                    </div>
-                </div>
+                                <div className="contenerProd col-6" >
+                                    <label id="produit"> Type de produit: </label>
+                                    
+                                    <label  id="produitValue" >{props.process.nom_produit} </label>
+                                    
+                                </div>
+                            
+                        
+                        </div>
 
                 {bouton}
-                
+                <form class="needs-validation" noValidate>
 
                 <div className="mb-3 row">
                     <label for="recepteur"  className="col-sm-2 col-form-label">Agent de Conditionnemt</label>

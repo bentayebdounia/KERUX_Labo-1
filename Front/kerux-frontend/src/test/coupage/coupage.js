@@ -142,7 +142,7 @@ const Coupage = (props) => {
                         <option value = "tendres" > Tendres</option>
                         <option value = "wings" >Wings</option>
                         <option value = "legs" >Legs</option>
-                        <option value =" dips" >Dips</option>
+                        <option value ="dips" >Dips</option>
                         <option value = "hotDogs" >HotDogs</option>
                     </select>
                         
@@ -194,14 +194,15 @@ const Coupage = (props) => {
             <section id="etape_section">
                 <div className="container">
                     <form class="needs-validation" noValidate>
+                    <div className="contenerProd " style={{textAlign: 'center'}} >
+                                    <label id="categorie"> Categorie de produit: </label>
+                                    
+                                    <label  id="categorieValue" >{props.process.categorie} </label>
+                                    
+                     </div>
                         
 
-                        <div className="mb-3 row">
-                            <label htmlFor="categorie"  className="col-sm-2 col-form-label">Categorie de produit</label>
-                            <div className="col-sm-10">
-                                <input type="text"  className="form-control" id="categorie" readOnly={props.process.categorie} defaultValue={props.process.categorie}  required/>
-                            </div>
-                        </div>
+                        
 
                         <div className="mb-3 row">
                             <label htmlFor="typeprod" className="col-sm-2 col-form-label">Type de produit</label>
