@@ -122,13 +122,13 @@ const Navbar = () => {
         
           <Link className="nav-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i className="bi bi-person-fill" style={{fontSize: "1.25rem", color:"white"}}></i>
-            <i className="bi bi-chevron-down" style={{fontSize: "0.5rem", color:"white"}}></i>
+            <i className="bi bi-caret-down-fill" style={{fontSize: "0.5rem", color:"white"}}></i>
           </Link>
-          <ul className="dropdown-menu dropdown-menu-end menubar">
+          <ul className="dropdown-menu menubar" style={{marginLeft:'87%'}}>
             <li>
-              <span className="spanUser">MAHMOIDI Amin</span> 
+              <span className="spanUser">BENTAYEB Dounia</span> 
               <br/>
-              <span className="spanID">4 </span> 
+              <span className="spanID">97 </span> 
               <br/>
               <span className="spanRole">admin</span> 
            </li>

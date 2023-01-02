@@ -28,9 +28,9 @@ const Navbar = () => {
           </Link>
           <ul className="dropdown-menu menubar" style={{marginLeft:"70%"}}>
             <li>
-              <span className="spanUser">MAHMOIDI Amin</span> 
+              <span className="spanUser">BENTAYEB Dounia</span> 
               <br/>
-              <span className="spanID">4 </span> 
+              <span className="spanID">97 </span> 
               <br/>
               <span className="spanRole">admin</span> 
            </li>
