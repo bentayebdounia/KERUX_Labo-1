@@ -10,7 +10,7 @@ import Reception from '../receptionProcess/reception'
 
 const Enregistrement = (props) => {
 
-    const [test, setTest] = useState(false)
+   // const [test, setTest] = useState(false)
     
     const [id , setId] = useState('')
 
@@ -21,19 +21,9 @@ const Enregistrement = (props) => {
     const [showRecepion, setShowreception] = useState(false)
     const handleShowReception = () => setShowreception(true)
 
-    var testplus = true
-    var testNotExist = false
     
-    const [message, setMessage] = useState('')
     
-    const [process, setProcess] = useState({
-        fk_proditfourni: "",
-        categorie: "",
-        nom_produit: "",
-        stock: "",
-        etape: ""
-    })
-
+   
     const [produits,setProduits] = useState([{
         categorie: "",
         nom_produit: "",
@@ -42,7 +32,7 @@ const Enregistrement = (props) => {
         date:new Date()
     }])
 
-    const [id_generateNet, setId_generateNet] = useState('')
+    
     const [poids, setPoids] = useState(0)
     const [produitFourni, setProduitForuni] = useState({
             categorie: "",
@@ -56,6 +46,8 @@ const Enregistrement = (props) => {
     const [erreurProduit, setErreurproduit] = useState(false)
     const [erreurPoids, setErreurpoids] = useState(false)
     const [erreurNombre, setErreurnombre] = useState(false)
+
+   
 
     function plus () {
 
@@ -126,7 +118,7 @@ const Enregistrement = (props) => {
  
     return ( 
         <>
-            {test===false && <div className="mb-3 row">
+             <div className="mb-3 row">
                 
                 <div>
                 {produits.map((box,key) => {
@@ -192,7 +184,8 @@ const Enregistrement = (props) => {
                 
                 
                  
-            </div>}
+            </div>
+            <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} >FIN PROCESS</button>
             
              <ModalAjoutBoxes   
                                 show={show} 
@@ -202,9 +195,9 @@ const Enregistrement = (props) => {
                                                    
                  />
            
-            { showRecepion && <Reception />
+            
 
-            }
+            
         </>
      )
     

@@ -50,7 +50,7 @@ export default function ListeAgent() {
             
                 <div className="input-group col-sm-9">
                     <input type="text" className="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" value={recherche} onChange={(e)=> setRecherche(e.target.value)} />
-                    <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={(e)=>getElement(e)}>
+                    <button className="btn " type="button" id="button-addon2" onClick={(e)=>getElement(e)} style={{background:'rgb(123, 23, 15)'}}>
                         <i className="bi bi-search" style={{fontSize: "1.25rem"}}></i>
                     </button>
                 </div>

@@ -239,7 +239,7 @@ const MouvementStock = (props) => {
                     
                         <div className="input-group col-sm-9" style={{width:"50%" }}>
                             {barRechereche}
-                            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={(e) => recherche(e)} >
+                            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={(e) => recherche(e)} style={{background:'rgb(123, 23, 15)'}}>
                                  <i className="bi bi-search" style={{fontSize: "1.25rem"}}></i>
                             </button>
 

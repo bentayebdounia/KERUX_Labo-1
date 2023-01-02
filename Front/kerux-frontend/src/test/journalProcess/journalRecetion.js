@@ -94,7 +94,7 @@ const JournalReception = (props) => {
                     
                         <div className="input-group col-sm-9">
                             <input type="text" className="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" value={serchValue} onChange={(e)=> setSerchValue(e.target.value)} />
-                            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={(e) => recherche(e)} >
+                            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={(e) => recherche(e)} style={{background:'rgb(123, 23, 15)'}}>
                                 <i className="bi bi-search" style={{fontSize: "1.25rem"}}></i>
                             </button>
                         </div>

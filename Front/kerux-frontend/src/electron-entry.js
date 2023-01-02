@@ -11,8 +11,8 @@ let win
 const creatWindow = () => {
   
   const win = new BrowserWindow ({
-    minWidth: 1000,
-    minHeight: 700,
+    minWidth: 1300,
+    minHeight: 800,
     width : 1000 ,
     height : 700,
     icon: './icon/logo-kerux-food-.png',

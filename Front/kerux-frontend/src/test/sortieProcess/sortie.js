@@ -160,7 +160,7 @@ const Sortie = (props) => {
                 
                 <div className="d-grid gap-3 d-md-flex justify-content-md-end" >
                     
-                    <button className="btn2" type="submit" onClick={props.toggleDisplay}  >Annuler</button>
+                    <button className="btn2" type="submit" onClick={()=>{ props.toggleDisplay(); props.sortieBtn()}}  >Annuler</button>
                     <button className="btn1" type="submit" >Valider</button>
                 
                 </div>

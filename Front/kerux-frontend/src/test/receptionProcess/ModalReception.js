@@ -36,7 +36,8 @@ const ModalReception = (props) => {
             <Modal.Body>
                    <p style = {{fontWeight: "bold"}} >Fournisseur:  </p>  {props.nom_fournisseur}  
                    
-                   <p style = {{fontWeight: "bold"}} >Acheteur:  </p>  {props.acheteur} 
+                  { props.acheteur !==''  && <p style = {{fontWeight: "bold"}} >Acheteur:  </p>   } {props.acheteur}
+                  { props.livreur !==''  && <p style = {{fontWeight: "bold"}} >Livreur:  </p>  }  {props.livreur}
                    
                    <p style = {{fontWeight: "bold"}}>Type de bon:  </p>  {props.type_bon} 
                    

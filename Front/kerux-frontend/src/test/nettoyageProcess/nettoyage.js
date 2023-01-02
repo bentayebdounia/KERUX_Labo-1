@@ -175,7 +175,7 @@ const Nettoyage = (props) => {
                         
                         <div className="d-grid gap-3 d-md-flex justify-content-md-end" >
                             
-                            <button className="btn2" type="submit" onClick={props.toggleDisplay} > ANNULER </button>
+                            <button className="btn2" type="submit" onClick={()=>{props.toggleDisplay() ; props.nettoypBtn()} } > ANNULER </button>
                             <button className="btn1" type="submit" >VALIDER</button>
                         
                         </div>

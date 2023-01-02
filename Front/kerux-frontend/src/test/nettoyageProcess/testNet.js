@@ -5,7 +5,7 @@ import ModelReponse from '../../Models/Model.repense'
 import ModalSortieStock from '../Stock/Modal.sortieStock'
 import Pagination from '../pagination/pagination' 
 import moment from 'moment'; 
-const TestNet = () => { 
+const TestNet = (props) => { 
  
     const [test, setTest] = useState(false) 
     const [id , setId] = useState('') 
@@ -113,10 +113,12 @@ const TestNet = () => {
                     else if(res.data.fk_stock===null){ 
                         console.log(test); 
                         toggleshow() 
+                        props.nettoypBtnV()
                      
                     } 
                     else {  
                         handleShow2() 
+                        
                          
                      } 
                 console.log("produit fourni=  "+process.fk_proditfourni + "\n categorie= "+ process.categorie + "\n produit= " + process.nom_produit + "\n stock= " + process.fk_stock, "\n etape= " + process.etape) 
@@ -420,12 +422,13 @@ table2=(
                                     id={id} process={process}  
                                     toggleshow={toggleshow}  
                                     etape={'nettoyage'} 
+                                    BtnV = {props.nettoypBtnV}
                                   />} 
             </section>
             
             
             } 
-            {toggle && <Nettoyage id={id} process={process} test={test} toggleDisplay = {toggleDisplay}/>} 
+            {toggle && <Nettoyage id={id} process={process} test={test} toggleDisplay = {toggleDisplay} nettoypBtn={props.nettoypBtn} />} 
              
              
         </> 

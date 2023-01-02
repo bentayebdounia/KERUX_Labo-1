@@ -19,7 +19,7 @@ const ModalSortieStock = (props) => {
             props.handleClose2()
             props.toggleshow()
 
-        
+            props.BtnV()
         
         
     }

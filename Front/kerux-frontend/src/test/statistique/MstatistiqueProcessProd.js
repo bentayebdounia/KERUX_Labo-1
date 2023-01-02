@@ -48,6 +48,7 @@ const StatistiqueProcess = (props) => {
               <div className="col-sm-2">
                 <label>Etape</label>
                       <select className="form-select" aria-label="Default select example" placeholder='categorie' id="typeBon" value={etape} onChange={(e)=> setEtape(e.target.value)}  required>
+                      <option  defaultValue={""}></option>
                         <option value="enregistrement">Enregistrement</option>
                         <option value="nettoyage">Nettoyage</option>
                         <option value="coupage">Coupage</option>

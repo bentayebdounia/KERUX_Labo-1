@@ -6,7 +6,7 @@ import ModalSortieStock from '../Stock/Modal.sortieStock'
 import Pagination from '../pagination/pagination'
 import moment from 'moment'
 
-const TestCondit = () => {
+const TestCondit = (props) => {
 
     const [test, setTest] = useState(false)
     const [id , setId] = useState('')
@@ -102,7 +102,7 @@ const TestCondit = () => {
                     else {
                         if(res.data.fk_stock ===null){
                             toggleShow()
-                            
+                            props.conditBtnV()
                         }
                         else {
                             handleShow2(true)
@@ -408,6 +408,7 @@ if(buttonColor2)
                                 id={id} 
                                 process={process} 
                                 etape={'conditionnement'}
+                                BtnV = {props.conditBtnV}
                                  />
         </section>
         )

@@ -10,11 +10,22 @@ import './etape.css'
 const Etape = () => {
 
     const [controleReception, setControleReception] = useState(false)
+    const [controleReceptionV, setControleReceptionV] = useState(false)
+
     const [controleEnrg, setControleEnrg] = useState(false)
+    const [controleEnrgV, setControleEnrgV] = useState(false)
+
     const [controleNettoyage, setControleNettoyage] = useState(false)
+    const [controleNettoyageV, setControleNettoyageV] = useState(false)
+
     const [controleCoupage, setControleCoupage] = useState(false)
+    const [controleCoupageV, setControleCoupageV] = useState(false)
+
     const [controleCondit, setControleCondit] = useState(false)
+    const [controleConditV, setControleConditV] = useState(false)
+
     const [controleSortie, setControleSortie] = useState(false)
+    const [controleSortieV, setControleSortieV] = useState(false)
    
     function recepBtn(){
         setControleReception(true)
@@ -23,19 +34,10 @@ const Etape = () => {
         setControleCoupage(false)
         setControleCondit(false)
         setControleSortie(false)
-   
+        annulation()
+
     }
     
-
-    function enrgBtn(){
-        setControleReception(false)
-        setControleEnrg(true)
-        setControleNettoyage(false)
-        setControleCoupage(false)
-        setControleCondit(false)
-        setControleSortie(false)
-        
-    }
     function nettoypBtn(){
         setControleReception(false)
         setControleEnrg(false)
@@ -43,6 +45,7 @@ const Etape = () => {
         setControleCoupage(false)
         setControleCondit(false)
         setControleSortie(false)
+        annulation()
         
     }
     function coupBtn(){
@@ -52,7 +55,7 @@ const Etape = () => {
         setControleCoupage(true)
         setControleCondit(false)
         setControleSortie(false)
-        
+        annulation()
     }
     function conditBtn(){
         setControleReception(false)
@@ -61,6 +64,7 @@ const Etape = () => {
         setControleCoupage(false)
         setControleCondit(true)
         setControleSortie(false)
+        annulation()
         
     }
     function sortieBtn(){
@@ -70,53 +74,172 @@ const Etape = () => {
         setControleCoupage(false)
         setControleCondit(false)
         setControleSortie(true)
+        annulation()
+        
+    }
+    // VALIDATION
+    function enrgBtn(){
+        
+        setControleEnrg(true)
+        setControleReceptionV(true)
         
     }
 
+    function nettoypBtnV(){
+        setControleReceptionV(true)
+        setControleEnrgV(true)
+        setControleNettoyageV(false)
+        setControleCoupageV(false)
+        setControleConditV(false)
+        setControleSortieV(false)
+        
+        
+    }
+    function coupBtnV(){
+        setControleReceptionV(true)
+        setControleEnrgV(true)
+        setControleNettoyageV(true)
+        setControleCoupageV(false)
+        setControleConditV(false)
+        setControleSortieV(false)
+    }
+    function conditBtnV(){
+        setControleReceptionV(true)
+        setControleEnrgV(true)
+        setControleNettoyageV(true)
+        setControleCoupageV(true)
+        setControleConditV(false)
+        setControleSortieV(false)
+        
+    }
+    function sortieBtnV(){
+        setControleReceptionV(true)
+        setControleEnrgV(true)
+        setControleNettoyageV(true)
+        setControleCoupageV(true)
+        setControleConditV(true)
+        setControleSortieV(false)
+        
+    }
 
+    //annulation
+    function annulation(){
+        setControleReceptionV(false)
+        setControleEnrgV(false)
+        setControleNettoyageV(false)
+        setControleCoupageV(false)
+        setControleConditV(false)
+        setControleSortieV(false)
+        
+    }
+
+    
 
     return (
         <>
            
             <div className="container" id='stepComponant'>
                 <div className="row row-cols-6">
-                    <div className="etape"    type="submit" onClick={recepBtn}>
-                        <div className="bi bi-1-circle"  style={{color:`${(controleReception===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
-                        <div id="reception_etape" style={{color:`${(controleReception===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Reception</div> 
+                    <div className="etape" type="submit" onClick={recepBtn}>
+                        {controleReceptionV===false &&
+                             <>
+                                <div className="bi bi-1-circle"  style={{color:`${(controleReception===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
+                                <div id="reception_etape" style={{color:`${(controleReception===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Reception</div>
+                            </>
+                         }
+                         {controleReceptionV && 
+                                <>
+                                    <div className="bi bi-1-circle"  style={{color: '#399C49'}}  id="etape1"></div>
+                                    <div id="reception_etape" style={{color: '#399C49'}} >Reception</div>
+                                </>
+                                    } 
+
                     </div>
+
                     <div className="etape">
-                        <i className="bi bi-2-circle"  ></i>
-                        <div id="enreg_etape">Enregistrement</div> 
+                        
+                    {controleEnrgV===false &&
+                             <>
+                                <div className="bi bi-2-circle"  style={{color:`${(controleEnrg===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
+                                <div id="reception_etape" style={{color:`${(controleEnrg===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Enregistrement</div>
+                            </>
+                         }
+                         {controleEnrgV && 
+                                <>
+                                    <div className="bi bi-2-circle"  style={{color: '#399C49'}}  id="etape1"></div>
+                                    <div id="reception_etape" style={{color: '#399C49'}} >Enregistrement</div>
+                                </>
+                                    }  
                     </div>
 
                     <div className="etape" type="submit"  onClick={nettoypBtn}>
-                        <i className="bi bi-3-circle" style={{color:`${(controleNettoyage===true) ? '#F6A51A' : '#D4D4D4'  }`}}></i>
-                        <div id="nettoyage_etape" style={{color:`${(controleNettoyage===true) ? '#F6A51A' : '#D4D4D4'  }`}}>Nettoyage</div> 
+                        {controleNettoyageV===false &&
+                             <>
+                                <div className="bi bi-3-circle"  style={{color:`${(controleNettoyage===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
+                                <div id="reception_etape" style={{color:`${(controleNettoyage===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Nettoyage</div>
+                            </>
+                         }
+                         {controleNettoyageV && 
+                                <>
+                                    <div className="bi bi-3-circle"  style={{color: '#399C49'}}  id="etape1"></div>
+                                    <div id="reception_etape" style={{color: '#399C49'}} >Nettoyage</div>
+                                </>
+                                    }  
                     </div>
 
                     <div className="etape" type="submit" onClick={coupBtn}>
-                        <i className="bi bi-4-circle" style={{color:`${(controleCoupage===true) ? '#F6A51A' : '#D4D4D4'  }`}}></i>
-                        <div id="coupage_etape" style={{color:`${(controleCoupage===true) ? '#F6A51A' : '#D4D4D4'  }`}}>Coupage</div> 
+                        {controleCoupageV===false &&
+                             <>
+                                <div className="bi bi-4-circle"  style={{color:`${(controleCoupage===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
+                                <div id="reception_etape" style={{color:`${(controleCoupage===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Coupage</div>
+                            </>
+                         }
+                         {controleCoupageV && 
+                                <>
+                                    <div className="bi bi-4-circle"  style={{color: '#399C49'}}  id="etape1"></div>
+                                    <div id="reception_etape" style={{color: '#399C49'}} >Coupage</div>
+                                </>
+                                    }  
                     </div>
 
                     <div className="etape" type="submit" onClick={conditBtn} >
-                        <i className="bi bi-5-circle" style={{color:`${(controleCondit===true) ? '#F6A51A' : '#D4D4D4'  }`}}></i>
-                        <div id="cond_etape" style={{color:`${(controleCondit===true) ? '#F6A51A' : '#D4D4D4'  }`}}>Conditionnemet</div> 
+                        {controleConditV===false &&
+                             <>
+                                <div className="bi bi-5-circle"  style={{color:`${(controleCondit===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
+                                <div id="reception_etape" style={{color:`${(controleCondit===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Conditionnement</div>
+                            </>
+                         }
+                         {controleConditV && 
+                                <>
+                                    <div className="bi bi-5-circle"  style={{color: '#399C49'}}  id="etape1"></div>
+                                    <div id="reception_etape" style={{color: '#399C49'}} >Conditionnement</div>
+                                </>
+                                    } 
                     </div>
 
                     <div className="etape" type="submit" onClick={sortieBtn}>
-                        <i className="bi bi-6-circle" style={{color:`${(controleSortie===true) ? '#F6A51A' : '#D4D4D4'  }`}}></i>
-                        <div id="sortie_etape" style={{color:`${(controleSortie===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Sortie</div> 
+                        {controleSortieV===false &&
+                             <>
+                                <div className="bi bi-6-circle"  style={{color:`${(controleSortie===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
+                                <div id="reception_etape" style={{color:`${(controleSortie===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Sortie</div>
+                            </>
+                         }
+                         {controleSortieV && 
+                                <>
+                                    <div className="bi bi-6-circle"  style={{color: '#399C49'}}  id="etape1"></div>
+                                    <div id="reception_etape" style={{color: '#399C49'}} >Sortie</div>
+                                </>
+                                    } 
                     </div>
                 </div>
             
             </div>
 
-            {controleReception && <Reception/>}
-            {controleNettoyage && <TestNet/>}
-            {controleCoupage && <TestCoupage/>}
-            {controleCondit && <TestCondit/>}
-            {controleSortie && <TestSortie/>}
+            {controleReception && <Reception enrgBtn={enrgBtn} />}
+            {controleNettoyage && <TestNet nettoypBtnV={nettoypBtnV} nettoypBtn={nettoypBtn} />}
+            {controleCoupage && <TestCoupage coupBtnV={coupBtnV} coupBtn={coupBtn} />}
+            {controleCondit && <TestCondit conditBtnV={conditBtnV}  conditBtn={conditBtn} />}
+            {controleSortie && <TestSortie sortieBtnV={sortieBtnV}  sortieBtn={sortieBtn}/>}
             
         
         </>

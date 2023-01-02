@@ -12,9 +12,9 @@ const Reception = (props) => {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
-    const [toggle, setToggle] = useState (false) 
-    const toggleshow = () => setToggle(true)
-    const toggleDisplay = () => setToggle (false)
+    const [togglle, setTogglle] = useState (false) 
+    const togglleshow = () => setTogglle(true)
+    const togglleDisplay = () => setTogglle (false)
 
     const [toggleConfirme, setToggleConfirme] = useState (false)
     const toggleConfirmeTrue = () => setToggleConfirme (true)
@@ -79,17 +79,19 @@ const Reception = (props) => {
             //ajouter un bon au bdd
             
             ProcessService.ajouterBon(fk_fournisseur, acheteur, type_bon, recepteur , livreur).then( (res)=> {
-            
-            setId_bon(res.data[0].id_bon)
-                toggleshow() //afficher le component de ajouter un produit fourni
+                console.log(res.data);
+                setId_bon(res.data[0].id_bon)
+                 
                 
-            })              
+            })
+            togglleshow() //afficher le component de ajouter un produit fourni
+            props.enrgBtn()              
         }
     }
 
     const confirmer = (e) => {
         e.preventDefault()
-        handleShow()  //modal de confirmation
+        handleShow() //modal de confirmation
 
     }
 
@@ -197,7 +199,7 @@ const Reception = (props) => {
                 </div>
     
                 <div className="d-grid gap-2 my-4">
-                    <button className="btn1" type="submit"  >Valider</button>
+                    <button className="btn1" type="submit"  >VALIDER</button>
                     
                 </div>
 
@@ -242,24 +244,26 @@ const Reception = (props) => {
         <div className="containerMain">
             
             <section id="etape_section">
-            {toggle && <h3 style={{marginLeft:'8%'}}> Ajouter un produit fourni: </h3> }
+            {togglle && <h3 style={{marginLeft:'8%'}}> Ajouter un produit fourni: </h3> }
             <div className="container">
                 
 
-                    {!toggle && reception}
-                    {toggle && <Enregistrement  toggleDisplay = {toggleDisplay}  id_bon ={id_bon} />}
+                    {togglle===false && reception}
+                    {togglle && <Enregistrement  togglleDisplay={togglleDisplay}  id_bon ={id_bon} />}
                     
                 
                 
             </div>
-            {show && <ModalReception show={show} handleClose={handleClose} handleShow={handleShow}
-                            toggleShow = {toggleshow}
-                            nom_fournisseur= {nom_fournisseur}
-                            fk_fournisseur={fk_fournisseur}
-                            acheteur={acheteur} 
-                            type_bon={type_bon}
-                            recepteur={recepteur}
-                            toggleConfirmeTrue={toggleConfirmeTrue}
+            {show && <ModalReception    show={show} 
+                                        handleClose={handleClose} 
+                                        handleShow={handleShow}
+                                        nom_fournisseur= {nom_fournisseur}
+                                        fk_fournisseur={fk_fournisseur}
+                                        acheteur={acheteur}
+                                        livreur={livreur} 
+                                        type_bon={type_bon}
+                                        recepteur={recepteur}
+                                        toggleConfirmeTrue={toggleConfirmeTrue}
         />}
         </section>
 

@@ -7,7 +7,7 @@ import ModalSortieStock from '../Stock/Modal.sortieStock'
 import Pagination from '../pagination/pagination'
 import moment from 'moment'
 
-const TestCoupage = () => {
+const TestCoupage = (props) => {
 
     
     
@@ -201,8 +201,11 @@ const TestCoupage = () => {
       const confirmer = (e) => {
         console.log("length= "+boxes.length);
         if(boxes.length >1)
-                {toggleshow()
-                setBoxes([1])}
+                {
+                    toggleshow()
+                    setBoxes([1])
+                    props.coupBtnV()
+                }
         else {
             setMessage("Ajouter des boxes")
             handleShow()
@@ -540,6 +543,7 @@ if(buttonColor2)
                                      process={process}
                                      etape={'coupage'}
                                      toggleSortieTrue = {toggleSortieTrue}  
+                                     BtnV = {props.coupBtnV}
                                      />}
              </section>
             }
@@ -549,6 +553,7 @@ if(buttonColor2)
                             nombre={nombre}
                             process={process}  
                             toggleDisplay = {toggleDisplay}
+
                              />}
             
             

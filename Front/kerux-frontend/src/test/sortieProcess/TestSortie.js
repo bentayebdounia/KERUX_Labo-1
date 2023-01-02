@@ -4,8 +4,9 @@ import Sortie from './sortie'
 import ModelReponse from '../../Models/Model.repense'
 import Pagination from '../pagination/pagination'
 import moment from 'moment'
+import ModalSortieStock from '../Stock/Modal.sortieStock'
 
-const TestSortie = () => {
+const TestSortie = (props) => {
 
     const [test, setTest] = useState(false)
     const [id , setId] = useState('')
@@ -13,6 +14,10 @@ const TestSortie = () => {
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
+
+    const [show2, setShow2] = useState(false) 
+    const handleClose2 = () => setShow2(false) 
+    const handleShow2 = () => setShow2(true)
 
     const [toggle, setToggle] = useState () 
     const toggleshow = () => setToggle(true)
@@ -104,8 +109,13 @@ const TestSortie = () => {
                     else if(res.data.fk_stock===null){
                         console.log(test)
                         toggleshow()
+                        props.sortieBtnV()
                     
                     }
+                    else {  
+                        handleShow2() 
+                        props.sortieBtnV()
+                     } 
                 
            }
            
@@ -353,7 +363,7 @@ if(buttonColor2)
 
     
       if(toggle){
-        sortie = (<Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} />)
+        sortie = (<Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} sortieBtnV={props.sortieBtnV}/>)
       }
 
       else{
@@ -402,6 +412,15 @@ if(buttonColor2)
                             titre={"sortie"} 
                             message={message} 
                             />}
+            {show2 && <ModalSortieStock 
+                                    show2={show2}  
+                                    handleClose2={handleClose2}  
+                                    handleShow2={handleShow2}  
+                                    id={id} process={process}  
+                                    toggleshow={toggleshow}  
+                                    etape={'sortie'} 
+                                    BtnV={props.sortieBtnV}
+                                  />}
         </section>
         )
       }
@@ -409,7 +428,7 @@ if(buttonColor2)
     return ( 
         <>
             {testSortie}
-            {toggle && <Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} /> }
+            {toggle && <Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} sortieBtn={props.sortieBtn}/> }
             
             
         </>
