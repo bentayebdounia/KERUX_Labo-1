@@ -4,29 +4,42 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
   const [number , setNumber] = useState(1)
   //const [suiv , setSuiv] = useState(false)
+  //const [verify, setVerify] = useState(false)
  
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
 
+   
  
+ function increment(n){
+  return n+1
+ }
   function suivant () {
-    if (number< pageNumbers.length+1){
-        
-      setNumber((prevNumber)=> prevNumber+1)
-        console.log(number)
-        paginate(number)
-       
+    console.log(number)
+    if (number < pageNumbers.length){ 
+       paginate(increment(number))
+       setNumber(increment(number))
     }
   }
 
+  function decrement (n){
+    return n-1
+  }
   function precident () {
-    if (number> 0){
+    if (number> 1){
         console.log(number)
-        
-        setNumber((prevNumber)=> prevNumber-1)
-        paginate(number)
+        paginate(decrement(number))
+        setNumber(decrement(number))
     }
+  }
+
+  function one (n){
+    return 1
+  }
+
+  function two (n){
+    return 2
   }
 
   return (
@@ -43,12 +56,12 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
              }
  
             <li className='page-item'>
-                <a onClick={() => paginate(number)} href='#' className='page-link' style={{color: "#7B170F"}}>
+                <a onClick={() => {setNumber(one(number)); paginate(one(number))}} href='#' className='page-link' style={{color: "#7B170F"}}>
                 {(pageNumbers.length-(pageNumbers.length-1))}
                 </a>
             </li>
             <li  className='page-item'>
-                <a onClick={() => paginate(number+1)} href='#' className='page-link' style={{color: "#7B170F"}}>
+                <a onClick={() => {setNumber(two(number)); paginate(two(number))}} href='#' className='page-link' style={{color: "#7B170F"}}>
                 {(pageNumbers.length-(pageNumbers.length-2))}
                 </a>
             </li>
@@ -58,7 +71,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
                 </a>
             </li>
             <li className='page-item'>
-                <a onClick={suivant} href='#' className='page-link' style={{color: "#7B170F"}}>
+                <a  onClick={()=> suivant()} href='#' className='page-link' style={{color: "#7B170F"}}>
                   suivant
                 </a>
              </li>

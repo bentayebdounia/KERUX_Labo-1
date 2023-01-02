@@ -2,7 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import serviceProcess from '../../service/service.sorti'
 import Sortie from './sortie'
 import ModelReponse from '../../Models/Model.repense'
-import Pagination from '../nettoyageProcess/pagination'
+import Pagination from '../pagination/pagination'
 import moment from 'moment'
 
 const TestSortie = () => {

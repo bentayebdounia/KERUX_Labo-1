@@ -52,6 +52,7 @@ const Acueil = (props) => {
     const [toggleAjoutFourni , setToggleAjoutfourni ]  = useState (false)
     const toggleshowAjoutFourni = () => setToggleAjoutfourni(true)
     const toggleDisplayAjoutFourni = () => setToggleAjoutfourni (false)
+
     const [togglelistFourni , setTogglelistfourni ]  = useState (false)
     const toggleshowListFourni = () => setTogglelistfourni(true)
     const toggleDisplayListFourni = () => setTogglelistfourni (false)
@@ -79,19 +80,19 @@ const Acueil = (props) => {
     //ajouter au BDD
     
 
-    const saveAgent = (e) => {
+    const  saveAgent = async (e) => {
       e.preventDefault();
         console.log(date_naissance);
         const agent = { nom, prenom, date_naissance, num_tel, adresse,  fk_role };
         
         console.log(role)
-        ServiceRole.getIdRole(role).then( (res)=> {
+        await ServiceRole.getIdRole(role).then( (res)=> {
             console.log(res.data.id_role) 
             
             setFk_role(JSON.parse(res.data.id_role))
-        }).then( () => {
+        }).then( async () => {
             console.log('agent =>' + JSON.stringify(agent));
-            ServiceAdmin.ajouterAgent(agent).then((res)=>{
+            await ServiceAdmin.ajouterAgent(agent).then((res)=>{
                 console.log(res.data)
                 if(res.data==='Agent bien ajouter'){
                   setNom('')
@@ -100,10 +101,6 @@ const Acueil = (props) => {
                   setAdr('')
                   setTel('')
                   setFk_role('')
-
-
-
-
                   
                 }
              })}
@@ -241,7 +238,7 @@ const Acueil = (props) => {
           <section className="section" id="ajouterAgent">
               <form className="needs-validation" name="formModify" noValidate>
                     <div className="mb-3 row">
-                        <label for="nomAgent"  className="col-sm-2 col-form-label ">Nom</label>
+                        <label htmlFor="nomAgent"  className="col-sm-2 col-form-label ">Nom</label>
                         <div className="col-sm-10">
                         <input  type="text"  className="form-control" id="nomAgent" value={nom} onChange={(e)=> setNom(e.target.value)} required/>
                         </div>
@@ -249,21 +246,21 @@ const Acueil = (props) => {
                     </div>
 
                     <div className="mb-3 row">
-                        <label for="prenomAgent" className="col-sm-2 col-form-label " >Prénom</label>
+                        <label htmlFor="prenomAgent" className="col-sm-2 col-form-label " >Prénom</label>
                         <div className="col-sm-10">
                         <input type="text"  className="form-control" id="prenomAgent" value={prenom} onChange={(e)=> setPrenom(e.target.value)} required/>
                         </div>
                     </div>
 
                     <div className="mb-3 row">
-                        <label for="DNagent" className="col-sm-2 col-form-label ">Date de naissance</label>
+                        <label htmlFor="DNagent" className="col-sm-2 col-form-label ">Date de naissance</label>
                         <div className="col-sm-10">
                         <input type="date"  className="form-control label" id="DNagent" value={date_naissance} onChange={(e)=> setDateN(e.target.value)} required/>
                         </div>
                     </div>
 
                     <div className="mb-3 row">
-                        <label for="adresseAgent" className="col-sm-2 col-form-label ">Adresse</label>
+                        <label htmlFor="adresseAgent" className="col-sm-2 col-form-label ">Adresse</label>
                         <div className="col-sm-10">
                         <input type="text"  className="form-control" id="adresseAgent" value={adresse} onChange={(e)=> setAdr(e.target.value)} required/>
                         </div>
@@ -271,14 +268,14 @@ const Acueil = (props) => {
                     
 
                     <div className="mb-3 row">
-                        <label for="numAgent" className="col-sm-2 col-form-label ">N° téléphone</label>
+                        <label htmlFor="numAgent" className="col-sm-2 col-form-label ">N° téléphone</label>
                         <div className="col-sm-10">
                         <input type="number"  className="form-control" id="numAgent" value={num_tel} onChange={(e)=> setTel(e.target.value)} required/>
                         </div>
                     </div>
                     
                     <div className="mb-3 row">
-                        <label for="roleAgentAjout" className="col-sm-2 col-form-label">Role</label>
+                        <label htmlFor="roleAgentAjout" className="col-sm-2 col-form-label">Role</label>
                         <div className="col-sm-10">
                             <select className="form-select" aria-label="Default select example" id="roleAgentAjout" value={role} onChange={(e)=> setRole(e.target.value)}  required>
                                 <option selected></option>
@@ -291,7 +288,7 @@ const Acueil = (props) => {
                   
                   
                     {role!="Agent simple" && <div className="mb-3 row" >
-                          <label for="inputPassword" className="col-sm-2 col-form-label">Mot de passe</label>
+                          <label htmlFor="inputPassword" className="col-sm-2 col-form-label">Mot de passe</label>
                           <div className="col-sm-10">
                           <input type="password" className="form-control" id="password" value={mot_passe} onChange={(e)=> setPassword(e.target.value)} required/>
                           </div>

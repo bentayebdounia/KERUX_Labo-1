@@ -1,18 +1,4 @@
-body{
-    background-image: url();
-}
-.spanUser {
-    margin-left: 15px;
-    font-weight: bold;
-}
-.spanID {
-    margin-left: 15px;
-    color: rgb(123, 124, 126);
-}
-.spanRole {
-    margin-left: 15px;
-    color: rgb(123, 124, 126);
-}
+
 
 .sidebar {
     position: fixed;
@@ -28,7 +14,7 @@ body{
     position: fixed;
     top: 20;
     height: calc(100vh-70px);
-    width: calc(10%);
+    width: 25%;
 }
 
 .sidebar li .nav-link {

@@ -12,7 +12,7 @@ import StatistiqueProduitFourni from '../statistique/MstatistiqueProduitFourni'
 import StatistiqueTypeProduit from '../statistique/MstatistiqueType'
 import StatistiqueProcess from '../statistique/MstatistiqueProcessProd'
 
-
+import './navbar.css'
 
 const Navbar = () => {
     
@@ -62,7 +62,7 @@ const Navbar = () => {
     const [showStatProcessProd, setShowstatprocess_prod] = useState(false)
     const handleCloseStatProcessProd = () => setShowstatprocess_prod(false)
     const handleShowStatProcessProd = () => setShowstatprocess_prod(true)
-  let etape
+
 
   
 
@@ -72,19 +72,21 @@ const Navbar = () => {
 
     return (
         <div>
-          <nav className="navbar   fixed-top flex-md-nowrap p-0 shadow" style={{background: "#7B170F"}}>
+          <nav className="navbar fixed-top flex-md-nowrap p-0 shadow" >
             <div className="container-fluid" id='divContainer'>
           
-          <Link className="nav-link active me-auto mx-3" style={{color: "white" , fontSize: "13px" }} aria-current="page" to="#"  >
-            <i className="bi bi-house-door-fill" style={{fontSize: "1rem" ,color:"white"}}></i>
+          <Link className="nav-link active"   to="#"  >
+            <i className="bi bi-house-door-fill me-2" ></i>
             Acueil
           </Link>
-          <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  aria-current="page" to="#" onClick={handleShowProcess}>Process</Link>
-          <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">
-            <i className="bi bi-journals" style={{fontSize: "1rem", color:"white"}}></i>
+          <Link className="nav-link active"  to="#" onClick={handleShowProcess}>
+          <i className="bi bi-bar-chart-steps me-2" ></i>
+            Process</Link>
+          <Link className="nav-link active "   role="button" data-bs-toggle="dropdown"  to="#">
+            <i className="bi bi-journals me-2" ></i>
             Journal
           </Link>
-          <ul className="dropdown-menu" style={{marginLeft:'40%'}}>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'39.5%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalReception() } } >Journal de reception</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalProduitFourni() } } >Journal de produits fournis</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalNettoyage(); setJournalProcess('enregistrement') } }>Journal de enregistrement</button> </li>
@@ -96,18 +98,22 @@ const Navbar = () => {
             
           </ul>
 
-          <Link className="nav-link active me-auto mx-3" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{color: "white", fontSize: "13px"}}   href="#">
+          <Link className="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">
+          <i className="bi bi-boxes me-2" ></i>
               Stock   
           </Link>
-          <ul className="dropdown-menu" style={{marginLeft:'60%'}}>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'55%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={handleShow4}>Entrepot</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={handleShowMouvementStock}>Movement de stock</button> </li>
             
           </ul>
 
 
-          <Link className="nav-link active me-auto mx-3" style={{color: "white", fontSize: "13px"}}  role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">Statistique</Link>
-          <ul className="dropdown-menu" style={{marginLeft:'77%'}}>
+          <Link className="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">
+          <i className="bi bi-bar-chart-line-fill me-2" ></i>
+          Statistique
+            </Link>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'69.5%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowStatistiqueProd() } } >Statistique des categories produits </button> </li>
             <li> <button className="dropdown-item"  type="button"  onClick={()=> { handleShowStatistiqueProdType ()}}>Statistique des types produits  </button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=> { handleShowStatProcessProd ()}}>Statistique des process </button> </li>
@@ -118,7 +124,7 @@ const Navbar = () => {
             <i className="bi bi-person-fill" style={{fontSize: "1.25rem", color:"white"}}></i>
             <i className="bi bi-chevron-down" style={{fontSize: "0.5rem", color:"white"}}></i>
           </Link>
-          <ul className="dropdown-menu dropdown-menu-end">
+          <ul className="dropdown-menu dropdown-menu-end menubar">
             <li>
               <span className="spanUser">MAHMOIDI Amin</span> 
               <br/>

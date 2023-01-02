@@ -13,7 +13,7 @@ const AjouterEntrepot = (props) => {
     const [verifier , setVerifier] = useState()
 
     const verificetionChamp = () => {
-        if((nomEntrepot !=='' ) && type !=='' && airStock !=='' && capacite !=='' && adr !=''){
+        if((nomEntrepot !=='' ) && type !=='' && airStock !=='' && capacite !=='' && adr !==''){
             console.log(verifier);
             setVerifier(true)}
         else {
@@ -38,13 +38,10 @@ const AjouterEntrepot = (props) => {
         }
          
     }
-    
-    
 
     const non = () => {
         props.handleClose ()
-       
-
+      
     }
     
     //console.log(entrepot);

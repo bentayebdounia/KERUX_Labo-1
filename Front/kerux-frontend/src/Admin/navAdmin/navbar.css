@@ -28,7 +28,7 @@ body{
     position: fixed;
     top: 20;
     height: calc(100vh-70px);
-    width: calc(10%);
+    width: calc(25%);
 }
 
 .sidebar li .nav-link {

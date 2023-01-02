@@ -22,6 +22,7 @@ const fournisseur = require("./routes/route_fournisseur")
 const produit = require("./routes/route.produit")
 const statistique = require("./routes/route.statistique")
 
+const pagination = require("./routes/route.pagination")
 //----------------middleware ---------------------------------------------------//
 app.use(cors())
 app.use(express.json()) //req.body
@@ -47,6 +48,8 @@ app.use("/fournisseur", fournisseur)
 app.use("/produit", produit)
 
 app.use("/statistique", statistique )
+
+app.use("/pagination", pagination)
 
 //--ajouter
 //require("./routes/route_role.js")

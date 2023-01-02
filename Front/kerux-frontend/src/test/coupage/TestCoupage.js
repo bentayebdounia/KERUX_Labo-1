@@ -4,7 +4,7 @@ import Coupage from './coupage'
 import ModelReponse from '../../Models/Model.repense'
 import BoxCoupage from './boxCoupage'
 import ModalSortieStock from '../Stock/Modal.sortieStock'
-import Pagination from '../nettoyageProcess/pagination'
+import Pagination from '../pagination/pagination'
 import moment from 'moment'
 
 const TestCoupage = () => {

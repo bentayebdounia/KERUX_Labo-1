@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import ProcessService from '../../service/service.process'
 import moment from 'moment';
+import Pagination from '../pagination/pagination';
 
 const JournalProduitsFournis = (props) => {
     
@@ -10,6 +11,16 @@ const JournalProduitsFournis = (props) => {
     const [comboBox, setComboBox] = useState('')
     const [serchValue, setSerchValue] = useState('')
     const [empty, setEmpty] =useState (false)
+    
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(6);
+    //les operation de pagination 
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = process.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = processRecherche.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
     let tableGeneral, tableCondition, response
     
     useEffect(() => {
@@ -53,7 +64,7 @@ const JournalProduitsFournis = (props) => {
    
     if (comboBox===''){
             tableGeneral = (
-                process.map(
+                currentPosts.map(
                     (p, key) =>
                         <tr key={key}>
                             <td>{key +1}</td>
@@ -76,7 +87,7 @@ const JournalProduitsFournis = (props) => {
 
         else if(comboBox==='fournisseur'|| comboBox==='livrer' || comboBox==='acheter'){
             tableCondition = (
-                processRecherche.map(
+                currentPosts2.map(
                     (p, key) =>
                     <tr key={key}>
                         <td>{key +1}</td>
@@ -153,6 +164,16 @@ const JournalProduitsFournis = (props) => {
                                 
                             </tbody>
                             </table>
+                            {comboBox==='' && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={process.length}
+                                    paginate={paginate}
+                                />}
+                            {(comboBox==='fournisseur'|| comboBox==='livrer' || comboBox==='acheter') && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={processRecherche.length}
+                                    paginate={paginate}
+                                />}
                         </div>
                     </div>
 

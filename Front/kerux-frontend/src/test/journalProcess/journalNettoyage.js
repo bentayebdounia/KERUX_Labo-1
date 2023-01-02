@@ -8,6 +8,7 @@ import serviceMarinade from '../../service/service.marinade';
 import serviceSorti from '../../service/service.sorti'
 import serviceEnregistrement from '../../service/service.enregistrement'
 import moment from 'moment';
+import Pagination from '../pagination/pagination'
 
 const JournalNettoyage = (props) => {
     
@@ -15,6 +16,16 @@ const JournalNettoyage = (props) => {
     const [processRecherche, setProcessRecheche ] =useState([])
     const [comboBox, setComboBox] = useState('')
     const [serchValue, setSerchValue] = useState('')
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(6);
+    //les operation de pagination 
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = process.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = processRecherche.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
     let tableGeneral, tableCondition
     
     useEffect(() => {
@@ -224,7 +235,7 @@ const JournalNettoyage = (props) => {
    
     if (comboBox===''){
             tableGeneral = (
-                process.map(
+                currentPosts.map(
                     (p, key) =>
                         <tr key={key}>
                             <td>{key +1}</td>
@@ -242,7 +253,7 @@ const JournalNettoyage = (props) => {
 
         else{
             tableCondition = (
-                processRecherche.map(
+                currentPosts2.map(
                     (p, key) =>
                         <tr key={key+1}>
                             <td>{key}</td>
@@ -259,7 +270,7 @@ const JournalNettoyage = (props) => {
         }
     
     return ( 
-        <Modal size="lg" scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
+        <Modal size="fullscreen" scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
             <Modal.Header closeButton>
             <Modal.Title>Journal {props.journalprocess}</Modal.Title>
             </Modal.Header>
@@ -301,6 +312,17 @@ const JournalNettoyage = (props) => {
                                 
                             </tbody>
                             </table>
+
+                            {comboBox==='' && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={process.length}
+                                    paginate={paginate}
+                                />}
+                            {(comboBox==='id_gnerate'|| comboBox==='categorie' || comboBox==='nom_produit') && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={processRecherche.length}
+                                    paginate={paginate}
+                                />}
                         </div>
                     </div>
 

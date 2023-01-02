@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './process.css'
 import '../service/service.process'
 import ServiceProcess from '../service/service.process'
+/*
 const Process = () => {
     const [controleReception, setControleReception] = useState(false)
     const [controleEnrg, setControleEnrg] = useState(false)
@@ -56,7 +57,7 @@ const Process = () => {
         </div>
     )
 //********************************* step coponant ***************************/
-    let stepComponant= (
+  /*  let stepComponant= (
         <div>
             <div className="container" id='stepComponant'>
         <div className="row row-cols-6">
@@ -98,7 +99,7 @@ const Process = () => {
 
 //*********************************** Etape *************************************************************/
  // boutons etapes
-        function recepBtn(){
+ /*       function recepBtn(){
             setControleReception(true)
             setControleEnrg(false)
             setControleNettoyage(false)
@@ -165,7 +166,7 @@ const Process = () => {
 
        
 
-//**************************** reception *******************************************/
+//**************************** reception *******************************************
 const [nom_fournisseur, setFournisseur] = useState('')
 const [acheteur, setAcheteur] = useState('')
 const [type_bon, setTypebon] = useState('')
@@ -245,7 +246,7 @@ if(controleReception){
         </div>
     )}
 
-    //**************************** Test process by id product *******************************************/
+    //**************************** Test process by id product *******************************************
 if(controleTest){
     test= (
         <div>
@@ -268,7 +269,7 @@ if(controleTest){
     )
 }
 
-    //**************************** nettoyage *******************************************/
+    //**************************** nettoyage *******************************************
 
 const [id_box , setId_box] = useState('')
 const [categorie_n , setCategorie_n] = useState('')
@@ -350,7 +351,7 @@ if(controleNettoyage){
     )
 }
 
-//**************************** coupage *******************************************/
+//**************************** coupage *******************************************
 if(controleCoupage){
     coupage= (
         <div>
@@ -414,7 +415,7 @@ if(controleCoupage){
     )
 }
 
-//**************************** sortie *******************************************/
+//**************************** sortie *******************************************
 if(controleSortie){
     sortie= (
         <div>
@@ -500,3 +501,5 @@ if(controleSortie){
 }
  
 export default Process;
+
+*/

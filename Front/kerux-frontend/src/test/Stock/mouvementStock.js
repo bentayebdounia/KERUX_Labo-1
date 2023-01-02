@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import serviceStock from '../../service/service.stock'
 import moment from 'moment';
+import Pagination from '../pagination/pagination';
 const MouvementStock = (props) => {
     
     const [stock, setStock] = useState([])
@@ -10,6 +11,18 @@ const MouvementStock = (props) => {
     const [serchValue, setSerchValue] = useState('')
     const [enStock, setenStock] = useState([])
     const [sortieStock, setSortiestock] = useState([])
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(6);
+    //les operation de pagination 
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = stock.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = stockRecherche.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts3 = enStock.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts4 = sortieStock.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
+
     let tableGeneral, tableCondition , barRechereche , dateRecherech
     
     useEffect(() => {
@@ -63,7 +76,7 @@ const MouvementStock = (props) => {
    
     if (comboBox===''){
             tableGeneral = (
-                stock.map(
+                currentPosts.map(
                     (p, key) =>
                         <tr key={key}>
                             <td>{key+1}</td>
@@ -101,7 +114,7 @@ const MouvementStock = (props) => {
                 </>
             )
             tableCondition = (
-                stockRecherche.map(
+                currentPosts2.map(
                     (p, key) =>
                     <tr key={key}>
                             <td>{key+1}</td>
@@ -133,7 +146,7 @@ const MouvementStock = (props) => {
                 </>
             )
             tableCondition = (
-                stockRecherche.map(
+                currentPosts2.map(
                     (p, key) =>
                     <tr key={key}>
                              <td>{key+1}</td>
@@ -159,7 +172,7 @@ const MouvementStock = (props) => {
         else if(comboBox==='en stock'){
             
             tableCondition = (
-                enStock.map(
+                currentPosts3.map(
                     (p, key) =>
                     <tr key={key}>
                             <td>{key+1}</td>
@@ -184,7 +197,7 @@ const MouvementStock = (props) => {
         else if(comboBox==='sortie de stock'){
             
             tableCondition = (
-                sortieStock.map(
+                currentPosts4.map(
                     (p, key) =>
                     <tr key={key}>
                             <td>{key+1}</td>
@@ -259,6 +272,26 @@ const MouvementStock = (props) => {
                                 
                             </tbody>
                             </table>
+                            {comboBox==='' && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={stock.length}
+                                    paginate={paginate}
+                                />}
+                            {(comboBox==='etape' || comboBox==='date') && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={stockRecherche.length}
+                                    paginate={paginate}
+                                />}
+                                {(comboBox==='en stock') && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={enStock.length}
+                                    paginate={paginate}
+                                />}
+                                {(comboBox==='sortie de stock') && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={sortieStock.length}
+                                    paginate={paginate}
+                                />}
                         </div>
                     </div>
 

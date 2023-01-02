@@ -3,7 +3,7 @@ import ConditService from '../../service/service.condit'
 import Conditionnement from './conditionnement'
 import ModelReponse from '../../Models/Model.repense'
 import ModalSortieStock from '../Stock/Modal.sortieStock'
-import Pagination from '../nettoyageProcess/pagination'
+import Pagination from '../pagination/pagination'
 import moment from 'moment'
 
 const TestCondit = () => {

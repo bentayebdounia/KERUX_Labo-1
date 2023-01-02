@@ -3,7 +3,7 @@ import serviceNettoyage from '../../service/service.nettoyage'
 import Nettoyage from './nettoyage' 
 import ModelReponse from '../../Models/Model.repense' 
 import ModalSortieStock from '../Stock/Modal.sortieStock'
-import Pagination from './pagination' 
+import Pagination from '../pagination/pagination' 
 import moment from 'moment'; 
 const TestNet = () => { 
  
@@ -387,7 +387,7 @@ table2=(
                                 style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }` , padding: "5px" , borderBottom: `${(buttonColor2===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor2===true) ? '7B170F' : 'white'  }`}}
                                 onClick={chargerDataEnStock}
                                 >
-                                   <a class="nav-link " style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }`}} href='#'> Produits en Stock</a></label>
+                                   <a className="nav-link " style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }`}} href='#'> Produits en Stock</a></label>
     
                         <p style={{ borderBottom:  '1px solid' , borderBottomColor: "#BBBABA"}}/>
     

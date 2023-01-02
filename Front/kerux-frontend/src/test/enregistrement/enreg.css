@@ -1,9 +1,8 @@
 #produitFourni{
-    border-style: solid;
-    border-color: rgb(1, 11, 31);
-    border-radius: 10px;
+   border-radius: 10px;
     padding: 20px;
     margin-left: 7%;
+    background-color: #cfcfcf;
 }
 
 #boxBtn {

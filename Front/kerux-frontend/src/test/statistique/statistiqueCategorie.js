@@ -13,7 +13,7 @@ const CategorieStatistique = (props) => {
     
     //const labels = Utils.months({count: 12});
 
- console.log("hello");
+ 
     
  
 
@@ -65,6 +65,7 @@ const CategorieStatistique = (props) => {
                             borderColor: props.borderColor,
                             borderWidth: 1,
                             },
+                            
                             
                         ],
                         }}

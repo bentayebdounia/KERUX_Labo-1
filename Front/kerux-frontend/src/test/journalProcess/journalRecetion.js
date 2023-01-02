@@ -2,6 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import ProcessService from '../../service/service.process'
 import moment from 'moment'
+import Pagination from '../pagination/pagination'
 
 const JournalReception = (props) => {
     
@@ -10,6 +11,15 @@ const JournalReception = (props) => {
     const [comboBox, setComboBox] = useState('')
     const [serchValue, setSerchValue] = useState('')
     let tableGeneral, tableCondition
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const [postsPerPage] = useState(6);
+    //les operation de pagination 
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = process.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = processRecherche.slice(indexOfFirstPost, indexOfLastPost);
+    const paginate = pageNumber => setCurrentPage(pageNumber);
     
     useEffect(() => {
         ProcessService.getBonOrderByDate()
@@ -33,7 +43,8 @@ const JournalReception = (props) => {
    
     if (comboBox===''){
             tableGeneral = (
-                process.map(
+                
+                currentPosts.map(
                     (p, key) =>
                         <tr key={key}>
                             <td>{key +1}</td>
@@ -51,7 +62,7 @@ const JournalReception = (props) => {
 
         else if(comboBox==='fournisseur'){
             tableCondition = (
-                processRecherche.map(
+                currentPosts2.map(
                     (p, key) =>
                     <tr key={key}>
                         <td>{key +1}</td>
@@ -68,7 +79,7 @@ const JournalReception = (props) => {
         }
     
     return ( 
-        <Modal size="lg" scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
+        <Modal size="fullscreen" scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
             <Modal.Header closeButton>
             <Modal.Title>Journal de reception</Modal.Title>
             </Modal.Header>
@@ -107,7 +118,21 @@ const JournalReception = (props) => {
                                 {tableCondition}
                                 
                             </tbody>
+                            
+                            
                             </table>
+                            {comboBox==='' && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={process.length}
+                                    paginate={paginate}
+                                />}
+                            {comboBox==='fournisseur' && <Pagination
+                                    postsPerPage={postsPerPage}
+                                    totalPosts={processRecherche.length}
+                                    paginate={paginate}
+                                />}
+
+                            
                         </div>
                     </div>
 
