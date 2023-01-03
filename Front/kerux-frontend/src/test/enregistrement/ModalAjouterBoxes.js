@@ -41,17 +41,35 @@ const ModalAjoutBoxes = (props) => {
             categorie: "" ,
             nom_produit: "",
             poids:0, 
+            unite:"",
             nombre: 0,
             id_gnerate:""
         
     }])
 
+
        //console.log("produitFourni: "+ props.produitFourni);  props.produitFourni.nombre_fourni
        //console.log("categorier= "+props.produitFourni.categorie+ "\n id produit " +props.produitFourni.id_produit);
 
+       function transforme(unite, poids){
+        console.log(unite);
+        if (unite==="kg") {
+            console.log(poids);
+            return poids*1000
+        }
+        else return poids
+    }
+
+    function verificationPoids(poids, nombre , unite){
+        
+        console.log(poids*1000/nombre)
+        return transforme(unite, poids)/nombre
+
+    }
+
     function plus () {
         setConteur(conteur+1)
-        setPoisrester(parseFloat(poidsRester)+parseFloat(boxe[0].poids)) 
+        setPoisrester(parseFloat(transforme(boxe[0].unite, poidsRester))+parseFloat(transforme(boxe[0].unite, boxe[0].poids))) 
         setNbrrester (parseFloat(nbrRester)+parseFloat(boxe[0].nombre))
         const newBoxe = [...boxe]
         
@@ -60,6 +78,7 @@ const ModalAjoutBoxes = (props) => {
             categorie:'',
             nom_produit:'',
             poids:0,
+            unite:"",
             nombre:0,
             date:new Date()
         })
@@ -83,10 +102,14 @@ const ModalAjoutBoxes = (props) => {
                
                 if (boxe[0].nombre===0 || boxe[0].nombre==='0' || boxe[0].nombre==='')  setErreurnombre(true)
     
-                if ( (boxe[0].poids !==0 && boxe[0].poids !=='' && boxe[0].poids !=='0') &&  (boxe[0].nombre !==0 && boxe[0].nombre !=='0' && boxe[0].nombre !==''))
+                if ( (boxe[0].poids !==0 && boxe[0].poids !=='' && boxe[0].poids !=='0') &&  (boxe[0].nombre !==0 && boxe[0].nombre !=='0' && boxe[0].nombre !=='') && boxe[0].unite !=='')
                     {
                         console.log(props.produitFourni.categorie);
-                        plus()
+                       
+                            if(transforme(boxe[0].unite, poidsRester)<=1500 && transforme(boxe[0].unite, poidsRester)>=2000)
+                                plus() 
+
+                            else alert ("verifier le poids ou le nombre")
                     }
             } 
             //poids de nombre
@@ -94,6 +117,7 @@ const ModalAjoutBoxes = (props) => {
             
                  else if (boxe[0].poids !==0 && boxe[0].poids !=='0' && boxe[0].poids !==''  ) {
                       console.log(props.produitFourni.categorie);
+                      boxe[0].poids = transforme(boxe[0].unite, boxe[0].poids)
                     plus()
                      }}
         }
@@ -104,16 +128,28 @@ const ModalAjoutBoxes = (props) => {
 
     const confirmAjoutBoxes = (e) => {
             e.preventDefault();
-            
+            var boxes= []
             var i=1
             while(i<boxe.length){
-                
+               /* 
                 EnregistrementService.ajouerEnregistrement(props.produitFourni.categorie, props.produitFourni.nom_produit, "enregistrement", boxe[i].poids, boxe[i].nombre, props.produitFourni.id_produit)
                 .then((res) => {
                     
                     tableboxe.push(res.data)
                     
-                })
+                })*/
+                
+                var b = {
+                    nom_produit: props.produitFourni.categorie,
+                    nom_produit: props.produitFourni.nom_produit,
+                    etape: "enregistrement",
+                    poids: boxe[i].poids,
+                    nombre: boxe[i].nombre,
+                    id_produit: props.produitFourni.id_produit
+                }
+                boxes.push(b)
+                localStorage.setItem ('boxes', JSON.stringify(boxes))
+
 
             i=i+1
             }
@@ -151,7 +187,7 @@ const ModalAjoutBoxes = (props) => {
                     
                 <label htmlFor="poids" className="col-sm-3 form-label">
                                     <div className="progress"> POIDS
-                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.produitFourni.poids_fourni-poidsRester)*100/props.produitFourni.poids_fourni)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.produitFourni.poids_fourni-poidsRester} </div>
+                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.produitFourni.poids_fourni-poidsRester)*100/props.produitFourni.poids_fourni)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {(props.produitFourni.poids_fourni-poidsRester)/1000} Kg</div>
                                     </div>
                     </label>
 
@@ -176,6 +212,13 @@ const ModalAjoutBoxes = (props) => {
                                         newProduits[key].poids = newPoids
                                         setBoxe(newProduits)
                                         }} 
+
+                                        unite= {boxe.unite} onUniteChange={newUnite => {
+                                            const newProduits = [...boxe]
+                                            newProduits[key].unite = newUnite
+                                            setBoxe(newProduits)
+                                            }}
+
                                     erreurPoids = {erreurPoids}
                                     erreurNombre ={erreurNombre}
                                     nombre = {box.nombre} onNombreChange={newNombre => {
