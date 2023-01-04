@@ -2,7 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import ProcessService from '../../service/service.process'
 import serviceFournisseur from '../../service/service.fournisseur'
 import ModalReception from './ModalReception'
-import Enregistrement from '../enregistrement/enregistrement'
+import Enregistrement from '../enregistrement/enregistrementNv'
 import './fournisseur.css'
 
 const Reception = (props) => {
@@ -259,7 +259,7 @@ const Reception = (props) => {
                 </section>
                     }
         
-          {toggle && <Enregistrement  toggleDisplay={toggleDisplay}  id_bon ={id_bon} />}
+          {toggle && <Enregistrement  toggleDisplay={toggleDisplay}  id_bon ={id_bon}  nom_fournisseur={nom_fournisseur} recepteur={recepteur} type_bon={type_bon} />}
                     
                 
                 

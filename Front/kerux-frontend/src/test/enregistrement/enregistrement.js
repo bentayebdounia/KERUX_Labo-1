@@ -20,7 +20,7 @@ const Enregistrement = (props) => {
     const handleShowReception = () => setShowreception(true)
     const [id_prod, setId_prod] = useState(1)
     
-    var produitsFourni= []
+    const[produitsFourni, setProduitsFourni] = useState([])
    
     const [produits,setProduits] = useState([{
         categorie: "",
@@ -99,6 +99,7 @@ const Enregistrement = (props) => {
 
     }
 
+    //fonction tranforme le poids au gramme 
     function transforme(unite, poids){
         console.log(unite);
         if (unite==="kg") {
@@ -108,14 +109,15 @@ const Enregistrement = (props) => {
         else return poids
     }
 
+    //fonction qui verifier le poids de chaque poulet
     function verificationPoids(poids, nombre , unite){
         
         console.log(poids*1000/nombre)
         return transforme(unite, poids)/nombre
 
     }
-
-    const  plusId = () => {
+// fonction pour 'ajout d un produit fourni
+    const  ajouterProduitFourni = () => {
 
         if (produits[0].categorie !== '' && produits[0].nom_produit!== '' && (produits[0].poids !== '' && produits[0].poids !== '0' && produits[0].poids !== 0) && produits[0].unite !=='' ){
             if (produits[0].categorie === 'poulet' ){
@@ -203,7 +205,7 @@ const Enregistrement = (props) => {
                             {key === 0 && (<>
 
                                             <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
-                                                onClick={(e) => plusId(e)} >
+                                                onClick={(e) => ajouterProduitFourni(e)} >
                                                 <i className="bi bi-plus-lg" style={{color: "white"}}> </i> Ajouter des boxes
                                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
                                                     {conteur}
@@ -236,10 +238,10 @@ const Enregistrement = (props) => {
                                 handleClose={handleClose} 
                                 handleShow={handleShow}
                                 produitFourni={produitFourni}
+                                
                                 id_prod={id_prod}
                                                    
                  />
-           
             
            </section>
             

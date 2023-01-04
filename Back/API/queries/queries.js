@@ -30,7 +30,7 @@ const ModifyStock = "UPDATE stock SET date_sortie= $1 , poids_sortie= $2 WHERE i
 
 ///////////////////////// Process *******************************
 // -- Reception*************************
-const ajouterReception = "INSERT INTO bon ( fk_fournisseur, acheteur, type_bon, datee, heure, recepteur, livreur )VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING id_bon"
+const ajouterReception = "INSERT INTO bon ( fk_fournisseur, acheteur, type_bon, datee, heure, recepteur, livreur )VALUES ($1, $2, $3, $4, $5, $6, $7 ) RETURNING id_bon , recepteur , fk_fournisseur"
 const getBonBydateHeure = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur ORDER BY datee DESC , heure DESC"
 const getbonByFournisseur = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur ORDER BY fk_fournisseur"
 const getBonByNomFournisseur = "SELECT * FROM bon , fournisseur WHERE fk_fournisseur=id_fournisseur AND nom_fournisseur ILIKE $1  ORDER BY datee DESC, heure DESC"

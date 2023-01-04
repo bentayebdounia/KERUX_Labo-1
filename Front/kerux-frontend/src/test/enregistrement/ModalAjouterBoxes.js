@@ -22,6 +22,8 @@ const ModalAjoutBoxes = (props) => {
 
     const [erreurPoids, setErreurpoids] = useState(false)
     const [erreurNombre, setErreurnombre] = useState(false)
+    const [prodF, setProdf] = useState(JSON.parse (localStorage.getItem ('produitsFournis')))
+    
 
     const [boxe,setBoxe] = useState([{
         nom_produit: "",
@@ -145,10 +147,10 @@ const ModalAjoutBoxes = (props) => {
                     etape: "enregistrement",
                     poids: boxe[i].poids,
                     nombre: boxe[i].nombre,
-                    id_produit: props.produitFourni.id_produit
+                    id_produit: props.produitFourni.id_prod
                 }
                 boxes.push(b)
-                localStorage.setItem ('boxes', JSON.stringify(boxes))
+                localStorage.setItem ('boxes'+ props.id_prod, JSON.stringify(boxes))
 
 
             i=i+1
@@ -174,7 +176,7 @@ const ModalAjoutBoxes = (props) => {
         setConteur(0)
       
     }
-   
+   console.log( prodF);
     return (
         <>
       <Modal size="lg" scrollable={true} show={props.show} onHide={props.handleClose}>
@@ -183,7 +185,11 @@ const ModalAjoutBoxes = (props) => {
             </Modal.Header>
             <Modal.Body >
                 <div className="mb-3 row">
-                
+                    
+                {( prodF.id_prod === props.id_prod ) && 
+                    
+                    <p> {prodF.id_prod}</p>
+                }
                     
                 <label htmlFor="poids" className="col-sm-3 form-label">
                                     <div className="progress"> POIDS

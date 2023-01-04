@@ -122,8 +122,6 @@ const Nettoyage = (props) => {
                                 
                             </div>
 
-                            
-                            
                                 <div className="contenerProd col-6" >
                                     <label id="categorie"> Categorie de produit: </label>
                                     
