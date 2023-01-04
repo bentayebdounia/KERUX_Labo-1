@@ -54,7 +54,7 @@ export default function ProduitFourni(props){
             
             <div className="row gy-2 gx-2 align-items-left">
                 
-                <div col-12>
+                <div className="col-6">
                     <div className="form-floating  ">
                         <select className="form-select" aria-label="Default select example" id="categorie"
                                 value={props.categorie} 
@@ -69,7 +69,7 @@ export default function ProduitFourni(props){
                     </div>
                     {props.erreurCategorie ===true && props.categorie === ""  && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner une categorie </p>}
                 </div>
-                <div className="col-12 ">  
+                <div className="col-6 ">  
                     <div className="form-floating">
                         <select className="form-select" aria-label="Default select example" id="produit"
                                 value={props.nom_produit} 
@@ -83,7 +83,7 @@ export default function ProduitFourni(props){
                     </div>
                     {props.erreurProduit === true && props.nom_produit === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner un type de produit </p>}
                 </div>  
-                    <div className="col-5" style={{marginRight:"0px"}}>
+                    <div className="col-5 " style={{paddingRight:'0px'}}>
                         <div className="form-floating">
                             <input type="number" class="form-control" id="poids"
                                 value={props.poids} 
@@ -95,13 +95,19 @@ export default function ProduitFourni(props){
                         
                         {props.erreurPoids ===true && (props.poids === "" || props.poids === "0" || props.poids === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le poids fourni </p>}
                     </div>
-                    <div className="col-2" style={{marginRight:"30px", width:"70px"}}>
-                    <select className="form-select" aria-label="Default select example" style={{width:"70px", height:"58px" , padding:"10px"}}  required>
-                                <option defaultValue="kg">Kg</option>
-                                <option value="gramme">g</option>
-                            </select>
+                    <div className="col-1 mb-3" style={{ paddingLeft:'0px'}}>
+                        <select className="form-select" aria-label="Default select example" id="categorie"
+                                value={props.unite} 
+                                onChange={event => { props.onUniteChange(event.target.value)}} 
+                                style={{height:"58px"}}
+                                required>
+                            <option ></option>
+                            <option value="kg">Kg</option>
+                            <option value="gramme">G</option>
+                        </select>
+                        {props.unite === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner l'unité </p>}
                     </div>
-                    <div className="col-5 mb-3">
+                    <div className="col-6 mb-3">
                         {nbr}
                     </div>
                     
