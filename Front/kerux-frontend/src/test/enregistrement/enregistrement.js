@@ -18,9 +18,9 @@ const Enregistrement = (props) => {
 
     const [showRecepion, setShowreception] = useState(false)
     const handleShowReception = () => setShowreception(true)
-
+    const [id_prod, setId_prod] = useState(1)
     
-    
+    var produitsFourni= []
    
     const [produits,setProduits] = useState([{
         categorie: "",
@@ -36,7 +36,9 @@ const Enregistrement = (props) => {
     const [produitFourni, setProduitForuni] = useState({
             categorie: "",
             nom_produit: "", 
-            id_produit: ""
+            id_produit: "",
+            poids_fourni:0,
+            nombre_fourni:0
     })
     
     const [conteur, setConteur] = useState (0)
@@ -52,14 +54,30 @@ const Enregistrement = (props) => {
 
         setConteur(conteur+1)
         const newProduits = [...produits]
-        EnregistrementService.ajouterProduitFournit(produits[0].categorie, produits[0].nom_produit, transforme(produits[0].unite , produits[0].poids), produits[0].nombre, props.id_bon)
-        .then((res) => {
+
+        // EnregistrementService.ajouterProduitFournit(produits[0].categorie, produits[0].nom_produit, transforme(produits[0].unite , produits[0].poids), produits[0].nombre, props.id_bon)
+        // .then((res) => {
             
-            setProduitForuni(res.data[0])
+        //     setProduitForuni(res.data[0])
 
-        })
+        // })
 
+        
+        var prod= {
+            id_prod: id_prod,
+            categorie : produits[0].categorie, 
+            nom_produit:produits[0].nom_produit, 
+            poids_fourni:transforme(produits[0].unite , produits[0].poids), 
+            nombre_fourni: parseInt (produits[0].nombre), 
+            id_bon:props.id_bon
+
+        }
+        produitsFourni.push(prod)
+        localStorage.setItem ('produitsFournis', JSON.stringify(produitsFourni))
+
+        setId_prod(id_prod+1)
         console.log(produitFourni);
+        setProduitForuni(prod)
         handleShow()
                             
         newProduits.push({
@@ -218,6 +236,7 @@ const Enregistrement = (props) => {
                                 handleClose={handleClose} 
                                 handleShow={handleShow}
                                 produitFourni={produitFourni}
+                                id_prod={id_prod}
                                                    
                  />
            

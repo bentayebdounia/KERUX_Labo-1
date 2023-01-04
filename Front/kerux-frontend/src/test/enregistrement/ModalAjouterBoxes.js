@@ -69,7 +69,7 @@ const ModalAjoutBoxes = (props) => {
 
     function plus () {
         setConteur(conteur+1)
-        setPoisrester(parseFloat(transforme(boxe[0].unite, poidsRester))+parseFloat(transforme(boxe[0].unite, boxe[0].poids))) 
+        setPoisrester(parseFloat(poidsRester)+parseFloat(transforme(boxe[0].unite, boxe[0].poids))) 
         setNbrrester (parseFloat(nbrRester)+parseFloat(boxe[0].nombre))
         const newBoxe = [...boxe]
         
@@ -78,7 +78,6 @@ const ModalAjoutBoxes = (props) => {
             categorie:'',
             nom_produit:'',
             poids:0,
-            unite:"",
             nombre:0,
             date:new Date()
         })
@@ -105,11 +104,12 @@ const ModalAjoutBoxes = (props) => {
                 if ( (boxe[0].poids !==0 && boxe[0].poids !=='' && boxe[0].poids !=='0') &&  (boxe[0].nombre !==0 && boxe[0].nombre !=='0' && boxe[0].nombre !=='') && boxe[0].unite !=='')
                     {
                         console.log(props.produitFourni.categorie);
-                       
-                            if(transforme(boxe[0].unite, poidsRester)<=1500 && transforme(boxe[0].unite, poidsRester)>=2000)
-                                plus() 
+                        console.log(verificationPoids(boxe[0].poids,boxe[0].nombre, boxe[0].unite  ))
+                            if(verificationPoids(boxe[0].poids,boxe[0].nombre, boxe[0].unite)>=1500 && verificationPoids(boxe[0].poids,boxe[0].nombre, boxe[0].unite )<=2000)
+                                {   console.log(transforme(boxe[0].unite, boxe[0].poids));
+                                    plus() }
 
-                            else alert ("verifier le poids ou le nombre")
+                            else alert ("verifier le poids ")
                     }
             } 
             //poids de nombre
@@ -140,7 +140,7 @@ const ModalAjoutBoxes = (props) => {
                 })*/
                 
                 var b = {
-                    nom_produit: props.produitFourni.categorie,
+                    categorie: props.produitFourni.categorie,
                     nom_produit: props.produitFourni.nom_produit,
                     etape: "enregistrement",
                     poids: boxe[i].poids,
