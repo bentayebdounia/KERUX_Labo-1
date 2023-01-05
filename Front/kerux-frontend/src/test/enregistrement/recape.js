@@ -2,14 +2,19 @@ import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 
 
-const AffichageBoxes = (props) => {
+const Recape = (props) => {
 
     const [entrepots, setEntrepots] = useState([])
     const [entrepot, setEntrepot] = useState()
     const [stock , setStock] = useState()
-    var n=props.id
-    const [boxe,setBoxe] = useState( JSON.parse (localStorage.getItem('boxes'+props.id)))
-    console.log(props.id); 
+    const [boxe,setBoxe] = useState([])
+
+    useEffect(()=>{
+        for(var i=1 ; i<2; i++){
+            boxe= boxe.concat(JSON.parse(localStorage.getItem('boxes'+i)))
+        }
+    },[])
+    
     const non = () => {
         
         props.handleClose ()    
@@ -22,7 +27,7 @@ const AffichageBoxes = (props) => {
         <>
             <Modal size="lg" scrollable={true} show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Affichage des boxes</Modal.Title>
+                    <Modal.Title>Recape de l'etape enregistrement</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
 
@@ -43,7 +48,7 @@ const AffichageBoxes = (props) => {
                                             </thead>
                                             <tbody>
                                         
-                                                {
+                                                { 
                                                     boxe.map( (p, key) =>
                                                             <tr key={key}>
                                                                 
@@ -65,7 +70,7 @@ const AffichageBoxes = (props) => {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                        <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={ ()=> non ()}>OK</button>
+                        <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={ ()=> non ()}>VALIDER</button>
                         
                 </Modal.Footer>
              </Modal>
@@ -77,4 +82,4 @@ const AffichageBoxes = (props) => {
      )
 }
  
-export default AffichageBoxes;
+export default Recape;

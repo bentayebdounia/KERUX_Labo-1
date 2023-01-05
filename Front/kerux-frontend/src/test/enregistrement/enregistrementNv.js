@@ -6,6 +6,7 @@ import ModalAjoutBoxes from './ModalAjouterBoxes'
 import EnregistrementService from '../../service/service.enregistrement'
 import './enreg.css'
 import AffichageBoxes from './boxAffichage'
+import Recape from './recape'
 
 const Enregistrement = (props) => {
 
@@ -20,6 +21,10 @@ const Enregistrement = (props) => {
     const [showAffichage, setShowaffichage] = useState(false)
     const handleCloseAffichage = () => setShowaffichage(false)
     const handleShowAffichage = () => setShowaffichage(true)
+
+    const [showRecap, setShowRecap] = useState(false)
+    const handleCloseRecap = () => setShowRecap(false)
+    const handleShowRecap = () => setShowRecap(true)
 
     
     const [idprod, setIdprod] = useState(1)
@@ -56,6 +61,8 @@ const Enregistrement = (props) => {
    const [produit_categorie, setProduit_categorie] = useState()
 
    const [poidsRester, setPoidsrester] = useState()
+
+   const [length, setLength] = useState()
 
     function plus () {
 
@@ -141,10 +148,7 @@ const Enregistrement = (props) => {
         props.toggleDisplay()
       }
 
-      function terminerProcess() {
-        
-       props.toggleDisplay()
-      }
+      
 
       const ajouterBox = (id, categorie, type, poids, nombre) => {
         setProduit_id(id)
@@ -158,6 +162,11 @@ const Enregistrement = (props) => {
             setPoidsrester(poidsGlobal)
 
             return poidsRester
+      }
+
+      const AfiicherBoxes = (id) => {
+        setProduit_id(id) 
+        handleShowAffichage()
       }
 
       if(categorie === "poulet"){
@@ -346,11 +355,11 @@ const Enregistrement = (props) => {
                                  
                                 <td>{p.categorie}</td> 
                                 <td>{p.nom_produit}</td> 
-                                <td>{p.poids_fourni/ 1000} / {poidsRester}</td> 
+                                <td>{p.poids_fourni/ 1000} </td> 
                                 <td>{p.nombre_fourni}</td> 
                                 <td style={{textAlign: 'center'}} >
                                     <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni) ;  handleShow()}}> ajouter</button>
-                                    <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{setIdprod(p.id_prod) ;handleShowAffichage()} } > Afficher</button>
+                                    <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod)} } > Afficher</button>
                                 </td>
                                 
                                 
@@ -361,7 +370,7 @@ const Enregistrement = (props) => {
                         </table> 
                     </div>
                 
-                <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={()=>{props.toggleDisplay()} } >VALIDER LE PROCESS</button>
+                <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={handleShowRecap} >VALIDER LE PROCESS</button>
             </div>
              <ModalAjoutBoxes   
                                 show= {show} 
@@ -377,11 +386,16 @@ const Enregistrement = (props) => {
                                 
                                                    
                  />
-            <AffichageBoxes     show= {showAffichage} 
+            {showAffichage && <AffichageBoxes     show= {showAffichage} 
                                 handleClose= {handleCloseAffichage} 
                                 handleShow= {handleShowAffichage}
                                 id= {produit_id}
-                                />
+                                />}
+
+            {showRecap &&     <Recape     show= {showRecap} 
+                                            handleClose= {handleCloseRecap} 
+                                            
+                                />}
             
            </section>
             

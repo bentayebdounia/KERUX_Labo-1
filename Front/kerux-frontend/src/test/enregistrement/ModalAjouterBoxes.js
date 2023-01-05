@@ -150,19 +150,28 @@ const ModalAjoutBoxes = (props) => {
 
             i=i+1
             }
-
+           
+            var tab= []
+            tab= JSON.parse(localStorage.getItem('produitsFournis'))
+           for(var i=0; i<tab.length; i++){
+                if (tab[i].id_prod === props.id){
+                    tab[i].poidsRester = poidsRester
+                    console.log("tab",tab[i].poidsRester );
+                }
+           }
             console.log( tableboxe);
-            
+           
             setBoxe([...nboxe] )
-            props.poidsRestant((props.poids-poidsRester)/1000)
+           // props.poidsRestant((props.poids-poidsRester)/1000)
 
             handleShowQstock()
             props.handleClose()
-            //tableboxe.splice("")
-            boxe.splice("")
-            setConteur(0)
             boxe[0].poids=""
             boxe[0].nombre=""
+            tableboxe.splice("")
+            boxe.splice("")
+            setConteur(0)
+            
 
     }
 
@@ -273,10 +282,10 @@ const ModalAjoutBoxes = (props) => {
       </Modal>
 
        <ModalQStock 
-                                                show = {showQstock}
-                                                handleClose = {handleCloseQstock}
-                                                tableBox = {tableboxe}
-                                                />
+                    show = {showQstock}
+                    handleClose = {handleCloseQstock}
+                    tableBox = {tableboxe}
+                    />
         <ModelReponse
                 show={show} 
                 handleClose={handleClose} 
