@@ -5,6 +5,7 @@ import ProduitFourni from './produitFourni'
 import ModalAjoutBoxes from './ModalAjouterBoxes'
 import EnregistrementService from '../../service/service.enregistrement'
 import './enreg.css'
+import AffichageBoxes from './boxAffichage'
 
 const Enregistrement = (props) => {
 
@@ -16,8 +17,12 @@ const Enregistrement = (props) => {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
+    const [showAffichage, setShowaffichage] = useState(false)
+    const handleCloseAffichage = () => setShowaffichage(false)
+    const handleShowAffichage = () => setShowaffichage(true)
+
     
-    const [id_prod, setId_prod] = useState(1)
+    const [idprod, setIdprod] = useState(1)
     
     const[produitsFourni, setProduitsFourni] = useState([])
     const [categorie, setCategorie] = useState()
@@ -26,9 +31,6 @@ const Enregistrement = (props) => {
     const [nombre_fourni, setNombre_fourni] = useState()
     const [unite, setUnite] = useState()
     var nbr, TypePoulet, TypeLegume
-   
-    
-    const [test, setTest ]= useState()
     
     const [poids, setPoids] = useState(0)
     const [produitFourni, setProduitForuni] = useState({
@@ -46,7 +48,14 @@ const Enregistrement = (props) => {
     const [erreurPoids, setErreurpoids] = useState(false)
     const [erreurNombre, setErreurnombre] = useState(false)
 
-   
+   //les variable imegrer
+   const [produit_id, setProduit_id ]= useState() 
+   const [produit_type, setProduit_type] = useState()
+   const [produit_poids, setProduit_poids] = useState()
+   const [produit_nombe, setProduit_nombre] = useState()
+   const [produit_categorie, setProduit_categorie] = useState()
+
+   const [poidsRester, setPoidsrester] = useState()
 
     function plus () {
 
@@ -60,20 +69,21 @@ const Enregistrement = (props) => {
 
         // })
 
-        
+        console.log(conteur);
         var prod= {
-            id_prod: id_prod,
+            id_prod: idprod,
             categorie : categorie, 
             nom_produit:nom_produit, 
             poids_fourni:transforme(unite , poids_fourni), 
             nombre_fourni: parseInt (nombre_fourni), 
-            id_bon:props.id_bon
+            id_bon:props.id_bon,
+            poidsRester: 0
 
         }
         produitsFourni.push(prod)
         localStorage.setItem ('produitsFournis', JSON.stringify(produitsFourni))
 
-        setId_prod(id_prod+1)
+        setIdprod(idprod+1)
         console.log(produitFourni);
         setProduitForuni(prod)
        // handleShow()
@@ -136,7 +146,19 @@ const Enregistrement = (props) => {
        props.toggleDisplay()
       }
 
-      
+      const ajouterBox = (id, categorie, type, poids, nombre) => {
+        setProduit_id(id)
+        setProduit_type(type)
+        setProduit_categorie(categorie)
+        setProduit_poids(poids)
+        setProduit_nombre(nombre)
+      }
+
+      const poidsRestant = (poidsGlobal) => {
+            setPoidsrester(poidsGlobal)
+
+            return poidsRester
+      }
 
       if(categorie === "poulet"){
         TypePoulet=(
@@ -310,7 +332,7 @@ const Enregistrement = (props) => {
                         
                         <th scope="col">Categorie </th> 
                         <th scope="col">Nom de produit</th> 
-                        <th scope="col">Poids</th> 
+                        <th scope="col">Poids (Kg)</th> 
                         <th scope="col">Nombre</th> 
                         <th scope="col"></th> 
                         
@@ -324,11 +346,11 @@ const Enregistrement = (props) => {
                                  
                                 <td>{p.categorie}</td> 
                                 <td>{p.nom_produit}</td> 
-                                <td>{p.poids_fourni}</td> 
+                                <td>{p.poids_fourni/ 1000} / {poidsRester}</td> 
                                 <td>{p.nombre_fourni}</td> 
                                 <td style={{textAlign: 'center'}} >
-                                    <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{setId_prod(p.id_prod); setTest(p.poids_fourni) ;  handleShow()}}> ajouter</button>
-                                    <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}> Afficher</button>
+                                    <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni) ;  handleShow()}}> ajouter</button>
+                                    <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{setIdprod(p.id_prod) ;handleShowAffichage()} } > Afficher</button>
                                 </td>
                                 
                                 
@@ -342,15 +364,24 @@ const Enregistrement = (props) => {
                 <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={()=>{props.toggleDisplay()} } >VALIDER LE PROCESS</button>
             </div>
              <ModalAjoutBoxes   
-                                show={show} 
-                                handleClose={handleClose} 
-                                handleShow={handleShow}
-                                produitFourni={produitFourni}
-                                id_prod={id_prod}
-                                test= {test}
+                                show= {show} 
+                                handleClose= {handleClose} 
+                                handleShow= {handleShow}
+                                produitFourni= {produitFourni}
+                                id= {produit_id}
+                                categorie= {produit_categorie}
+                                type= {produit_type}
+                                poids= {produit_poids}
+                                nombre= {produit_nombe}
+                                poidsRestant = {poidsRestant}
+                                
                                                    
                  />
-           
+            <AffichageBoxes     show= {showAffichage} 
+                                handleClose= {handleCloseAffichage} 
+                                handleShow= {handleShowAffichage}
+                                id= {produit_id}
+                                />
             
            </section>
             
