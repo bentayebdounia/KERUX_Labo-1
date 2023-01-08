@@ -135,7 +135,7 @@ const Enregistrement = (props) => {
                 else setErreurnombre(true)
             } 
             else {
-                setNombre_fourni(0)
+                
                     plus()
                 }
 
@@ -204,6 +204,7 @@ const Enregistrement = (props) => {
     )
 }
         if(categorie==="legume"){
+            //setNombre_fourni(0)
             TypeLegume=(
                 <>
                             <option defaultValue={""}></option>
