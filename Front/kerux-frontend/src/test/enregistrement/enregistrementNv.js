@@ -61,12 +61,13 @@ const Enregistrement = (props) => {
    const [produit_categorie, setProduit_categorie] = useState()
 
    const [poidsRester, setPoidsrester] = useState()
+   const [nombreRester, setNombrerester] = useState()
 
    const [length, setLength] = useState()
-
+   
    useEffect(()=>{
-        produitsFourni=JSON.parse(localStorage.getItem('produitsFournis'))
-   },[],produitsFourni)
+     setProduitsFourni (JSON.parse(localStorage.getItem('produitsFournis') || "[]"))
+   },[produitsFourni]) 
 
     function plus () {
 
@@ -88,7 +89,8 @@ const Enregistrement = (props) => {
             poids_fourni:transforme(unite , poids_fourni), 
             nombre_fourni: parseInt (nombre_fourni), 
             id_bon:props.id_bon,
-            poidsRester: transforme(unite , poids_fourni)
+            poidsRester: transforme(unite , poids_fourni),
+            nombreRester: parseInt (nombre_fourni)
 
         }
         produitsFourni.push(prod)
@@ -132,7 +134,10 @@ const Enregistrement = (props) => {
                 }
                 else setErreurnombre(true)
             } 
-            else plus()
+            else {
+                setNombre_fourni(0)
+                    plus()
+                }
 
         }
         else {
@@ -192,6 +197,7 @@ const Enregistrement = (props) => {
                     />
                 <label for="nbr" style={{color:"#000" , fontWeight:"bold"}}>Nombre fourni</label>
                 {props.erreurNombre===true && (nombre_fourni === "" || nombre_fourni === "0" || nombre_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre fourni </p>}
+                
             </div>
             
                
@@ -313,7 +319,7 @@ const Enregistrement = (props) => {
 
                     <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
                         onClick={(e) => ajouterProduitFourni(e)} >
-                        <i className="bi bi-plus-lg" style={{color: "white"}}> </i> AJOUTER PRODUIT
+                        <i className="bi bi-plus-lg" style={{color: "white"}}> AJOUTER PRODUIT </i> 
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
                             {conteur}
                             <span class="visually-hidden">unread messages</span>
@@ -356,10 +362,10 @@ const Enregistrement = (props) => {
                                 <td>{p.categorie}</td> 
                                 <td>{p.nom_produit}</td> 
                                 <td>{p.poids_fourni/ 1000}  / {p.poidsRester / 1000} </td> 
-                                <td>{p.nombre_fourni}</td> 
+                                <td>{p.nombre_fourni} / {p.nombreRester} </td> 
                                 <td style={{textAlign: 'center'}} >
-                                {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester );  handleShow()}}> ajouter </button>}
-                                {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod)} } > Afficher</button>}
+                                {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester );setNombrerester(p.nombreRester);  handleShow()}}> ajouter </button>}
+                                {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod)} } > Afficher </button>}
                                 </td>
                                 
                                 
@@ -383,6 +389,7 @@ const Enregistrement = (props) => {
                                 poids= {produit_poids}
                                 nombre= {produit_nombe}
                                 poidsRestant = {poidsRester}
+                                nombreRestant = {nombreRester}
                                 
                                                    
                  />

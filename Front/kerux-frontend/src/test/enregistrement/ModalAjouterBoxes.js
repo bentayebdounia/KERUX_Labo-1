@@ -23,6 +23,8 @@ const ModalAjoutBoxes = (props) => {
 
     const [erreurPoids, setErreurpoids] = useState(false)
     const [erreurNombre, setErreurnombre] = useState(false)
+
+    const [msg, setMsg] = useState()
     //const [prodF, setProdf] = useState(JSON.parse (localStorage.getItem ('produitsFournis')))
     
 
@@ -41,6 +43,9 @@ const ModalAjoutBoxes = (props) => {
     }])
 
     const [tableboxe,setTableboxe] = useState([])
+    useEffect(()=>{
+        setTableboxe(JSON.parse(localStorage.getItem('boxes'+ props.id) || "[]"))
+    })
 
 
        //console.log("produitFourni: "+ props.produitFourni);  props.produitFourni.nombre_fourni
@@ -90,9 +95,11 @@ const ModalAjoutBoxes = (props) => {
 
     const  plusId = () => {
         
-        console.log(props.poids-poidsRester); 
-        if(parseFloat(poidsRester)+parseFloat(boxe[0].poids) <= props.poids){
-            if (props.categorie==="poulet" && parseFloat(nbrRester)+parseFloat(boxe[0].nombre) <= props.nombre ){
+        console.log(props.nombre); 
+        console.log(parseFloat(nbrRester)+parseFloat(boxe[0].nombre));
+        if((parseFloat(poidsRester)+parseFloat(boxe[0].poids))*1000 <= props.poidsRestant){
+            if (props.categorie==="poulet" ){
+                if((parseFloat(nbrRester)+parseFloat(boxe[0].nombre)) <= props.nombreRestant ){
                 if(boxe[0].poids ===0  || boxe[0].poids ==='0'|| boxe[0].poids ==='') setErreurpoids(true)
                     
                
@@ -106,7 +113,14 @@ const ModalAjoutBoxes = (props) => {
                                 {   console.log(transforme(boxe[0].unite, boxe[0].poids));
                                     plus() }
 
-                            else alert ("verifier le poids ")
+                            else {
+                                    setMsg("Veillez verifier le poid")
+                                    handleShow()
+                        }
+                    }}
+                    else{
+                            setMsg("Veillez remplire le nombre de poulet de ce boxe")
+                            handleShow()
                     }
             } 
             //poids de nombre
@@ -118,12 +132,15 @@ const ModalAjoutBoxes = (props) => {
                     plus()
                      }}
         }
-        else {handleShow()  }
+        else {  setMsg('Le poids ou le nombre est incorrect')
+                handleShow()  }
         
         
     }
 
     const confirmAjoutBoxes = (e) => {
+        
+        if(boxe.length >1){
             e.preventDefault();
             var boxes= []
             var i=1
@@ -135,6 +152,7 @@ const ModalAjoutBoxes = (props) => {
                     tableboxe.push(res.data)
                     
                 })*/
+
                 
                 var b = {
                     categorie: props.produitFourni.categorie,
@@ -155,8 +173,10 @@ const ModalAjoutBoxes = (props) => {
             tab= JSON.parse(localStorage.getItem('produitsFournis'))
            for(var i=0; i<tab.length; i++){
                 if (tab[i].id_prod === props.id){
-                    tab[i].poidsRester = props.poids-poidsRester
-                    console.log("tab",tab[i].poidsRester );
+                    tab[i].poidsRester = props.poidsRestant-poidsRester
+                    tab[i].nombreRester = props.nombreRestant-nbrRester
+                    console.log(nbrRester);
+                    console.log("tab",tab[i].nombreRester );
                 }
            }
             console.log( tableboxe);
@@ -170,7 +190,13 @@ const ModalAjoutBoxes = (props) => {
             boxe[0].nombre=""
             tableboxe.splice("")
             boxe.splice("")
-            setConteur(0)
+            setConteur(0)}
+            else {
+                setMsg('vous pouvez pas valider')
+                handleShow()
+                
+                
+            }
             
 
     }
@@ -198,7 +224,7 @@ const ModalAjoutBoxes = (props) => {
             <Modal.Title>Ajouter des boxes</Modal.Title>
             </Modal.Header>
             <Modal.Body >
-                {props.poidsRestant}
+                
                 <div className="mb-3 row">
                     
                 
@@ -214,7 +240,7 @@ const ModalAjoutBoxes = (props) => {
 
                     {props.categorie==="poulet" &&  <label htmlFor="poids" className="col-sm-3 form-label">
                                     <div className="progress"> NOMBRE
-                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.nombre-nbrRester)*100/props.nombre)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.nombre-nbrRester} </div>
+                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.nombreRestant-nbrRester)*100/props.nombreRestant)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.nombreRestant-nbrRester} </div>
                                     </div>
                     </label>}
                 <div>
@@ -282,7 +308,7 @@ const ModalAjoutBoxes = (props) => {
             </Modal.Footer>
       </Modal>
 
-       <ModalQStock 
+        <ModalQStock 
                     show = {showQstock}
                     handleClose = {handleCloseQstock}
                     tableBox = {tableboxe}
@@ -291,7 +317,7 @@ const ModalAjoutBoxes = (props) => {
                 show={show} 
                 handleClose={handleClose} 
                 handleShow={handleShow} 
-                message={"Le poids ou le nombre est incorrect"} 
+                message={msg} 
                 titre={"d'erreur"} 
                 />
         
