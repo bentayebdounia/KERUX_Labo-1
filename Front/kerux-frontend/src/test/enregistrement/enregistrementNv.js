@@ -29,7 +29,7 @@ const Enregistrement = (props) => {
     
     const [idprod, setIdprod] = useState(1)
     
-    const[produitsFourni, setProduitsFourni] = useState([])
+    var[produitsFourni, setProduitsFourni] = useState([])
     const [categorie, setCategorie] = useState()
     const [nom_produit, setNom_produit] = useState()
     const [poids_fourni, setPoids_fourni] = useState()
@@ -64,6 +64,10 @@ const Enregistrement = (props) => {
 
    const [length, setLength] = useState()
 
+   useEffect(()=>{
+        produitsFourni=JSON.parse(localStorage.getItem('produitsFournis'))
+   },[],produitsFourni)
+
     function plus () {
 
         setConteur(conteur+1)
@@ -84,7 +88,7 @@ const Enregistrement = (props) => {
             poids_fourni:transforme(unite , poids_fourni), 
             nombre_fourni: parseInt (nombre_fourni), 
             id_bon:props.id_bon,
-            poidsRester: 0
+            poidsRester: transforme(unite , poids_fourni)
 
         }
         produitsFourni.push(prod)
@@ -158,11 +162,7 @@ const Enregistrement = (props) => {
         setProduit_nombre(nombre)
       }
 
-      const poidsRestant = (poidsGlobal) => {
-            setPoidsrester(poidsGlobal)
-
-            return poidsRester
-      }
+      
 
       const AfiicherBoxes = (id) => {
         setProduit_id(id) 
@@ -355,11 +355,11 @@ const Enregistrement = (props) => {
                                  
                                 <td>{p.categorie}</td> 
                                 <td>{p.nom_produit}</td> 
-                                <td>{p.poids_fourni/ 1000} </td> 
+                                <td>{p.poids_fourni/ 1000}  / {p.poidsRester / 1000} </td> 
                                 <td>{p.nombre_fourni}</td> 
                                 <td style={{textAlign: 'center'}} >
-                                    <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni) ;  handleShow()}}> ajouter</button>
-                                    <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod)} } > Afficher</button>
+                                {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester );  handleShow()}}> ajouter </button>}
+                                {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod)} } > Afficher</button>}
                                 </td>
                                 
                                 
@@ -382,7 +382,7 @@ const Enregistrement = (props) => {
                                 type= {produit_type}
                                 poids= {produit_poids}
                                 nombre= {produit_nombe}
-                                poidsRestant = {poidsRestant}
+                                poidsRestant = {poidsRester}
                                 
                                                    
                  />

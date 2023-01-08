@@ -155,15 +155,15 @@ const ModalAjoutBoxes = (props) => {
             tab= JSON.parse(localStorage.getItem('produitsFournis'))
            for(var i=0; i<tab.length; i++){
                 if (tab[i].id_prod === props.id){
-                    tab[i].poidsRester = poidsRester
+                    tab[i].poidsRester = props.poids-poidsRester
                     console.log("tab",tab[i].poidsRester );
                 }
            }
             console.log( tableboxe);
            
             setBoxe([...nboxe] )
-           // props.poidsRestant((props.poids-poidsRester)/1000)
-
+           //props.poidsRestant((props.poids-poidsRester)/1000)
+           localStorage.setItem('produitsFournis', JSON.stringify(tab))
             handleShowQstock()
             props.handleClose()
             boxe[0].poids=""
@@ -198,6 +198,7 @@ const ModalAjoutBoxes = (props) => {
             <Modal.Title>Ajouter des boxes</Modal.Title>
             </Modal.Header>
             <Modal.Body >
+                {props.poidsRestant}
                 <div className="mb-3 row">
                     
                 
@@ -207,7 +208,7 @@ const ModalAjoutBoxes = (props) => {
                     
                 <label htmlFor="poids" className="col-sm-3 form-label">
                                     <div className="progress"> POIDS
-                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.poids-poidsRester)*100/props.poids)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {(props.poids-poidsRester)/1000} Kg</div>
+                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.poidsRestant-poidsRester)*100/props.poidsRestant)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {(props.poidsRestant-poidsRester)/1000} Kg</div>
                                     </div>
                     </label>
 
