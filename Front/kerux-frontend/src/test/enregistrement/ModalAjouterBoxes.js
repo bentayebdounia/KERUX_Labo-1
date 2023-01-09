@@ -89,17 +89,22 @@ const ModalAjoutBoxes = (props) => {
                 return -1
             return 0
         }))
+        
+       
+        
+
 
         
     }
 
     const  plusId = () => {
         
-        console.log(props.nombre); 
-        console.log(parseFloat(nbrRester)+parseFloat(boxe[0].nombre));
-        if((parseFloat(poidsRester)+parseFloat(boxe[0].poids))*1000 <= props.poidsRestant){
+        console.log(props.poidsRestant);
+        alert(poidsRester) 
+        console.log(parseFloat(poidsRester)+parseFloat(boxe[0].poids)*1000);
+        if(parseFloat(poidsRester)+transforme(boxe[0].unite, boxe[0].poids) <= props.poidsRestant){
             if (props.categorie==="poulet" ){
-                if((parseFloat(nbrRester)+parseFloat(boxe[0].nombre)) <= props.nombreRestant ){
+                if(nbrRester + parseFloat(boxe[0].nombre )<= props.nombreRestant ){
                 if(boxe[0].poids ===0  || boxe[0].poids ==='0'|| boxe[0].poids ==='') setErreurpoids(true)
                     
                
@@ -119,7 +124,7 @@ const ModalAjoutBoxes = (props) => {
                         }
                     }}
                     else{
-                            setMsg("Veillez remplire le nombre de poulet de ce boxe")
+                            setMsg("Veillez remplire les champs")
                             handleShow()
                     }
             } 
@@ -132,7 +137,7 @@ const ModalAjoutBoxes = (props) => {
                     plus()
                      }}
         }
-        else {  setMsg('Le poids ou le nombre est incorrect')
+        else {  setMsg( " "+(poidsRester+parseFloat(transforme(boxe[0].unite, boxe[0].poids)))+"<="+props.poidsRestant)
                 handleShow()  }
         
         

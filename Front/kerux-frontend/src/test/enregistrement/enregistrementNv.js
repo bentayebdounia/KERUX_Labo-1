@@ -99,11 +99,13 @@ const Enregistrement = (props) => {
         setIdprod(idprod+1)
         console.log(produitFourni);
         setProduitForuni(prod)
-       // handleShow()
-                            
-        
-        
-    
+        // handleShow()
+        setCategorie("")
+        setNom_produit("")
+        setPoids_fourni("")
+        setNombre_fourni("")
+        setUnite("")
+     
     }
 
     function transforme(unite, poids){
@@ -135,7 +137,7 @@ const Enregistrement = (props) => {
                 else setErreurnombre(true)
             } 
             else {
-                
+                    
                     plus()
                 }
 
@@ -174,6 +176,20 @@ const Enregistrement = (props) => {
         handleShowAffichage()
       }
 
+      const supprimerProduitFourni=(id)=>{
+        
+        var tab= []
+        tab= JSON.parse(localStorage.getItem('produitsFournis'))
+       for(var i=0; i<tab.length; i++){
+            if (tab[i].id_prod === id){
+                tab.splice(i,1)
+            }
+       }
+        console.log( tab);
+        localStorage.setItem('produitsFournis', JSON.stringify(tab))
+        localStorage.removeItem('boxes'+id)
+      }
+
       if(categorie === "poulet"){
         TypePoulet=(
             <>
@@ -204,7 +220,7 @@ const Enregistrement = (props) => {
     )
 }
         if(categorie==="legume"){
-            //setNombre_fourni(0)
+            
             TypeLegume=(
                 <>
                             <option defaultValue={""}></option>
@@ -345,7 +361,7 @@ const Enregistrement = (props) => {
                     <table className="table table-bordered" style={{width:"90%" , marginLeft:"20"}} > 
                     <thead style={{backgroundColor: "#16161"}}> 
                         <tr> 
-                        
+                        <th scope='col'></th>
                         <th scope="col">Categorie </th> 
                         <th scope="col">Nom de produit</th> 
                         <th scope="col">Poids (Kg)</th> 
@@ -359,7 +375,7 @@ const Enregistrement = (props) => {
                         produitsFourni.map( 
                             (p, key) => 
                             <tr key={key}> 
-                                 
+                                 <td style={{textAlign:"center"}}><i className="bi bi-x-circle" style={{color:"black"}} onClick={()=> {supprimerProduitFourni(p.id_prod)}}></i></td>
                                 <td>{p.categorie}</td> 
                                 <td>{p.nom_produit}</td> 
                                 <td>{p.poids_fourni/ 1000}  / {p.poidsRester / 1000} </td> 
@@ -400,7 +416,7 @@ const Enregistrement = (props) => {
                                 id= {produit_id}
                                 />}
 
-            {showRecap &&     <Recape     show= {showRecap} 
+            {showRecap &&     <Recape       show= {showRecap} 
                                             handleClose= {handleCloseRecap} 
                                             
                                 />}

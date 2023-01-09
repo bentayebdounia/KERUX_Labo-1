@@ -10,7 +10,7 @@ const Recape = (props) => {
     var [boxe,setBoxe] = useState([])
 
     
-
+    
     for(var i=1 ; i<3; i++){
         boxe= boxe.concat(JSON.parse(localStorage.getItem('boxes'+i)))
     }
