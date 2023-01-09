@@ -30,19 +30,21 @@ const ModalQStock = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <h3> Voulez-vous vraiment ajouter ces boxes au stock? </h3>
-                    {showAjouterStock && <AjouterStock 
-                                 show= {showAjouterStock}
-                                 handleClose = {handleCloseAjouterStock}
-                                 tableBox = {props.tableBox}
-
-            
-            />}
+                    hello
+                    {props.id}
                 </Modal.Body>
                 <Modal.Footer>
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={ ()=> non ()}>Non</button>
                         <button type="button" className="btn btn-success" onClick={ ()=>oui() } >Oui</button>
                 </Modal.Footer>
             </Modal>
+            
+            {showAjouterStock && <AjouterStock 
+                                 show= {showAjouterStock}
+                                 handleClose = {handleCloseAjouterStock}
+                                 id = {props.id}
+
+            />}
 
              
              

@@ -33,7 +33,7 @@ export default function Boxes(props){
                                 onChange={event => { props.onUniteChange(event.target.value)}} 
                                 style={{height:"58px",width:"80px" }}
                                 required>
-                            <option ></option>
+                            <option defaultValue=""></option>
                             <option value="kg">Kg</option>
                             <option value="gramme">G</option>
                         </select>

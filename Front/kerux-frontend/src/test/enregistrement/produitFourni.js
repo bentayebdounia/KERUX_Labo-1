@@ -101,7 +101,7 @@ export default function ProduitFourni(props){
                                 onChange={event => { props.onUniteChange(event.target.value)}} 
                                 style={{height:"58px"}}
                                 required>
-                            <option ></option>
+                            <option defaultValue=""></option>
                             <option value="kg">Kg</option>
                             <option value="gramme">G</option>
                         </select>

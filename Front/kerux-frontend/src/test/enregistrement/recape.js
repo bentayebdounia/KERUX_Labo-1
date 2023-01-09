@@ -4,15 +4,16 @@ import Modal from 'react-bootstrap/Modal'
 
 const Recape = (props) => {
 
-    const [entrepots, setEntrepots] = useState([])
-    const [entrepot, setEntrepot] = useState()
-    const [stock , setStock] = useState()
+   
     var [boxe,setBoxe] = useState([])
-
+    var produitFourni= []
+   produitFourni= JSON.parse(localStorage.getItem('produitsFournis') || '[]')
     
     
-    for(var i=1 ; i<3; i++){
-        boxe= boxe.concat(JSON.parse(localStorage.getItem('boxes'+i)))
+    
+    for(var i=0 ; i<produitFourni.length; i++){
+        console.log(produitFourni[i].id_prod)
+        boxe= boxe.concat(JSON.parse(localStorage.getItem('boxes'+produitFourni[i].id_prod ) || '[]'))
     }
     
     const non = () => {
@@ -31,6 +32,7 @@ const Recape = (props) => {
                     <Modal.Title>Recape de l'etape enregistrement</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
+                    {boxe.length}
                     <div style={{margin:"5%", marginRight:"5%"}}>
                                         
                                         <div className="divTab" style={{width:"100%" , margin:"0px"}}>
@@ -46,7 +48,7 @@ const Recape = (props) => {
                                                 
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            {boxe.length>=1 && <tbody>
                                         
                                                 { 
                                                     boxe.map( (p, key) =>
@@ -62,7 +64,7 @@ const Recape = (props) => {
                                                     )
                                                 }
                                             
-                                            </tbody>
+                                            </tbody>}
                                             </table>
                                         </div>
                                     

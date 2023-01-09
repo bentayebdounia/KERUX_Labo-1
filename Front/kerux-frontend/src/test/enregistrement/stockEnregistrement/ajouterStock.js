@@ -8,13 +8,14 @@ const AjouterStock = (props) => {
 
     const [entrepots, setEntrepots] = useState([])
     const [entrepot, setEntrepot] = useState()
-    const [stock , setStock] = useState()
-    
+    const [stock , setStock] = useState(JSON.parse (localStorage.getItem('boxes'+props.id)))
+    var tab = []
+    tab = JSON.parse (localStorage.getItem('boxes'+props.id) || '[]')
     const [boxe,setBoxe] = useState(
-        props.tableBox.map(d => {
+        JSON.parse (localStorage.getItem('boxes'+props.id) || '[]').map(d => {
             return {
                 select: false,
-                id_gnerate: d.id_gnerate,
+                id_produit: d.id_produit,
                 categorie: d.categorie,
                 nom_produit: d.nom_produit,
                 poids: d.poids,
@@ -32,10 +33,10 @@ const AjouterStock = (props) => {
             
         })
     })
-
-    const  ajouterauStock = async(id_gnerate) =>{
+ 
+    const  ajouterauStock = async(id_produit) =>{
        
-        await ServiceStock.ajouterStock(entrepot).then((res) => {
+      /*  await ServiceStock.ajouterStock(entrepot).then((res) => {
             setStock(res.data)
             console.log(res.data)
             //console.log(stock.id_stock)
@@ -43,20 +44,30 @@ const AjouterStock = (props) => {
                 console.log(res.data)
             })
             
-        })     
+        })  */  
+        
+        
     }
    
     const ajout = async() => {
-  
+        var tab= []
+        tab= JSON.parse(localStorage.getItem('boxes'+props.id))
+
         for (var i=0 ; i<boxe.length ;i++) {
             if (boxe[i].select === true){
-                console.log(boxe[i].id_gnerate);
-                await ajouterauStock(boxe[i].id_gnerate)
+                console.log(boxe[i].id_produit);
+                boxe[i].id_stock = entrepot
+                if(tab[i].date ===boxe[i].date)
+                    tab[i].id_stock = entrepot
+                
                 boxe.splice(i,1)
-                i=i-1
                 }
+                
         }
-        //props.handleClose()    
+        //props.handleClose()  
+        
+        
+        localStorage.setItem('boxes'+props.id, JSON.stringify(tab))  
         
     }
 
@@ -75,7 +86,8 @@ const AjouterStock = (props) => {
                     <Modal.Title>Ajouter au stock</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-
+                    {console.log(boxe)}
+                {props.id}
                     <div style={{margin:"5%", marginRight:"5%"}}>
                                         <div className="mb-3 row">
                                             <label htmlFor="entrepot" className="col-sm-2 col-form-label">Etrepot</label>
@@ -127,8 +139,8 @@ const AjouterStock = (props) => {
                                                                     onChange={event => {
                                                                         let checked = event.target.checked;
                                                                         setBoxe(
-                                                                        boxe.map(data => {
-                                                                            if (p.id_gnerate === data.id_gnerate) {
+                                                                        boxe.map((data,k) => {
+                                                                            if (key === k) {
                                                                             data.select = checked;
                                                                             }
                                                                             return data;
@@ -139,7 +151,7 @@ const AjouterStock = (props) => {
                                                                     checked={p.select}
                                                                     ></input>
                                                                 </th>
-                                                                <td>{p.id_gnerate}</td>
+                                                                <td>{p.id_produit}</td>
                                                                 <td>{p.categorie}</td>
                                                                 <td>{p.nom_produit}</td>
                                                                 <td>{p.poids}</td>

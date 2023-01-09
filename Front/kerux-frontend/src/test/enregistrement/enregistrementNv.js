@@ -126,7 +126,7 @@ const Enregistrement = (props) => {
 
     const  ajouterProduitFourni = () => {
 
-        if (categorie !== '' && nom_produit!== '' && (poids_fourni !== '' && poids_fourni !== '0' && poids_fourni !== 0) && unite !=='' ){
+        if (categorie !== '' && nom_produit!== '' && (poids_fourni !== '' && poids_fourni !== '0' && poids_fourni !== 0) && unite !=="" ){
             if (categorie === 'poulet' ){
                 if(nombre_fourni !== '' && nombre_fourni !== '0' && nombre_fourni !== 0){
                     console.log(poids_fourni);
@@ -212,7 +212,7 @@ const Enregistrement = (props) => {
                     
                     />
                 <label for="nbr" style={{color:"#000" , fontWeight:"bold"}}>Nombre fourni</label>
-                {props.erreurNombre===true && (nombre_fourni === "" || nombre_fourni === "0" || nombre_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre fourni </p>}
+                {erreurNombre===true && (nombre_fourni === "" || nombre_fourni === "0" || nombre_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre fourni </p>}
                 
             </div>
             
@@ -320,11 +320,11 @@ const Enregistrement = (props) => {
                                 onChange={event => setUnite(event.target.value)}
                                 style={{height:"58px"}}
                                 required>
-                            <option ></option>
+                            <option defaultValue=""></option>
                             <option value="kg">Kg</option>
                             <option value="gramme">G</option>
                         </select>
-                        {props.unite === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner l'unité </p>}
+                        {unite === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner l'unité </p>}
                     </div>
                     <div className="col-6 mb-3">
                         {nbr}
