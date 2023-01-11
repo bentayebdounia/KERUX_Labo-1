@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal';
-import EnregistrementService from '../../service/service.enregistrement'
+
 import ModalQStock from './stockEnregistrement/questStock'
 import ModelReponse from '../../Models/Model.repense'
 import Boxes from './boxes'
@@ -112,7 +112,7 @@ const ModalAjoutBoxes = (props) => {
        // alert(poidsAccumuler) 
         console.log(parseFloat(poidsAccumuler)+parseFloat(boxe[0].poids)*1000);
         if(parseFloat(poidsAccumuler)+parseFloat(transforme(boxe[0].unite, boxe[0].poids))<= props.poidsRestant){
-            alert(boxe[0].unite)
+            //alert(boxe[0].unite)
             if (props.categorie==="poulet" ){
                 if(nbrAccumuler + parseFloat(boxe[0].nombre )<= props.nombreRestant ){
                 if(boxe[0].poids ===0  || boxe[0].poids ==='0'|| boxe[0].poids ==='') setErreurpoids(true)
@@ -177,7 +177,8 @@ const ModalAjoutBoxes = (props) => {
                     poids: boxe[i].poids,
                     nombre: boxe[i].nombre,
                     id_produit: props.id,
-                    id_stock: null
+                    id_stock: null,
+                    stock:""
                 }
                 tableboxe.push(b)
                 localStorage.setItem ('boxes'+ props.id, JSON.stringify(tableboxe))
@@ -202,7 +203,7 @@ const ModalAjoutBoxes = (props) => {
            //props.poidsRestant((props.poids-poidsRester)/1000)
            localStorage.setItem('produitsFournis', JSON.stringify(tab))
             handleShowQstock()
-            props.handleClose()
+           // props.handleClose()
             boxe[0].poids=""
             boxe[0].nombre=""
             tableboxe.splice("")
@@ -322,9 +323,10 @@ const ModalAjoutBoxes = (props) => {
             </Modal.Footer>
       </Modal>
 
-      <ModalQStock 
+     <ModalQStock 
                     show = {showQstock}
                     handleClose = {handleCloseQstock}
+                    handleCloseAjoutBox= {props.handleClose}
                     id = {props.id}
                     />
         <ModelReponse

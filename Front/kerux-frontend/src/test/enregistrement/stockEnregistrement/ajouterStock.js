@@ -15,15 +15,19 @@ const AjouterStock = (props) => {
         JSON.parse (localStorage.getItem('boxes'+props.id) || '[]').map(d => {
             return {
                 select: false,
-                id_produit: d.id_produit,
                 categorie: d.categorie,
+                date: d.date,
+                id_produit: d.id_produit,
+                id_stock: d.id_stock,
                 nom_produit: d.nom_produit,
                 poids: d.poids,
-                nombre: d.nombre
+                nombre: d.nombre,
+                stock: d.stock,
+
+                
             
-            };
+            }
         })
-        
         )
  
     useEffect(()=> {
@@ -52,18 +56,37 @@ const AjouterStock = (props) => {
     const ajout = async() => {
         var tab= []
         tab= JSON.parse(localStorage.getItem('boxes'+props.id))
-
+        console.log(entrepots);
+        console.log(entrepot);
+        
+        const n = entrepots.find(({ id_entrepot }) => id_entrepot === parseInt(entrepot))
+        console.log(n);
         for (var i=0 ; i<boxe.length ;i++) {
             if (boxe[i].select === true){
                 console.log(boxe[i].id_produit);
-                boxe[i].id_stock = entrepot
-                if(tab[i].date ===boxe[i].date)
-                    tab[i].id_stock = entrepot
+                //alert(entrepot)
+                boxe[i].id_stock = entrepot.id
+
+
+                for(var j = 0 ; j<boxe.length; j++){ 
+                    
+                    if(boxe[i].date === tab[j].date)
+                    {
+                       
+                        tab[j].id_stock = entrepot
+                        tab[j].stock = n.nom_entrepot
+                        
+                    }
+                
+                //boxe.splice(i,1)
+                }
                 
                 boxe.splice(i,1)
                 }
                 
         }
+
+        
         //props.handleClose()  
         
         
@@ -72,8 +95,9 @@ const AjouterStock = (props) => {
     }
 
     const non = () => {
-        
-        props.handleClose ()    
+        props.HandelCloseAjout()
+        props.handleClose ()  
+          
 
     }
     
@@ -86,8 +110,7 @@ const AjouterStock = (props) => {
                     <Modal.Title>Ajouter au stock</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {console.log(boxe)}
-                {props.id}
+                    
                     <div style={{margin:"5%", marginRight:"5%"}}>
                                         <div className="mb-3 row">
                                             <label htmlFor="entrepot" className="col-sm-2 col-form-label">Etrepot</label>
@@ -171,7 +194,7 @@ const AjouterStock = (props) => {
                 <Modal.Footer>
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={ ()=> non ()}>Non</button>
                         <button type="button" className="btn btn-success" onClick={ ()=>ajout() } >Oui</button>
-                        <button type="button" className="btn btn-dark" onClick={ props.handleClose } >Terminer</button>
+                        <button type="button" className="btn btn-dark" onClick={()=>{ props.handleClose() ; props.HandelCloseAjout() }} >Terminer</button>
                 </Modal.Footer>
              </Modal>
 

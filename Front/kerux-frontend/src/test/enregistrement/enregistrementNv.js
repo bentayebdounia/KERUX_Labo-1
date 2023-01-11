@@ -349,13 +349,9 @@ const Enregistrement = (props) => {
 
                     </div>
                     <p style={{borderBottom :'5px solid', borderRadius:"3px" , borderColor:'#a6a6a6'}}></p>
-                    
-                    
-                                              
-                    
+               
                 </div>
                 
-                 
                 </div>
                 <div className="divTab" style={{width:"100%", height:"300px" , margin:"0px" , overflow : 'auto'}} >
                     <table className="table table-bordered" style={{width:"90%" , marginLeft:"20"}} > 
@@ -381,7 +377,7 @@ const Enregistrement = (props) => {
                                 <td>{p.poids_fourni/ 1000}  / {p.poidsRester / 1000} </td> 
                                 <td>{p.nombre_fourni} / {p.nombreRester} </td> 
                                 <td style={{textAlign: 'center'}} >
-                                {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester );setNombrerester(p.nombreRester);  handleShow()}}> ajouter </button>}
+                                {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester ); setNombrerester(p.nombreRester);  handleShow()}}> ajouter </button>}
                                 {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod)} } > Afficher </button>}
                                 </td>
                                 
@@ -395,7 +391,7 @@ const Enregistrement = (props) => {
                 
                 <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={handleShowRecap} >VALIDER LE PROCESS</button>
             </div>
-             <ModalAjoutBoxes   
+            {show && <ModalAjoutBoxes   
                                 show= {show} 
                                 handleClose= {handleClose} 
                                 handleShow= {handleShow}
@@ -407,9 +403,8 @@ const Enregistrement = (props) => {
                                 nombre= {produit_nombe}
                                 poidsRestant = {poidsRester}
                                 nombreRestant = {nombreRester}
-                                
-                                                   
-                 />
+                                                      
+                 />}
             {showAffichage && <AffichageBoxes     show= {showAffichage} 
                                 handleClose= {handleCloseAffichage} 
                                 handleShow= {handleShowAffichage}

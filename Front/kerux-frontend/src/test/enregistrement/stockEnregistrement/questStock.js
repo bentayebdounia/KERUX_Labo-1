@@ -8,7 +8,7 @@ const ModalQStock = (props) => {
     const handleCloseAjouterStock = () => setShowAjouterStock(false)
     const handleShowAjouterStock  = () => setShowAjouterStock(true)
 
-    
+   // console.log("houcine");
     const oui = () =>{
         
         handleShowAjouterStock()
@@ -19,6 +19,7 @@ const ModalQStock = (props) => {
 
     const non = () => {
         props.handleClose()
+        props.handleCloseAjoutBox()
         
     }
   
@@ -30,8 +31,7 @@ const ModalQStock = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <h3> Voulez-vous vraiment ajouter ces boxes au stock? </h3>
-                    hello
-                    {props.id}
+                   
                 </Modal.Body>
                 <Modal.Footer>
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={ ()=> non ()}>Non</button>
@@ -42,6 +42,7 @@ const ModalQStock = (props) => {
             {showAjouterStock && <AjouterStock 
                                  show= {showAjouterStock}
                                  handleClose = {handleCloseAjouterStock}
+                                 HandelCloseAjout = {props.handleCloseAjoutBox}
                                  id = {props.id}
 
             />}
