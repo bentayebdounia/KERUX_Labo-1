@@ -89,6 +89,7 @@ const Enregistrement = (props) => {
             poids_fourni:transforme(unite , poids_fourni), 
             nombre_fourni: parseInt (nombre_fourni), 
             id_bon:props.id_bon,
+            id_fournisseur: props.fk_fournisseur,
             poidsRester: transforme(unite , poids_fourni),
             nombreRester: parseInt (nombre_fourni)
 

@@ -31,7 +31,7 @@ const TimeNow = () => {
 }
 
 
-const generieIdEnreg = (fk_proditFourni, etape ) => {
+const generieIdEnreg = (fk_fournisseur, fk_bon, cle ) => {
     var today = new Date()
     const datt = 0 
     switch (today.getMonth()) {
@@ -74,9 +74,9 @@ const generieIdEnreg = (fk_proditFourni, etape ) => {
            break;
       }
     
-    const spl = etape.split('')
-    console.log(spl[0]+spl[1])
-    var id = (frk_fournisseur +""+ fk_bon+""+datt+""+ +""+TimeNow())  
+      const year = today.getFullYear().toString().split('');
+    
+    var id = (fk_fournisseur +""+ fk_bon+""+datt+""+ year[3]+""+cle)  
     return id
 }
 
@@ -85,8 +85,8 @@ const generieIdEnreg = (fk_proditFourni, etape ) => {
 ajouterProcessEnregistrement =(req, res) => {
     var datee = dateNow()
     var heure = HeureNow()
-    const { categorie, nom_produit, etape, poids, nombre, fk_proditFourni } = req.body
-    var id_gnerate = generieIdEnreg(fk_proditFourni,etape)
+    const { categorie, nom_produit, etape, poids, nombre, fk_proditFourni, fk_fournisseur, fk_bon, cle} = req.body
+    var id_gnerate = generieIdEnreg(fk_fournisseur, fk_bon, cle)
     pool.query(queries.ajouterProcessEnreg, [categorie, nom_produit, etape, poids, nombre, datee, heure,  fk_proditFourni , id_gnerate ] ,
          (error, result) =>{
             if (error) throw error
