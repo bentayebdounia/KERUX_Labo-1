@@ -406,7 +406,7 @@ const Enregistrement = (props) => {
                                 nombreRestant = {nombreRester}
                                                       
                  />}
-            {showAffichage && <AffichageBoxes     show= {showAffichage} 
+            {showAffichage && <AffichageBoxes   show= {showAffichage} 
                                 handleClose= {handleCloseAffichage} 
                                 handleShow= {handleShowAffichage}
                                 id= {produit_id}
