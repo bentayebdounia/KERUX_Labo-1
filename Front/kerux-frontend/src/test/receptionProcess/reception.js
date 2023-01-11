@@ -259,7 +259,7 @@ const Reception = (props) => {
                 </section>
                     }
         
-          {toggle && <Enregistrement  toggleDisplay={toggleDisplay}  id_bon ={id_bon}  nom_fournisseur={nom_fournisseur} recepteur={recepteur} type_bon={type_bon} />}
+          {toggle && <Enregistrement recepBtn={props.recepBtn} toggleDisplay={toggleDisplay}  id_bon ={id_bon}  nom_fournisseur={nom_fournisseur} recepteur={recepteur} type_bon={type_bon} />}
                     
                 
                 

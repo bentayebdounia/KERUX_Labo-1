@@ -85,10 +85,24 @@ const Recape = (props) => {
           
           
       }
+      const supprimerProduitFourni=()=>{
+        
+        var tab= []
+        tab= JSON.parse(localStorage.getItem('produitsFournis'))
+       for(var i=0; i<tab.length; i++){
+            localStorage.removeItem('boxes'+tab[i].id_prod)
+       }
+        console.log( tab);
+        localStorage.removeItem('produitsFournis')
+        
+      }
     const valider = () => {
 
-        ajouterBon()       
-        props.handleClose ()    
+        ajouterBon()  
+        supprimerProduitFourni()
+        props.recepBtn ()
+        props.handleClose ()   
+        //props.recepBtn ()
 
     }
     
@@ -143,7 +157,8 @@ const Recape = (props) => {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                        <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={ ()=> valider ()}>VALIDER</button>
+                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() =>{ props.handleClose() }}>ANNULER</button>
+                        <button type="button" className="btn btn-success" data-bs-dismiss="modal" onClick={ ()=> valider ()}>VALIDER</button>
                         
                 </Modal.Footer>
              </Modal>

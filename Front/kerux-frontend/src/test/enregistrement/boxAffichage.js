@@ -62,23 +62,37 @@ const AffichageBoxes = (props) => {
       }
     
     //console.log(props.tableBox);
-    const enregistrer = (id,poidss, nombres, id_stocks) => {
-        //var tab= []
+    const enregistrer = (id) => {
+        var tab= []
+        tab= JSON.parse(localStorage.getItem('boxes'+props.id))
         console.log(boxe);
         const n = entrepots.find(({ id_entrepot }) => id_entrepot === parseInt(entrepot))
-        for(var i=0; i<boxe.length; i++){
+        for(var i=0; i<tab.length; i++){
             console.log((id));
             console.log(boxe.date);
-            if (boxe[0].date === id){
-                console.log(("hhhhhh"));
-                boxe.poids=poids
-                boxe.nombre = nombre
-                boxe.id_stock = entrepot
-                boxe.stock=n.nom_entrepot
+            if (tab[i].date === id){
+                console.log((poids));
+                if (poids !== null)
+                    {tab[i].poids=poids
+                     boxe[i].poids =poids
+                    }
+                if (nombre !== null){
+                    tab[i].nombre = nombre
+                    boxe[i].nombre =nombre
+                }
+                if (entrepot !== ""){
+                    tab[i].id_stock = entrepot
+                    tab[i].stock=n.nom_entrepot
+                    boxe[i].id_stock =entrepot
+                    boxe[i].stock = n.nom_entrepot
+            }
             }
        }
-        //tab= JSON.parse(localStorage.getItem('boxes'+props.id))
-
+       console.log(tab);
+       localStorage.setItem('boxes'+props.id, JSON.stringify(tab))
+       setPoids(null)
+       setNombre(null)
+       setEntrepot(null)
     }
 
     return (  
@@ -143,11 +157,14 @@ const AffichageBoxes = (props) => {
                                                                         <td> {p.id_produit} </td>
                                                                         <td> {p.categorie} </td>
                                                                         <td> {p.nom_produit}  </td>
-                                                                        <td> <input value={poids} type="number" placeholder={p.poids} onChange={event => setPoids(event.target.value)}/> </td>
+                                                                        <td> <input value={poids} type="number" placeholder={p.poids} 
+                                                                                            onChange={event => { 
+                                                                                                                 setPoids(event.target.value)
+                                                                                                                }}/> </td>
                                                                         <td> <input value={nombre} type="number" placeholder={p.nombre} onChange={event => setNombre(event.target.value)} /> </td>
                                                                         <td> 
                                                                             <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)} >
-                                                                                <option defaultValue={p.id_stock}>{p.stock}</option>
+                                                                                <option value="" ></option>
                                                                                 {entrepots.map( (entrepot,key) =>
                                                                                     
                                                                                     <option value={entrepot.id_entrepot}> {entrepot.nom_entrepot} </option>
@@ -156,24 +173,25 @@ const AffichageBoxes = (props) => {
                                                                         </td>
                                                                         <td>
                                                                         <input
-                                                                    onClick={() => {
-                                                                        enregistrer(p.date,p.poids, p.nombre, p.id_stock)
-                                                                        let checked = false;
-                                                                        setBoxe(
-                                                                        boxe.map((data,k) => {
-                                                                            if (key === k) {
-                                                                            data.select = checked;
-                                                                            }
-                                                                            return data;
-                                                                        })
-                                                                        );
-                                                                    }}
-                                                                    type="button"
-                                                                    className='btn' style={{background:"#4f8b2a", color:"white"}}
-                                                                    value='ENREGISTRER'
-                                                                    checked={p.select}
-                                                                    >
-                                                                    </input>
+                                                                            onClick={() => {
+                                                                                
+                                                                                let checked = false;
+                                                                                setBoxe(
+                                                                                boxe.map((data,k) => {
+                                                                                    if (key === k) {
+                                                                                    data.select = checked;
+                                                                                    }
+                                                                                    return data;
+                                                                                })
+                                                                                );
+                                                                                enregistrer(p.date)
+                                                                            }}
+                                                                            type="button"
+                                                                            className='btn' style={{background:"#4f8b2a", color:"white"}}
+                                                                            value='ENREGISTRER'
+                                                                            checked={p.select}
+                                                                            >
+                                                                        </input>
                                                                     
                                                                     <input
                                                                     onClick={() => {

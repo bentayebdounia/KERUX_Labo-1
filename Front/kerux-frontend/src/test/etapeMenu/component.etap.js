@@ -82,6 +82,11 @@ const Etape = () => {
         
         setControleEnrg(true)
         setControleReceptionV(true)
+        setControleNettoyage(false)
+        setControleCoupage(false)
+        setControleCondit(false)
+        setControleSortie(true)
+        annulation()
         
     }
 
@@ -235,7 +240,7 @@ const Etape = () => {
             
             </div>
 
-            {controleReception && <Reception enrgBtn={enrgBtn} />}
+            {controleReception && <Reception recepBtn={recepBtn} enrgBtn={enrgBtn} />}
             {controleNettoyage && <TestNet nettoypBtnV={nettoypBtnV} nettoypBtn={nettoypBtn} />}
             {controleCoupage && <TestCoupage coupBtnV={coupBtnV} coupBtn={coupBtn} />}
             {controleCondit && <TestCondit conditBtnV={conditBtnV}  conditBtn={conditBtn} />}

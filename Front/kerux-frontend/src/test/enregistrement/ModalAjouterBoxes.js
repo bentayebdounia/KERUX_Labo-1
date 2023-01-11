@@ -27,7 +27,7 @@ const ModalAjoutBoxes = (props) => {
 
     const [msg, setMsg] = useState()
     //const [prodF, setProdf] = useState(JSON.parse (localStorage.getItem ('produitsFournis')))
-    
+     const event= new Date()
 
     const [boxe,setBoxe] = useState([{
         id: 0 ,
@@ -36,7 +36,7 @@ const ModalAjoutBoxes = (props) => {
         nombre: 0,
         unite: "",
         id_stock:"",
-        date:new Date()
+        date:event+""+event.getMilliseconds()
     }])
 
     const [nboxe,setNBoxe] = useState([{
@@ -46,7 +46,7 @@ const ModalAjoutBoxes = (props) => {
         nombre: 0,
         unite: "",
         id_stock:"",
-        date:new Date()
+        date: event+""+event.getMilliseconds()
     }])
 
     const [tableboxe,setTableboxe] = useState([])
@@ -88,7 +88,7 @@ const ModalAjoutBoxes = (props) => {
             nombre:0,
             unite:"",
             id_stock:"",
-            date:new Date()
+            date: event+""+event.getMilliseconds()
         })
         //console.log('poids= '+boxe[0].poids)
         setBoxe(newBoxe.sort((a,b) => {
@@ -170,7 +170,7 @@ const ModalAjoutBoxes = (props) => {
 
                 
                 var b = {
-                    date:new Date(),
+                    date: event+""+event.getMilliseconds(),
                     categorie: props.produitFourni.categorie,
                     nom_produit: props.produitFourni.nom_produit,
                     etape: "enregistrement",
@@ -197,7 +197,7 @@ const ModalAjoutBoxes = (props) => {
                     console.log("tab",tab[i].nombreRester );
                 }
            }
-            console.log( tableboxe);
+            console.log(tableboxe);
            
             setBoxe([...nboxe] )
            //props.poidsRestant((props.poids-poidsRester)/1000)

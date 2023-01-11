@@ -413,6 +413,8 @@ const Enregistrement = (props) => {
 
             {showRecap &&     <Recape       show= {showRecap} 
                                             handleClose= {handleCloseRecap} 
+                                            recepBtn={props.recepBtn}
+                                            toggleDisplay = {props.toggleDisplay}
                                             
                                 />}
             

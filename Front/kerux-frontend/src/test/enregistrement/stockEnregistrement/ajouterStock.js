@@ -10,9 +10,9 @@ const AjouterStock = (props) => {
     const [entrepot, setEntrepot] = useState()
     const [stock , setStock] = useState(JSON.parse (localStorage.getItem('boxes'+props.id)))
     var tab = []
-    tab = JSON.parse (localStorage.getItem('boxes'+props.id) || '[]')
+    tab = JSON.parse (localStorage.getItem('boxes'+props.id) )
     const [boxe,setBoxe] = useState(
-        JSON.parse (localStorage.getItem('boxes'+props.id) || '[]').map(d => {
+        JSON.parse (localStorage.getItem('boxes'+props.id) ).map(d => {
             return {
                 select: false,
                 categorie: d.categorie,
@@ -65,17 +65,16 @@ const AjouterStock = (props) => {
             if (boxe[i].select === true){
                 console.log(boxe[i].id_produit);
                 //alert(entrepot)
-                boxe[i].id_stock = entrepot.id
+                boxe[i].id_stock = entrepot
 
 
                 for(var j = 0 ; j<boxe.length; j++){ 
                     
                     if(boxe[i].date === tab[j].date)
-                    {
-                       
+                    {   
                         tab[j].id_stock = entrepot
                         tab[j].stock = n.nom_entrepot
-                        
+   
                     }
                 
                 //boxe.splice(i,1)
@@ -88,7 +87,7 @@ const AjouterStock = (props) => {
 
         
         //props.handleClose()  
-        
+        console.log(tab);
         
         localStorage.setItem('boxes'+props.id, JSON.stringify(tab))  
         
