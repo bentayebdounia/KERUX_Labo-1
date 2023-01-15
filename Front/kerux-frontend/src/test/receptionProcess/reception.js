@@ -250,6 +250,7 @@ const Reception = (props) => {
                                                 handleShow={handleShow}
                                                 nom_fournisseur= {nom_fournisseur}
                                                 fk_fournisseur={fk_fournisseur}
+                                                id_bon={id_bon}
                                                 acheteur={acheteur}
                                                 livreur={livreur} 
                                                 type_bon={type_bon}

@@ -30,6 +30,8 @@ const Coupage = (props) => {
     const [nombre , setNombre] = useState()
     const [agent , setAgent] = useState('')
     const [idAgent, setIdAgent]= useState([])
+
+    const [numeroBox, setNumerobox] = useState(1)
     
     //const [note , setNote] = useState(false)
     const [nomAgent, setNomAgent ] = useState([])
@@ -59,25 +61,14 @@ const Coupage = (props) => {
     
     const ajouterAgent=(e) => {
         e.preventDefault()
-        ServiceAdmin.getPersonneById(agent)
-        .then ( (res)=> {
-            if(res.data==="ID n'existe pas"){
-                console.log(res.data);
-                setMessage("ID n'existe pas")
-                handleShow3()
-            
-            }
-                
-
-            else{
-                setNomAgent(current => [...current , res.data[0].nom +" "+ res.data[0].prenom])
-                setIdAgent(current => [...current, agent]);
-                console.log("ajouter agent "+ idAgent)
-                setAgent('')
-            }
-        })
+      
+        agentNettoyageSelect.push({
+        id_personne: id_personne,
+        nom:  agent,
         
-        console.log(agent)
+       })
+        handleShow2()
+        setAgent('')  
         
     }
 
@@ -86,10 +77,11 @@ const Coupage = (props) => {
     useEffect(()=>{
         if(confirmeCoupage){
                 setPorcentagePoids(ControlerPoids()); 
-                setTypeProd('')
                 setIdAgent([])
                 setPoids('')
                 setNombre('')
+                setNumerobox(numeroBox+1)
+                console.log(numeroBox)
 
                 confirmeCoupageFalse()
         }
@@ -225,9 +217,9 @@ const Coupage = (props) => {
                                     {agents}
 
                             </div>
-                                    {show && <Tableau show={show} 
-                                        handleClose={handleClose} 
-                                        handleShow={handleShow} 
+                                    {show2 && <Tableau show={show2} 
+                                        handleClose={handleClose2} 
+                                        handleShow={handleShow2} 
                                         agentNettoyage={agentNettoyageSelect}
                                         
                                     />}
@@ -300,6 +292,7 @@ const Coupage = (props) => {
                                 confirmeCoupageTrue= {confirmeCoupageTrue}  
                                 toggleDisplay = {props.toggleDisplay} 
                                 PorcentagePoids = {PorcentagePoids}
+                                numeroBox= {numeroBox}
 
                  />
 
@@ -311,12 +304,7 @@ const Coupage = (props) => {
                                     titre={"coupage"} 
                                     />}
 
-            {show2 && <ModalListAgent             show={show2} 
-                                        handleClose={handleClose2} 
-                                        handleShow={handleShow2} 
-                                        id={idAgent}
-                                        nom={nomAgent}
-                                        />}
+            
             </section>
            
 

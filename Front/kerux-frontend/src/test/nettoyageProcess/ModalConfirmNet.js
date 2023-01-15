@@ -24,7 +24,7 @@ const ModalConfirmNet = (props) => {
         e.preventDefault();
         var etape="nettoyage"
        
-        await NettoyageService.ajouterNettoyage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.fk_proditfourni).then( (res)=> {
+        await NettoyageService.ajouterNettoyage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.fk_proditfourni ).then( (res)=> {
             console.log(res.data.id_gnerate)
             setResult(res.data)
             //console.log("id_gnerate= " + result.id_gnerate);

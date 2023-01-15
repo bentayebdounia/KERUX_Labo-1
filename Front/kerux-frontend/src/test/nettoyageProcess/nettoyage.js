@@ -65,10 +65,7 @@ const Nettoyage = (props) => {
         
        })
         handleShow()
-        setAgent('')
-            
-        
-        
+        setAgent('')  
         
     }
 

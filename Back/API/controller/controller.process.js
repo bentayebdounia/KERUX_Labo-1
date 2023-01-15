@@ -27,7 +27,7 @@ ajouterBon = (req, res) => {
          (error, result) =>{
             if (error) throw error
             res.status(200).json(result.rows)
-         })
+         }) 
 
 }
 

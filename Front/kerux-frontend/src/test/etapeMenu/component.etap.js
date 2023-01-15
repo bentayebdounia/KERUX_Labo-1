@@ -85,8 +85,8 @@ const Etape = () => {
         setControleNettoyage(false)
         setControleCoupage(false)
         setControleCondit(false)
-        setControleSortie(true)
-        annulation()
+        setControleSortie(false)
+        //annulation()
         
     }
 

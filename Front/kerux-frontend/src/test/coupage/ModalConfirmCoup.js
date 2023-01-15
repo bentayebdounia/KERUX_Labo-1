@@ -10,6 +10,32 @@ const ModalConfirmCoup = (props) => {
 
     const [result, setResult] = useState()
 
+    const ajouterCle = (categorie, type, numeroBox) => {
+        if (categorie === "poulet"){
+            if (type === "poulet") return 'PP'+numeroBox
+            else if (type === "tendres") return 'PT'+numeroBox
+                 else if (type === "wings") return 'PW'+numeroBox
+                      else if (type === "dips") return 'PD'+numeroBox
+                            else if (type === "hotDogs") return 'PH'+numeroBox
+        }
+
+        else if (categorie === "legume"){
+            if (type === "frite") return 'LF'+ numero_box(numeroBox)
+            else if (type === "laitue") return 'LL'+numero_box(numeroBox)
+                else if (type === "tomate") return 'LT'+numero_box(numeroBox)
+                    else if (type === "oignon") return 'LO'+numero_box(numeroBox)
+                            else if (type === "choux") return 'LCH'+numero_box(numeroBox)
+                                else if (type === "carotte") return 'LC'+numero_box(numeroBox)
+        }
+
+            else return 'A'+numeroBox
+    }
+
+    const numero_box = (n) =>
+    {
+        if (n >0 && n<10) return (0+''+n)
+        else return n
+    }
   
 
     const confirmCoupage = async (e) => {
@@ -20,8 +46,11 @@ const ModalConfirmCoup = (props) => {
         var heure = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
         console.log(datee)
         console.log(heure)
+
+        var cle = ajouterCle(props.categorie, props.typeProd, props.numeroBox)
+        console.log(  props.fk_proditfourni)
         
-        await CoupageService.ajouterCoupage( props.categorie, props.typeProd, etape, props.poids, props.nombre,props.id_box, props.fk_proditfourni).then( (res)=> {
+        await CoupageService.ajouterCoupage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_box, props.fk_proditfourni, cle).then( (res)=> {
             console.log(res.data)
             setResult(res.data)
 

@@ -32,7 +32,7 @@ CREATE TABLE personne(
 
 CREATE TABLE fournisseur (
 
-    id_fournisseur SERIAL PRIMARY KEY,
+    id_fournisseur SERIAL PRIMARY KEY ,
     categorie VARCHAR (100)
     nom_fournisseur VARCHAR(500),
     forme_juridique VARCHAR (200),
@@ -42,7 +42,6 @@ CREATE TABLE fournisseur (
     modalite_paiement VARCHAR (100),
     type_paiement VARCHAR (100),
     nature_livraison VARCHAR (100) ,
-    categorie VARCHAR (100),
     date_enregistement DATE
 
 );

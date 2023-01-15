@@ -14,9 +14,9 @@ const GET_COUPAGE_TABLE = "http://localhost:8080/process/coupage/getCoupageTble"
 
 class CoupageService {
 
-    ajouterCoupage(categorie, nom_produit, etape, poids, nombre, id_nettoyage, fk_proditFourni){
+    ajouterCoupage(categorie, nom_produit, etape, poids, nombre, id_nettoyage, fk_proditFourni, cle){
             //props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.id_nettoyage , props.id_coupage, props.id , props.fk_proditfourni
-        const CoupageProcess = {categorie, nom_produit, etape, poids, nombre, id_nettoyage, fk_proditFourni}
+        const CoupageProcess = {categorie, nom_produit, etape, poids, nombre, id_nettoyage, fk_proditFourni, cle}
         
         return axios.post(KERUX_API_Coupage, CoupageProcess)
     }

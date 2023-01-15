@@ -15,8 +15,8 @@ class EnregistrementService {
         return axios.post(PRODUIT_FOURNIT, produitFournit)
     }
 
-    ajouerEnregistrement (categorie, nom_produit, etape, poids, nombre, fk_proditFourni) {
-        const enregistrement= {categorie, nom_produit, etape, poids, nombre, fk_proditFourni}
+    ajouerEnregistrement (categorie, nom_produit, etape, poids, nombre, fk_proditFourni,fk_fournisseur, fk_bon, cle) {
+        const enregistrement= {categorie, nom_produit, etape, poids, nombre, fk_proditFourni,fk_fournisseur, fk_bon, cle}
         return axios.post(ETAPE_ENREGISTREMENT, enregistrement )
     }
 

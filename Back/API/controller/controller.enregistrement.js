@@ -33,7 +33,7 @@ const TimeNow = () => {
 
 const generieIdEnreg = (fk_fournisseur, fk_bon, cle ) => {
     var today = new Date()
-    const datt = 0 
+    var datt = 0 
     switch (today.getMonth()) {
         case 0: datt= today.getDate()
             break;

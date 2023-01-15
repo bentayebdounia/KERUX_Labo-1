@@ -42,9 +42,10 @@ const Recape = (props) => {
             var i=0
             
             while(i<box.length){
-                console.log(i)
+                console.log(i+1)
+                var cle = ajouterCle(box[i].categorie, box[i].nom_produit,i+1)
                 if (box[i].id_stock === null){
-                    await EnregistrementService.ajouerEnregistrement(box[i].categorie, box[i].nom_produit, "enregistrement",parseFloat (box[i].poids),parseInt (box[i].nombre), id_produit)
+                    await EnregistrementService.ajouerEnregistrement(box[i].categorie, box[i].nom_produit, "enregistrement",parseFloat (box[i].poids),parseInt (box[i].nombre), id_produit, props.fk_fournisseur, props.id_bon, cle)
                     
                     .then((res) => {
                         console.log(res.data);
@@ -55,7 +56,7 @@ const Recape = (props) => {
                     })
             }
             if (box[i].id_stock !== null) {
-                await EnregistrementService.ajouerEnregistrement(box[i].categorie, box[i].nom_produit, "enregistrement",parseFloat (box[i].poids),parseInt (box[i].nombre), id_produit)
+                await EnregistrementService.ajouerEnregistrement(box[i].categorie, box[i].nom_produit, "enregistrement",parseFloat (box[i].poids),parseInt (box[i].nombre), id_produit, props.fk_fournisseur, props.id_bon, cle)
                     
                     .then((res) => {
                         
@@ -67,6 +68,33 @@ const Recape = (props) => {
             }
                 i++
             }}
+
+            const ajouterCle = (categorie, type, numeroBox) => {
+                if (categorie === "poulet"){
+                    if (type === "poulet") return 'PP'+numeroBox
+                    else if (type === "tendres") return 'PT'+numeroBox
+                         else if (type === "wings") return 'PW'+numeroBox
+                              else if (type === "dips") return 'PD'+numeroBox
+                                    else if (type === "hotDogs") return 'PH'+numeroBox
+                }
+
+                else if (categorie === "legume"){
+                    if (type === "frite") return 'LF'+ numero_box(numeroBox)
+                    else if (type === "laitue") return 'LL'+numero_box(numeroBox)
+                        else if (type === "tomate") return 'LT'+numero_box(numeroBox)
+                            else if (type === "oignon") return 'LO'+numero_box(numeroBox)
+                                    else if (type === "choux") return 'LCH'+numero_box(numeroBox)
+                                        else if (type === "carotte") return 'LC'+numero_box(numeroBox)
+                }
+
+                    else return 'A'+numeroBox
+            }
+
+            const numero_box = (n) =>
+            {
+                if (n >0 && n<10) return (0+''+n)
+                else return n
+            }
             
            
 
@@ -99,8 +127,8 @@ const Recape = (props) => {
     const valider = () => {
 
         ajouterBon()  
-        supprimerProduitFourni()
-        props.recepBtn ()
+        //supprimerProduitFourni()
+        //props.recepBtn ()
         props.handleClose ()   
         //props.recepBtn ()
 
