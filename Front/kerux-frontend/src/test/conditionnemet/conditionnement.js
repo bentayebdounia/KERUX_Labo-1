@@ -31,7 +31,7 @@ const Conditionnement = (props) => {
     const [idAgent, setIdAgent]= useState([])
     const [poidsControl, setPoidControl] = useState()
     const [note , setNote] = useState(false)
-
+    const [numeroBox, setNumerobox] = useState(1)
     
     var  bouttonMarinade, agents
 
@@ -70,8 +70,10 @@ const Conditionnement = (props) => {
         if(confirmeConditionnement){
                 setPorcentagePoids(ControlerPoids()); 
                 setIdAgent([])
+                setNumerobox(numeroBox+1)
                 setPoids('')
-                setNombre('')
+                if (props.process.categorie === 'poulet') setNombre('')
+                else setNombre(0)
                 confirmeConditionnemetFalse()
         }
     })
@@ -274,6 +276,7 @@ const Conditionnement = (props) => {
             </div>
             {show2 && <ModalMarinade show2={show2} handleClose2={handleClose2} handleShow2={handleShow2} id_box={props.id}
              process={props.process}
+             numeroBox= {numeroBox}
               />}
             
              <ModalConfirmCondit    show={show} 
@@ -286,6 +289,7 @@ const Conditionnement = (props) => {
                                     confirmeConditionnemetTrue= {confirmeConditionnemetTrue}  
                                     toggleDisplay = {props.toggleDisplay} 
                                     PorcentagePoids = {PorcentagePoids}
+                                    numeroBox= {numeroBox}
             />
             {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
                                     message={message} 

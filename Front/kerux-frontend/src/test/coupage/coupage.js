@@ -76,12 +76,14 @@ const Coupage = (props) => {
     
     useEffect(()=>{
         if(confirmeCoupage){
-                setPorcentagePoids(ControlerPoids()); 
+                setPorcentagePoids(ControlerPoids(poids)); 
                 setIdAgent([])
                 setPoids('')
-                setNombre('')
+                
                 setNumerobox(numeroBox+1)
                 console.log(numeroBox)
+                if (props.process.categorie === 'poulet') setNombre('')
+                else setNombre(0)
 
                 confirmeCoupageFalse()
         }
@@ -92,7 +94,7 @@ const Coupage = (props) => {
       }
     let porcentagePoids 
 
-        const ControlerPoids = () => {
+        const ControlerPoids = (poids) => {
             console.log("nombreTotale= "+props.nombre)
             console.log(props.poids);
             console.log(poids);

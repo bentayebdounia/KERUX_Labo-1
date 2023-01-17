@@ -82,7 +82,7 @@ const generieIdCoup = (id,cle) => {
     
       const year = today.getFullYear().toString().split('');
     
-    var n = (id.substring(0,id.length-7)+""+datt+""+ year[3]+""+cle)  
+    var n = (id.split('-')[1]+""+datt+""+ year[3]+""+cle)  
     return n
 }
 

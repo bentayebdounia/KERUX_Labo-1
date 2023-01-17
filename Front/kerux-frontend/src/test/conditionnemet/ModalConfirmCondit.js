@@ -9,6 +9,35 @@ const ModalConfirmCondit = (props) => {
     const handleShow3 = () => setShow3(true)
 
     const [result, setResult] = useState()
+
+    const ajouterCle = (categorie, type, numeroBox) => {
+        if (categorie === "poulet"){
+            if (type === "poulet") return 'PP'+ numero_box(numeroBox)
+            else if (type === "tendres") return 'PT'+ numero_box(numeroBox)
+                 else if (type === "wings") return 'PW'+ numero_box(numeroBox)
+                      else if (type === "dips") return 'PD'+ numero_box(numeroBox)
+                            else if (type === "hotDogs") return 'PH'+ numero_box(numeroBox)
+                                 else if (type === "legs") return 'PL'+ numero_box(numeroBox)
+        }
+
+        else if (categorie === "legume"){
+            if (type === "frite") return 'LF'+ numero_box(numeroBox)
+            else if (type === "laitue") return 'LL'+numero_box(numeroBox)
+                else if (type === "tomate") return 'LT'+numero_box(numeroBox)
+                    else if (type === "oignon") return 'LO'+numero_box(numeroBox)
+                            else if (type === "choux") return 'LCH'+numero_box(numeroBox)
+                                else if (type === "carotte") return 'LC'+numero_box(numeroBox)
+        }
+
+            else return 'A'+numeroBox
+    }
+
+    const numero_box = (n) =>
+    {
+        if (n >0 && n<10) return (0+''+n)
+        else return n
+    }
+    
     const confirmNCondit = (e) => {
         e.preventDefault();
         var etape="conditionnement"
@@ -17,10 +46,9 @@ const ModalConfirmCondit = (props) => {
         var heure = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
         console.log(datee)
         console.log(heure)
-        //categorie, nom_produit, etape, poids, nombre, datee, heure, id_nettoyage, fk_proditFourni
-
-        //const nettoyage = {props.id_box, props.categorie, props.typeProd, props.poids, props.nombrs }      nom_produit, etape, poids, nombre, id_enregistrement, fk_proditFourni
-        ConditService.ajouterConditionnement( props.process.categorie, props.process.nom_produit, etape, parseFloat(props.poids) ,parseFloat(props.nombre) , props.process.id_nettoyage, props.id_box, props.process.fk_proditfourni)
+        
+        var cle = ajouterCle(props.process.categorie, props.process.nom_produit, props.numeroBox)
+        ConditService.ajouterConditionnement( props.process.categorie, props.process.nom_produit, etape, parseFloat(props.poids) ,parseFloat(props.nombre) , props.process.id_nettoyage, props.id_box, props.process.fk_proditfourni, cle)
         .then( (res)=> {
             console.log(res.data)
             setResult(res.data)

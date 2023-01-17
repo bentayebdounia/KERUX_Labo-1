@@ -113,14 +113,15 @@ const TestCoupage = (props) => {
         console.log("heure "+heure );
         return heure
     }
-    const generateId = (fk_proditFourni) =>{
-        var id = (fk_proditFourni+"id"+dateNow()+""+TimeNow())  
+    const generateId = (fk_proditFourni, id_nettoyage) =>{
+        var n= id_nettoyage.substring(0,id_nettoyage.length-7)
+        var id = (fk_proditFourni+"id"+dateNow()+""+TimeNow()+"-"+n)  
         //console.log("id_generate= "+id);
     return id
     }
     var id_generate
     const ajouterBoxCouper = (id_produit, id_enregistrement, id_nettoyage) => {
-         id_generate = generateId(id_produit)
+         id_generate = generateId(id_produit ,id_nettoyage)
         setId_generateNet( id_generate )
         //console.log(id_generateNet)
         CoupageService.ajouterBoxCouper(id_produit, id_enregistrement, id_nettoyage, id_generate).then( (res) => {
@@ -239,7 +240,9 @@ const TestCoupage = (props) => {
                          if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate )   {
                              
                              a = true
+                             
                              console.log(a);
+                             break
                          }
                      }
                          
@@ -286,7 +289,9 @@ const TestCoupage = (props) => {
                  if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate )   {
                      
                      a = true
+                     
                      console.log(a);
+                     break;
                  }
              }
                  

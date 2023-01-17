@@ -29,20 +29,69 @@ const TimeNow = () => {
     return heure
 }
 
-const generieIdNettoyage = (fk_proditFourni, etape ) => {
+// const generieIdNettoyage = (fk_proditFourni, etape ) => {
     
     
-    const spl = etape.split('')
-    console.log(spl[0]+spl[1])
-    var id = (fk_proditFourni+""+spl[0]+spl[1]+""+dateNow2()+""+TimeNow())  
-    return id
+//     const spl = etape.split('')
+//     console.log(spl[0]+spl[1])
+//     var id = (fk_proditFourni+""+spl[0]+spl[1]+""+dateNow2()+""+TimeNow())  
+//     return id
+// }
+
+const generieIdNettoyage = (id) => {
+    var today = new Date()
+    var datt = 0 
+    switch (today.getMonth()) {
+        case 0: datt= today.getDate()
+            break;
+
+        case 1: datt=31+ today.getDate()
+            break;
+        
+        case 2: datt=60+ today.getDate()
+            break;
+        
+        case 3: datt=91+ today.getDate()
+            break;
+
+        case 4: datt=121+ today.getDate()
+            break;
+        
+        case 5: datt=152+ today.getDate()
+            break;
+        case 6: datt=182+ today.getDate()
+            break;
+
+        case 7: datt=213+ today.getDate()
+            break; 
+
+        case 8: datt=244+ today.getDate()
+            break;
+
+        case 9:datt=274+ today.getDate()
+            break;
+
+        case 10: datt=305+ today.getDate()
+            break;
+
+        case 11: datt=335+ today.getDate()
+            break;
+
+        default:
+           break;
+      }
+    
+      const year = today.getFullYear().toString().split('');
+    
+    var n = (id.substring(0,id.length-7)+""+datt+""+ year[3]+""+id.substring(id.length-4))  
+    return n
 }
 
 ajouterProcessSortie =(req, res) => {
     var datee = dateNow()
     var heure = HeureNow()
     const { categorie, nom_produit, etape, poids, nombre, id_enregistrement, id_nettoyage, id_coupage, id_conditionnement,  fk_proditFourni } = req.body
-    var id_gnerate = generieIdNettoyage(fk_proditFourni,etape)
+    var id_gnerate = generieIdNettoyage(id_conditionnement)
 
     
     

@@ -31,7 +31,7 @@ const Sortie = (props) => {
     const [toggleRecomendation, setToggleRecomendation] = useState(true)
     const toggleRecomendationTrue = () => setToggleRecomendation (true)
     const toggleRecomendationFalse = () => setToggleRecomendation(false)
-    var agents
+    var nbr, agents
     
     const [agentNettoyage, setAgentNettoyage] = useState([{
         id_personne:"",
@@ -92,6 +92,17 @@ const Sortie = (props) => {
         </>
     )
 
+    if(props.process.categorie==="poulet"){
+        nbr=(<>
+                    <label htmlFor="nombre" className="col-sm-2 col-form-label">Nombre</label>
+                    <div className="col-sm-10">
+                    <input type="number"  className="form-control" id="nombre" value={nombre} onChange={(e)=> setNombre(e.target.value)} required/>
+                    </div>
+            </>
+                   
+        )
+    }
+
     return ( 
         <div>
             <section id="etape_section">
@@ -151,10 +162,7 @@ const Sortie = (props) => {
                     </div>
                 </div>
                 <div className="mb-3 row">
-                    <label for="nombre" className="col-sm-2 col-form-label">Nombre</label>
-                    <div className="col-sm-10">
-                    <input type="number"  class="form-control" id="nombre" value={nombre} onChange={(e)=> setNombre(e.target.value)} required/>
-                    </div>
+                     {nbr}
                 </div>
 
                 

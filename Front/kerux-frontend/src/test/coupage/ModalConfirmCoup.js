@@ -12,11 +12,12 @@ const ModalConfirmCoup = (props) => {
 
     const ajouterCle = (categorie, type, numeroBox) => {
         if (categorie === "poulet"){
-            if (type === "poulet") return 'PP'+numeroBox
-            else if (type === "tendres") return 'PT'+numeroBox
-                 else if (type === "wings") return 'PW'+numeroBox
-                      else if (type === "dips") return 'PD'+numeroBox
-                            else if (type === "hotDogs") return 'PH'+numeroBox
+            if (type === "poulet") return 'PP'+ numero_box(numeroBox)
+            else if (type === "tendres") return 'PT'+ numero_box(numeroBox)
+                 else if (type === "wings") return 'PW'+ numero_box(numeroBox)
+                      else if (type === "dips") return 'PD'+ numero_box(numeroBox)
+                            else if (type === "hotDogs") return 'PH'+ numero_box(numeroBox)
+                                 else if (type === "legs") return 'PL'+ numero_box(numeroBox)
         }
 
         else if (categorie === "legume"){

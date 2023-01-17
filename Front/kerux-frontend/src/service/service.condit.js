@@ -17,9 +17,9 @@ const GET_CONDITIONNELMENT_TABLE = "http://localhost:8080/process/conditionnemen
 
 class ConditService {
 
-    ajouterConditionnement(categorie, nom_produit, etape, poids, nombre, id_nettoyage, id_coupage, fk_proditFourni){
+    ajouterConditionnement(categorie, nom_produit, etape, poids, nombre, id_nettoyage, id_coupage, fk_proditFourni, cle){
 
-        const nettoyageProcess = {categorie, nom_produit, etape, poids, nombre, id_nettoyage, id_coupage, fk_proditFourni}
+        const nettoyageProcess = {categorie, nom_produit, etape, poids, nombre, id_nettoyage, id_coupage, fk_proditFourni, cle}
         console.log(nettoyageProcess);
         return axios.post(KERUX_API_CONDIT, nettoyageProcess)
     }

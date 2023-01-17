@@ -7,6 +7,7 @@ import EnregistrementService from '../../service/service.enregistrement'
 import './enreg.css'
 import AffichageBoxes from './boxAffichage'
 import Recape from './recape'
+import TestNet from '../nettoyageProcess/testNet'
 
 const Enregistrement = (props) => {
 
@@ -421,6 +422,8 @@ const Enregistrement = (props) => {
 
                                             
                                 />}
+
+            
             
            </section>
             

@@ -60,9 +60,13 @@ const ModalMarinade = (props) => {
         }
     }
 
+
+
     const confirmMarinade = (e) => {
         e.preventDefault();
         var etape="marinade"
+
+        //var cle = ajouterCle(props.process.categorie, props.typeProd, props.numeroBox)
         
         //categorie, nom_produit, etape, poids, nombre, datee, heure, id_nettoyage, fk_proditFourni
 

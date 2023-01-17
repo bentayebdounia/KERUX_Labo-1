@@ -30,6 +30,8 @@ const Recape = (props) => {
                 ajouterBoxe(res.data[0].id_produit, produitFourni[i].id_prod)
              
          })}
+
+         supprimerProduitFourni()
     }
 
     const ajouterBoxe = async(id_produit,id) => {
@@ -127,7 +129,7 @@ const Recape = (props) => {
     const valider = () => {
 
         ajouterBon()  
-        //supprimerProduitFourni()
+        
         //props.recepBtn ()
         props.handleClose ()   
         //props.recepBtn ()
