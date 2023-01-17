@@ -64,7 +64,7 @@ const Navbar = () => {
     const handleShowStatProcessProd = () => setShowstatprocess_prod(true)
 
 
-  
+    var user = JSON.parse (localStorage.getItem('login'))
 
    
     
@@ -126,13 +126,14 @@ const Navbar = () => {
           </Link>
           <ul className="dropdown-menu menubar" style={{marginLeft:'87%'}}>
             <li>
-              <span className="spanUser">BENTAYEB Dounia</span> 
+              <span className="spanUser">{user.nom}</span> 
               <br/>
-              <span className="spanID">97 </span> 
+              <span className="spanID">{user.id} </span> 
               <br/>
-              <span className="spanRole">admin</span> 
+              <span className="spanRole">{user.role}</span> 
            </li>
-            <li><Link className="dropdown-item" to='login'>Déconnecter</Link></li>
+           {user.role=== 'Admin' && <li><Link className="dropdown-item" to='admin' >Retourner à la page admin</Link></li>}
+            <li><Link className="dropdown-item" to='login' onClick={()=>{ localStorage.removeItem('login')}}>Déconnecter</Link></li>
           </ul>
           
             </div>

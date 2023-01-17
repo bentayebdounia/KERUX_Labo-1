@@ -77,12 +77,15 @@ const TestCoupage = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(8);
     //les operation de pagination 
+
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const currentPosts = EnAttente.slice(indexOfFirstPost, indexOfLastPost);
     const currentPosts2 = enStock.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    const [boxCoupageTab, setBoxcoupagetab ] = useState([])
 
 
     useEffect(()=>{ 
@@ -98,6 +101,10 @@ const TestCoupage = (props) => {
 
          
      }) 
+
+     useEffect(()=>{
+        setBoxcoupagetab (JSON.parse(localStorage.getItem('boxCoupage') || "[]"))
+      },[])
 
     const dateNow = () => {
         var today = new Date 
@@ -124,9 +131,20 @@ const TestCoupage = (props) => {
          id_generate = generateId(id_produit ,id_nettoyage)
         setId_generateNet( id_generate )
         //console.log(id_generateNet)
-        CoupageService.ajouterBoxCouper(id_produit, id_enregistrement, id_nettoyage, id_generate).then( (res) => {
+        /*CoupageService.ajouterBoxCouper(id_produit, id_enregistrement, id_nettoyage, id_generate).then( (res) => {
             console.log(res.data)
-        })
+        })*/
+        var tab = {
+            id_produit: id_produit, 
+            id_enregistrement: id_enregistrement, 
+            id_nettoyage: id_nettoyage, 
+            id_generate: id_generate
+
+        }
+        boxCoupageTab.push(tab)
+        console.log(boxCoupageTab);
+        localStorage.setItem ('boxCoupage', JSON.stringify(boxCoupageTab))
+        //setBoxcoupagetab()
     }
 /*
     useEffect(()=>{
@@ -173,27 +191,71 @@ const TestCoupage = (props) => {
             }   
                 else 
                     {
+                        
                         if(res.data.fk_stock!==null){
-                                handleShow2(true)   // il faut ajouter un autre teste pour confirmer que l'agent il a bien fait la sortie de stock avant l'enregistrer au process de coupage
+                                  // il faut ajouter un autre teste pour confirmer que l'agent il a bien fait la sortie de stock avant l'enregistrer au process de coupage
                 
                                 //ajouter le box couper et generer un identifiant
-                              
-                                ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
-                                //console.log("nombre= "+res.data.nombre);
-                                setPoids(poids+res.data.poids)
-                                setNombre(nombre+res.data.nombre)
-                                ajouterBox() 
+                                
+                                if (boxCoupageTab.length === 0){
+                                    handleShow2(true)
+                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
+                                    //console.log("nombre= "+res.data.nombre);
+                                    setPoids(poids+res.data.poids)
+                                    setNombre(nombre+res.data.nombre)
+                                    ajouterBox() 
+                                }
+                                else {
+                                    console.log(boxCoupageTab);
+                                    var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
+                                    console.log( found  );
+                                    if (found === undefined) {
+                                        handleShow2(true)
+                                        ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
+                                        //console.log("nombre= "+res.data.nombre);
+                                        setPoids(poids+res.data.poids)
+                                        setNombre(nombre+res.data.nombre)
+                                        ajouterBox() 
+                                        
+                                    }
+                                    else{
+                                        setMessage("Vous avez déjà selectionné ce produit")
+                                        handleShow(true)
+                                    }
+                                }
+
                                 
                         }
 
                         else{
-                            //ajouter le box couper et generer un identifiant
-                            ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
-                          //  console.log("nombre= "+res.data.nombre);
-                            setPoids(poids+res.data.poids)
-                            setNombre(nombre+res.data.nombre)
-                            ajouterBox()
 
+                            if (boxCoupageTab.length === 0){
+                                //ajouter le box couper et generer un identifiant
+                                ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
+                                //  console.log("nombre= "+res.data.nombre);
+                                setPoids(poids+res.data.poids)
+                                setNombre(nombre+res.data.nombre)
+                                ajouterBox() 
+                            }
+
+                            else {
+                                console.log(boxCoupageTab);
+                                var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
+                                console.log( found  );
+                                if (found === undefined) {
+                                    //ajouter le box couper et generer un identifiant
+                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
+                                    //  console.log("nombre= "+res.data.nombre);
+                                    setPoids(poids+res.data.poids)
+                                    setNombre(nombre+res.data.nombre)
+                                    ajouterBox()
+                               
+                                }
+                                else  {
+                                    setMessage("Vous avez déjà selectionné ce produit")
+                                    handleShow(true)
+                                }
+}
                         }                     
                 }
             })     
@@ -203,9 +265,14 @@ const TestCoupage = (props) => {
         console.log("length= "+boxes.length);
         if(boxes.length >1)
                 {
+                    for (var i =0 ; i< boxCoupageTab.length ; i++) {
+                        CoupageService.ajouterBoxCouper(boxCoupageTab[i].id_produit, boxCoupageTab[i].id_enregistrement, boxCoupageTab[i].id_nettoyage, boxCoupageTab[i].id_generate).then( (res) => {
+                            console.log(res.data)
+                    })}
                     toggleshow()
                     setBoxes([1])
                     props.coupBtnV()
+                    localStorage.removeItem('boxCoupage')
                 }
         else {
             setMessage("Ajouter des boxes")
@@ -228,27 +295,27 @@ const TestCoupage = (props) => {
                 //setTabledonnees(res.data) 
                 setButtoncolor(!buttonColor)
                 setButtoncolor2(false)
-                console.log("hello1"); 
+                //console.log("hello1"); 
                 EnAttente.splice("") 
                 enStock.splice("") 
                 for ( var i=0 ; i<tableNettoyage.length ; i++) { 
                     // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
                      
                      var a = false
-                     console.log(tableNettoyage[i].fk_stock);
+                    // console.log(tableNettoyage[i].fk_stock);
                      for (var j=0 ; j<tableCoupage.length ; j++){
                          if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate )   {
                              
                              a = true
                              
-                             console.log(a);
+                            // console.log(a);
                              break
                          }
                      }
                          
                          if (a ===false && tableNettoyage[i].fk_stock===null){
                               EnAttente.push(tableNettoyage[i])
-                              console.log( "EnAttente");
+                              //console.log( "EnAttente");
                               }
                               
               
@@ -284,13 +351,13 @@ const TestCoupage = (props) => {
             // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
              
              var a = false
-             console.log(tableNettoyage[i].fk_stock);
+             //console.log(tableNettoyage[i].fk_stock);
              for (var j=0 ; j<tableCoupage.length ; j++){
                  if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate )   {
                      
                      a = true
                      
-                     console.log(a);
+                     //console.log(a);
                      break;
                  }
              }
@@ -298,7 +365,7 @@ const TestCoupage = (props) => {
                  
                       if (a ===false && tableNettoyage[i].fk_stock!==null){
                         enStock.push(tableNettoyage[i])
-                        console.log( "EnStock");
+                        //console.log( "EnStock");
                         }
       
 }

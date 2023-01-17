@@ -43,16 +43,28 @@ const Login=() => {
                         }
                             //alert("Mot de passe incorrect")
                         else {
+                            ServiceRole.getNomRole(res.data[0].fk_role).then(result => {
+                                console.log(res.data);
+                                
+                                var logIn = {
+                                    nom : res.data[0].nom +' '+res.data[0].prenom ,
+                                    id : res.data[0].id_personne,
+                                    role: result.data.nom_role
+                                }
+    
+                                localStorage.setItem ('login', JSON.stringify(logIn))
+                                console.log(res.data[0].nom , res.data[0].prenom);
+                                if ( result.data.nom_role ==='Admin')
+                                    history.push(  { pathname:'/admin' }  );
+                                else if(result.data.nom_role ==='Agent de saisie') history.push(  { pathname:'/test' }  );
+                                     else {
+                                        setMessage("Cet agent peut pas connecter à cet application ")
+                                        handleShow()
+                                     }
+                                
+                            })
 
-
-                            history.push(  {
-                                                         pathname:'/admin' ,
-                                                         name: res.data[0].nom  ,
-                                                         lastname: res.data[0].prenom ,
-                                                         id: res.data[0].id_personne
-                                                     }  );
-                            
-                        console.log(res.data[0].nom , res.data[0].prenom);}
+                           }
                     })
                 }
             })

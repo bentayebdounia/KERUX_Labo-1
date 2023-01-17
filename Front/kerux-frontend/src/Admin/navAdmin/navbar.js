@@ -4,13 +4,15 @@ import { Link} from 'react-router-dom'
 import './navbar.css'
 
 const Navbar = () => {
+  
+    var user = JSON.parse (localStorage.getItem('login'))
  
     return (
         <div>
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow" >
             <div className="container-fluid" id='divContainer'>
           
-          <Link className="nav-link active"   to={{pathname:"/test"}}  >
+          <Link className="nav-link active"   to='/test'  >
             <i className="bi bi-door-open-fill" ></i>
             Passer au mode agent
           </Link>
@@ -28,13 +30,13 @@ const Navbar = () => {
           </Link>
           <ul className="dropdown-menu menubar" style={{marginLeft:"70%"}}>
             <li>
-              <span className="spanUser">BENTAYEB Dounia</span> 
+              <span className="spanUser">{user.nom}</span> 
               <br/>
-              <span className="spanID">97 </span> 
+              <span className="spanID">{user.id }</span> 
               <br/>
-              <span className="spanRole">admin</span> 
+              <span className="spanRole">{user.role}</span> 
            </li>
-            <li><Link className="dropdown-item" to='login'>Déconnecter</Link></li>
+            <li><Link className="dropdown-item" to='login' onClick={()=>{ localStorage.removeItem('login')}}>Déconnecter</Link></li>
           </ul>
           
             </div>

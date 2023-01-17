@@ -12,6 +12,7 @@ const AffichageBoxes = (props) => {
     const toggleOn = () => setToggle(true)
     const toggleOff = () => setToggle(false)
 
+    
     const [poids, setPoids] = useState()
     const [nombre, setNombre] = useState()
     
