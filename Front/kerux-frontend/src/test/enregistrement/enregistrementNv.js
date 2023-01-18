@@ -30,7 +30,7 @@ const Enregistrement = (props) => {
     
     const [idprod, setIdprod] = useState(1)
     
-    var[produitsFourni, setProduitsFourni] = useState([])
+    const [produitsFourni, setProduitsfourni] = useState([])
     const [categorie, setCategorie] = useState()
     const [nom_produit, setNom_produit] = useState()
     const [poids_fourni, setPoids_fourni] = useState()
@@ -67,8 +67,10 @@ const Enregistrement = (props) => {
    const [length, setLength] = useState()
    
    useEffect(()=>{
-     setProduitsFourni (JSON.parse(localStorage.getItem('produitsFournis') || "[]"))
-   },[produitsFourni]) 
+    
+    setProduitsfourni (JSON.parse(localStorage.getItem('produitsFournis') || "[]"))
+    //return produitFourni
+   }) // l'erreur est la ***********************************************************************************************************************
 
     function plus () {
 
@@ -187,7 +189,7 @@ const Enregistrement = (props) => {
                 tab.splice(i,1)
             }
        }
-        console.log( tab);
+         
         localStorage.setItem('produitsFournis', JSON.stringify(tab))
         localStorage.removeItem('boxes'+id)
       }
@@ -208,12 +210,12 @@ const Enregistrement = (props) => {
         nbr=(
             
             <div className="form-floating">
-                <input type="number" class="form-control" id="nbr"
+                <input type="number" className="form-control" id="nbr"
                            value={nombre_fourni} 
                            onChange={event => setNombre_fourni(event.target.value) }
                     
                     />
-                <label for="nbr" style={{color:"#000" , fontWeight:"bold"}}>Nombre fourni</label>
+                <label htmlFor="nbr" style={{color:"#000" , fontWeight:"bold"}}>Nombre fourni</label>
                 {erreurNombre===true && (nombre_fourni === "" || nombre_fourni === "0" || nombre_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre fourni </p>}
                 
             </div>
@@ -281,12 +283,12 @@ const Enregistrement = (props) => {
                                 value={categorie} 
                                 onChange={event => setCategorie(event.target.value)} 
                         required>
-                        <option selected></option>
+                        <option defaultValue></option>
                         <option value="poulet">Poulet</option>
                         <option value="legume">Legume</option>
                         <option value="autre">Autre</option>
                         </select>
-                        <label for="categorie" style={{color:"#000" , fontWeight:"bold"}} >  Categorie  </label>
+                        <label htmlFor="categorie" style={{color:"#000" , fontWeight:"bold"}} >  Categorie  </label>
                     </div>
                     {erreurCategorie ===true && categorie === ""  && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner une categorie </p>}
                 </div>
@@ -300,7 +302,7 @@ const Enregistrement = (props) => {
                         {TypeLegume}
 
                         </select>
-                        <label for="produit" style={{color:"#000", fontWeight:"bold"}} >Type de produit</label>
+                        <label htmlFor="produit" style={{color:"#000", fontWeight:"bold"}} >Type de produit</label>
                     </div>
                     {erreurProduit === true && nom_produit === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner un type de produit </p>}
                 </div>  
@@ -311,7 +313,7 @@ const Enregistrement = (props) => {
                                 onChange={event => setPoids_fourni(event.target.value) }
                             />
                             
-                            <label for="poids" style={{color:"#000", fontWeight:"bold"}}>Poids fourni</label>
+                            <label htmlFor="poids" style={{color:"#000", fontWeight:"bold"}}>Poids fourni</label>
                         </div>
                         
                         {erreurPoids ===true && (poids_fourni === "" || poids_fourni === "0" || poids_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le poids fourni </p>}
@@ -339,9 +341,9 @@ const Enregistrement = (props) => {
                     <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
                         onClick={(e) => ajouterProduitFourni(e)} >
                         <i className="bi bi-plus-lg" style={{color: "white"}}> AJOUTER PRODUIT </i> 
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
                             {conteur}
-                            <span class="visually-hidden">unread messages</span>
+                            <span className="visually-hidden">unread messages</span>
                         </span>
                         </button>
                                              

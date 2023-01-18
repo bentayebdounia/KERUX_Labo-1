@@ -3,13 +3,14 @@ import serviceRole from '../../service/service.role'
 import serviceAdmin from '../../service/serviceAdmin'
 import ModelReponse from '../../Models/Model.repense'
 
+
 export default function AjouterAgent() {
     const [nom , setNom] = useState('')
     const [prenom, setPrenom] = useState('')
     const [date_naissance, setDateN] = useState('')
     const [adresse, setAdr] = useState('')
     const [num_tel, setTel] = useState('')
-    const [role, setRole] = useState('')
+    const [role, setRole] = useState([])
     const [mot_passe, setPassword] = useState('')
     const [recherche, setRecherche] = useState('')
 
@@ -19,10 +20,14 @@ export default function AjouterAgent() {
     const [verifier , setVerifier] = useState()
     var response
     
-    
+    useEffect(()=>{
+        serviceRole.getRole().then((res) => {
+            setRole(res.data)
+        })
+    },[])
     const verificetionChamp = () => {
         if((nom !=='' ) && prenom !=='' && date_naissance !=='' && adresse !=='' && num_tel !=='' && role !=='' ){
-            if(role!== 'Agent simple'){
+            if(fk_role!== '4'){
                 if(mot_passe !== '') { 
                     setVerifier(true)
                     return true
@@ -38,6 +43,7 @@ export default function AjouterAgent() {
             }
         }
         else{ 
+            setPassword('')
             setVerifier(false)
             return false
         }}
@@ -46,13 +52,9 @@ export default function AjouterAgent() {
     const saveAgent =  (e) => {
         e.preventDefault()
         
-          const agent = { nom, prenom, date_naissance, num_tel, adresse,  fk_role };
+          const agent = { nom, prenom, date_naissance, num_tel, adresse,  fk_role , mot_passe};
           if(verificetionChamp()){
-                 serviceRole.getIdRole(role).then( (res)=> {
-                    console.log(res.data.id_role) 
-                    
-                    setFk_role(JSON.parse(res.data.id_role))
-                }).then(  () => {
+                 
                     console.log('agent =>' + JSON.stringify(agent));
                      serviceAdmin.ajouterAgent(agent).then((res)=>{
                         console.log(res.data)
@@ -62,13 +64,13 @@ export default function AjouterAgent() {
                         setDateN('')
                         setAdr('')
                         setTel('')
-                        setRole('')
+                        setFk_role('')
+                        setPassword('')
                         
                         response =(<ModelReponse titre={''} message={'Agent bien ajouter'} />)
                         }
                         else response =(<ModelReponse titre={''} message={"Agent n'a pas bien ajouter"} />)
-                    })}
-          )
+                    })
           }
           
            }
@@ -124,18 +126,18 @@ export default function AjouterAgent() {
                     <div className="mb-3 row">
                         <label htmlFor="roleAgentAjout" className="col-sm-3 col-form-label">Role</label>
                         <div className="col-sm-9">
-                            <select className="form-select" aria-label="Default select example" id="roleAgentAjout" value={role} onChange={(e)=> setRole(e.target.value)}  >
-                                <option defaultValue></option>
-                                <option value="Admin">Admin</option>
-                                <option value="Agent de saisie">Agent de saisie</option>
-                                <option value="Agent simple">Agent simple</option>
+                            <select className="form-select" aria-label="Default select example" id="roleAgentAjout" value={fk_role} onChange={(e)=> setFk_role(e.target.value)}  >
+                                <option defaultValue= ""></option>
+                                {role.map((fk_role) => 
+                                <option value={fk_role.id_role}> {fk_role.nom_role} </option>
+                                )}
                             </select>
                             {(verifier===false && role==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez selectionner le role</p>}
                         </div>
                     </div>
                   
                   
-                    {role!=="Agent simple" && <div className="mb-3 row" >
+                    {fk_role !== '4' && <div className="mb-3 row" >
                           <label htmlFor="inputPassword" className="col-sm-3 col-form-label">Mot de passe</label>
                           <div className="col-sm-9">
                             <input type="password" className="form-control" id="password" value={mot_passe} onChange={(e)=> setPassword(e.target.value)} />

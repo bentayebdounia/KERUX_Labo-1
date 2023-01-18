@@ -74,10 +74,20 @@ const generieIdEnreg = (fk_fournisseur, fk_bon, cle ) => {
            break;
       }
     
-      const year = today.getFullYear().toString().split('');
+    const year = today.getFullYear().toString().split('');
     
-    var id = (fk_fournisseur +""+ fk_bon+""+datt+""+ year[3]+""+cle)  
+    var id = (verifierId (fk_fournisseur) +""+ verifierId (fk_bon) +""+ datt +""+ year[3] +""+ cle)  
     return id
+}
+
+const verifierId = (id) => {
+    if (id >= 0 && id < 10) 
+        return 0+''+id 
+    
+    else if (id >9 && id<100)
+            return 00+''+id
+     
+        else return id
 }
 
 

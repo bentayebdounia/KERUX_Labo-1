@@ -63,21 +63,24 @@ const AffichageBoxes = (props) => {
       }
     
     //console.log(props.tableBox);
-    const enregistrer = (id) => {
+    const enregistrer = (id, key) => {
         var tab= []
         tab= JSON.parse(localStorage.getItem('boxes'+props.id))
         console.log(boxe);
         const n = entrepots.find(({ id_entrepot }) => id_entrepot === parseInt(entrepot))
         for(var i=0; i<tab.length; i++){
-            console.log((id));
+            console.log((key));
             console.log(boxe.date);
-            if (tab[i].date === id){
+            if (i === key){
                 console.log((poids));
-                if (poids !== null)
+                if (poids !== '')
                     {tab[i].poids=poids
                      boxe[i].poids =poids
                     }
-                if (nombre !== null){
+                else {
+                    tab[i].poids = tab[i].poids
+                }
+                if (nombre !== ''){
                     tab[i].nombre = nombre
                     boxe[i].nombre =nombre
                 }
@@ -91,9 +94,9 @@ const AffichageBoxes = (props) => {
        }
        console.log(tab);
        localStorage.setItem('boxes'+props.id, JSON.stringify(tab))
-       setPoids(null)
-       setNombre(null)
-       setEntrepot(null)
+       //setPoids(null)
+       //setNombre(null)
+       //setEntrepot(null)
     }
 
     return (  
@@ -185,7 +188,7 @@ const AffichageBoxes = (props) => {
                                                                                     return data;
                                                                                 })
                                                                                 );
-                                                                                enregistrer(p.date)
+                                                                                enregistrer(p.date,key)
                                                                             }}
                                                                             type="button"
                                                                             className='btn' style={{background:"#4f8b2a", color:"white"}}

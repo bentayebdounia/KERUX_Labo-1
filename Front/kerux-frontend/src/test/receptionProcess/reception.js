@@ -55,10 +55,12 @@ const Reception = (props) => {
     }
 
     const getVlue =() =>{
-        serviceFournisseur.getFournisseurByNomOrCategorie(nom_fournisseur,nom_fournisseur)
-        .then((res) => {
-            setFournisseur2(res.data)
-        })
+        if (nom_fournisseur !== '' && !toggle){
+            serviceFournisseur.getFournisseurByNomOrCategorie(nom_fournisseur,nom_fournisseur)
+            .then((res) => {
+                setFournisseur2(res.data)
+         })
+        }
     }
 
      //get all fournisseur
@@ -105,9 +107,9 @@ const Reception = (props) => {
                         <>
                         {nom_fournisseur ==='' && 
                          (<div className='dataResult'>
-                         {fournisseur.map((value, key) => {
+                         {fournisseur.map((value) => {
                                      return (
-                                         <a className='dataItem' onClick={()=>{setNomFournisseur(value.nom_fournisseur); setFk_fournisseur(value.id_fournisseur)}}>
+                                         <a className='dataItem' key={value.id_fournisseur} onClick={()=>{setNomFournisseur(value.nom_fournisseur); setFk_fournisseur(value.id_fournisseur)}}>
                                              <p > {value.nom_fournisseur}</p>
                                          </a>
                                      )
@@ -117,9 +119,9 @@ const Reception = (props) => {
                          } 
                           {nom_fournisseur !=='' && 
                          (<div className='dataResult'>
-                         {fournisseur2.map((value, key) => {
+                         {fournisseur2.map((value) => {
                                      return (
-                                         <a className='dataItem' onClick={()=>{setNomFournisseur(value.nom_fournisseur); setFk_fournisseur(value.id_fournisseur) }} >
+                                         <a className='dataItem' key={value.id_fournisseur} onClick={()=>{setNomFournisseur(value.nom_fournisseur); setFk_fournisseur(value.id_fournisseur) }} >
                                              <p > {value.nom_fournisseur}</p>
                                          </a>
                                      )
@@ -146,7 +148,7 @@ const Reception = (props) => {
            
                  <div className="container">
                     
-                    <form class="needs-validation" noValidate>
+                    <form className="needs-validation" noValidate>
                     <div>
                     
                         <div className="mb-3 row ">
@@ -167,16 +169,16 @@ const Reception = (props) => {
                     </div>
     
                     <div className="mb-3 row">
-                        <div class="col-sm-1 form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"  onChange={(e)=> {setAchetlivreur(false) ; setLivreur('')}} required/>
-                            <label class="form-check-label" forHtml="flexRadioDefault1">
+                        <div className="col-sm-1 form-check">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"  onChange={(e)=> {setAchetlivreur(false) ; setLivreur('')}} required/>
+                            <label className="form-check-label" >
                                Acheteur   
                             </label>
                         </div>
     
-                        <div class="col-sm-1 form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"  onChange={(e)=> {setAchetlivreur(true) ; setAcheteur('')}} required/>
-                            <label class="form-check-label" forHtml="flexRadioDefault2">
+                        <div className="col-sm-1 form-check">
+                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"  onChange={(e)=> {setAchetlivreur(true) ; setAcheteur('')}} required/>
+                            <label className="form-check-label" >
                                 Livreur
                             </label>
                         </div>

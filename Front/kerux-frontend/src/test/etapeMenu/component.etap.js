@@ -149,13 +149,13 @@ const Etape = () => {
                         {controleReceptionV===false &&
                              <>
                                 <div className="bi bi-1-circle"  style={{color:`${(controleReception===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
-                                <div id="reception_etape" style={{color:`${(controleReception===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Reception</div>
+                                <div  style={{color:`${(controleReception===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Reception</div>
                             </>
                          }
                          {controleReceptionV && 
                                 <>
                                     <div className="bi bi-1-circle"  style={{color: '#399C49'}}  id="etape1"></div>
-                                    <div id="reception_etape" style={{color: '#399C49'}} >Reception</div>
+                                    <div  style={{color: '#399C49'}} >Reception</div>
                                 </>
                                     } 
 
@@ -166,13 +166,13 @@ const Etape = () => {
                     {controleEnrgV===false &&
                              <>
                                 <div className="bi bi-2-circle"  style={{color:`${(controleEnrg===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
-                                <div id="reception_etape" style={{color:`${(controleEnrg===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Enregistrement</div>
+                                <div style={{color:`${(controleEnrg===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Enregistrement</div>
                             </>
                          }
                          {controleEnrgV && 
                                 <>
                                     <div className="bi bi-2-circle"  style={{color: '#399C49'}}  id="etape1"></div>
-                                    <div id="reception_etape" style={{color: '#399C49'}} >Enregistrement</div>
+                                    <div style={{color: '#399C49'}} >Enregistrement</div>
                                 </>
                                     }  
                     </div>
@@ -181,13 +181,13 @@ const Etape = () => {
                         {controleNettoyageV===false &&
                              <>
                                 <div className="bi bi-3-circle"  style={{color:`${(controleNettoyage===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
-                                <div id="reception_etape" style={{color:`${(controleNettoyage===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Nettoyage</div>
+                                <div  style={{color:`${(controleNettoyage===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Nettoyage</div>
                             </>
                          }
                          {controleNettoyageV && 
                                 <>
                                     <div className="bi bi-3-circle"  style={{color: '#399C49'}}  id="etape1"></div>
-                                    <div id="reception_etape" style={{color: '#399C49'}} >Nettoyage</div>
+                                    <div  style={{color: '#399C49'}} >Nettoyage</div>
                                 </>
                                     }  
                     </div>
@@ -196,13 +196,13 @@ const Etape = () => {
                         {controleCoupageV===false &&
                              <>
                                 <div className="bi bi-4-circle"  style={{color:`${(controleCoupage===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
-                                <div id="reception_etape" style={{color:`${(controleCoupage===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Coupage</div>
+                                <div style={{color:`${(controleCoupage===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Coupage</div>
                             </>
                          }
                          {controleCoupageV && 
                                 <>
                                     <div className="bi bi-4-circle"  style={{color: '#399C49'}}  id="etape1"></div>
-                                    <div id="reception_etape" style={{color: '#399C49'}} >Coupage</div>
+                                    <div  style={{color: '#399C49'}} >Coupage</div>
                                 </>
                                     }  
                     </div>
@@ -211,13 +211,13 @@ const Etape = () => {
                         {controleConditV===false &&
                              <>
                                 <div className="bi bi-5-circle"  style={{color:`${(controleCondit===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
-                                <div id="reception_etape" style={{color:`${(controleCondit===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Conditionnement</div>
+                                <div  style={{color:`${(controleCondit===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Conditionnement</div>
                             </>
                          }
                          {controleConditV && 
                                 <>
                                     <div className="bi bi-5-circle"  style={{color: '#399C49'}}  id="etape1"></div>
-                                    <div id="reception_etape" style={{color: '#399C49'}} >Conditionnement</div>
+                                    <div  style={{color: '#399C49'}} >Conditionnement</div>
                                 </>
                                     } 
                     </div>
@@ -226,13 +226,13 @@ const Etape = () => {
                         {controleSortieV===false &&
                              <>
                                 <div className="bi bi-6-circle"  style={{color:`${(controleSortie===true) ? '#F6A51A' : '#D4D4D4'  }`}}  id="etape1"></div>
-                                <div id="reception_etape" style={{color:`${(controleSortie===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Sortie</div>
+                                <div  style={{color:`${(controleSortie===true) ? '#F6A51A' : '#D4D4D4'  }`}} >Sortie</div>
                             </>
                          }
                          {controleSortieV && 
                                 <>
                                     <div className="bi bi-6-circle"  style={{color: '#399C49'}}  id="etape1"></div>
-                                    <div id="reception_etape" style={{color: '#399C49'}} >Sortie</div>
+                                    <div  style={{color: '#399C49'}} >Sortie</div>
                                 </>
                                     } 
                     </div>

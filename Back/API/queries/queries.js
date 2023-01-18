@@ -1,8 +1,8 @@
 //// table perrsonne ***********************************************
 
 //--ajouter personne 
-const postPersonne = "INSERT INTO personne (nom, prenom, date_naissance, num_tel, adresse, fk_role) "
-                        +"VALUES ($1, $2, $3, $4, $5, $6)"
+const postPersonne = "INSERT INTO personne (nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe) "
+                        +"VALUES ($1, $2, $3, $4, $5, $6, $7)"
 
 const getPersonneById = "SELECT * FROM personne WHERE id_personne= $1"
 

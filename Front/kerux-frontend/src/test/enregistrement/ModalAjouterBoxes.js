@@ -52,7 +52,7 @@ const ModalAjoutBoxes = (props) => {
     const [tableboxe,setTableboxe] = useState([])
     useEffect(()=>{
         setTableboxe(JSON.parse(localStorage.getItem('boxes'+ props.id) || "[]"))
-    })
+    },[])
 
 
        //console.log("produitFourni: "+ props.produitFourni);  props.produitFourni.nombre_fourni

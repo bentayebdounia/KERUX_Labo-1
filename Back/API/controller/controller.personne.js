@@ -2,8 +2,8 @@ const pool =require ("../db")
 const queries= require("../queries/queries")
 
 AjouterPersonne = (req , res) => {
-    const {nom, prenom, date_naissance, num_tel, adresse, fk_role } = req.body
-    pool.query(queries.postPersonne, [nom, prenom, date_naissance, num_tel, adresse, fk_role ] ,
+    const {nom, prenom, date_naissance, num_tel, adresse, fk_role , mot_passe } = req.body
+    pool.query(queries.postPersonne, [nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe ] ,
          (error, result) =>{
             if (error) throw error
             res.status(200).send("Agent bien ajouter")
