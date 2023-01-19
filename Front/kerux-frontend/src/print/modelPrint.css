@@ -1,0 +1,34 @@
+
+.ticket {
+    font-size: 12px;
+    font-family: 'Times New Roman';
+    width: 155px;
+    max-width: 155px;
+    height: 200px;
+    max-height: 250px;
+}
+.ticket li{
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+}
+
+@media print {
+    * {
+        visibility: hidden;
+    }
+
+    .display-print {
+        visibility: visible;
+       
+        
+    }
+
+    .display-print * {
+        visibility: visible;
+    } 
+    
+}
+    
+   
+
+

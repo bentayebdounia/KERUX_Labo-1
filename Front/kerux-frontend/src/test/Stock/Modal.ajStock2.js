@@ -23,7 +23,7 @@ const ModalAjouterStock = (props) => {
             setStock(res.data)
             console.log(res.data)
             //console.log(stock.id_stock)
-            ServiceStock.modifierProcess(props.result.id_gnerate, res.data.id_stock).then( (res) => {
+            ServiceStock.modifierProcess(props.result, res.data.id_stock).then( (res) => {
                 console.log(res.data)
             })
             

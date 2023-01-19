@@ -1,7 +1,4 @@
-* {
-    font-size: 12px;
-    font-family: 'Times New Roman';
-}
+
 
 td,
 th,
@@ -37,18 +34,33 @@ th.price {
 }
 
 .ticket {
+    font-size: 12px;
+    font-family: 'Times New Roman';
     width: 155px;
     max-width: 155px;
+    height: 200px;
+    max-height: 250px;
 }
 
 img {
     max-width: inherit;
     width: inherit;
 }
+.ticket li{
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+}
 
 @media print {
     .hidden-print,
     .hidden-print * {
         display: none !important;
+    }
+}
+
+@media print {
+    .display-print,
+    .display-print * {
+        display: block !important ;
     }
 }

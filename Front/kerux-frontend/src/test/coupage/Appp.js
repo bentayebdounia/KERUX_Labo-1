@@ -1,7 +1,9 @@
 import React ,{useState,useEffect} from 'react'
 import Box from './box'
 import "./appp.css"
+import TESTPRINT from './testPrint'
 var Barcode = require('react-barcode')
+
 
 function Appp(){
     
@@ -39,36 +41,10 @@ const print =() => {
 }
     return (
         <>
-
-            <div class="ticket">
-                        
-                        
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th class="quantity">P.</th>
-                                    <th class="price">N.</th>
-                                    <th class="description">Description</th>
-                                    
-                                </tr>
-                            </thead>
-                            <tbody>
-                                
-                                <tr>
-                                    <td class="quantity">20Kg</td>
-                                    <td class="price">10</td>
-                                    <td class="description">Poulet</td>
-                                </tr>
-                                <tr>
-                                    <Barcode value="014008193LT05"  width= {1}  flat={ true}/>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-                        
-                        
-                    </div>
-                    <button id="btnPrint" class="hidden-print" onClick={ print }>Print</button>
+                <div className='display-print'>
+                    <TESTPRINT/>
+                </div>
+                    <button id="btnPrint" className="hidden-print" onClick={ print }>Print</button>
 
                   
 

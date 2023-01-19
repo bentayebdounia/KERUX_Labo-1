@@ -17,7 +17,7 @@ const AjouterFournisseur = (props) => {
 
     const [nomContact, setNomContact] = useState('')
     const [numContact, setNumContact] = useState('')
-
+    const [verifier , setVerifier] = useState()
     
     
     const [contacts,setContacts] = useState([{
@@ -29,10 +29,23 @@ const AjouterFournisseur = (props) => {
 
     let contact_
 
+    const verificetionChamp = () => {
+        if((nomFournisseur !=='' ) && categorie !=='' && formJuridique !=='' && adresse !=='' && email !=='' && activite !==''  && modalite !==''  && typePaiement !==''  && natureLivraison !=='' ){
+            setVerifier(true)
+            return true
+            }
+        
+        else{ 
+            setVerifier(false)
+            return false
+        }
+    }
     const fonctionAjouter = async(e) => {
         e.preventDefault();
-        console.log(contacts);
+
+        //console.log(contacts);
         //console.log(nomFournisseur, formJuridique, adresse, email,  activite, modalite, typePaiement, natureLivraison, categorie);
+        if(verificetionChamp()){
         await ServiceFournisseur.ajouterFournisseur(nomFournisseur, formJuridique, adresse, email,  activite, modalite, typePaiement, natureLivraison, categorie)
         .then ((res)=>{
             console.log(res.data);
@@ -46,6 +59,8 @@ const AjouterFournisseur = (props) => {
 
                 
         })
+    }
+    else alert ('fournisseur pas ajouter')
     }
 
     contact_ = (
@@ -105,6 +120,7 @@ const AjouterFournisseur = (props) => {
                             <label htmlFor="nomFournisseur"  className="col-sm-2 col-form-label ">Nom Fournisseur</label>
                             <div className="col-sm-10">
                             <input  type="text"  className="form-control" id="nomFournisseur" value={nomFournisseur} onChange={(e)=> setNomFournisseur(e.target.value)}  required/>
+                            {(verifier===false && nomFournisseur==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir le nom de fournisseur </p>}
                             </div>
                             
                         </div>
@@ -113,6 +129,7 @@ const AjouterFournisseur = (props) => {
                             <label htmlFor="activite" className="col-sm-2 col-form-label ">Activite</label>
                             <div className="col-sm-10">
                             <input type="text"  className="form-control" id="activite" value={activite} onChange={(e)=> setActivite(e.target.value)} required/>
+                            {(verifier===false && activite==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir l'activité de fournisseur </p>}
                             </div>
                         </div>
 
@@ -120,6 +137,7 @@ const AjouterFournisseur = (props) => {
                             <label htmlFor="adrFournisseur" className="col-sm-2 col-form-label " >Adresse fournisseur</label>
                             <div className="col-sm-10">
                             <input type="text"  className="form-control" id="adrFournisseur" value={adresse} onChange={(e)=> setAdresse(e.target.value)} required/>
+                            {(verifier===false && adresse==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir l'adresse de fournisseur </p>}
                             </div>
                         </div>
 
@@ -132,7 +150,9 @@ const AjouterFournisseur = (props) => {
                                     <option value="SARL">SARL</option>
                                     <option value="EURL">EURL</option>
                                 </select>
+                                {(verifier===false && formJuridique==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir la forme juridique de fournisseur </p>}
                             </div>
+                            
                         </div>
 
                         
@@ -148,6 +168,7 @@ const AjouterFournisseur = (props) => {
                             <label htmlFor="email" className="col-sm-2 col-form-label ">Email</label>
                             <div className="col-sm-10">
                             <input type="text"  className="form-control" id="email" value={email} onChange={(e)=> setEmail(e.target.value)}  required/>
+                            {(verifier===false && email==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir l'email de fournisseur </p>}
                             </div>
                         </div>
                         
@@ -162,6 +183,7 @@ const AjouterFournisseur = (props) => {
                                             <option value="versement par tranche">versement par tranche</option>
                                             <option value="versement cash">versement cash</option>
                                     </select>
+                                    {(verifier===false && modalite==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir la modalité de paiement </p>}
                             </div>
                         </div>
 
@@ -174,6 +196,7 @@ const AjouterFournisseur = (props) => {
                                             <option value="par cheque">par chèque</option>
                                             <option value="par espece">par espèce</option>
                                     </select>
+                                    {(verifier===false && typePaiement==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir le type de paiement </p>}
                             </div>
                         </div>
                         
@@ -183,6 +206,7 @@ const AjouterFournisseur = (props) => {
                             <label htmlFor="natureLivraison" className="col-sm-2 col-form-label ">Nature de livraison</label>
                             <div className="col-sm-10">
                             <input type="text"  className="form-control" id="natureLivraison" value={natureLivraison} onChange={(e)=> setNaturelivraison(e.target.value)}  required/>
+                            {(verifier===false && natureLivraison==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir la nature de livraison </p>}
                             </div>
                         </div>
                         
@@ -194,38 +218,18 @@ const AjouterFournisseur = (props) => {
                                             <option value="fournisseur de poulet">Fournisseur de poulet</option>
                                             <option value="fournisseur des legumes">Fournisseur des legumes</option>
                                     </select>
+                                    {(verifier===false && categorie==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir la categorie </p>}
                             </div>
                         </div>
                         
                         <div className="d-grid gap-2 my-4">
-                        <button className="btn1" type="submit" id="ajouterbtn"  >AJOUTER</button>
+                        <button className="btn1" type="submit" id="ajouterbtn" onClick={(e)=> fonctionAjouter(e)}  >AJOUTER</button>
                     </div>
                           
                         
 
                     </form>
-                    {
-                        (function () {
-                            'use strict'
-                          
-                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                            var forms = document.querySelectorAll('.needs-validation')
-                          
-                            // Loop over them and prevent submission
-                            Array.prototype.slice.call(forms)
-                              .forEach(function (form) {
-                                form.addEventListener('submit', function (event) {
-                                  if (!form.checkValidity()) {
-                                    event.preventDefault()
-                                    event.stopPropagation()
-                                  }
-                                  if (form.checkValidity()) fonctionAjouter(event)
-                          
-                                  form.classList.add('was-validated')
-                                }, false)
-                              })
-                          })()
-                    }
+                    
                     
                 </section>
     

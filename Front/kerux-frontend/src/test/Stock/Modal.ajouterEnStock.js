@@ -2,7 +2,8 @@ import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import ServiceEntrepot from '../../service/service.entrepot'
 import ModalAjouterStock from './Modal.ajStock2'
-
+import '../../print/modelPrint.css'
+import TESTPRINT from '../../print/ModelPrint';
 const ModalQStock = (props) => {
     const [show4, setShow4] = useState(false)
     const handleClose4 = () => setShow4(false)
@@ -13,6 +14,7 @@ const ModalQStock = (props) => {
 
     
     const getEntrepot = () =>{
+        window.print();
         ServiceEntrepot.getEntrepot()
         .then ((res)=> {
             setEntrepot(res.data)
@@ -24,12 +26,13 @@ const ModalQStock = (props) => {
     }
 
     const non = () => {
+        window.print();
         props.handleClose3 ()
         props.toggleDisplay()
 
     }
     
-    console.log(entrepot);
+    //console.log(entrepot);
 
     return (  
         <>
@@ -39,6 +42,10 @@ const ModalQStock = (props) => {
             </Modal.Header>
             <Modal.Body>
                    <h3> Voulez-vous vraiment ajouter ce box au stock? </h3>
+
+                   <div className='display-print' style={{display:"none" , margin: '0px'}}>
+                            <TESTPRINT id= {props.result } poids= {props.poids} nombre= {props.nombre} categorie={props.categorie} />
+                    </div>
                    
             </Modal.Body>
             <Modal.Footer>
