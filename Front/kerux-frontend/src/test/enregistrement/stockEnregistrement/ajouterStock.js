@@ -68,17 +68,16 @@ const AjouterStock = (props) => {
                 boxe[i].id_stock = entrepot
 
 
-                for(var j = 0 ; j<boxe.length; j++){ 
+                
                     
-                    if(boxe[i].date === tab[j].date)
-                    {   
-                        tab[j].id_stock = entrepot
-                        tab[j].stock = n.nom_entrepot
+                      
+                        tab[i].id_stock = entrepot
+                        tab[i].stock = n.nom_entrepot
    
-                    }
+                    
                 
                 //boxe.splice(i,1)
-                }
+                
                 
                 boxe.splice(i,1)
                 }

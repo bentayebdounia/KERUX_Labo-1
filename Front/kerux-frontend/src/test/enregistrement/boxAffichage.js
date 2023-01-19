@@ -13,8 +13,8 @@ const AffichageBoxes = (props) => {
     const toggleOff = () => setToggle(false)
 
     
-    const [poids, setPoids] = useState()
-    const [nombre, setNombre] = useState()
+    const [poids, setPoids] = useState('')
+    const [nombre, setNombre] = useState('')
     
     useEffect(()=> {
         serviceEntrepot.getEntrepot()
@@ -63,7 +63,12 @@ const AffichageBoxes = (props) => {
       }
     
     //console.log(props.tableBox);
-    const enregistrer = (id, key) => {
+    const enregistrer = (id, key, poid, nbr) => {
+
+        if (poid < poids && props.poidsRester === 0) alert ("erreur")
+
+            else if (nombre !=='' && poids !== '')
+{
         var tab= []
         tab= JSON.parse(localStorage.getItem('boxes'+props.id))
         console.log(boxe);
@@ -78,11 +83,16 @@ const AffichageBoxes = (props) => {
                      boxe[i].poids =poids
                     }
                 else {
-                    tab[i].poids = tab[i].poids
+                    tab[i].poids = poid
+                    boxe[i].poids =poid
                 }
                 if (nombre !== ''){
                     tab[i].nombre = nombre
                     boxe[i].nombre =nombre
+                }
+                else{
+                    tab[i].nombre = nbr
+                    boxe[i].nombre =nbr
                 }
                 if (entrepot !== ""){
                     tab[i].id_stock = entrepot
@@ -97,6 +107,9 @@ const AffichageBoxes = (props) => {
        //setPoids(null)
        //setNombre(null)
        //setEntrepot(null)
+       return false
+    }
+    else return true
     }
 
     return (  
@@ -157,15 +170,20 @@ const AffichageBoxes = (props) => {
                                                                    </td>
                                                                     </>
                                                                     }
-                                                                    {p.select===true &&  <>
+                                                                    { p.select===true &&  <>
                                                                         <td> {p.id_produit} </td>
                                                                         <td> {p.categorie} </td>
                                                                         <td> {p.nom_produit}  </td>
                                                                         <td> <input value={poids} type="number" placeholder={p.poids} 
                                                                                             onChange={event => { 
                                                                                                                  setPoids(event.target.value)
-                                                                                                                }}/> </td>
-                                                                        <td> <input value={nombre} type="number" placeholder={p.nombre} onChange={event => setNombre(event.target.value)} /> </td>
+                                                                                                                }}/>
+                                                                        {poids==='' && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le poids  </p>}
+                                                                        </td>
+                                                                        <td> 
+                                                                            <input value={nombre} type="number" placeholder={p.nombre} onChange={event => setNombre(event.target.value)} /> 
+                                                                            {nombre==='' && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre  </p>}
+                                                                        </td>
                                                                         <td> 
                                                                             <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)} >
                                                                                 <option value="" ></option>
@@ -173,6 +191,7 @@ const AffichageBoxes = (props) => {
                                                                                     
                                                                                     <option value={entrepot.id_entrepot}> {entrepot.nom_entrepot} </option>
                                                                                 )}  
+                                                                                
                                                                             </select>  
                                                                         </td>
                                                                         <td>
@@ -183,12 +202,13 @@ const AffichageBoxes = (props) => {
                                                                                 setBoxe(
                                                                                 boxe.map((data,k) => {
                                                                                     if (key === k) {
-                                                                                    data.select = checked;
+                                                                                        data.select = enregistrer(p.date,key, p.poids,p.npmbre);
+                                                                                        
                                                                                     }
                                                                                     return data;
                                                                                 })
                                                                                 );
-                                                                                enregistrer(p.date,key)
+                                                                                
                                                                             }}
                                                                             type="button"
                                                                             className='btn' style={{background:"#4f8b2a", color:"white"}}

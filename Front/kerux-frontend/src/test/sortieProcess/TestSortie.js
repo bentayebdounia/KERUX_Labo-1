@@ -363,7 +363,7 @@ if(buttonColor2)
 
     
       if(toggle){
-        sortie = (<Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} sortieBtnV={props.sortieBtnV}/>)
+        sortie = (<Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} sortieBtn={props.sortieBtn}/>)
       }
 
       else{
@@ -428,7 +428,7 @@ if(buttonColor2)
     return ( 
         <>
             {testSortie}
-            {toggle && <Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} sortieBtn={props.sortieBtn}/> }
+            {sortie }
             
             
         </>

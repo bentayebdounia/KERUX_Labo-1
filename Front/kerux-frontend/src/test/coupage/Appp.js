@@ -1,6 +1,10 @@
 import React ,{useState,useEffect} from 'react'
 import Box from './box'
+import "./appp.css"
+var Barcode = require('react-barcode')
+
 function Appp(){
+    
 
     //const [users,setUsers] = useState([])
 
@@ -29,52 +33,46 @@ function Appp(){
     }
 */
 console.log(boxes);
+
+const print =() => {
+    window.print()
+}
     return (
-        <div>
+        <>
 
-            {boxes.map((box,key) => {
-                return (
-                    <div key={key}>
-                        <Box product={box.product} onProductChange={newProductName => {
-                            const newBoxes = [...boxes]
-                            newBoxes[key].product = newProductName
-                            setBoxes(newBoxes)
-                        }}
-                            weight={box.weight} onWeightChange = {newWeight => {
-                                const newBoxes = [...boxes]
-                                newBoxes[key].weight = newWeight
-                                setBoxes(newBoxes)
-                            }}
-                        />
+            <div class="ticket">
                         
-                        {key === 0 && <button onClick={() => {
-                            
-                            const newBoxes = [...boxes]
-                            
-                            newBoxes.push({
-                                product:'',
-                                weight:0,
-                                number:0,
-                                date:new Date()
-                            })
-                            
-                            setBoxes(newBoxes.sort((a,b) => {
-                                if(a.date < b.date)
-                                    return 1
-                                if(a.date > b.date)
-                                    return -1
-                                return 0
-                            }))
-                            console.log("box=  "+boxes[0].product);
-                        }}>
-                            Ajouter une box
-                        </button>}
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="quantity">P.</th>
+                                    <th class="price">N.</th>
+                                    <th class="description">Description</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <tr>
+                                    <td class="quantity">20Kg</td>
+                                    <td class="price">10</td>
+                                    <td class="description">Poulet</td>
+                                </tr>
+                                <tr>
+                                    <Barcode value="014008193LT05"  width= {1}  flat={ true}/>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                        
+                        
                     </div>
-                )
-            })}
+                    <button id="btnPrint" class="hidden-print" onClick={ print }>Print</button>
 
+                  
 
-        </div>
+        </>
     )
 }
 export default Appp;

@@ -131,8 +131,9 @@ const Recape = (props) => {
         ajouterBon()  
         
         //props.recepBtn ()
-        props.handleClose ()   
-        //props.recepBtn ()
+        props.handleClose () 
+        props.toggleshow ()
+        props.recepBtn ()
 
     }
     

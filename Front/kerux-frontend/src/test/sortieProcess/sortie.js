@@ -69,6 +69,7 @@ const Sortie = (props) => {
            
     const valider = (e) => {
         e.preventDefault()
+        props.sortieBtn()
         handleShow()
     }
 
@@ -169,7 +170,7 @@ const Sortie = (props) => {
                 <div className="d-grid gap-3 d-md-flex justify-content-md-end" >
                     
                     <button className="btn2" type="submit" onClick={()=>{ props.toggleDisplay(); props.sortieBtn()}}  >Annuler</button>
-                    <button className="btn1" type="submit" >Valider</button>
+                    <button className="btn1" type="submit" onClick={valider} >Valider</button>
                 
                 </div>
                 </form>

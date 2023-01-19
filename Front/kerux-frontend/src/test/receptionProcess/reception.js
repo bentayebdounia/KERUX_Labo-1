@@ -12,9 +12,9 @@ const Reception = (props) => {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
-    const [toggle, setToggle] = useState ()  
-    const toggleshow = () => setToggle(true) 
-    const toggleDisplay = () => setToggle (false) 
+    const [toggle, setToggle] = useState (true)  
+    const toggleshow = () => setToggle(false) 
+    const toggleDisplay = () => setToggle (true) 
 
     const [toggleConfirme, setToggleConfirme] = useState (false)
     const toggleConfirmeTrue = () => setToggleConfirme (true)
@@ -143,7 +143,7 @@ const Reception = (props) => {
             
                 
 
-        {!toggle && 
+        {toggle === true && 
             <section id="etape_section">
            
                  <div className="container">
@@ -262,7 +262,7 @@ const Reception = (props) => {
                 </section>
                     }
         
-          {toggle && <Enregistrement recepBtn={props.recepBtn} toggleDisplay={toggleDisplay}  id_bon ={id_bon} fk_fournisseur= {fk_fournisseur}  nom_fournisseur={nom_fournisseur} recepteur={recepteur} type_bon={type_bon} />}
+          {toggle === false && <Enregistrement recepBtn={props.recepBtn} toggleDisplay={toggleDisplay}  id_bon ={id_bon} fk_fournisseur= {fk_fournisseur}  nom_fournisseur={nom_fournisseur} recepteur={recepteur} type_bon={type_bon} />}
                     
                 
                 

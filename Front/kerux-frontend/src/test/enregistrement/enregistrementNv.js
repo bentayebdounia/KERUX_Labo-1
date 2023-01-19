@@ -8,6 +8,7 @@ import './enreg.css'
 import AffichageBoxes from './boxAffichage'
 import Recape from './recape'
 import TestNet from '../nettoyageProcess/testNet'
+import Reception from '../receptionProcess/reception'
 
 const Enregistrement = (props) => {
 
@@ -27,6 +28,9 @@ const Enregistrement = (props) => {
     const handleCloseRecap = () => setShowRecap(false)
     const handleShowRecap = () => setShowRecap(true)
 
+    const [toggle, setToggle] = useState (false )  
+    const toggleshow = () => setToggle(true) 
+    const toggleDisplay = () => setToggle (false)
     
     const [idprod, setIdprod] = useState(1)
     
@@ -63,7 +67,7 @@ const Enregistrement = (props) => {
 
    const [poidsRester, setPoidsrester] = useState()
    const [nombreRester, setNombrerester] = useState()
-
+    const [p , setP] = useState()
    const [length, setLength] = useState()
    
    useEffect(()=>{
@@ -175,8 +179,9 @@ const Enregistrement = (props) => {
 
       
 
-      const AfiicherBoxes = (id) => {
+      const AfiicherBoxes = (id, poid) => {
         setProduit_id(id) 
+        setP(poid)
         handleShowAffichage()
       }
 
@@ -240,7 +245,7 @@ const Enregistrement = (props) => {
  
     return ( 
         <>
-        
+        {toggle === false && 
         <section id="etape_section">
             <div className="container">
              <div className=" row">
@@ -382,7 +387,7 @@ const Enregistrement = (props) => {
                                 <td>{p.nombre_fourni} / {p.nombreRester} </td> 
                                 <td style={{textAlign: 'center'}} >
                                 {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester ); setNombrerester(p.nombreRester);  handleShow()}}> ajouter </button>}
-                                {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod)} } > Afficher </button>}
+                                {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod, p.poidsRester)} } > Afficher </button>}
                                 </td>
                                 
                                 
@@ -394,7 +399,9 @@ const Enregistrement = (props) => {
                     </div>
                 
                 <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={() =>{alert(props.id_bon); handleShowRecap()}} >VALIDER LE PROCESS</button>
+            
             </div>
+            
             {show && <ModalAjoutBoxes   
                                 show= {show} 
                                 handleClose= {handleClose} 
@@ -413,6 +420,7 @@ const Enregistrement = (props) => {
                                 handleClose= {handleCloseAffichage} 
                                 handleShow= {handleShowAffichage}
                                 id= {produit_id}
+                                poidsRester = {p}
                                 />}
 
             {showRecap &&     <Recape       show= {showRecap} 
@@ -421,13 +429,15 @@ const Enregistrement = (props) => {
                                             toggleDisplay = {props.toggleDisplay}
                                             id_bon = {props.id_bon}
                                             fk_fournisseur= {props.fk_fournisseur}
-
+                                            toggleshow = {toggleshow}
                                             
                                 />}
 
             
             
            </section>
+}
+          {toggle === true && <Reception/>}
             
         </>
      )
