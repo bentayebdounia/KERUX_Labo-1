@@ -1,14 +1,14 @@
 const pool =require ("../db")
 const queries= require("../queries/queries")
 const GetDat = require ("./GetDate")
-
+/*
 const dateNow = () => {
     var today = new Date 
     //on doit regler la date pcq les donnee dans la bdd ajoute un jour mais on affichage n'ajoute rien
     datee = today.getFullYear()+'-'+(today.getMonth()+1) + '-' + (today.getDate()+1)
     console.log("dateeee "+datee );
     return datee
-}
+}*/
 
 const HeureNow = () => {
     var today = new Date 
@@ -19,7 +19,7 @@ const HeureNow = () => {
 
 //////***************** Ajouter un BON  -----------------------------------------------------*/
 ajouterBon = (req, res) => { 
-    var datee = dateNow()
+    var datee = new Date
     var heure = HeureNow()
     
     const { fk_fournisseur, acheteur, type_bon, recepteur, livreur } = req.body
@@ -33,7 +33,7 @@ ajouterBon = (req, res) => {
 
 //////***************** Ajouter un PRODUIT FOURNI  -----------------------------------------------------*/
 ajouterProduitFourni =(req, res) =>{
-    var datee = dateNow()
+    var datee = new Date
     var heure = HeureNow()
     const { categorie, nom_produit, poids_fourni, nombre_fourni,  fk_bon} = req.body
     pool.query(queries.ajouterProduitFourni, [ categorie, nom_produit, poids_fourni, nombre_fourni, datee, heure , fk_bon ] ,

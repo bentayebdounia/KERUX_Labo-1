@@ -232,6 +232,14 @@ const JournalNettoyage = (props) => {
             }
         }
     }
+
+    const dateNow = (d) => {
+        var date=  moment.utc(d).format('DD-MM-YY')
+        const words = date.split('-');
+        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
+        console.log(a+1)
+        return a
+    }
    
     if (comboBox===''){
             tableGeneral = (
@@ -244,7 +252,7 @@ const JournalNettoyage = (props) => {
                             <td>{p.nom_produit}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                         </tr>
                 )
@@ -262,7 +270,7 @@ const JournalNettoyage = (props) => {
                             <td>{p.nom_produit}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                         </tr>
                 )

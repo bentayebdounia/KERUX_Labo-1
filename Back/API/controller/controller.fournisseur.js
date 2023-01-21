@@ -1,14 +1,9 @@
 const pool =require ("../db")
 const queries= require("../queries/quierie.fornisseur")
 
-const dateNow = () => {
-    var today = new Date 
-    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + (today.getDate()+1)
-    console.log("dateeee "+datee );
-    return datee
-}
+
 ajouterFournisseur = (req, res) => {
-    date_enregistement = dateNow()
+    date_enregistement = new Date 
     const { nom_fournisseur, forme_juridique, adresse_fournisseur, email,  activite, modalite_paiement, type_paiement, nature_livraison, categorie  } = req.body
     pool.query(queries.ajouterFourniseur, [nom_fournisseur, forme_juridique, adresse_fournisseur, email,  activite, modalite_paiement, type_paiement, nature_livraison, categorie, date_enregistement ] ,
              (error, result) =>{

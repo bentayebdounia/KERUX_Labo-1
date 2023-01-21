@@ -23,6 +23,8 @@ const produit = require("./routes/route.produit")
 const statistique = require("./routes/route.statistique")
 
 const pagination = require("./routes/route.pagination")
+
+const alerte = require("./routes/route.alert")
 //----------------middleware ---------------------------------------------------//
 app.use(cors())
 app.use(express.json()) //req.body
@@ -50,6 +52,8 @@ app.use("/produit", produit)
 app.use("/statistique", statistique )
 
 app.use("/pagination", pagination)
+
+app.use("/alert", alerte )
 
 //--ajouter
 //require("./routes/route_role.js")

@@ -36,7 +36,7 @@ const AjouterFournisseur = (props) => {
             }
         
         else{ 
-            setVerifier(false)
+            setVerifier(false )
             return false
         }
     }

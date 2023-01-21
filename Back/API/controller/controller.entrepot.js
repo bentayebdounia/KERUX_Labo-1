@@ -1,15 +1,10 @@
 const pool =require ("../db")
 const queries= require("../queries/queries")
 
-const dateNow = () => {
-    var today = new Date 
-    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + (today.getDate()+1)
-    console.log("dateeee "+datee );
-    return datee
-}
+
 
 ajouterEntrepot = (req, res) => {
-    var date_enregistrement_entrepot = dateNow()
+    var date_enregistrement_entrepot =  new Date 
     var exist = true
     const { nom_entrepot, type_entrepot, air_stockage, capacite, adresse } = req.body
     pool.query(queries.ajouterEntrepot, [nom_entrepot, type_entrepot, air_stockage, capacite, adresse, exist, date_enregistrement_entrepot] ,

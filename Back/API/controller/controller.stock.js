@@ -2,21 +2,9 @@ const pool =require ("../db")
 const queries= require("../queries/queries")
 const q = require(".././queries/querie.stock")
 
-const dateNow = () => {
-    var today = new Date 
-    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + (today.getDate()+1)
-    console.log("dateeee "+datee );
-    return datee
-}
 
-const HeureNow = () => {
-    var today = new Date 
-    heure = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
-    console.log("heure "+heure );
-    return heure
-}
 ajouterStock = (req, res) => {
-    var date_entree = dateNow()
+    var date_entree = new Date
     const  {fk_entrepot} = req.body
     pool.query(queries.ajouterStock, [date_entree, fk_entrepot] ,
              (error, result) =>{
@@ -27,7 +15,7 @@ ajouterStock = (req, res) => {
 
 modifierStock =(req, res) => {
     const id_stock = req.params.id_stock
-    date_sortie = dateNow()
+    date_sortie = new Date
     const { poids_sortie } = req.body
     pool.query(queries.ModifyStock, [date_sortie, poids_sortie, id_stock ] ,
         (error, result) =>{

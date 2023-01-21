@@ -89,10 +89,10 @@ const generieIdMarinade = (id) => {
 }
 
 ajouterProcessMarinade =(req, res) => {
-    var datee = dateNow()
+    var datee = new Date()
     var heure = HeureNow()
     const { categorie, nom_produit, etape, poids, nombre, marine, mi_cuissan, id_nettoyage, id_coupage, fk_proditFourni } = req.body
-    var id_gnerate = generieIdNettoyage(id_coupage)
+    var id_gnerate = generieIdMarinade(id_coupage)
     //var id_gnerate = generieIdMarinade(fk_proditFourni,etape)
     pool.query(queries.ajouterProcessMarinade, [categorie, nom_produit, etape, poids, nombre, marine, mi_cuissan, datee, heure, id_nettoyage, id_coupage, fk_proditFourni, id_gnerate ] ,
          (error, result) =>{

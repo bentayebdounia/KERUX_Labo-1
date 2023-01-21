@@ -5,18 +5,7 @@ const q= require("../queries/queries")
 const actual = require ( "../queries/queries.ActualiteProcess") 
 
 
-const dateNow = () => {
-    var today = new Date 
-    datee = today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + (today.getDate()+1)
-    console.log("dateeee "+datee );
-    return datee
-}
-const dateNow2 = () => {
-    var today = new Date 
-    datee = today.getFullYear()+''+(today.getMonth() + 1) + '' + (today.getDate())
-    console.log("dateeee "+datee );
-    return datee
-}
+
 
 const HeureNow = () => {
     var today = new Date 
@@ -82,7 +71,7 @@ const generieIdNettoyage = (id) => {
 }
 
 ajouterProcessNettoyage =(req, res) => {
-    var datee = dateNow()
+    var datee =new Date
     var heure = HeureNow()
     console.log(datee)
     console.log(heure);

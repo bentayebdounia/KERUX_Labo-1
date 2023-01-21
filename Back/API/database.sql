@@ -159,6 +159,12 @@ CREATE TABLE box_couper (
     heure TIME
 ) ;
 
+CREATE TABLE alert (
+    id_alert SERIAL PRIMARY KEY ,
+    fk_processs INT REFERENCES process (id_process), 
+    date_alert DATE ,
+    existe BOOLEAN
+)
 
 -- pas encore creer (on vas voire ca avec le service comercial)
 CREATE TABLE inventaire (

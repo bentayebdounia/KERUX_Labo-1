@@ -88,7 +88,7 @@ const generieIdNettoyage = (id) => {
 }
 
 ajouterProcessSortie =(req, res) => {
-    var datee = dateNow()
+    var datee = new Date
     var heure = HeureNow()
     const { categorie, nom_produit, etape, poids, nombre, id_enregistrement, id_nettoyage, id_coupage, id_conditionnement,  fk_proditFourni } = req.body
     var id_gnerate = generieIdNettoyage(id_conditionnement)

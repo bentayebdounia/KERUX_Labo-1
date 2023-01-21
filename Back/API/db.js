@@ -5,7 +5,7 @@ const pool = new Pool ({
     password: "1997",
     host: "localhost",
     port: 5432,
-    database: "kerux_labo"
+    database: "kerux_labo2"
 })
 
 module.exports = pool;

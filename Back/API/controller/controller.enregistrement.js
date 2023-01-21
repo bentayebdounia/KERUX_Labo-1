@@ -82,10 +82,10 @@ const generieIdEnreg = (fk_fournisseur, fk_bon, cle ) => {
 
 const verifierId = (id) => {
     if (id >= 0 && id < 10) 
-        return 0+''+id 
+        return 00+''+id 
     
-    else if (id >9 && id<100)
-            return 00+''+id
+    else if (id > 9 && id<100)
+            return 0+''+id
      
         else return id
 }
@@ -93,8 +93,9 @@ const verifierId = (id) => {
 
 
 ajouterProcessEnregistrement =(req, res) => {
-    var datee = dateNow()
+    var datee = new Date
     var heure = HeureNow()
+    console.log(datee);
     const { categorie, nom_produit, etape, poids, nombre, fk_proditFourni, fk_fournisseur, fk_bon, cle} = req.body
     var id_gnerate = generieIdEnreg(fk_fournisseur, fk_bon, cle)
     pool.query(queries.ajouterProcessEnreg, [categorie, nom_produit, etape, poids, nombre, datee, heure,  fk_proditFourni , id_gnerate ] ,

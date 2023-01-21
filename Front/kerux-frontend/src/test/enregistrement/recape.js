@@ -14,7 +14,7 @@ const Recape = (props) => {
     
     
     for(var i=0 ; i<produitFourni.length; i++){
-        console.log(produitFourni[i].id_prod)
+        //console.log(produitFourni[i].id_prod)
         boxe= boxe.concat(JSON.parse(localStorage.getItem('boxes'+produitFourni[i].id_prod ) || '[]'))
     }
 
@@ -50,6 +50,7 @@ const Recape = (props) => {
                     await EnregistrementService.ajouerEnregistrement(box[i].categorie, box[i].nom_produit, "enregistrement",parseFloat (box[i].poids),parseInt (box[i].nombre), id_produit, props.fk_fournisseur, props.id_bon, cle)
                     
                     .then((res) => {
+                        
                         console.log(res.data);
                         
                             

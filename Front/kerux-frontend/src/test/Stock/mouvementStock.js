@@ -73,6 +73,16 @@ const MouvementStock = (props) => {
         } 
         
     }
+
+    const dateNow = (d) => {
+        if ( d !== null )
+       { var date=  moment.utc(d).format('DD-MM-YY')
+        const words = date.split('-');
+        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
+        //console.log(a+1)
+        return a}
+        else return d
+    }
    
     if (comboBox===''){
             tableGeneral = (
@@ -86,11 +96,11 @@ const MouvementStock = (props) => {
                             <td>{p.etape}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
-                            <td>{moment.utc(p.date_entree).format('DD/MM/YY')}</td>
-                            <td>{moment.utc(p.date_sortie).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.date_entree)}</td>
+                            <td>{dateNow(p.date_sortie)}</td>
                             <td>{p.poids_sortie}</td>
                         </tr>
                 )
@@ -124,11 +134,11 @@ const MouvementStock = (props) => {
                             <td>{p.etape}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
-                            <td>{moment.utc(p.date_entree).format('DD/MM/YY')}</td>
-                            <td>{moment.utc(p.date_sortie).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.date_entree)}</td>
+                            <td>{dateNow(p.date_sortie)}</td>
                             <td>{p.poids_sortie}</td>
                     
                     </tr>
@@ -156,11 +166,11 @@ const MouvementStock = (props) => {
                             <td>{p.etape}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
-                            <td>{moment.utc(p.date_entree).format('DD/MM/YY')}</td>
-                            <td>{moment.utc(p.date_sortie).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.date_entree)}</td>
+                            <td>{dateNow(p.date_sortie)}</td>
                             <td>{p.poids_sortie}</td>
                     
                     </tr>
@@ -182,10 +192,10 @@ const MouvementStock = (props) => {
                             <td>{p.etape}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
-                            <td>{moment.utc(p.date_entree).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.date_entree)}</td>
                             
                             
                     
@@ -207,11 +217,11 @@ const MouvementStock = (props) => {
                             <td>{p.etape}</td>
                             <td>{p.poids}</td>
                             <td>{p.nombre}</td>
-                            <td>{moment.utc(p.datee).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
-                            <td>{moment.utc(p.date_entree).format('DD/MM/YY')}</td>
-                            <td>{moment.utc(p.date_sortie).format('DD/MM/YY')}</td>
+                            <td>{dateNow(p.date_entree)}</td>
+                            <td>{dateNow(p.date_sortie)}</td>
                             <td>{p.poids_sortie}</td>
                     
                     </tr>
