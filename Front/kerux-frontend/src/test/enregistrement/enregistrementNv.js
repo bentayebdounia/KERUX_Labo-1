@@ -401,7 +401,7 @@ const Enregistrement = (props) => {
                 <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={() =>{alert(props.id_bon); handleShowRecap()}} >VALIDER LE PROCESS</button>
             
             </div>
-            
+
             {show && <ModalAjoutBoxes   
                                 show= {show} 
                                 handleClose= {handleClose} 
@@ -437,7 +437,7 @@ const Enregistrement = (props) => {
             
            </section>
 }
-          {toggle === true && <Reception/>}
+          {toggle === true && <Reception recepBtn={props.recepBtn} enrgBtn ={props.enrgBtn}/>}
             
         </>
      )

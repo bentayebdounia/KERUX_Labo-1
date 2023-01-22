@@ -7,7 +7,7 @@ import JournalNettoyage from '../journalProcess/journalNettoyage'
 import JournalReception from '../journalProcess/journalRecetion'
 import JournalProduitsFournis from '../journalProcess/journalProduitFourni'
 import MouvementStock from '../Stock/mouvementStock'
-import AcueilBoutton from '../acueil_boutton'
+import Acueil from '../acueil/acueil'
 import StatistiqueProduitFourni from '../statistique/MstatistiqueProduitFourni'
 import StatistiqueTypeProduit from '../statistique/MstatistiqueType'
 import StatistiqueProcess from '../statistique/MstatistiqueProcessProd'
@@ -75,11 +75,11 @@ const Navbar = () => {
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow" >
             <div className="container-fluid" id='divContainer'>
           
-          <Link className="nav-link active"   to="#"  >
+          <Link className="nav-link active"   to="#"  onClick={()=>{ handleCloseProcess(); handleShowAcueil()}}>
             <i className="bi bi-house-door-fill me-2" ></i>
             Acueil
           </Link>
-          <Link className="nav-link active"  to="#" onClick={handleShowProcess}>
+          <Link className="nav-link active"  to="#" onClick={() =>  { handleCloseAcueil(); handleShowProcess ()}}>
           <i className="bi bi-bar-chart-steps me-2" ></i>
             Process</Link>
           <Link className="nav-link active "   role="button" data-bs-toggle="dropdown"  to="#">
@@ -139,7 +139,7 @@ const Navbar = () => {
             </div>
         </nav>
         {showProcess && <Etape/>}
-        {showAcueil && <AcueilBoutton/> }
+        {showAcueil && <Acueil/> }
 
         {show4 && <AjouterEntrepot 
                             show={show4} 

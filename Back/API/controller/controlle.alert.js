@@ -5,8 +5,8 @@ ajouterAlert = (req, res) => {
     //var date_alert = new Date
     
     var existe = true
-    const { fk_processs, date_alert } = req.body
-    pool.query(queries.ajouterAlert, [fk_processs,  date_alert, existe], 
+    const { fk_processs, date_alert, etape } = req.body
+    pool.query(queries.ajouterAlert, [fk_processs,  date_alert, existe, etape], 
         
         (err, result) => {
             if (err) throw err
@@ -24,7 +24,57 @@ updateAlert = (req, res) => {
         })
 }
 
+countAlert = (req, res) => {
+    const date_alert = req.params.date_alert
+
+    pool.query(queries.countAlert, [date_alert] , 
+        (error, result) => {
+            if (error) throw error
+            res.status(200).json(result.rows)
+        })
+
+}
+
+countAlertPrimary = (req, res) => {
+    const date_alert = req.params.date_alert
+
+    pool.query(queries.countAlertPrimary, [date_alert] , 
+        (error, result) => {
+            if (error) throw error
+            res.status(200).json(result.rows)
+        })
+
+}
+
+countAlertEtape = (req, res) => {
+    const date_alert = req.params.date_alert
+    const etape = req.params.etape
+
+    pool.query(queries.countAlertEtape, [date_alert, etape] , 
+        (error, result) => {
+            if (error) throw error
+            res.status(200).json(result.rows)
+        })
+
+}
+
+countAlertEtapePrimary = (req, res) => {
+    const date_alert = req.params.date_alert
+    const etape = req.params.etape
+
+    pool.query(queries.countAlertEtapePrimary, [date_alert, etape] , 
+        (error, result) => {
+            if (error) throw error
+            res.status(200).json(result.rows)
+        })
+
+}
+
 module.exports = {
     ajouterAlert,
-    updateAlert
+    updateAlert,
+    countAlert,
+    countAlertPrimary,
+    countAlertEtape,
+    countAlertEtapePrimary
 }

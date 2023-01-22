@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import NettoyageService from '../../service/service.nettoyage'
 import ModalQStock from '../Stock/Modal.ajouterEnStock'
 import Service_AgentProcess from '../../service/service.agentProcess'
-
+import serviceAlert from '../../service/service.alert';
 
 //import Print from './print';
 const ModalConfirmNet = (props) => {
@@ -26,18 +26,32 @@ const ModalConfirmNet = (props) => {
     useEffect(()=>{
         setId(idGne)
     },idGne)
+
+    const dateAlert = () => {
+        const d = new Date
+        if (props.categorie === "poulet" ){
+            return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
+        }
+
+        else if (props.categorie === "legume" ){
+            return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
+        }
+    }
     const confirmNettoyage = async (e) => {
         e.preventDefault();
         var etape="nettoyage"
        
         await NettoyageService.ajouterNettoyage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.fk_proditfourni )
         .then( (res)=> {
-            console.log(res.data.id_gnerate)
+            console.log(res.data)
             setResult(res.data)
             idGne = res.data.id_gnerate
             //console.log("id_gnerate= " + result.id_gnerate);
             //idd=res.data.id_gnerate
             
+            serviceAlert.ajouterAlert(res.data.id_process, dateAlert(), "nettoyage").then ((result) =>{
+                alert (result.data)
+            })
 
             //console.log(idd);
             //ajouter les agents  de nettoyage au bdd
