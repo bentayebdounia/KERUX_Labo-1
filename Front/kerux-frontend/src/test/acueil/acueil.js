@@ -36,12 +36,13 @@ const Acueil = () => {
         })
 
     })
-
+//<i className="bi bi-exclamation-triangle-fill"></i>
     return (
         <div style={{marginTop: "100px", marginLeft:"5%", marginRight:"5%"}}>
           
 
             <Alert variant={'danger'}>
+            <i className="bi bi-exclamation-triangle-fill"></i>
                 Vous avez ( {alertDanger} ) produit en attente 
             </Alert>
             <Alert variant={'warning'}>

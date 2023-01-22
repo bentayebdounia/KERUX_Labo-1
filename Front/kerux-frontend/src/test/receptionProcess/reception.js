@@ -4,6 +4,7 @@ import serviceFournisseur from '../../service/service.fournisseur'
 import ModalReception from './ModalReception'
 import Enregistrement from '../enregistrement/enregistrementNv'
 import './fournisseur.css'
+import ModelAlert from '../alert/modalAlert'
 
 const Reception = (props) => {
 
@@ -23,6 +24,11 @@ const Reception = (props) => {
     const [toggleRecomendation, setToggleRecomendation] = useState(true)
     const toggleRecomendationTrue = () => setToggleRecomendation (true)
     const toggleRecomendationFalse = () => setToggleRecomendation(false)
+
+    const [toggleAlert, setTogglealert] = useState(true)
+    const toggleAlertTrue = () => setTogglealert (true)
+    const toggleAlertFalse = () => setTogglealert(false)
+
 
     const [id_bon, setId_bon] = useState()
     const [achetLivreur, setAchetlivreur] = useState()
@@ -245,7 +251,13 @@ const Reception = (props) => {
                                 })
                             })()
                     }
-
+                        <div className="l" onClick={toggleAlertTrue}>
+                            
+                            <i className="bi bi bi-bell-fill " id="l"  style={{fontSize: "50px", color:"#7B170F"}}> </i>
+                            <br/>
+                            <span style={{ color:"#7B170F" , marginTop:"0px"}}>ALERT</span> 
+                            
+                        </div>
                     </div>
                     {show && <ModalReception    show={show} 
                                                 handleClose={handleClose} 
@@ -264,7 +276,8 @@ const Reception = (props) => {
         
           {toggle === false && <Enregistrement recepBtn={props.recepBtn} enrgBtn ={props.enrgBtn}  toggleDisplay={toggleDisplay}  id_bon ={id_bon} fk_fournisseur= {fk_fournisseur}  nom_fournisseur={nom_fournisseur} recepteur={recepteur} type_bon={type_bon} />}
                     
-                
+           {toggleAlert && <ModelAlert  show={toggleAlert} 
+                                        handleClose={toggleAlertFalse} /> }     
                 
             
 

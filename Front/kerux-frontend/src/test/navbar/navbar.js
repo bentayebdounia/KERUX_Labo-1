@@ -11,7 +11,9 @@ import Acueil from '../acueil/acueil'
 import StatistiqueProduitFourni from '../statistique/MstatistiqueProduitFourni'
 import StatistiqueTypeProduit from '../statistique/MstatistiqueType'
 import StatistiqueProcess from '../statistique/MstatistiqueProcessProd'
+import ModelAlert from '../alert/modalAlert'
 
+import serviceAlert from '../../service/service.alert'
 import './navbar.css'
 
 const Navbar = () => {
@@ -42,9 +44,9 @@ const Navbar = () => {
     const handleCloseProcess = () => setShowprocess(false)
     const handleShowProcess = () => setShowprocess(true)
 
-    const [showAcueil, setShowacueil] = useState(false)
-    const handleCloseAcueil = () => setShowacueil(false)
-    const handleShowAcueil = () => setShowacueil(true)
+    const [toggleAlert, setTogglealert] = useState(true)
+    const toggleAlertTrue = () => setTogglealert (true)
+    const toggleAlertFalse = () => setTogglealert(false)
 
     const [journalprocess, setJournalProcess ] = useState('')
 
@@ -62,10 +64,22 @@ const Navbar = () => {
     const [showStatProcessProd, setShowstatprocess_prod] = useState(false)
     const handleCloseStatProcessProd = () => setShowstatprocess_prod(false)
     const handleShowStatProcessProd = () => setShowstatprocess_prod(true)
-
+    const [alert, setAlert] = useState()
 
     var user = JSON.parse (localStorage.getItem('login'))
 
+    const dateAlert = () => {
+      const d = new Date
+      
+          return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate())
+  }
+
+    useEffect(()=>{
+      serviceAlert.countAlert(dateAlert()).then((res)=> {
+        setAlert(res.data[0].count)
+        
+    })
+    })
    
     
     
@@ -75,18 +89,15 @@ const Navbar = () => {
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow" >
             <div className="container-fluid" id='divContainer'>
           
-          <Link className="nav-link active"   to="#"  onClick={()=>{ handleCloseProcess(); handleShowAcueil()}}>
-            <i className="bi bi-house-door-fill me-2" ></i>
-            Acueil
-          </Link>
-          <Link className="nav-link active"  to="#" onClick={() =>  { handleCloseAcueil(); handleShowProcess ()}}>
+          
+          <Link className="nav-link active"  to="#" onClick={() =>  {  handleShowProcess ()}}>
           <i className="bi bi-bar-chart-steps me-2" ></i>
             Process</Link>
           <Link className="nav-link active "   role="button" data-bs-toggle="dropdown"  to="#">
             <i className="bi bi-journals me-2" ></i>
             Journal
           </Link>
-          <ul className="dropdown-menu menubar" style={{marginLeft:'39.5%'}}>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'27%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalReception() } } >Journal de reception</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalProduitFourni() } } >Journal de produits fournis</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalNettoyage(); setJournalProcess('enregistrement') } }>Journal de enregistrement</button> </li>
@@ -102,7 +113,7 @@ const Navbar = () => {
           <i className="bi bi-boxes me-2" ></i>
               Stock   
           </Link>
-          <ul className="dropdown-menu menubar" style={{marginLeft:'55%'}}>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'39.5%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={handleShow4}>Entrepot</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={handleShowMouvementStock}>Movement de stock</button> </li>
             
@@ -113,12 +124,18 @@ const Navbar = () => {
           <i className="bi bi-bar-chart-line-fill me-2" ></i>
           Statistique
             </Link>
-          <ul className="dropdown-menu menubar" style={{marginLeft:'69.5%'}}>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'55%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowStatistiqueProd() } } >Statistique des categories produits </button> </li>
             <li> <button className="dropdown-item"  type="button"  onClick={()=> { handleShowStatistiqueProdType ()}}>Statistique des types produits  </button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=> { handleShowStatProcessProd ()}}>Statistique des process </button> </li>
             
           </ul>
+
+          <Link className="nav-link active"   to="#"  onClick={toggleAlertTrue}>
+             <i className="bell bi bi-bell-fill" id="bell"  > </i>
+                  
+                Alert
+          </Link>
         
           <Link className="nav-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             <i className="bi bi-person-fill" style={{fontSize: "1.25rem", color:"white"}}></i>
@@ -139,7 +156,7 @@ const Navbar = () => {
             </div>
         </nav>
         {showProcess && <Etape/>}
-        {showAcueil && <Acueil/> }
+        
 
         {show4 && <AjouterEntrepot 
                             show={show4} 
@@ -189,6 +206,8 @@ const Navbar = () => {
                                                     show={showStatProcessProd}
                                                     handleClose={handleCloseStatProcessProd}
                             />}
+          {toggleAlert && <ModelAlert  show={toggleAlert} 
+                                        handleClose={toggleAlertFalse} /> }   
         
         </div>
     
