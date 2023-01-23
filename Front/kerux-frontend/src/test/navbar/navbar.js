@@ -64,25 +64,25 @@ const Navbar = () => {
     const [showStatProcessProd, setShowstatprocess_prod] = useState(false)
     const handleCloseStatProcessProd = () => setShowstatprocess_prod(false)
     const handleShowStatProcessProd = () => setShowstatprocess_prod(true)
-    const [alert, setAlert] = useState()
+    const [alerte, setAlert] = useState()
 
     var user = JSON.parse (localStorage.getItem('login'))
 
-    const dateAlert = () => {
+    const dateAlert = (n) => {
       const d = new Date
       
-          return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate())
+          return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+n)
   }
 
     useEffect(()=>{
-      serviceAlert.countAlert(dateAlert()).then((res)=> {
+      serviceAlert.countAlert().then((res)=> {
         setAlert(res.data[0].count)
         
     })
     })
    
     
-    
+    console.log(alerte);
 
     return (
         <div>
@@ -132,8 +132,13 @@ const Navbar = () => {
           </ul>
 
           <Link className="nav-link active"   to="#"  onClick={toggleAlertTrue}>
-             <i className="bell bi bi-bell-fill" id="bell"  > </i>
-                  
+             <i className="bell bi bi-bell-fill" id="bell"  > 
+             <span className="position-absolute top-0 start-1 translate-middle badge rounded-pill bg-danger text-light" style={{fontSize:"11px", fontStyle:"normal"}}>
+                    {alerte}
+                    <span className="visually-hidden">unread messages</span>
+              </span> 
+             </i>
+             
                 Alert
           </Link>
         
@@ -155,6 +160,7 @@ const Navbar = () => {
           
             </div>
         </nav>
+        
         {showProcess && <Etape/>}
         
 

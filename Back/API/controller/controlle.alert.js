@@ -27,7 +27,7 @@ updateAlert = (req, res) => {
 countAlert = (req, res) => {
     const date_alert = req.params.date_alert
 
-    pool.query(queries.countAlert, [date_alert] , 
+    pool.query(queries.countAlert , 
         (error, result) => {
             if (error) throw error
             res.status(200).json(result.rows)

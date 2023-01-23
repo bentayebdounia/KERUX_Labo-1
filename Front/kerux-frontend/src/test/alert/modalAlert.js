@@ -21,7 +21,7 @@ const ModelAlert = (props) => {
             setAlertwarnning(res.data)
             
         })
-        serviceAlert.alertDataPrimary(dateAlert(2)).then((res)=> {
+        serviceAlert.alertDataPrimary(dateAlert(1)).then((res)=> {
             setAlertprimary(res.data)
             
         })
@@ -42,20 +42,20 @@ const ModelAlert = (props) => {
                 {alertDanger.map ( (key) =>
                     <Alert variant={'danger'}>
                     <i className="bi-exclamation-octagon-fill me-2"></i>
-                       Le produit de ID: {key.id_gnerate} est en attente à l'étape: {key.etape}  
+                       Le produit de ID: <span style={{fontWeight:"bold"}}> {key.id_gnerate} </span>  est en attente à l'étape: <span style={{fontWeight:"bold"}}> {key.etape} </span>
                     </Alert>
 )}
                     {alertWarnning.map ( (key) =>
                         <Alert variant={'warning'}>
                         <i className="bi-exclamation-triangle-fill me-2"></i>
-                        Le produit de ID: {key.id_gnerate} est en attente à l'étape: {key.etape}  
+                        Le produit de ID: <span style={{fontWeight:"bold"}}> {key.id_gnerate} </span> est en attente à l'étape: <span style={{fontWeight:"bold"}}> {key.etape} </span>  
                     </Alert>
                     )}
 
                     {alertPrimary.map ( (key) =>
                         <Alert variant={'primary'}>
                         <i className="bi-info-circle-fill me-2"></i>
-                        Le produit de ID: {key.id_gnerate} est en attente à l'étape: {key.etape}  
+                        Le produit de ID: <span style={{fontWeight:"bold"}}> {key.id_gnerate} </span> est en attente à l'étape: <span style={{fontWeight:"bold"}}> {key.etape} </span>  
                     </Alert>
                     )}
                 </div>
