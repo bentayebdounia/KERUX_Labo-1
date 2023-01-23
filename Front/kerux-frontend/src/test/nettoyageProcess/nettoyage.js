@@ -63,7 +63,7 @@ const Nettoyage = (props) => {
       
         agentNettoyageSelect.push({
         id_personne: id_personne,
-        nom:  agent,
+        nom: agent,
         
        })
         handleShow()

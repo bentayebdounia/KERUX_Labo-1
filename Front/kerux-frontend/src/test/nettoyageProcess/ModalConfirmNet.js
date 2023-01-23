@@ -61,12 +61,9 @@ const ModalConfirmNet = (props) => {
                 .then((result)=>{
                     console.log(result.data)
                             })
-
             }                 
                 
         })
-        
-        
         
         handleShow3()
        props.handleClose2()  

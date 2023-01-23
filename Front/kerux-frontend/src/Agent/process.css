@@ -20,21 +20,13 @@
     margin-top: 100px;
 }
 
-#stepComponant {
-    background-color: rgb(255, 255, 255);
-    margin-top: 50px;
-    height: auto;
-}
 
-.etape {
-    text-align:center;
-}
+
+
 #reception_etape{
     color: #D3D3D3 ;
 } 
-.etape div{
-    color: #D3D3D3;
-}
+
 
 #mainprocess{
     margin-left: 100px;

@@ -67,12 +67,13 @@ const AffichageBoxes = (props) => {
 
         if (poid < poids && props.poidsRester === 0) alert ("erreur")
 
-            else if (nombre !=='' && poids !== '')
+            else if (nombre !=='' && poids !== '' )
 {
         var tab= []
         tab= JSON.parse(localStorage.getItem('boxes'+props.id))
         console.log(boxe);
         const n = entrepots.find(({ id_entrepot }) => id_entrepot === parseInt(entrepot))
+        console.log('entrepot='+ entrepot);
         for(var i=0; i<tab.length; i++){
             console.log((key));
             console.log(boxe.date);
@@ -94,12 +95,26 @@ const AffichageBoxes = (props) => {
                     tab[i].nombre = nbr
                     boxe[i].nombre =nbr
                 }
-                if (entrepot !== ""){
+                if (entrepot === undefined){
+                    console.log('id box');
                     tab[i].id_stock = entrepot
+                    console.log(tab[i].id_stock);
+                    tab[i].stock=""
+                    boxe[i].id_stock =entrepot
+                    console.log(boxe[i].id_stock);
+                    boxe[i].stock = ""
+                }
+
+                else {
+                    console.log('id box');
+                    tab[i].id_stock = entrepot
+                    console.log(tab[i].id_stock);
                     tab[i].stock=n.nom_entrepot
                     boxe[i].id_stock =entrepot
+                    console.log(boxe[i].id_stock);
                     boxe[i].stock = n.nom_entrepot
-            }
+                }
+                
             }
        }
        console.log(tab);
@@ -186,10 +201,12 @@ const AffichageBoxes = (props) => {
                                                                         </td>
                                                                         <td> 
                                                                             <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)} >
-                                                                                <option value="" ></option>
+                                                                                 <option value={""} ></option>
                                                                                 {entrepots.map( (entrepot,key) =>
+                                                                                   <> 
                                                                                     
                                                                                     <option value={entrepot.id_entrepot}> {entrepot.nom_entrepot} </option>
+                                                                                    </>
                                                                                 )}  
                                                                                 
                                                                             </select>  
@@ -202,7 +219,7 @@ const AffichageBoxes = (props) => {
                                                                                 setBoxe(
                                                                                 boxe.map((data,k) => {
                                                                                     if (key === k) {
-                                                                                        data.select = enregistrer(p.date,key, p.poids,p.npmbre);
+                                                                                        data.select = enregistrer(p.date,key, p.poids,p.nombre);
                                                                                         
                                                                                     }
                                                                                     return data;

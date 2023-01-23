@@ -123,6 +123,14 @@ const TestSortie = (props) => {
      
       }
 
+      const dateNow = (d) => {
+        var date=  moment.utc(d).format('DD-MM-YY')
+        const words = date.split('-');
+        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
+        console.log(a+1)
+        return a
+    }
+
       const chargerData = () => { 
         toggleshow1()
         toggleDisplay2()
@@ -163,7 +171,7 @@ const TestSortie = (props) => {
                 nom_produit:p.nom_produit,
                 poids:p.poids ,
                 nombre:p.nombre, 
-                datee :p.datee,
+                datee :dateNow(p.datee),
                 heure:p.heure,
                 etape:p.etape ,
                
@@ -201,7 +209,7 @@ setEnstock(
              nom_produit:p.nom_produit,
              poids:p.poids ,
              nombre:p.nombre, 
-             datee :p.datee,
+             datee :dateNow(p.datee),
              heure:p.heure,
              etape:p.etape ,
              nom_entrepot :p.nom_entrepot ,

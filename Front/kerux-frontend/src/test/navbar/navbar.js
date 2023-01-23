@@ -83,21 +83,23 @@ const Navbar = () => {
    
     
     console.log(alerte);
-
+/* 
+<Link className="nav-link active"  to="#" onClick={() =>  {  handleShowProcess ()}}>
+          <i className="bi bi-bar-chart-steps me-2" ></i>
+            Process</Link>
+*/
     return (
         <div>
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow" >
             <div className="container-fluid" id='divContainer'>
           
           
-          <Link className="nav-link active"  to="#" onClick={() =>  {  handleShowProcess ()}}>
-          <i className="bi bi-bar-chart-steps me-2" ></i>
-            Process</Link>
-          <Link className="nav-link active "   role="button" data-bs-toggle="dropdown"  to="#">
+          
+          <Link className="nav-link active me-5 "   role="button" data-bs-toggle="dropdown"  to="#">
             <i className="bi bi-journals me-2" ></i>
             Journal
           </Link>
-          <ul className="dropdown-menu menubar" style={{marginLeft:'27%'}}>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'38%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalReception() } } >Journal de reception</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalProduitFourni() } } >Journal de produits fournis</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowJournalNettoyage(); setJournalProcess('enregistrement') } }>Journal de enregistrement</button> </li>
@@ -109,30 +111,30 @@ const Navbar = () => {
             
           </ul>
 
-          <Link className="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">
+          <Link className="nav-link active me-5" role="button" data-bs-toggle="dropdown" aria-expanded="false"  href="#">
           <i className="bi bi-boxes me-2" ></i>
               Stock   
           </Link>
-          <ul className="dropdown-menu menubar" style={{marginLeft:'39.5%'}}>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'45%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={handleShow4}>Entrepot</button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={handleShowMouvementStock}>Movement de stock</button> </li>
             
           </ul>
 
 
-          <Link className="nav-link active" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">
+          <Link className="nav-link active me-5" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">
           <i className="bi bi-bar-chart-line-fill me-2" ></i>
           Statistique
             </Link>
-          <ul className="dropdown-menu menubar" style={{marginLeft:'55%'}}>
+          <ul className="dropdown-menu menubar" style={{marginLeft:'50%'}}>
             <li> <button className="dropdown-item"  type="button" onClick={()=>{ handleShowStatistiqueProd() } } >Statistique des categories produits </button> </li>
             <li> <button className="dropdown-item"  type="button"  onClick={()=> { handleShowStatistiqueProdType ()}}>Statistique des types produits  </button> </li>
             <li> <button className="dropdown-item"  type="button" onClick={()=> { handleShowStatProcessProd ()}}>Statistique des process </button> </li>
             
           </ul>
 
-          <Link className="nav-link active"   to="#"  onClick={toggleAlertTrue}>
-             <i className="bell bi bi-bell-fill" id="bell"  > 
+          <Link className="nav-link active "   to="#"  onClick={toggleAlertTrue}>
+             <i className="bell bi bi-bell-fill me-2" id="bell"  > 
              <span className="position-absolute top-0 start-1 translate-middle badge rounded-pill bg-danger text-light" style={{fontSize:"11px", fontStyle:"normal"}}>
                     {alerte}
                     <span className="visually-hidden">unread messages</span>
@@ -142,11 +144,11 @@ const Navbar = () => {
                 Alert
           </Link>
         
-          <Link className="nav-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i className="bi bi-person-fill" style={{fontSize: "1.25rem", color:"white"}}></i>
+          <Link className="nav-link p-5 position-absolute end-0 " to="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">
+            <i className="bi bi-person-fill" style={{fontSize: "1.25rem", color:"white" }}></i>
             <i className="bi bi-caret-down-fill" style={{fontSize: "0.5rem", color:"white"}}></i>
           </Link>
-          <ul className="dropdown-menu menubar" style={{marginLeft:'87%'}}>
+          <ul className="dropdown-menu" style={{marginLeft:"90%" }} >
             <li>
               <span className="spanUser">{user.nom}</span> 
               <br/>

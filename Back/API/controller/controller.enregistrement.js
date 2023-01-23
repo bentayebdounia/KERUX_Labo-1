@@ -82,7 +82,7 @@ const generieIdEnreg = (fk_fournisseur, fk_bon, cle ) => {
 
 const verifierId = (id) => {
     if (id >= 0 && id < 10) 
-        return 00+''+id 
+        return 0+''+0+''+id 
     
     else if (id > 9 && id<100)
             return 0+''+id

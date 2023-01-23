@@ -5,7 +5,7 @@ ajouterAlert = (req, res) => {
     //var date_alert = new Date
     
     var existe = true
-    const { fk_processs, date_alert, etape } = req.body
+    const { fk_processs, date_alert } = req.body
     pool.query(queries.ajouterAlert, [fk_processs,  date_alert, existe], 
         
         (err, result) => {

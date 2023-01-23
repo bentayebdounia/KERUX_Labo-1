@@ -1,9 +1,9 @@
 .navbar {
     background: #7B170F;
-    height: 50px;
+    height: 60px;
 }
 .navbar .container-fluid{
-    justify-content: space-evenly
+    justify-content:center
 }
 .container-fluid .nav-link{
     color: white;
@@ -19,7 +19,7 @@
 .nav-link:hover{
     color: rgb(255, 255, 255);
     
-    font-size: 18px;
+    font-size: 19px;
 }
 
 .menubar{

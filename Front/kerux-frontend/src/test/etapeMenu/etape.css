@@ -2,3 +2,18 @@
     font-size: 4rem;
     color: #D4D4D4;
 }
+
+#stepComponant {
+    background-color: rgb(255, 255, 255);
+   
+    height: auto;
+}
+
+.etape {
+    text-align:center;
+}
+
+.etape div{
+    color: #D3D3D3;
+   
+}

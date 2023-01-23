@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const POST_ALERT = "http://localhost:8080/alert//ajouterAlert"
+const POST_ALERT = "http://localhost:8080/alert/ajouterAlert"
 const UPDATE_ALERT = "http://localhost:8080/alert//modifierAlert/"
 const COUNT_ALERT = "http://localhost:8080/alert/alertCount"
 const COUNT_ALERT_PRIMARY = "http://localhost:8080/alert/alertCountPrimary/"

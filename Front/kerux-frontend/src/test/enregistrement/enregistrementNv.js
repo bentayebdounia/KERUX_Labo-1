@@ -345,17 +345,13 @@ const Enregistrement = (props) => {
 
                     <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
                         onClick={(e) => ajouterProduitFourni(e)} >
-                        <i className="bi bi-plus-lg" style={{color: "white"}}> AJOUTER PRODUIT </i> 
-                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                        <i className="bi bi-plus-lg" style={{color: "white" , fontStyle:"normal"}}> AJOUTER PRODUIT </i> 
+                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill " style={{background: "#f0f0f0" , color: "black" , fontStyle:"normal"}}>
                             {conteur}
                             <span className="visually-hidden">unread messages</span>
                         </span>
-                        </button>
-                                             
-                                               
-                                             
-                                             
-
+                    </button>
+                    
                     </div>
                     <p style={{borderBottom :'5px solid', borderRadius:"3px" , borderColor:'#a6a6a6'}}></p>
                
