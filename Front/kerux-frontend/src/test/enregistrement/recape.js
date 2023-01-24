@@ -2,7 +2,7 @@ import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import serviceStock from '../../service/service.stock'
 import EnregistrementService from '../../service/service.enregistrement'
-
+import serviceAlert from '../../service/service.alert';
 
 const Recape = (props) => {
     const [stock , setStock] = useState()
@@ -34,13 +34,13 @@ const Recape = (props) => {
          supprimerProduitFourni()
     }
 
-    const dateAlert = () => {
+    const dateAlert = (categorie) => {
         const d = new Date
-        if (props.categorie === "poulet" ){
+        if (categorie === "poulet" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
         }
 
-        else if (props.categorie === "legume" ){
+        else if (categorie === "legume" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
         }
     }
@@ -64,7 +64,9 @@ const Recape = (props) => {
                         
                         console.log(res.data);
                         
-                            
+                        serviceAlert.ajouterAlert(res.data.id_process, dateAlert(box[i].categorie)).then ((result) =>{
+                            alert (result.data)
+                        })
                         
                         
                     })
@@ -75,6 +77,9 @@ const Recape = (props) => {
                     .then((res) => {
                         
                         console.log(res.data);
+                        serviceAlert.ajouterAlert(res.data.id_process, dateAlert(box[i].categorie)).then ((result) =>{
+                            alert (result.data)
+                        })
                         ajouterauStock(res.data.id_gnerate,box[i].id_stock)
                         
                         
