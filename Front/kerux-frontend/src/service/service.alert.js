@@ -11,9 +11,9 @@ const ALERT_DATA_PRIMARY= "http://localhost:8080/alert/dataAlertPrimary/"
 
 class AlertService {
    
-    ajouterAlert(fk_processs, date_alert, etape) {
+    ajouterAlert(fk_processs, date_alert) {
         
-        const alertData = {fk_processs, date_alert, etape}
+        const alertData = {fk_processs, date_alert}
         
         return axios.post(POST_ALERT, alertData)
     }

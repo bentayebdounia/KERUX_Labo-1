@@ -52,7 +52,7 @@ const StatistiqueTypeProduit = (props) => {
       var categorie_prod = []
        for (var i=1 ; i< 13 ; i++ ){
          if (i<12){
-             seviceStatistique.getTypeproduitFourni(categorie,'2023-'+i+'-01', '2023-'+(i+1)+'-1')
+             seviceStatistique.getTypeproduitFourni(categorie,'2023-'+i+'-1', '2023-'+(i+1)+'-1')
              .then((res) => {
                  //console.log(res.data[0]);
                  categorie_prod.push(parseFloat (res.data[0].count))
@@ -60,7 +60,7 @@ const StatistiqueTypeProduit = (props) => {
              }
              
          else if (i===12){
-           seviceStatistique.getTypeproduitFourni(categorie,'2023-'+i+'-01','2024-' +1+'-1')
+           seviceStatistique.getTypeproduitFourni(categorie,'2023-'+i+'-1','2024-' +1+'-1')
                .then((res) => {
                    //console.log(res.data[0]);
                    categorie_prod.push(parseFloat (res.data[0].count))

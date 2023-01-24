@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import ServiceEntrepot from '../../service/service.entrepot'
 import ModalAjouterStock from './Modal.ajStock2'
 import '../../print/modelPrint.css'
-import TESTPRINT from '../../print/ModelPrint';
+import TESTPRINT from '../../print/ModelPrint'
 const ModalQStock = (props) => {
     const [show4, setShow4] = useState(false)
     const handleClose4 = () => setShow4(false)

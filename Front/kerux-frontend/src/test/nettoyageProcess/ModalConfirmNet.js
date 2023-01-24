@@ -49,7 +49,7 @@ const ModalConfirmNet = (props) => {
             //console.log("id_gnerate= " + result.id_gnerate);
             //idd=res.data.id_gnerate
             
-            serviceAlert.ajouterAlert(res.data.id_process, dateAlert(), "nettoyage").then ((result) =>{
+            serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
                 alert (result.data)
             })
 

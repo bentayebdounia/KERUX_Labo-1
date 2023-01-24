@@ -37,7 +37,7 @@ const StatistiqueProcess = (props) => {
     {
       setFrite(calassificate('frite',etape))
       setTomate(calassificate('tomate',etape))
-      setLaitue(calassificate('laitue,etape'))
+      setLaitue(calassificate('laitue',etape))
       setOignon(calassificate('oignon',etape))
       setChoux(calassificate('choux',etape))
       setCaroute(calassificate('carotte',etape))
@@ -46,7 +46,7 @@ const StatistiqueProcess = (props) => {
     {
       setFrite(calassificate('frite',etape))
       setTomate(calassificate('tomate',etape))
-      setLaitue(calassificate('laitue,etape'))
+      setLaitue(calassificate('laitue',etape))
       setOignon(calassificate('oignon',etape))
       setChoux(calassificate('choux',etape))
       setCaroute(calassificate('carotte',etape))
@@ -55,7 +55,7 @@ const StatistiqueProcess = (props) => {
     {
       setFrite(calassificate('frite',etape))
       setTomate(calassificate('tomate',etape))
-      setLaitue(calassificate('laitue,etape'))
+      setLaitue(calassificate('laitue',etape))
       setOignon(calassificate('oignon',etape))
       setChoux(calassificate('choux',etape))
       setCaroute(calassificate('carotte',etape))
@@ -65,7 +65,7 @@ const StatistiqueProcess = (props) => {
     {
       setFrite(calassificate('frite',etape))
       setTomate(calassificate('tomate',etape))
-      setLaitue(calassificate('laitue,etape'))
+      setLaitue(calassificate('laitue',etape))
       setOignon(calassificate('oignon',etape))
       setChoux(calassificate('choux',etape))
       setCaroute(calassificate('carotte',etape))
@@ -75,7 +75,7 @@ const StatistiqueProcess = (props) => {
     {
       setFrite(calassificate('frite',etape))
       setTomate(calassificate('tomate',etape))
-      setLaitue(calassificate('laitue,etape'))
+      setLaitue(calassificate('laitue',etape))
       setOignon(calassificate('oignon',etape))
       setChoux(calassificate('choux',etape))
       setCaroute(calassificate('carotte',etape))
@@ -85,7 +85,7 @@ const StatistiqueProcess = (props) => {
     {
       setFrite(calassificate('frite',etape))
       setTomate(calassificate('tomate',etape))
-      setLaitue(calassificate('laitue,etape'))
+      setLaitue(calassificate('laitue',etape))
       setOignon(calassificate('oignon',etape))
       setChoux(calassificate('choux',etape))
       setCaroute(calassificate('carotte',etape))
@@ -159,7 +159,7 @@ const StatistiqueProcess = (props) => {
         var categorie_prod = []
          for (var i=1 ; i< 13 ; i++ ){
            if (i<12){
-               seviceStatistique.getPocessProd(produit,etape,'2023-'+i+'-01', '2023-'+(i+1)+'-1')
+               seviceStatistique.getPocessProd(produit,etape,'2023-'+i+'-1', '2023-'+(i+1)+'-1')
                .then((res) => {
                    console.log(res.data);
                    categorie_prod.push(parseFloat (res.data[0].count))
@@ -167,7 +167,7 @@ const StatistiqueProcess = (props) => {
                }
                
            if (i===12){
-             seviceStatistique.getPocessProd(produit,etape,'2023-'+i+'-01','2024-' +(1)+'-1')
+             seviceStatistique.getPocessProd(produit,etape,'2023-'+i+'-1','2024-' +(1)+'-1')
                  .then((res) => {
                      console.log(res.data);
                      categorie_prod.push(parseFloat (res.data[0].count))

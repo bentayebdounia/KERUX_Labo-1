@@ -10,7 +10,7 @@ const ModalConfirmCoup = (props) => {
     const handleClose3 = () => setShow3(false)
     const handleShow3 = () => setShow3(true)
 
-    const [result, setResult] = useState()
+    const [resulte, setResult] = useState()
 
     const ajouterCle = (categorie, type, numeroBox) => {
         if (categorie === "poulet"){
@@ -67,7 +67,9 @@ const ModalConfirmCoup = (props) => {
             console.log(res.data)
             setResult(res.data)
 
-            
+            serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
+                alert (result.data)
+            })
 
             //ajouter les agents  de nettoyage au bdd
             for(var i=0 ; i<props.agents.length ;i++) {
@@ -97,7 +99,7 @@ const ModalConfirmCoup = (props) => {
                 <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <span style = {{fontWeight: "bold"}} > D box: </span> {props.id_box}
+                    <span style = {{fontWeight: "bold"}} > ID box: </span> {props.id_box}
                     <br/>  
                     <span style = {{fontWeight: "bold"}} > Categorie: </span> {props.categorie}
                     <br/>
@@ -121,7 +123,7 @@ const ModalConfirmCoup = (props) => {
                                 show3={show3} 
                                 handleClose3={handleClose3} 
                                 handleShow3={handleShow3}  
-                                result={result} 
+                                result={resulte} 
                                 toggleDisplay = {props.toggleDisplay}
                                 PorcentagePoids = { props.PorcentagePoids}
                                 poids= {props.poids} nombre= {props.nombre} categorie={props.categorie}

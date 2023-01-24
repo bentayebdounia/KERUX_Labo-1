@@ -1,7 +1,9 @@
 import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal';
 import ConditService from '../../service/service.condit'
-import ModalQStock from '../Stock/Modal.ajouterEnStock'
+import ModalQStock from '../coupage/Stock_coupage/Modal.ajouterEnStock'
+import serviceAlert from '../../service/service.alert'
+
 const ModalConfirmCondit = (props) => {
 
     const [show3, setShow3] = useState(false)
@@ -38,7 +40,18 @@ const ModalConfirmCondit = (props) => {
         else return n
     }
     
-    const confirmNCondit = (e) => {
+    const dateAlert = () => {
+        const d = new Date
+        if (props.process.categorie === "poulet" ){
+            return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
+        }
+
+        else if (props.process.categorie === "legume" ){
+            return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
+        }
+    }
+
+    const confirmNCondit = async (e) => {
         e.preventDefault();
         var etape="conditionnement"
         var today = new Date()
@@ -48,10 +61,14 @@ const ModalConfirmCondit = (props) => {
         console.log(heure)
         
         var cle = ajouterCle(props.process.categorie, props.process.nom_produit, props.numeroBox)
-        ConditService.ajouterConditionnement( props.process.categorie, props.process.nom_produit, etape, parseFloat(props.poids) ,parseFloat(props.nombre) , props.process.id_nettoyage, props.id_box, props.process.fk_proditfourni, cle)
+        await ConditService.ajouterConditionnement( props.process.categorie, props.process.nom_produit, etape, parseFloat(props.poids) ,parseFloat(props.nombre) , props.process.id_nettoyage, props.id_box, props.process.fk_proditfourni, cle)
         .then( (res)=> {
             console.log(res.data)
             setResult(res.data)
+
+            serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
+                alert (result.data)
+            })
             
         })
        
@@ -77,11 +94,7 @@ const ModalConfirmCondit = (props) => {
                     <p style = {{fontWeight: "bold"}} > Poids: </p> {props.poids}
                     <p style = {{fontWeight: "bold"}} > Nombre: </p> {props.nombre} 
                     <br/>
-                    
-
-                    
-                    
-                    
+        
                 </Modal.Body>
                 <Modal.Footer>
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={props.handleClose}>Non</button>
@@ -103,3 +116,4 @@ const ModalConfirmCondit = (props) => {
 }
  
 export default ModalConfirmCondit;
+

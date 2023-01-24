@@ -36,8 +36,7 @@ const ModalAjouterStock = (props) => {
             
         })     
     }
-
-    
+  
 
     const ajout = async() => {
         
@@ -96,6 +95,7 @@ const ModalAjouterStock = (props) => {
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={ annuler}> annuler </button>
                         <button type="button" className="btn btn-success" onClick={ ajout } > Valider </button>
                 </Modal.Footer>
+
         </Modal>
         <ModelQnote
                         showQnote={showQnote}

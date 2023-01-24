@@ -18,7 +18,7 @@ const ModalQStock = (props) => {
     
  
     const getEntrepot = () =>{
-        
+        window.print();
         handleShow4()
         props.handleClose3()
        
@@ -34,6 +34,7 @@ const ModalQStock = (props) => {
         }
         else {if ( props.PorcentagePoids >= 100  ) props.toggleDisplay()}
         window.print();
+        console.log(props.result);
         props.handleClose3 ()
 
     }
@@ -49,7 +50,7 @@ const ModalQStock = (props) => {
             <Modal.Body>
                    <h3> Voulez-vous vraiment ajouter ce box au stock? </h3>
                    <div className='display-print' style={{display:"none" , margin: '0px'}}>
-                            <TESTPRINT id= {props.result } poids= {props.poids} nombre= {props.nombre} categorie={props.categorie} />
+                            <TESTPRINT id= {props.result} poids= {props.poids} nombre= {props.nombre} categorie={props.categorie} />
                     </div>
                    
             </Modal.Body>
