@@ -6,30 +6,43 @@ import seviceStatistique from '../../service/sevice.statistique'
 
 
 const StatistiqueProduitFourni = (props) => {
-     const [poulet, setPoulet] = useState(calassificate ('poulet'))
-     const [legume, setLegume] = useState(calassificate ('legume'))
+     const [poulet, setPoulet] = useState([])
+     const [legume, setLegume] = useState([])
     
     
       // setPoulet(calassificate('poulet'))
       // setLegume(calassificate('legume'))
    
+      useEffect( () =>{
+        setPoulet(calassificate('poulet'))
+        
+      },poulet)
+
+      useEffect (()=>{
+        setLegume(calassificate('legume'))
+      },legume)
       
      function  calassificate (categorie) {
        const categorie_prod = []
+
+       
         for (var i=1 ; i< 13 ; i++ ){
+          
           if (i<12){
-               seviceStatistique.getCategorieproduitFourni(categorie,'2022-'+i+'-01', '2022-'+i+'-1')
-              .then( async(res) => {
-                  //console.log(res.data[0]);
+            console.log(categorie+' '+i);
+               seviceStatistique.getCategorieproduitFourni(categorie,'2023-'+(i)+'-1', '2023-'+(i+1)+'-1')
+              .then( async (res) => {
+                  console.log(res.data[0]);
                   await categorie_prod.push(parseFloat (res.data[0].count))
               })
               }
               
-          if (i===12){
-            seviceStatistique.getCategorieproduitFourni(categorie,'2022-'+i+'-01','2023-' +i+'-1')
-                .then(async(res) => {
-                    //console.log(res.data[0]);
-                    await categorie_prod.push(parseFloat (res.data[0].count))
+          else if (i===12){
+            console.log(categorie+' '+i);
+            seviceStatistique.getCategorieproduitFourni(categorie,'2023-'+i+'-1','2024-' +1+'-1')
+                .then(async (res) => {
+                    console.log(res.data[0]);
+                     await categorie_prod.push(parseFloat (res.data[0].count))
                 })
                 }
 

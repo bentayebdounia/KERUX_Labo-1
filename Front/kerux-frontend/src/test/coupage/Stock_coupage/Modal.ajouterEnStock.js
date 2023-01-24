@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal'
 
 import ModalAjouterStock from './Modal.ajStock2'
 import ModelQnote from './Modal.Qnote'
+import '../../../print/modelPrint.css'
+import TESTPRINT from '../../../print/ModelPrint';
 
 const ModalQStock = (props) => {
     const [show4, setShow4] = useState(false)
@@ -31,7 +33,7 @@ const ModalQStock = (props) => {
             
         }
         else {if ( props.PorcentagePoids >= 100  ) props.toggleDisplay()}
-        
+        window.print();
         props.handleClose3 ()
 
     }
@@ -46,6 +48,9 @@ const ModalQStock = (props) => {
             </Modal.Header>
             <Modal.Body>
                    <h3> Voulez-vous vraiment ajouter ce box au stock? </h3>
+                   <div className='display-print' style={{display:"none" , margin: '0px'}}>
+                            <TESTPRINT id= {props.result } poids= {props.poids} nombre= {props.nombre} categorie={props.categorie} />
+                    </div>
                    
             </Modal.Body>
             <Modal.Footer>

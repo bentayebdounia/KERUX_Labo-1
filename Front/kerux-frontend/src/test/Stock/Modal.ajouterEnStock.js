@@ -14,11 +14,12 @@ const ModalQStock = (props) => {
 
     
     const getEntrepot = () =>{
-        window.print();
+        
         ServiceEntrepot.getEntrepot()
         .then ((res)=> {
             setEntrepot(res.data)
         })
+        window.print();
         handleShow4()
         props.handleClose3()
         
@@ -32,7 +33,7 @@ const ModalQStock = (props) => {
 
     }
     
-    //console.log(entrepot);
+    console.log(props.result);
 
     return (  
         <>

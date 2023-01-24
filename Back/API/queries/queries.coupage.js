@@ -1,6 +1,6 @@
 // -- process Coupage ******************
 const ajouterProcessCoup = "INSERT INTO process (categorie, nom_produit, etape, poids, nombre, datee, heure, id_nettoyage, fk_proditFourni, id_gnerate)"
-                                +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9, $10) RETURNING id_process , id_gnerate"
+                                +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9, $10) RETURNING *"
 
 const ajouterProcessCoupHist = "INSERT INTO process_historique (categorie, nom_produit, etape, poids, nombre, datee, heure, id_nettoyage, fk_proditFourni, id_gnerate)"
                                 +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9, $10) "

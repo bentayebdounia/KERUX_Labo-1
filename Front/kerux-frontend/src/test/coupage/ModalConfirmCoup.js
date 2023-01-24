@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import CoupageService from '../../service/service.coupage'
 import ModalQStock from './Stock_coupage/Modal.ajouterEnStock'
 import Service_AgentProcess from '../../service/service.agentProcess'
+import serviceAlert from '../../service/service.alert'
+
 const ModalConfirmCoup = (props) => {
     const [show3, setShow3] = useState(false)
     const handleClose3 = () => setShow3(false)
@@ -38,6 +40,16 @@ const ModalConfirmCoup = (props) => {
         else return n
     }
   
+    const dateAlert = () => {
+        const d = new Date
+        if (props.categorie === "poulet" ){
+            return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
+        }
+
+        else if (props.categorie === "legume" ){
+            return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
+        }
+    }
 
     const confirmCoupage = async (e) => {
         e.preventDefault();
@@ -54,6 +66,8 @@ const ModalConfirmCoup = (props) => {
         await CoupageService.ajouterCoupage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_box, props.fk_proditfourni, cle).then( (res)=> {
             console.log(res.data)
             setResult(res.data)
+
+            
 
             //ajouter les agents  de nettoyage au bdd
             for(var i=0 ; i<props.agents.length ;i++) {
@@ -110,6 +124,7 @@ const ModalConfirmCoup = (props) => {
                                 result={result} 
                                 toggleDisplay = {props.toggleDisplay}
                                 PorcentagePoids = { props.PorcentagePoids}
+                                poids= {props.poids} nombre= {props.nombre} categorie={props.categorie}
                                 />
         </>
      );

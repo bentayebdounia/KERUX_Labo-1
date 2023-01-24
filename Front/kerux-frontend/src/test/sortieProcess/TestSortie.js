@@ -274,7 +274,7 @@ setEnstock(
                                         <td>{p.nom_produit}</td> 
                                         <td>{p.poids}</td> 
                                         <td>{p.nombre}</td> 
-                                        <td>{moment.utc(p.datee).format('DD/MM/YYYY')}</td> 
+                                        <td>{p.datee}</td> 
                                         <td>{p.heure}</td> 
                                         
                                         
@@ -346,7 +346,7 @@ if(buttonColor2)
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids}</td> 
                                     <td>{p.nombre}</td> 
-                                    <td>{moment.utc(p.datee).format('DD/MM/YYYY')}</td> 
+                                    <td>{p.datee}</td> 
                                     <td>{p.heure}</td> 
                                     <td>{p.nom_entrepot}</td>  
                                 

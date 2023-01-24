@@ -201,16 +201,16 @@ const Navbar = () => {
 
                                           />}
                                   
-          {showStatistiqueProd && <StatistiqueProduitFourni
+             <StatistiqueProduitFourni
                                           show={showStatistiqueProd}
                                           handleClose={handleCloseStatistiqueProd}
-                  />}
+                  />
 
-          {showStatistiqueProdType && <StatistiqueTypeProduit
+             <StatistiqueTypeProduit
                                                     show={showStatistiqueProdType}
                                                     handleClose={handleCloseStatistiqueProdType}
-                            />}
-          {showStatProcessProd && <StatistiqueProcess
+                            />
+           {showStatProcessProd && <StatistiqueProcess
                                                     show={showStatProcessProd}
                                                     handleClose={handleCloseStatProcessProd}
                             />}

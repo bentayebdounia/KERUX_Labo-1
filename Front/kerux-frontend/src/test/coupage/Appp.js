@@ -3,9 +3,9 @@ import Box from './box'
 import "./appp.css"
 import TESTPRINT from './testPrint'
 var Barcode = require('react-barcode')
-var jsThermalPrinter = require("js-thermal-printer")
-const ThermalPrinter = require("../../node-thermal-printer").printer;
-const PrinterTypes = require("../../node-thermal-printer").types;
+//var jsThermalPrinter = require("js-thermal-printer")
+//const ThermalPrinter = require("../../node-thermal-printer").printer;
+//const PrinterTypes = require("../../node-thermal-printer").types;
 
 function Appp(){
     
@@ -22,7 +22,7 @@ function Appp(){
     }])
 
 //how to print config a printer in react js?    
-
+/*
     const printThermal = () => {
         let printer = new ThermalPrinter({
             type: PrinterTypes.STAR,                                  // Printer type: 'star' or 'epson'
@@ -42,7 +42,7 @@ function Appp(){
             printer.println("Hello World"); 
         
 
-    }
+    }*/
 console.log(boxes);
 
 const print =() => {
@@ -51,7 +51,7 @@ const print =() => {
     return (
         <>
                 
-                    <button id="btnPrint" className="hidden-print" onClick={ printThermal }>Print</button>
+                    <button id="btnPrint" className="hidden-print" onClick={ print }>Print</button>
 
                   
 

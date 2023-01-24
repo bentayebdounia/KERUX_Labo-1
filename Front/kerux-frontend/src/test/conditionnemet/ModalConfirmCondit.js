@@ -1,7 +1,7 @@
 import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal';
 import ConditService from '../../service/service.condit'
-import ModalQStock from '../coupage/Stock_coupage/Modal.ajouterEnStock'
+import ModalQStock from '../Stock/Modal.ajouterEnStock'
 const ModalConfirmCondit = (props) => {
 
     const [show3, setShow3] = useState(false)
@@ -96,6 +96,7 @@ const ModalConfirmCondit = (props) => {
                             result={result} 
                             toggleDisplay = {props.toggleDisplay} 
                             PorcentagePoids = {props.PorcentagePoids}
+                            poids= {props.poids} nombre= {props.nombre} categorie={props.process.categorie}
                             />
         </>
      );
