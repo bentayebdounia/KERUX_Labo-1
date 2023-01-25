@@ -32,6 +32,10 @@ const ModalQStock = (props) => {
         props.toggleDisplay()
 
     }
+
+    const printThermal = () => {
+        
+    }
     
     console.log(props.result);
 

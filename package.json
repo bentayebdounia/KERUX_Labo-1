@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "react-barcode": "^1.4.6"
+    "browserify-zlib": "^0.2.0",
+    "node-thermal-printer": "^4.1.2",
+    "react-barcode": "^1.4.6",
+    "stream-browserify": "^3.0.0"
   }
 }

@@ -237,14 +237,16 @@ const Etape = () => {
                                     } 
                     </div>
                 </div>
-            
+
+                {controleReception && <Reception recepBtn={recepBtn} enrgBtn={enrgBtn} />}
+                {controleNettoyage && <TestNet nettoypBtnV={nettoypBtnV} nettoypBtn={nettoypBtn} />}
+                {controleCoupage && <TestCoupage coupBtnV={coupBtnV} coupBtn={coupBtn} />}
+                {controleCondit && <TestCondit conditBtnV={conditBtnV}  conditBtn={conditBtn} />}
+                {controleSortie && <TestSortie sortieBtnV={sortieBtnV}  sortieBtn={sortieBtn}/>}
+                
             </div>
 
-            {controleReception && <Reception recepBtn={recepBtn} enrgBtn={enrgBtn} />}
-            {controleNettoyage && <TestNet nettoypBtnV={nettoypBtnV} nettoypBtn={nettoypBtn} />}
-            {controleCoupage && <TestCoupage coupBtnV={coupBtnV} coupBtn={coupBtn} />}
-            {controleCondit && <TestCondit conditBtnV={conditBtnV}  conditBtn={conditBtn} />}
-            {controleSortie && <TestSortie sortieBtnV={sortieBtnV}  sortieBtn={sortieBtn}/>}
+            
             
         
         </>

@@ -168,14 +168,14 @@ getProcessByEtapes_idGnerate = (req, res) => {
 }
 
 getProduitEnAttente = (req, res) => {
-    pool.query(actual.ActualProcess, ['enregistrement', 'nettoyage'] ,
+    pool.query(actual.ActualProcess, [ 'enregistrement'] ,
     (error, result) => {
         res.status(200).json(result.rows)  
     }
     )
 }
 getProduitEnStock = (req, res) => {
-    pool.query(actual.ActualProcessEnStock, ['enregistrement', 'nettoyage'] ,
+    pool.query(actual.ActualProcessEnStock, ['enregistrement'] ,
     (error, result) => {
         res.status(200).json(result.rows)  
     }

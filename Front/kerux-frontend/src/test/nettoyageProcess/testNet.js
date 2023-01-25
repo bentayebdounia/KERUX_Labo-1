@@ -65,27 +65,17 @@ const TestNet = (props) => {
     //les operation de pagination 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = EnAttente.slice(indexOfFirstPost, indexOfLastPost);
-    const currentPosts2 = enStock.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = tableDonnees.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = tableDonneesStocker.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
      useEffect(()=>{ 
-       /* serviceNettoyage.getActualProcess() 
+        serviceNettoyage.getActualProcess() 
             .then((res)=>{ 
                 setTabledonnees(res.data) 
-            }) */
-        serviceNettoyage.getEnregistrementTable()
-        .then((res)=>{ 
-            setTableEnregistrement(res.data)
-        })
-
-        serviceNettoyage.getNettoyageTable()
-        .then((res)=>{ 
-            setTablenettoyage(res.data)
-        })
-
-
+            }) 
+        
         serviceNettoyage.getActualProcesssStock()
         .then((res)=>{ 
             setTabledonneesstocker(res.data) 
@@ -132,11 +122,16 @@ const TestNet = (props) => {
       } 
 
       const dateNow = (d) => {
-        var date=  moment.utc(d).format('DD-MM-YY')
+        var date=  moment.utc(d).format('DD-M-YYYY')
         const words = date.split('-');
         var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
         console.log(a+1)
         return a
+    }
+    const dateToday = () => {
+        var today = new Date
+        var datee =  today.getDate()+'-'+(today.getMonth() +1)  + '-' +today.getFullYear()
+        return datee
     }
  
        const chargerData = () => { 
@@ -146,46 +141,7 @@ const TestNet = (props) => {
                 //setTabledonnees(res.data) 
                 setButtoncolor(!buttonColor)
                 setButtoncolor2(false)
-                console.log("hello1"); 
-                EnAttente.splice("") 
-                enStock.splice("") 
-               // console.log(tablenettoyage);
-                for ( var i=0 ; i<tableEnregistrement.length ; i++) { 
-                    // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
-                    var j=0
-                    var a = false
-                    //console.log(tablenettoyage[j].id_enregistrement);
-                    for (var j=0 ; j<tablenettoyage.length ; j++){
-                        if ( tablenettoyage[j].id_enregistrement === tableEnregistrement[i].id_gnerate   )   {
-                            
-                            a = true
-                            //console.log(a);
-                        }
-                    }
-                        
-                        if (a ===false && tableEnregistrement[i].fk_stock === null){
-                                EnAttente.push(tableEnregistrement[i])
-                                //console.log( EnAttente);
-                                }
-                 
-                }
-                setEnattente(
-                    EnAttente.map(p => {
-                        return {
-                            select: false,
-                            id_gnerate:p.id_gnerate,
-                            categorie: p.categorie,
-                            nom_produit:p.nom_produit,
-                            poids:p.poids ,
-                            nombre:p.nombre, 
-                            datee :dateNow(p.datee),
-                            heure:p.heure,
-                            etape:p.etape ,
-                        
-                        
-                        };
-                    })
-    )
+           
     } 
      
        const chargerDataEnStock = () => {
@@ -194,36 +150,7 @@ const TestNet = (props) => {
 
         setButtoncolor(false)
         setButtoncolor2(!buttonColor2)
-        EnAttente.splice("") 
-        enStock.splice("") 
-        for ( var i=0 ; i<tableDonneesStocker.length ; i++) { 
-            if(tableDonneesStocker[i].id_enregistrement === null && tableDonneesStocker[i].fk_stock !== null && tableDonneesStocker[i].date_sortie === null) { 
-                 
-                  
-                     enStock.push(tableDonneesStocker[i]) 
-              }
-              
-              
-   
-      
-}
-setEnstock(
-    enStock.map(p => {
-         return {
-             select: false,
-             id_gnerate:p.id_gnerate,
-             categorie: p.categorie,
-             nom_produit:p.nom_produit,
-             poids:p.poids ,
-             nombre:p.nombre, 
-             datee :dateNow(p.datee),
-             heure:p.heure,
-             etape:p.etape ,
-             nom_entrepot :p.nom_entrepot ,
-         
-         };
-     })
- )
+
 
        }
      
@@ -253,13 +180,13 @@ setEnstock(
                             { 
                                 currentPosts.map( 
                                     (p, key) => 
-                                    <tr key={key}> 
+                                    <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                         <td>
                                         <input
                                             onChange={event => {
                                                 let checked = event.target.checked;
                                                 setEnattente(
-                                                EnAttente.map(data => {
+                                                    currentPosts.map(data => {
                                                     if (p.id_gnerate === data.id_gnerate) {
                                                         data.select = checked;
                                                         setId(p.id_gnerate)
@@ -277,12 +204,12 @@ setEnstock(
                                             ></input>
                                             </td> 
                                         
-                                        <td>{p.id_gnerate}</td> 
+                                        <td>{p.id_gnerate} </td> 
                                         <td>{p.categorie}</td> 
                                         <td>{p.nom_produit}</td> 
                                         <td>{p.poids}</td> 
                                         <td>{p.nombre}</td> 
-                                        <td>{p.datee}</td> 
+                                        <td>{dateNow (p.datee)}</td> 
                                         <td>{p.heure}</td> 
                                         
                                         
@@ -325,13 +252,13 @@ table2=(
                             <tbody >
                             {  currentPosts2.map( 
                                 (p, key) => 
-                                <tr key={key}> 
+                                <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                     <td>
                                     <input
                                         onChange={event => {
                                             let checked = event.target.checked;
                                             setEnstock(
-                                                enStock.map(data => {
+                                                currentPosts2.map(data => {
                                                 if (p.id_gnerate === data.id_gnerate) {
                                                     data.select = checked;
                                                     setId(p.id_gnerate)
@@ -348,12 +275,12 @@ table2=(
                                         ></input>
                                         </td> 
                                     
-                                    <td>{p.id_gnerate}</td> 
+                                    <td>{p.id_gnerate} </td> 
                                     <td>{p.categorie}</td> 
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids}</td> 
                                     <td>{p.nombre}</td> 
-                                    <td>{p.datee}</td> 
+                                    <td>{dateNow (p.datee)}</td> 
                                     <td>{p.heure}</td> 
                                     <td>{p.nom_entrepot}</td>  
                                 
