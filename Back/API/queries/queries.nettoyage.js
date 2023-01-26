@@ -10,7 +10,7 @@ const ModifyProcessNettoy = "UPDATE process SET fk_stock = $1 WHERE  id_nettoyag
 const ModifyProcessNettoyHist = "UPDATE process_historique SET fk_stock = $1 WHERE  id_nettoyage = 2$"
 
 ///nettoyage
-const getProcessByIdNettoyage = "SELECT fk_proditfourni , fk_stock, categorie, nom_produit, etape FROM process WHERE id_gnerate= $1  AND etape='enregistrement'"
+const getProcessByIdNettoyage = "SELECT id_process, fk_proditfourni , fk_stock, categorie, nom_produit, etape FROM process WHERE id_gnerate= $1  AND etape='enregistrement'"
 const getProcessbyIdEnregistrement = "SELECT * FROM process WHERE id_enregistrement= $1"
 
 

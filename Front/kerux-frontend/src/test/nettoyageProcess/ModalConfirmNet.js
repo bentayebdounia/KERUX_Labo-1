@@ -13,9 +13,7 @@ const ModalConfirmNet = (props) => {
     const handleClose3 = () => setShow3(false)
     const handleShow3 = () => setShow3(true)
 
-    const [show, setShow] = useState(false)
-    const handleClose = () => setShow3(false)
-    const handleShow = () => setShow3(true)
+
     
  
     const [result, setResult] = useState()
@@ -50,11 +48,12 @@ const ModalConfirmNet = (props) => {
             //idd=res.data.id_gnerate
             
             serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
-                alert (result.data)
+               // alert (result.data)
             })
 
             serviceAlert.updateAlert(props.id_process).then ((result) =>{
-                alert (result.data)
+                
+                //alert (result.data.id_alert)
             })
             //console.log(idd);
             //ajouter les agents  de nettoyage au bdd
@@ -69,6 +68,7 @@ const ModalConfirmNet = (props) => {
         })
         
         handleShow3()
+        props.nettoypBtn()
        props.handleClose2()  
     }
 
@@ -112,7 +112,8 @@ const ModalConfirmNet = (props) => {
                             handleShow3={handleShow3} 
                             result={result} 
                             toggleDisplay={props.toggleDisplay} 
-                            poids= {props.poids} nombre= {props.nombre} categorie={props.categorie}
+                            poids= {props.poids} nombre= {props.nombre}
+                             categorie={props.categorie}
                         />
             
             

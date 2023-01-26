@@ -21,7 +21,7 @@ const getPersonneByNomOrPrenom = "SELECT id_personne, nom , prenom  FROM personn
 /////// Entrepot *********************************
 const ajouterEntrepot = "INSERT INTO entrepot ( nom_entrepot, type_entrepot, air_stockage, capacite, adresse, exist ,date_enregistrement_entrepot)"
                         +"VALUES ( $1, $2, $3, $4, $5, $6, $7 )"
-const getEnrepot = "SELECT id_entrepot, nom_entrepot FROM entrepot WHERE exist=TRUE"
+const getEnrepot = "SELECT id_entrepot, nom_entrepot,air_stockage FROM entrepot WHERE exist=TRUE"
 /////// Stock *********************************
 // --ajouter  au stock
 const ajouterStock = "INSERT INTO stock ( date_entree, fk_entrepot) VALUES ( $1, $2 ) RETURNING id_stock"
@@ -102,24 +102,17 @@ module.exports={
     ajouterReception,
 
     ajouterProduitFourni,
-
     
     ajouterProcessEnreg,
     ajouterProcessEnregHist, 
     ModifyProcess,
     ModifyProcessHist,
 
-    
- 
-    
-
     ajouterProcessMarinade,
     ajouterProcessMarinadeHist,
     ModifyProcessMarinade,
     ModifyProcessMarinadeHist,
 
-   
- 
     ajouterEntrepot,
     getEnrepot,
 

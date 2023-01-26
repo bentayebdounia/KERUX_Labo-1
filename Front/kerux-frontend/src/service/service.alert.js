@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const POST_ALERT = "http://localhost:8080/alert/ajouterAlert"
 const UPDATE_ALERT = "http://localhost:8080/alert/modifierAlert/"
+const UPDATE_DATE_ALERT = "http://localhost:8080/alert/modifierDateAlert/"
 const COUNT_ALERT = "http://localhost:8080/alert/alertCount"
 const COUNT_ALERT_PRIMARY = "http://localhost:8080/alert/alertCountPrimary/"
 const COUNT_ALERT_ETAPE = "http://localhost:8080/alert/alertCountEtape/"
@@ -21,6 +22,12 @@ class AlertService {
     updateAlert (fk_process) {
         const existe = false
         return axios.put(UPDATE_ALERT+fk_process, existe )
+    }
+
+    updateDateAlert ( fk_process , date_alerte ) {
+        //console.log(date_alert);
+        const date_alert = date_alerte
+        return axios.put(UPDATE_DATE_ALERT+fk_process, date_alert )
     }
 
     countAlert () {

@@ -156,7 +156,8 @@ const Navbar = () => {
               <br/>
               <span className="spanRole">{user.role}</span> 
            </li>
-           {user.role=== 'Admin' && <li><Link className="dropdown-item" to='admin' >Retourner à la page admin</Link></li>}
+           {user.role=== 'Admin' && <li><Link className="dropdown-item" to='admin' > P
+           age admin</Link></li>}
             <li><Link className="dropdown-item" to='login' onClick={()=>{ localStorage.removeItem('login')}}>Déconnecter</Link></li>
           </ul>
           

@@ -15,10 +15,7 @@ const ModalQStock = (props) => {
     
     const getEntrepot = () =>{
         
-        ServiceEntrepot.getEntrepot()
-        .then ((res)=> {
-            setEntrepot(res.data)
-        })
+       
         window.print();
         handleShow4()
         props.handleClose3()
@@ -50,7 +47,7 @@ const ModalQStock = (props) => {
 
                    <div className='display-print' style={{display:"none" , margin: '0px'}}>
                             <TESTPRINT id= {props.result } poids= {props.poids} nombre= {props.nombre} categorie={props.categorie} />
-                    </div>
+                   </div>
                    
             </Modal.Body>
             <Modal.Footer>
@@ -66,6 +63,7 @@ const ModalQStock = (props) => {
                                     entrepot={entrepot}  
                                     result={props.result}
                                     toggleDisplay={props.toggleDisplay} 
+                                    
                                     />
         </>
         

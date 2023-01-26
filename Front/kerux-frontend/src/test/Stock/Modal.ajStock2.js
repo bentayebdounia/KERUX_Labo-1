@@ -2,12 +2,15 @@ import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import ServiceStock from '../../service/service.stock'
 import ServiceEntrepot from '../../service/service.entrepot'
+import serviceAlert from '../../service/service.alert'
+
 const ModalAjouterStock = (props) => {
    
 
     const [entrepots, setEntrepots] = useState([])
     const [entrepot, setEntrepot] = useState()
     const [stock , setStock] = useState()
+    const [dateAlert, setDatealert] = useState()
     
     useEffect(()=> {
         ServiceEntrepot.getEntrepot()
@@ -17,14 +20,18 @@ const ModalAjouterStock = (props) => {
         })
     })
     const  ajouterauStock = async() =>{
-        console.log(props.entrepot[0].id_entrepot)
+       // console.log(entrepot)
         //var fk_entrepot =  props.entrepot[0].id_entrepot
-        await ServiceStock.ajouterStock(props.entrepot[0].id_entrepot).then((res) => {
+        await ServiceStock.ajouterStock(entrepot).then((res) => {
             setStock(res.data)
-            console.log(res.data)
+            //console.log(res.data)
             //console.log(stock.id_stock)
-            ServiceStock.modifierProcess(props.result, res.data.id_stock).then( (res) => {
+            ServiceStock.modifierProcess(props.result.id_gnerate, res.data.id_stock).then( (res) => {
                 console.log(res.data)
+            })
+            serviceAlert.updateDateAlert(props.result.id_process, dateAlert ).then( (res) => {
+                console.log(res.data)
+                alert (res.data)
             })
             
         })     
@@ -43,7 +50,7 @@ const ModalAjouterStock = (props) => {
         props.handleClose4()
         props.toggleDisplay()
     }
-
+console.log('date alert = '+dateAlert);
     return ( 
         <Modal show={props.show4} onHide={props.handleClose4}>
             <Modal.Header closeButton>
@@ -51,15 +58,24 @@ const ModalAjouterStock = (props) => {
             </Modal.Header>
 
             <Modal.Body>
+                <div>
+                    <label>Entrepot</label>
 
-                <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)}  required>
-                                <option defaultValue={""}></option>
-                                {entrepots.map( (entrepot,key) =>
-                                    
-                                    <option value={entrepot.id_entrepot}> {entrepot.nom_entrepot} </option>
-                                )}
-                                            
-                </select>
+                    <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)}  required>
+                                    <option defaultValue={""}></option>
+                                    {entrepots.map( (entrepot,key) =>
+                                        
+                                        <option value={entrepot.id_entrepot}> {entrepot.nom_entrepot} | {entrepot.air_stockage} </option>
+                                    )}
+                                                
+                    </select>
+                </div>
+
+                <div>
+                    <label>Date d'alerte</label>
+                    <input type="date" className="form-control"   value={dateAlert} onChange={(e)=> setDatealert(e.target.value)} />
+                </div>
+                
                    
             </Modal.Body>
 

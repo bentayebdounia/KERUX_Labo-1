@@ -220,6 +220,7 @@ const Nettoyage = (props) => {
                              test={props.test}
                              toggleDisplay={props.toggleDisplay}
                              agents= {agentNettoyageSelect}
+                             nettoypBtn = {props.nettoypBtn}
             />
 
             {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}

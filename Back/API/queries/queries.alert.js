@@ -1,11 +1,13 @@
 // ajouter alert 
 
 const ajouterAlert = "INSERT INTO alert (fk_processs, date_alert, existe )"
-                                +" VALUES ($1, $2, $3) "
+                                +" VALUES ($1, $2, $3)  RETURNING id_alert"
 
 //modifier alert 
 
 const updateAlert = "UPDATE alert SET existe=$1 WHERE fk_processs=$2 "
+
+const updateDateAlert = "UPDATE alert SET  date_alert=$1 WHERE fk_processs=$2 "
 
 const countAlert = " SELECT COUNT(*) FROM alert WHERE existe=true "
 
@@ -21,6 +23,7 @@ const DataAlertPrimary = "SELECT * FROM process, alert WHERE id_process=fk_proce
 module.exports = {
     ajouterAlert,
     updateAlert,
+    updateDateAlert,
     countAlert,
     countAlertPrimary,
     countAlertEtape,

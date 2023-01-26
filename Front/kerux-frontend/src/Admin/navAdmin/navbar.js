@@ -12,7 +12,7 @@ const Navbar = () => {
           <nav className="navbar fixed-top flex-md-nowrap p-0 shadow" >
             <div className="container-fluid" id='divContainer'>
           
-          <Link className="nav-link active"   to='/test'  >
+          <Link className="nav-link active "   to='/test'  >
             <i className="bi bi-door-open-fill" ></i>
             Passer au mode agent
           </Link>
@@ -24,7 +24,7 @@ const Navbar = () => {
 
           
         
-          <Link className="nav-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <Link className="nav-link" to="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{marginLeft:"35%"}}>
             <i className="bi bi-person-fill" style={{fontSize: "1.25rem", color:"white"}}></i>
             <i className="bi bi-caret-down-fill" style={{fontSize: "0.5rem", color:"white"}}></i>
           </Link>

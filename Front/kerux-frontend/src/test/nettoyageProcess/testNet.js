@@ -89,8 +89,8 @@ const TestNet = (props) => {
         e.preventDefault(); 
          
         serviceNettoyage.getProcesaById(id).then((res) => { 
-                console.log(res.data) 
-                console.log(res.data.fk_proditfourni)  
+               // console.log(res.data) 
+               // console.log(res.data.fk_proditfourni)  
                 setProcess(res.data) 
                 if (res.data === "ID n'existe pas"){ 
                     setMessage("ID n'existe pas pour cette etape ") 
@@ -125,7 +125,7 @@ const TestNet = (props) => {
         var date=  moment.utc(d).format('DD-M-YYYY')
         const words = date.split('-');
         var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-        console.log(a+1)
+       // console.log(a+1)
         return a
     }
     const dateToday = () => {

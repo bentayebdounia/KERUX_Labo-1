@@ -10,7 +10,7 @@ ajouterAlert = (req, res) => {
         
         (err, result) => {
             if (err) throw err
-                res.status(200).send("alert bien ajouter")
+                res.status(200).json(result.rows[0])
         })
 }
 
@@ -24,8 +24,18 @@ updateAlert = (req, res) => {
         })
 }
 
+updateDateAlert = (req, res) => {
+    const fk_processs = req.params.fk_processs
+    const { date_alert } = req.body
+    pool.query(queries.updateDateAlert,[date_alert, fk_processs],
+        (error, result) =>{
+            if (error) throw error
+            res.status(200).send("date d'alert modifier")
+        })
+}
+
 countAlert = (req, res) => {
-    const date_alert = req.params.date_alert
+    //const date_alert = req.params.date_alert
 
     pool.query(queries.countAlert , 
         (error, result) => {
@@ -92,6 +102,7 @@ DataAlertPrimary = (req, res) => {
 module.exports = {
     ajouterAlert,
     updateAlert,
+    updateDateAlert,
     countAlert,
     countAlertPrimary,
     countAlertEtape,
