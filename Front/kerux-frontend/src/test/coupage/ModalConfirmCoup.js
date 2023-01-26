@@ -71,6 +71,8 @@ const ModalConfirmCoup = (props) => {
                 alert (result.data)
             })
 
+            
+
             //ajouter les agents  de nettoyage au bdd
             for(var i=0 ; i<props.agents.length ;i++) {
                 console.log(props.agents[i]);

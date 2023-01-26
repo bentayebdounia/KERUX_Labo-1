@@ -14,5 +14,7 @@ router.get( "/getProcessByEtapes_idGnerate/:id_gnerate", coupage.getProcessByEta
 
 router.get( "/getNettroyage", coupage.getProcessNettoyageTble)
 router.get( "/getCoupageTble", coupage.getBox_coupageTble)
+router.get( "/getActuelle", coupage.getProduitEnAttente)
+router.get( "/actualStock", coupage.getProduitEnStock)
 
 module.exports = router

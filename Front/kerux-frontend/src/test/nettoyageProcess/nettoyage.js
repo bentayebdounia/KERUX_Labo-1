@@ -212,6 +212,7 @@ const Nettoyage = (props) => {
                              id_enregistrement={props.id}  
                              categorie={props.process.categorie}  
                              typeProd={props.process.nom_produit}
+                             id_process={props.process.id_process}
                              agent={agent}  
                              poids={poids} 
                              nombre={nombre} 

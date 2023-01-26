@@ -119,6 +119,20 @@ modifierProcessCoupage = (req, res) => {
             res.status(200).send("process coupage bien modifier ")
         })
 }
+getProduitEnAttente = (req, res) => {
+    pool.query (actual.ActualProcess, ['nettoyage' ],
+            (error, result) => {
+                res.status(200).json(result.rows)  
+        }
+    )
+}
+getProduitEnStock = (req, res) => {
+    pool.query(actual.ActualProcessEnStock, ['nettoyage'] ,
+    (error, result) => {
+        res.status(200).json(result.rows)  
+    }
+    )
+}
 
 getProcessId = (req, res) => {
     const id = req.params.id_gnerate
@@ -221,7 +235,11 @@ module.exports = {
     getProcessByEtapes_produit,
     getProcessByEtapes_idGnerate,
     getProcessNettoyageTble,
-    getBox_coupageTble
+    getBox_coupageTble,
+
+    getProduitEnAttente,
+    getProduitEnStock
+
 }
 
 

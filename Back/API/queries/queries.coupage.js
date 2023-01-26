@@ -9,7 +9,7 @@ const ModifyProcessCoup = "UPDATE process SET fk_stock = $1 WHERE  id_coupage = 
 const ModifyProcessCoupHist = "UPDATE process_historique SET fk_stock = $1 WHERE  id_coupage = 2$"
 
 // ----recherche by id 
-const getProcessByIdSortie= "SELECT id_gnerate, fk_proditfourni , fk_stock, categorie, nom_produit, id_enregistrement, etape , poids , nombre FROM process_historique WHERE id_gnerate= $1  AND etape='nettoyage'"
+const getProcessByIdSortie= "SELECT id_process, id_gnerate, fk_proditfourni , fk_stock, categorie, nom_produit, id_enregistrement, etape , poids , nombre FROM process WHERE id_gnerate= $1  AND etape='nettoyage'"
 const getProcessbyIdNettoyage = "SELECT * FROM box_couper WHERE id_nettoyage= $1"
 
 //---------ajouter box_couper

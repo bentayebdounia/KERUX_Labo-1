@@ -28,7 +28,7 @@ const TestSortie = (props) => {
     const [EnAttente, setEnattente] = useState([]) 
     const [enStock, setEnstock] = useState ([]) 
 
-    const [buttonColor, setButtoncolor] = useState(false)
+    const [buttonColor, setButtoncolor] = useState(true)
     const [buttonColor2, setButtoncolor2] = useState(false)
     
     
@@ -66,25 +66,19 @@ const TestSortie = (props) => {
     //les operation de pagination 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = EnAttente.slice(indexOfFirstPost, indexOfLastPost);
-    const currentPosts2 = enStock.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = tableDonnees.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = tableDonneesStocker.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = pageNumber => setCurrentPage(pageNumber);
      
      useEffect(()=>{ 
-        serviceProcess.getConditionnementTable() 
+        serviceProcess.getActualProcess() 
             .then((res)=>{ 
-                setTableconditionnement(res.data) 
+                setTabledonnees(res.data) 
             }) 
-
-        serviceProcess.getSortieTable() 
+        
+            serviceProcess.getActualProcesssStock()
         .then((res)=>{ 
-            setTableSortie(res.data) 
-        })
-
-        serviceProcess.getActualProcesssStock()
-
-        .then((res)=>{ 
-            setTabledonneesstocker(res.data) 
+            setTabledonneesstocker(res.data)
         }) 
      }) 
 
@@ -131,54 +125,21 @@ const TestSortie = (props) => {
         return a
     }
 
+    const dateToday = () => {
+        var today = new Date
+        var datee =  today.getDate()+'-'+(today.getMonth() +1)  + '-' +today.getFullYear()
+        return datee
+    }
+
       const chargerData = () => { 
         toggleshow1()
         toggleDisplay2()
          
-                //setTabledonnees(res.data) 
-                setButtoncolor(!buttonColor)
-                setButtoncolor2(false)
-                console.log("hello1"); 
-                EnAttente.splice("") 
-                enStock.splice("") 
-
-                    for ( var i=0 ; i<tableconditionnement.length ; i++) { 
-                        // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
-                         var j=0
-                         var a = false
-                         
-                         for (var j=0 ; j<tableSotie.length ; j++){
-                             if ( tableSotie[j].id_conditionnement === tableconditionnement[i].id_gnerate   )   {
-                                 
-                                 a = true
-                                 console.log(a);
-                             }
-                         }
-                             
-                             if (a ===false && tableconditionnement[i].fk_stock === null){
-                                  EnAttente.push(tableconditionnement[i])
-                                  console.log( EnAttente);
-                                  }
-                  
-        }
-
-       setEnattente(
-        EnAttente.map(p => {
-            return {
-                select: false,
-                id_gnerate:p.id_gnerate,
-                categorie: p.categorie,
-                nom_produit:p.nom_produit,
-                poids:p.poids ,
-                nombre:p.nombre, 
-                datee :dateNow(p.datee),
-                heure:p.heure,
-                etape:p.etape ,
-               
-            
-            };
-        })
-    )
+        //setTabledonnees(res.data) 
+        setButtoncolor(!buttonColor)
+        setButtoncolor2(false)
+                
+    
     } 
      
        const chargerDataEnStock = () => {
@@ -187,36 +148,7 @@ const TestSortie = (props) => {
 
         setButtoncolor(false)
         setButtoncolor2(!buttonColor2)
-        EnAttente.splice("") 
-        enStock.splice("") 
-        for ( var i=0 ; i<tableDonneesStocker.length ; i++) { 
-            if(tableDonneesStocker[i].id_enregistrement === null  && tableDonneesStocker[i].date_sortie === null) { 
-                 
-                  
-                     enStock.push(tableDonneesStocker[i]) 
-              }
-              
-              
-   
-      
-}
-setEnstock(
-    enStock.map(p => {
-         return {
-             select: false,
-             id_gnerate:p.id_gnerate,
-             categorie: p.categorie,
-             nom_produit:p.nom_produit,
-             poids:p.poids ,
-             nombre:p.nombre, 
-             datee :dateNow(p.datee),
-             heure:p.heure,
-             etape:p.etape ,
-             nom_entrepot :p.nom_entrepot ,
-         
-         };
-     })
- )
+        
 
        }
      
@@ -246,13 +178,13 @@ setEnstock(
                             { 
                                 currentPosts.map( 
                                     (p, key) => 
-                                    <tr key={key}> 
+                                    <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                         <td>
                                         <input
                                             onChange={event => {
                                                 let checked = event.target.checked;
                                                 setEnattente(
-                                                EnAttente.map(data => {
+                                                    currentPosts.map(data => {
                                                     if (p.id_gnerate === data.id_gnerate) {
                                                         data.select = checked;
                                                         setId(p.id_gnerate)
@@ -274,7 +206,7 @@ setEnstock(
                                         <td>{p.nom_produit}</td> 
                                         <td>{p.poids}</td> 
                                         <td>{p.nombre}</td> 
-                                        <td>{p.datee}</td> 
+                                        <td>{dateNow (p.datee)}</td> 
                                         <td>{p.heure}</td> 
                                         
                                         
@@ -284,7 +216,7 @@ setEnstock(
                                 </table> 
                                 <Pagination
                                     postsPerPage={postsPerPage}
-                                    totalPosts={EnAttente.length}
+                                    totalPosts={tableDonnees.length}
                                     paginate={paginate}
                                 />
     
@@ -319,13 +251,13 @@ if(buttonColor2)
                             <tbody >
                             {  currentPosts2.map( 
                                 (p, key) => 
-                                <tr key={key}> 
+                                <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                     <td>
                                     <input
                                         onChange={event => {
                                             let checked = event.target.checked;
                                             setEnstock(
-                                                enStock.map(data => {
+                                                currentPosts2.map(data => {
                                                 if (p.id_gnerate === data.id_gnerate) {
                                                     data.select = checked;
                                                     setId(p.id_gnerate)
@@ -346,7 +278,7 @@ if(buttonColor2)
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids}</td> 
                                     <td>{p.nombre}</td> 
-                                    <td>{p.datee}</td> 
+                                    <td>{dateNow (p.datee)}</td> 
                                     <td>{p.heure}</td> 
                                     <td>{p.nom_entrepot}</td>  
                                 
@@ -356,7 +288,7 @@ if(buttonColor2)
                                 </table> 
                                 <Pagination
                                     postsPerPage={postsPerPage}
-                                    totalPosts={enStock.length}
+                                    totalPosts={tableDonneesStocker.length}
                                     paginate={paginate}
                                 />
     

@@ -70,6 +70,9 @@ const ModalConfirmCondit = (props) => {
                 alert (result.data)
             })
             
+            serviceAlert.updateAlert(props.process.id_process).then ((result) =>{
+                alert (result.data)
+            })
         })
        
         props.confirmeConditionnemetTrue()

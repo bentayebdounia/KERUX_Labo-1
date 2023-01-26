@@ -13,6 +13,7 @@ const GET_ENREGISTREMENT_TABLE = "http://localhost:8080/process/nettoyage/getEnr
 const GET_NETTOYAGE_TABLE = "http://localhost:8080/process/nettoyage/getNettoyageTble"
 
 
+
 class NettoyageService {
 
     ajouterNettoyage(categorie, nom_produit, etape, poids, nombre, id_enregistrement, fk_proditFourni){

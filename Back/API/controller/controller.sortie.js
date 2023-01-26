@@ -199,7 +199,7 @@ getProcessByEtapes_idGnerate = (req, res) => {
     )
 }
 getProduitEnAttente = (req, res) => {
-    pool.query (actual.ActualProcess, ['conditionnement' , 'sortie'],
+    pool.query (actual.ActualProcess, ['conditionnement' ],
             (error, result) => {
                 res.status(200).json(result.rows)  
         }
@@ -207,7 +207,7 @@ getProduitEnAttente = (req, res) => {
 }
 
 getProduitEnStock = (req, res) => {
-    pool.query(actual.ActualProcessEnStock, ['conditionnement' , 'sortie'],
+    pool.query(actual.ActualProcessEnStock, ['conditionnement' ],
     (error, result) => {
         res.status(200).json(result.rows)  
     }
@@ -230,13 +230,7 @@ getProcessSortieTble= (req,res) => {
     )
 }
 
-getProduitEnAttente = (req, res) => {
-    pool.query (ActualProcess.ActualProcess, ['conditionnement' , 'sortie'],
-            (error, result) => {
-                res.status(200).json(result.rows)  
-        }
-    )
-}
+
 
 module.exports = {
     ajouterProcessSortie,

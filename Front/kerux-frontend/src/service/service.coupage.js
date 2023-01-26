@@ -7,7 +7,8 @@ const GET_PROCESSBYDATE_HEURE= "http://localhost:8080/process/coupage/getProcess
 const GET_PROCESSBY_ID = "http://localhost:8080/process/coupage/getProcessByEtapes_idGnerate/"
 const GET_PROCESSBY_CATEGORIE ="http://localhost:8080/process/coupage/getProcessByEtapes_categorie/"
 const GET_PROCESSBY_PRODUIT ="http://localhost:8080/process/coupage/getProcessByEtapes_produit/"
-const GET_PROCESS_ACTUAL = "http://localhost:8080/process/conditionnement/getActuelle"
+const GET_PROCESS_ACTUAL = "http://localhost:8080/process/coupage/getActuelle"
+const GET_PROCESS_ACTUAL_STOCK = "http://localhost:8080/process/coupage/actualStock"
 
 const GET_NETTOYAGE_TABLE = "http://localhost:8080/process/coupage/getNettroyage"
 const GET_COUPAGE_TABLE = "http://localhost:8080/process/coupage/getCoupageTble"
@@ -46,6 +47,10 @@ class CoupageService {
     }
     getActualProcess() {
         return axios.get(GET_PROCESS_ACTUAL)
+    }
+
+    getActualProcessStock() {
+        return axios.get(GET_PROCESS_ACTUAL_STOCK)
     }
 
     getNettoyageTable () {

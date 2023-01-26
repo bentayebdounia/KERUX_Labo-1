@@ -1,6 +1,7 @@
 import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal';
 import TESTPRINT from '../../print/ModelPrint';
+import serviceAlert from '../../service/service.alert';
 import SortieService from '../../service/service.sorti'
 const ModalConfirmNet = (props) => {
 
@@ -18,6 +19,9 @@ const ModalConfirmNet = (props) => {
         //const nettoyage = {props.id_box, props.categorie, props.typeProd, props.poids, props.nombrs }      nom_produit, etape, poids, nombre, id_enregistrement, fk_proditFourni
         await SortieService.ajouterSortie( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.id_nettoyage , props.id_coupage, props.id_box , props.fk_proditfourni).then( (res)=> {
             console.log(res.data)
+            serviceAlert.updateAlert(props.id_process).then ((result) =>{
+                alert (result.data)
+            })
             setResult(res.data)
             functionTrue()
             

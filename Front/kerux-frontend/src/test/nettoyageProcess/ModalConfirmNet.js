@@ -53,6 +53,9 @@ const ModalConfirmNet = (props) => {
                 alert (result.data)
             })
 
+            serviceAlert.updateAlert(props.id_process).then ((result) =>{
+                alert (result.data)
+            })
             //console.log(idd);
             //ajouter les agents  de nettoyage au bdd
             for(var i=0 ; i<props.agents.length ;i++) {

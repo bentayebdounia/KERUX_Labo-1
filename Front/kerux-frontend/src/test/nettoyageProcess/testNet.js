@@ -134,6 +134,7 @@ const TestNet = (props) => {
         return datee
     }
  
+   
        const chargerData = () => { 
         toggleshow1()
         toggleDisplay2()
@@ -220,7 +221,7 @@ const TestNet = (props) => {
                                 
                                 <Pagination
                                     postsPerPage={postsPerPage}
-                                    totalPosts={EnAttente.length}
+                                    totalPosts={tableDonnees.length}
                                     paginate={paginate}
                                 />
                                 
@@ -291,7 +292,7 @@ table2=(
 
                                 <Pagination
                                     postsPerPage={postsPerPage}
-                                    totalPosts={enStock.length}
+                                    totalPosts={tableDonneesStocker.length}
                                     paginate={paginate}
                                 />
     
@@ -356,7 +357,8 @@ table2=(
                                     show2={show2}  
                                     handleClose2={handleClose2}  
                                     handleShow2={handleShow2}  
-                                    id={id} process={process}  
+                                    id={id} 
+                                    process={process}  
                                     toggleshow={toggleshow}  
                                     etape={'nettoyage'} 
                                     BtnV = {props.nettoypBtnV}

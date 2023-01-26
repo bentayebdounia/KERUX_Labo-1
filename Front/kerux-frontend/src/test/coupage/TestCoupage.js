@@ -6,6 +6,7 @@ import BoxCoupage from './boxCoupage'
 import ModalSortieStock from '../Stock/Modal.sortieStock'
 import Pagination from '../pagination/pagination'
 import moment from 'moment'
+import serviceAlert from '../../service/service.alert'
 
 const TestCoupage = (props) => {
 
@@ -71,7 +72,7 @@ const TestCoupage = (props) => {
     const [tableCoupage, setTableCoupage] = useState([])
     const [tableNettoyage, setTablenettoyage] = useState([]) 
 
-    const [buttonColor, setButtoncolor] = useState(false)
+    const [buttonColor, setButtoncolor] = useState(true)
     const [buttonColor2, setButtoncolor2] = useState(false)
     
     const [currentPage, setCurrentPage] = useState(1);
@@ -80,8 +81,8 @@ const TestCoupage = (props) => {
 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = EnAttente.slice(indexOfFirstPost, indexOfLastPost);
-    const currentPosts2 = enStock.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts = tableDonnees.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPosts2 = tableDonneesStocker.slice(indexOfFirstPost, indexOfLastPost);
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
@@ -89,15 +90,15 @@ const TestCoupage = (props) => {
 
 
     useEffect(()=>{ 
-        CoupageService.getNettoyageTable() 
-            .then((res)=>{ 
-                setTablenettoyage(res.data) 
-            }) 
-
-        CoupageService.getCoupageTable() 
+        CoupageService.getActualProcess() 
         .then((res)=>{ 
-            setTableCoupage(res.data) 
-        })
+                setTabledonnees(res.data) 
+            }) 
+        
+        CoupageService.getActualProcessStock()
+        .then((res)=>{ 
+            setTabledonneesstocker(res.data)
+        }) 
 
          
      }) 
@@ -127,18 +128,21 @@ const TestCoupage = (props) => {
     return id
     }
     var id_generate
-    const ajouterBoxCouper = (id_produit, id_enregistrement, id_nettoyage) => {
+    const ajouterBoxCouper = (id_produit, id_enregistrement, id_nettoyage, id_process) => {
          id_generate = generateId(id_produit ,id_nettoyage)
         setId_generateNet( id_generate )
         //console.log(id_generateNet)
         /*CoupageService.ajouterBoxCouper(id_produit, id_enregistrement, id_nettoyage, id_generate).then( (res) => {
             console.log(res.data)
         })*/
+        alert(id_process)
         var tab = {
             id_produit: id_produit, 
             id_enregistrement: id_enregistrement, 
             id_nettoyage: id_nettoyage, 
-            id_generate: id_generate
+            id_generate: id_generate,
+            id_process: id_process
+
 
         }
         boxCoupageTab.push(tab)
@@ -199,11 +203,13 @@ const TestCoupage = (props) => {
                                 
                                 if (boxCoupageTab.length === 0){
                                     handleShow2(true)
-                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
+                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box , res.data.id_process )
                                     //console.log("nombre= "+res.data.nombre);
                                     setPoids(poids+res.data.poids)
                                     setNombre(nombre+res.data.nombre)
                                     ajouterBox() 
+                                    
+                                    
                                 }
                                 else {
                                     console.log(boxCoupageTab);
@@ -211,7 +217,7 @@ const TestCoupage = (props) => {
                                     console.log( found  );
                                     if (found === undefined) {
                                         handleShow2(true)
-                                        ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
+                                        ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
                                         //console.log("nombre= "+res.data.nombre);
                                         setPoids(poids+res.data.poids)
                                         setNombre(nombre+res.data.nombre)
@@ -231,7 +237,7 @@ const TestCoupage = (props) => {
 
                             if (boxCoupageTab.length === 0){
                                 //ajouter le box couper et generer un identifiant
-                                ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
+                                ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
                                 //  console.log("nombre= "+res.data.nombre);
                                 setPoids(poids+res.data.poids)
                                 setNombre(nombre+res.data.nombre)
@@ -244,7 +250,7 @@ const TestCoupage = (props) => {
                                 console.log( found  );
                                 if (found === undefined) {
                                     //ajouter le box couper et generer un identifiant
-                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box)
+                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
                                     //  console.log("nombre= "+res.data.nombre);
                                     setPoids(poids+res.data.poids)
                                     setNombre(nombre+res.data.nombre)
@@ -266,9 +272,15 @@ const TestCoupage = (props) => {
         if(boxes.length >1)
                 {
                     for (var i =0 ; i< boxCoupageTab.length ; i++) {
-                        CoupageService.ajouterBoxCouper(boxCoupageTab[i].id_produit, boxCoupageTab[i].id_enregistrement, boxCoupageTab[i].id_nettoyage, boxCoupageTab[i].id_generate).then( (res) => {
+                        CoupageService.ajouterBoxCouper(boxCoupageTab[i].id_produit, boxCoupageTab[i].id_enregistrement, boxCoupageTab[i].id_nettoyage, boxCoupageTab[i].id_generate)
+                        .then( (res) => {
                             console.log(res.data)
-                    })}
+                           
+                    })
+                    serviceAlert.updateAlert(boxCoupageTab[i].id_process).then ((result) =>{
+                        alert (result.data)
+                    })
+                }
                     toggleshow()
                     setBoxes([1])
                     props.coupBtnV()
@@ -290,7 +302,7 @@ const TestCoupage = (props) => {
         var date=  moment.utc(d).format('DD-MM-YY')
         const words = date.split('-');
         var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-        console.log(a+1)
+       // console.log(a+1)
         return a
     }
 
@@ -298,51 +310,11 @@ const TestCoupage = (props) => {
         toggleshow1()
         toggleDisplay2()
          
-                //setTabledonnees(res.data) 
-                setButtoncolor(!buttonColor)
-                setButtoncolor2(false)
-                //console.log("hello1"); 
-                EnAttente.splice("") 
-                enStock.splice("") 
-                for ( var i=0 ; i<tableNettoyage.length ; i++) { 
-                    // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
-                     
-                     var a = false
-                    // console.log(tableNettoyage[i].fk_stock);
-                     for (var j=0 ; j<tableCoupage.length ; j++){
-                         if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate )   {
-                             
-                             a = true
-                             
-                            // console.log(a);
-                             break
-                         }
-                     }
-                         
-                         if (a ===false && tableNettoyage[i].fk_stock===null){
-                              EnAttente.push(tableNettoyage[i])
-                              //console.log( "EnAttente");
-                              }
-                              
-              
-    }
-       setEnattente(
-        EnAttente.map(p => {
-            return {
-                select: false,
-                id_gnerate:p.id_gnerate,
-                categorie: p.categorie,
-                nom_produit:p.nom_produit,
-                poids:p.poids ,
-                nombre:p.nombre, 
-                datee :dateModif(p.datee),
-                heure:p.heure,
-                etape:p.etape ,
+        //setTabledonnees(res.data) 
+        setButtoncolor(!buttonColor)
+        setButtoncolor2(false)
+        //console.log("hello1"); 
                
-            
-            };
-        })
-    )
     } 
      
        const chargerDataEnStock = () => {
@@ -351,50 +323,15 @@ const TestCoupage = (props) => {
 
         setButtoncolor(false)
         setButtoncolor2(!buttonColor2)
-        EnAttente.splice("") 
-        enStock.splice("") 
-        for ( var i=0 ; i<tableNettoyage.length ; i++) { 
-            // console.log(i+"not null := "+tableDonnees[i].id_enregistrement );
-             
-             var a = false
-             //console.log(tableNettoyage[i].fk_stock);
-             for (var j=0 ; j<tableCoupage.length ; j++){
-                 if ( tableCoupage[j].id_nettoyage === tableNettoyage[i].id_gnerate )   {
-                     
-                     a = true
-                     
-                     //console.log(a);
-                     break;
-                 }
-             }
-                 
-                 
-                      if (a ===false && tableNettoyage[i].fk_stock!==null){
-                        enStock.push(tableNettoyage[i])
-                        //console.log( "EnStock");
-                        }
-      
-}
-setEnstock(
-    enStock.map(p => {
-         return {
-             select: false,
-             id_gnerate:p.id_gnerate,
-             categorie: p.categorie,
-             nom_produit:p.nom_produit,
-             poids:p.poids ,
-             nombre:p.nombre, 
-             datee :dateModif(p.datee),
-             heure:p.heure,
-             etape:p.etape ,
-             nom_entrepot :p.nom_entrepot ,
-         
-         };
-     })
- )
+        
 
        }
      
+       const dateToday = () => {
+        var today = new Date
+        var datee =  today.getDate()+'-'+(today.getMonth() +1)  + '-' +today.getFullYear()
+        return datee
+    }
    
  if(buttonColor)
     {table=(
@@ -421,13 +358,13 @@ setEnstock(
                             { 
                                 currentPosts.map( 
                                     (p, key) => 
-                                    <tr key={key}> 
+                                    <tr key={key} style={{background:`${(dateModif(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                         <td>
                                         <input
                                             onChange={event => {
                                                 let checked = event.target.checked;
                                                 setEnattente(
-                                                EnAttente.map(data => {
+                                                    tableDonnees.map(data => {
                                                     if (p.id_gnerate === data.id_gnerate) {
                                                         data.select = checked;
                                                         boxes[0].id_box=p.id_gnerate
@@ -449,7 +386,7 @@ setEnstock(
                                         <td>{p.nom_produit}</td> 
                                         <td>{p.poids}</td> 
                                         <td>{p.nombre}</td> 
-                                        <td>{p.datee}</td> 
+                                        <td>{dateModif (p.datee)}</td> 
                                         <td>{p.heure}</td> 
                                         
                                         
@@ -460,7 +397,7 @@ setEnstock(
 
                                 <Pagination
                                     postsPerPage={postsPerPage}
-                                    totalPosts={EnAttente.length}
+                                    totalPosts={tableDonnees.length}
                                     paginate={paginate}
                                 />
     
@@ -495,13 +432,13 @@ if(buttonColor2)
                             <tbody >
                             {  currentPosts2.map( 
                                 (p, key) => 
-                                <tr key={key}> 
+                                <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                     <td>
                                     <input
                                         onChange={event => {
                                             let checked = event.target.checked;
                                             setEnstock(
-                                                enStock.map(data => {
+                                                tableDonneesStocker.map(data => {
                                                 if (p.id_gnerate === data.id_gnerate) {
                                                     data.select = checked;
                                                     boxes[0].id_box=p.id_gnerate
@@ -522,7 +459,7 @@ if(buttonColor2)
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids}</td> 
                                     <td>{p.nombre}</td> 
-                                    <td>{p.datee}</td> 
+                                    <td>{dateModif (p.datee)}</td> 
                                     <td>{p.heure}</td> 
                                     <td>{p.nom_entrepot}</td>  
                                 
@@ -532,7 +469,7 @@ if(buttonColor2)
                                 </table> 
                                 <Pagination
                                     postsPerPage={postsPerPage}
-                                    totalPosts={enStock.length}
+                                    totalPosts={tableDonneesStocker.length}
                                     paginate={paginate}
                                 />
     
