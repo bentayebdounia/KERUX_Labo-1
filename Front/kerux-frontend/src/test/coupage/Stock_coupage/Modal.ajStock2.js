@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import ServiceStock from '../../../service/service.stock'
 import ModelQnote from './Modal.Qnote'
 import ServiceEntrepot from '../../../service/service.entrepot'
+import serviceAlert from '../../../service/service.alert'
 
 const ModalAjouterStock = (props) => {
     
@@ -10,6 +11,7 @@ const ModalAjouterStock = (props) => {
     const [entrepots, setEntrepots] = useState([])
     const [stock , setStock] = useState()
     const [entrepot, setEntrepot] = useState()
+    const [dateAlert, setDatealert] = useState()
 
     const [showQnote, setShowQnote] = useState(false)
     const handleCloseQnote = () => setShowQnote(false)
@@ -34,6 +36,10 @@ const ModalAjouterStock = (props) => {
                 console.log(res.data)
             })
             
+            serviceAlert.updateDateAlert(props.result.id_process, dateAlert ).then( (res) => {
+                console.log(res.data)
+                alert (res.data)
+            })
         })     
     }
   
@@ -80,14 +86,23 @@ const ModalAjouterStock = (props) => {
 
                 <Modal.Body>
 
-                    <select className="form-select" aria-label="Default select example" id="typeBon" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)}  required>
-                            <option defaultValue={""}></option>
-                            {entrepots.map( (entrepot,key) =>
-                                
-                                <option value={entrepot.id_entrepot}> {entrepot.nom_entrepot} </option>
-                            )}
-                            
+                <div>
+                    <label>Entrepot</label>
+
+                    <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)}  required>
+                                    <option defaultValue={""}></option>
+                                    {entrepots.map( (entrepot,key) =>
+                                        
+                                        <option value={entrepot.id_entrepot}> {entrepot.nom_entrepot} | {entrepot.air_stockage} </option>
+                                    )}
+                                                
                     </select>
+                </div>
+
+                <div>
+                    <label>Date d'alerte</label>
+                    <input type="date" className="form-control" value={dateAlert} onChange={(e)=> setDatealert(e.target.value)} />
+                </div>
                     
                 </Modal.Body>
 

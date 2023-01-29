@@ -87,7 +87,7 @@ const generieIdCoup = (id,cle) => {
 }
 
 ajouterProcessCoupage =(req, res) => {
-    var datee = dateNow()
+    var datee = new Date
     var heure = HeureNow()
     
     const { categorie, nom_produit, etape, poids, nombre, id_nettoyage, fk_proditFourni, cle } = req.body

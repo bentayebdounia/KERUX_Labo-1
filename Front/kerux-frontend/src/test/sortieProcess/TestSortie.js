@@ -33,6 +33,7 @@ const TestSortie = (props) => {
     
     
      const [process, setProcess] = useState({
+        id_process: "",
         fk_proditfourni: "",
         categorie: "",
         nom_produit: "",

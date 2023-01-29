@@ -27,13 +27,15 @@ const ModalConfirmNet = (props) => {
 
     const dateAlert = () => {
         const d = new Date
+        /*
         if (props.categorie === "poulet" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
         }
 
         else if (props.categorie === "legume" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
-        }
+        }*/
+        return d
     }
     const confirmNettoyage = async (e) => {
         e.preventDefault();
@@ -75,6 +77,8 @@ const ModalConfirmNet = (props) => {
     
     //console.log(props.agents);
 
+
+    
     return ( 
         <>
             <Modal show={props.show2} onHide={props.handleClose2}> 
@@ -102,7 +106,7 @@ const ModalConfirmNet = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={props.handleClose2}>Non</button>
-                        <button type="button" className="btn btn-success" onClick={(e)=>confirmNettoyage(e)}>Oui</button>
+                        <button type="button" className="btn btn-success" onClick={ (e)=> confirmNettoyage(e) }>Oui</button>
                 </Modal.Footer>    
             </Modal>
 

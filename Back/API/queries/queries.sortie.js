@@ -18,8 +18,8 @@ const supprimerProcess = "DELETE FROM process WHERE id_egnerate= $1"
 
 
 ///sortie
-const getProcessByIdSortie= "SELECT fk_proditfourni , fk_stock, categorie, nom_produit, id_enregistrement, id_nettoyage, id_coupage, etape FROM process_historique WHERE id_gnerate= $1  AND etape='conditionnement'"
-const getProcessbyIdConitionnement = "SELECT * FROM process_historique WHERE id_conditionnement= $1"
+const getProcessByIdSortie= "SELECT id_process,  fk_proditfourni , fk_stock, categorie, nom_produit, id_enregistrement, id_nettoyage, id_coupage, etape FROM process WHERE id_gnerate= $1  AND etape='conditionnement'"
+const getProcessbyIdConitionnement = "SELECT * FROM process WHERE id_conditionnement= $1"
 
 module.exports ={
     ajouterProcessSortie,

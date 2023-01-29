@@ -73,7 +73,7 @@ console.log('date alert = '+dateAlert);
 
                 <div>
                     <label>Date d'alerte</label>
-                    <input type="date" className="form-control"   value={dateAlert} onChange={(e)=> setDatealert(e.target.value)} />
+                    <input type="date" className="form-control" value={dateAlert} onChange={(e)=> setDatealert(e.target.value)} />
                 </div>
                 
                    

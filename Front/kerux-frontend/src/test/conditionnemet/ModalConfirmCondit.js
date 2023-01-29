@@ -42,15 +42,9 @@ const ModalConfirmCondit = (props) => {
     
     const dateAlert = () => {
         const d = new Date
-        if (props.process.categorie === "poulet" ){
-            return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
-        }
-
-        else if (props.process.categorie === "legume" ){
-            return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
-        }
+       return d
     }
-
+    
     const confirmNCondit = async (e) => {
         e.preventDefault();
         var etape="conditionnement"

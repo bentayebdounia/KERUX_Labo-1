@@ -33,6 +33,7 @@ const Sortie = (props) => {
     const toggleRecomendationFalse = () => setToggleRecomendation(false)
     var nbr, agents
     
+    console.log(props.process);
     const [agentNettoyage, setAgentNettoyage] = useState([{
         id_personne:"",
         nom: "",
@@ -42,7 +43,7 @@ const Sortie = (props) => {
     const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
     //get personnes
     useEffect(()=>{
-        if( agent ==!'')
+        if( agent !=='')
         {ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
         .then((res) => {
             setAgentNettoyage(res.data)
@@ -114,7 +115,7 @@ const Sortie = (props) => {
                             <div className="contenaireBox">
                                 <label id="id_box"> ID Box: </label>
                                 
-                                <label  id="id_boxValue" >{props.id} </label>
+                                <label  id="id_boxValue" >{props.id}   /  {props.process.id_process}</label>
                                 
                             </div>
 

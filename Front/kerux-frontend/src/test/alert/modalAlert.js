@@ -19,26 +19,48 @@ const ModelAlert = (props) => {
     const [controleCondit, setControleCondit] = useState(false)
     const [controleSortie, setControleSortie] = useState(false)
 
+   
+
     const dateAlert = (n) => {
         const d = new Date
         
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+n)
     }
     useEffect(()=>{
-        serviceAlert.alertData(dateAlert(0)).then((res)=> {
+      /*  serviceAlert.alertData(dateAlert(0)).then((res)=> {
             setAlertdanger(res.data)
             
         })
         serviceAlert.alertData(dateAlert(1)).then((res)=> {
             setAlertwarnning(res.data)
             
-        })
-        serviceAlert.alertDataPrimary(dateAlert(1)).then((res)=> {
+        })*/
+        serviceAlert.alertDataPrimary(dateAlert(0)).then((res)=> {
             setAlertprimary(res.data)
             
         })
 
     })
+
+    const dateRester = (dateAlert) => {
+        var date1 = new Date (dateAlert)
+        var date2 = new Date
+        console.log(date2)
+        var diffTime = Math.abs(date1 - date2);
+
+        var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        console.log(diffTime);
+        return diffDays
+    }
+
+
+    const colorAlert = ( dateAlert) => {
+        if (dateRester(dateAlert) <=1) return 'danger'
+        else if (dateRester(dateAlert) > 1  && dateRester(dateAlert) <=5) return 'warning'
+        else return 'primary'
+
+    }
 
     const click = (etape) => {
         if (etape === 'enregistrement'){
@@ -93,10 +115,15 @@ const ModelAlert = (props) => {
                         )}
 
                         {alertPrimary.map ( (key) =>
-                            <Alert variant={'primary'}>
+                            
+                          
+                             <Alert variant={colorAlert(key.date_alert)}>
                                 <div onClick={() =>{click(key.etape)}}>
                                     <i className="bi-info-circle-fill me-2"></i>
-                                    Le produit de ID: <span style={{fontWeight:"bold"}}> {key.id_gnerate} </span> est en attente à l'étape: <span style={{fontWeight:"bold"}}> {key.etape} </span>  
+                                    Le produit de ID: <span style={{fontWeight:"bold"}}> {key.id_gnerate} </span> est en attente à l'étape: <span style={{fontWeight:"bold"}}> {key.etape} </span>   
+                                    <br/>
+                                    il vous reste <span style={{fontWeight:"bold"}}> {dateRester(key.date_alert)} jours </span>
+                                    
                                 </div>
                             </Alert>
                         )}

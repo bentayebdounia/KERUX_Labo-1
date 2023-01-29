@@ -34,15 +34,17 @@ const Recape = (props) => {
          supprimerProduitFourni()
     }
 
-    const dateAlert = (categorie) => {
+    const dateAlert = () => {
         const d = new Date
+        /*
         if (categorie === "poulet" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
         }
 
         else if (categorie === "legume" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
-        }
+        }*/
+        return d
     }
 
     const ajouterBoxe = async(id_produit,id) => {
@@ -64,7 +66,7 @@ const Recape = (props) => {
                         
                         console.log(res.data);
                         
-                        serviceAlert.ajouterAlert(res.data.id_process, dateAlert(box[i].categorie)).then ((result) =>{
+                        serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
                             alert (result.data)
                         })
                         
@@ -77,7 +79,7 @@ const Recape = (props) => {
                     .then((res) => {
                         
                         console.log(res.data);
-                        serviceAlert.ajouterAlert(res.data.id_process, dateAlert(box[i].categorie)).then ((result) =>{
+                        serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
                             alert (result.data)
                         })
                         ajouterauStock(res.data.id_gnerate,box[i].id_stock)
@@ -132,7 +134,8 @@ const Recape = (props) => {
           
           
       }
-      const supprimerProduitFourni=()=>{
+
+    const supprimerProduitFourni=()=>{
         
         var tab= []
         tab= JSON.parse(localStorage.getItem('produitsFournis'))
@@ -143,6 +146,7 @@ const Recape = (props) => {
         localStorage.removeItem('produitsFournis')
         
       }
+
     const valider = () => {
 
         ajouterBon()  

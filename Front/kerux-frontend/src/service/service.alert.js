@@ -24,10 +24,11 @@ class AlertService {
         return axios.put(UPDATE_ALERT+fk_process, existe )
     }
 
-    updateDateAlert ( fk_process , date_alerte ) {
-        //console.log(date_alert);
-        const date_alert = date_alerte
-        return axios.put(UPDATE_DATE_ALERT+fk_process, date_alert )
+    updateDateAlert ( fk_process , date_alert ) {
+        
+        const date_alerte = {date_alert} 
+        console.log(date_alerte);
+        return axios.put(UPDATE_DATE_ALERT+fk_process, date_alerte )
     }
 
     countAlert () {

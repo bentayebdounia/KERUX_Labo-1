@@ -14,6 +14,7 @@ const ModalConfirmNet = (props) => {
         e.preventDefault();
         var etape="sortie"
         
+        console.log(props.id_process);
         //categorie, nom_produit, etape, poids, nombre, datee, heure, id_nettoyage, fk_proditFourni
 
         //const nettoyage = {props.id_box, props.categorie, props.typeProd, props.poids, props.nombrs }      nom_produit, etape, poids, nombre, id_enregistrement, fk_proditFourni
@@ -27,9 +28,9 @@ const ModalConfirmNet = (props) => {
             
         })
 
-        window.print()
-        //props.toggleDisplay()
-        //props.handleClose2()
+        //window.print()
+        props.toggleDisplay()
+        props.handleClose2()
             
       
     }

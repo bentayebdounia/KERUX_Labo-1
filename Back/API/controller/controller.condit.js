@@ -89,7 +89,7 @@ const generieIdConditionnement = (id,cle) => {
 }
 
 ajouterProcessCondit =(req, res) => {
-    var datee = dateNow()
+    var datee = new Date
     var heure = HeureNow()
     const { categorie, nom_produit, etape, poids, nombre,  id_nettoyage, id_coupage,  fk_proditFourni, cle } = req.body
     var id_gnerate = generieIdConditionnement(id_coupage,cle)
