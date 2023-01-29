@@ -36,13 +36,14 @@ const Recape = (props) => {
 
     const dateAlert = (categorie) => {
         const d = new Date
-        if (categorie === "poulet" ){
+       /* if (categorie === "poulet" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
         }
 
         else if (categorie === "legume" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
-        }
+        }*/
+        return d
     }
 
     const ajouterBoxe = async(id_produit,id) => {

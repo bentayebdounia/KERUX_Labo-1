@@ -26,8 +26,8 @@ class AlertService {
 
     updateDateAlert ( fk_process , date_alerte ) {
         //console.log(date_alert);
-        const date_alert = date_alerte
-        return axios.put(UPDATE_DATE_ALERT+fk_process, date_alert )
+        
+        return axios.put(UPDATE_DATE_ALERT+fk_process, date_alerte )
     }
 
     countAlert () {

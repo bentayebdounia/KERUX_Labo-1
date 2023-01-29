@@ -27,13 +27,14 @@ const ModalConfirmNet = (props) => {
 
     const dateAlert = () => {
         const d = new Date
-        if (props.categorie === "poulet" ){
+       /* if (props.categorie === "poulet" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
         }
 
         else if (props.categorie === "legume" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
-        }
+        }*/
+        return d
     }
     const confirmNettoyage = async (e) => {
         e.preventDefault();
