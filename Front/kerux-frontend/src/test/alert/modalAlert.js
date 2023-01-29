@@ -56,8 +56,8 @@ const ModelAlert = (props) => {
 
 
     const colorAlert = ( dateAlert) => {
-        if (dateRester(dateAlert) <=1) return 'danger'
-        else if (dateRester(dateAlert) > 1  && dateRester(dateAlert) <=5) return 'warning'
+        if (dateRester(dateAlert) <=3) return 'danger'
+        else if (dateRester(dateAlert) > 3  && dateRester(dateAlert) <=5) return 'warning'
         else return 'primary'
 
     }
