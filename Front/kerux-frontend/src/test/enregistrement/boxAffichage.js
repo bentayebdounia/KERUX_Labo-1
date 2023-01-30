@@ -119,9 +119,9 @@ const AffichageBoxes = (props) => {
        }
        console.log(tab);
        localStorage.setItem('boxes'+props.id, JSON.stringify(tab))
-       //setPoids(null)
-       //setNombre(null)
-       //setEntrepot(null)
+       setPoids(null)
+       setNombre(null)
+       setEntrepot(null)
        return false
     }
     else return true
@@ -215,7 +215,6 @@ const AffichageBoxes = (props) => {
                                                                         <input
                                                                             onClick={() => {
                                                                                 
-                                                                                let checked = false;
                                                                                 setBoxe(
                                                                                 boxe.map((data,k) => {
                                                                                     if (key === k) {

@@ -141,7 +141,7 @@ const Navbar = () => {
               </span> 
              </i>
              
-                Alert
+                Alerte
           </Link>
         
           <Link className="nav-link p-5 position-absolute end-0 " to="#" role="button" data-bs-toggle="dropdown" data-bs-auto-close="false" aria-expanded="false">

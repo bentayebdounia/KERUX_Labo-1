@@ -91,7 +91,7 @@ const ModelAlert = (props) => {
         <>
             <Modal size="lg" scrollable={true} show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
-                <Modal.Title> <i className="bi bi-bell-fill" style={{color: "black"}}  > </i> ALERT</Modal.Title>
+                <Modal.Title> <i className="bi bi-bell-fill" style={{color: "black"}}  > </i> ALERTE </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div style={{ marginLeft:"5%", marginRight:"5%"}}>

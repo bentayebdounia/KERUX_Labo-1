@@ -36,7 +36,8 @@ const ModalAjoutBoxes = (props) => {
         nombre: 0,
         unite: "",
         id_stock:"",
-        date:event+""+event.getMilliseconds()
+        date:new Date(),
+        date_alert: ""
     }])
 
     const [nboxe,setNBoxe] = useState([{
@@ -46,7 +47,8 @@ const ModalAjoutBoxes = (props) => {
         nombre: 0,
         unite: "",
         id_stock:"",
-        date: event+""+event.getMilliseconds()
+        date: new Date(),
+        date_alert: ""
     }])
 
     const [tableboxe,setTableboxe] = useState([])
@@ -88,7 +90,8 @@ const ModalAjoutBoxes = (props) => {
             nombre:0,
             unite:"",
             id_stock:"",
-            date: event+""+event.getMilliseconds()
+            date: new Date(),
+            date_alert: ""
         })
         //console.log('poids= '+boxe[0].poids)
         setBoxe(newBoxe.sort((a,b) => {
@@ -170,7 +173,7 @@ const ModalAjoutBoxes = (props) => {
 
                 
                 var b = {
-                    date: event+""+event.getMilliseconds(),
+                    date: new Date(),
                     categorie: props.produitFourni.categorie,
                     nom_produit: props.produitFourni.nom_produit,
                     etape: "enregistrement",
@@ -178,7 +181,8 @@ const ModalAjoutBoxes = (props) => {
                     nombre: boxe[i].nombre,
                     id_produit: props.id,
                     id_stock: null,
-                    stock:""
+                    stock:"",
+                    date_alert: ""
                 }
                 tableboxe.push(b)
                 localStorage.setItem ('boxes'+ props.id, JSON.stringify(tableboxe))

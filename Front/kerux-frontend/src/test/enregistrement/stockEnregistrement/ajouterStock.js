@@ -8,15 +8,17 @@ const AjouterStock = (props) => {
 
     const [entrepots, setEntrepots] = useState([])
     const [entrepot, setEntrepot] = useState()
+    const [dateAlert, setDatealert] = useState()
     const [stock , setStock] = useState(JSON.parse (localStorage.getItem('boxes'+props.id)))
     var tab = []
     tab = JSON.parse (localStorage.getItem('boxes'+props.id) )
     const [boxe,setBoxe] = useState(
-        JSON.parse (localStorage.getItem('boxes'+props.id) ).map(d => {
+        JSON.parse (localStorage.getItem('boxes'+props.id) ).map((d,key) => {
             return {
                 select: false,
+                cle:key,
                 categorie: d.categorie,
-                date: d.date,
+                date_alert: d.date_alert,
                 id_produit: d.id_produit,
                 id_stock: d.id_stock,
                 nom_produit: d.nom_produit,
@@ -65,24 +67,27 @@ const AjouterStock = (props) => {
             if (boxe[i].select === true){
                 console.log(boxe[i].id_produit);
                 //alert(entrepot)
-                boxe[i].id_stock = entrepot
-
-
-                
-                    
-                      
-                        tab[i].id_stock = entrepot
-                        tab[i].stock = n.nom_entrepot
-   
-                    
-                
-                //boxe.splice(i,1)
-                
-                
-                boxe.splice(i,1)
+                boxe[i].id_stock = entrepot      
+                tab[boxe[i].cle].id_stock = entrepot
+                tab[boxe[i].cle].stock = n.nom_entrepot
+                tab[boxe[i].cle].date_alert = dateAlert
+                  
+               // boxe.splice(i,1)
                 }
                 
         }
+
+      
+        var j =0
+        while (j<boxe.length) {
+            if (boxe[j].select === true){
+                  
+                boxe.splice(j,1)
+                j=j
+                }
+                else j++
+        }
+       
 
         
         //props.handleClose()  
@@ -110,9 +115,9 @@ const AjouterStock = (props) => {
                 <Modal.Body>
                     
                     <div style={{margin:"5%", marginRight:"5%"}}>
-                                        <div className="mb-3 row">
-                                            <label htmlFor="entrepot" className="col-sm-2 col-form-label">Etrepot</label>
-                                            <div className="col-sm-10">
+                                        <div className="mb-2 row">
+                                            <label htmlFor="entrepot" className="col-sm-1 col-form-label">Etrepot</label>
+                                            <div className="col-sm-4">
                                                 <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)}  required>
                                                     <option defaultValue={""}></option>
                                                     {entrepots.map( (entrepot,key) =>
@@ -122,7 +127,13 @@ const AjouterStock = (props) => {
                                                     
                                                 </select>
                                             </div>
+                                           
+                                                <label className="col-sm-2 col-form-label">Date d'alerte</label>
+                                                <div className="col-sm-4">
+                                                    <input  type="date" className="form-control " value={dateAlert} onChange={(e)=> setDatealert(e.target.value)} />
+                                                </div>
                                         </div>
+                                        
                                         <div className="divTab" style={{width:"100%" , margin:"0px"}}>
                                             <table className="table table-bordered"  >
                                             <thead>
@@ -147,6 +158,7 @@ const AjouterStock = (props) => {
                                                     <th scope="col">Nom produit</th>
                                                     <th scope="col">Poids</th>
                                                     <th scope="col">Nombre</th>
+                                                    
                                                 
                                                 </tr>
                                             </thead>
@@ -157,19 +169,19 @@ const AjouterStock = (props) => {
                                                             <tr key={key}>
                                                                 <th scope="row">
                                                                     <input
-                                                                    onChange={event => {
-                                                                        let checked = event.target.checked;
-                                                                        setBoxe(
-                                                                        boxe.map((data,k) => {
-                                                                            if (key === k) {
-                                                                            data.select = checked;
-                                                                            }
-                                                                            return data;
-                                                                        })
-                                                                        );
-                                                                    }}
-                                                                    type="checkbox"
-                                                                    checked={p.select}
+                                                                        onChange={event => {
+                                                                            let checked = event.target.checked;
+                                                                            setBoxe(
+                                                                            boxe.map((data,k) => {
+                                                                                if (p.cle === data.cle) {
+                                                                                data.select = checked;
+                                                                                }
+                                                                                return data;
+                                                                            })
+                                                                            );
+                                                                        }}
+                                                                        type="checkbox"
+                                                                        checked={p.select}
                                                                     ></input>
                                                                 </th>
                                                                 <td>{p.id_produit}</td>
@@ -191,7 +203,7 @@ const AjouterStock = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={ ()=> non ()}>Non</button>
-                        <button type="button" className="btn btn-success" onClick={ ()=>ajout() } >Oui</button>
+                        <button type="button" className="btn btn-success" onClick={ ()=> ajout() } >Oui</button>
                         <button type="button" className="btn btn-dark" onClick={()=>{ props.handleClose() ; props.HandelCloseAjout() }} >Terminer</button>
                 </Modal.Footer>
              </Modal>

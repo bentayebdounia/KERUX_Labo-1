@@ -79,7 +79,7 @@ const Recape = (props) => {
                     .then((res) => {
                         
                         console.log(res.data);
-                        serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
+                        serviceAlert.ajouterAlert(res.data.id_process,  box[i].date_alert).then ((result) =>{
                             alert (result.data)
                         })
                         ajouterauStock(res.data.id_gnerate,box[i].id_stock)
