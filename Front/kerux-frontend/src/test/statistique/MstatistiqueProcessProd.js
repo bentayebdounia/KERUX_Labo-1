@@ -92,7 +92,7 @@ const StatistiqueProcess = (props) => {
     }
 
 
-  },frite,tomate,laitue,oignon,choux, caroute)
+  },[])
 
   useEffect(()=>{
     if (etape==='enregistrement')
@@ -152,7 +152,7 @@ const StatistiqueProcess = (props) => {
       setHotdogs(calassificate('hotDogs',etape))
     }
 
-  },poulet,tendres,wings,legs,dips, hotdogs)
+  },[])
 
      
      function calassificate (produit,etape) {
@@ -161,7 +161,7 @@ const StatistiqueProcess = (props) => {
            if (i<12){
                seviceStatistique.getPocessProd(produit,etape,'2023-'+i+'-1', '2023-'+(i+1)+'-1')
                .then((res) => {
-                   console.log(res.data);
+                  // console.log(res.data);
                    categorie_prod.push(parseFloat (res.data[0].count))
                })
                }
@@ -169,7 +169,7 @@ const StatistiqueProcess = (props) => {
            if (i===12){
              seviceStatistique.getPocessProd(produit,etape,'2023-'+i+'-1','2024-' +(1)+'-1')
                  .then((res) => {
-                     console.log(res.data);
+                    // console.log(res.data);
                      categorie_prod.push(parseFloat (res.data[0].count))
                  })
                  }

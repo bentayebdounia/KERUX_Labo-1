@@ -1,5 +1,6 @@
 import React ,{useState,useEffect} from 'react' 
 import serviceNettoyage from '../../service/service.nettoyage' 
+import serviceActuelProcess from '../../service/sevice.actuelProcess'
 import Nettoyage from './nettoyage' 
 import ModelReponse from '../../Models/Model.repense' 
 import ModalSortieStock from '../Stock/Modal.sortieStock'
@@ -60,6 +61,7 @@ const TestNet = (props) => {
     const [postsPerPage] = useState(8);
     
     const [message,setMessage] = useState() 
+    const [produitBloquant, setProduitbloquant] = useState(false)
      
 
     //les operation de pagination 
@@ -71,16 +73,36 @@ const TestNet = (props) => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
      useEffect(()=>{ 
-        serviceNettoyage.getActualProcess() 
+
+        serviceActuelProcess.getActualProcessBlock('enregistrement') 
             .then((res)=>{ 
-                setTabledonnees(res.data) 
+                console.log(res.data.length);
+                if (res.data.length ===0){
+                    console.log('actuel process non bloquant');
+                    setProduitbloquant(true)
+                    serviceActuelProcess.getActualProcess('enregistrement')
+                    .then((res) =>{
+                        setTabledonnees(res.data) 
+                    })
+                }
+                else setTabledonnees(res.data) 
             }) 
         
-        serviceNettoyage.getActualProcesssStock()
-        .then((res)=>{ 
-            setTabledonneesstocker(res.data) 
-        }) 
-     }) 
+            serviceActuelProcess.getActualProcesssStockBlock('enregistrement') 
+            .then((res)=>{ 
+                if (res.data.length===0){
+                    setProduitbloquant(true)
+                    serviceActuelProcess.getActualProcesssStock('enregistrement')
+                    .then((res) =>{
+                        console.log('actuel process stock non bloquant');
+                        setTabledonneesstocker(res.data) 
+                    })
+                }
+                else setTabledonneesstocker(res.data) 
+            }) 
+            //setTabledonneesstocker(res.data) 
+        
+     },[]) 
     
   
      
@@ -88,7 +110,7 @@ const TestNet = (props) => {
     const getProcess = (e) => { 
         e.preventDefault(); 
          
-        serviceNettoyage.getProcesaById(id).then((res) => { 
+      /*  serviceNettoyage.getProcesaById(id).then((res) => { 
                // console.log(res.data) 
                // console.log(res.data.fk_proditfourni)  
                 setProcess(res.data) 
@@ -117,22 +139,74 @@ const TestNet = (props) => {
               
            } 
            
-        ) 
+        ) */
+
+        if (produitBloquant === true) {
+            serviceActuelProcess.getIdProcess("enregistrement" , id)
+            .then((res) => {
+                if(res.data === "boxe n'existe pas"){
+                    setMessage("Vérifier votre ID") 
+                    handleShow(true) 
+                }
+
+                else if (res.data.fk_stock===null){ 
+                    console.log(test); 
+                    toggleshow() 
+                    props.nettoypBtnV()
+                 
+                } 
+                    else {  
+                        handleShow2() 
+                       } 
+            })
+        }
+        else {
+            serviceActuelProcess.getIdBloquant("enregistrement" , id)
+            .then((res) => {
+                if(res.data === "boxe n'existe pas"){
+                    setMessage("Vérifier votre ID") 
+                    handleShow(true) 
+                }
+
+                else if (res.data.fk_stock===null){ 
+                    console.log(test); 
+                    toggleshow() 
+                    props.nettoypBtnV()
+                 
+                } 
+                    else {  
+                        handleShow2() 
+                       } 
+            })
+
+        }
     
       } 
 
       const dateNow = (d) => {
-        var date=  moment.utc(d).format('DD-M-YYYY')
+        var date=  moment.utc(d).format('DD-MM-YYYY')
         const words = date.split('-');
         var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
        // console.log(a+1)
         return a
     }
+
+    const verifyMounth = (month) => {
+        if (month<9){
+            return 0+""+(month+1)
+        }
+        else if(month >= 9 && month < 12 ) 
+        return month+1
+             else  return month+1
+    }
     const dateToday = () => {
         var today = new Date
-        var datee =  today.getDate()+'-'+(today.getMonth() +1)  + '-' +today.getFullYear()
+        var datee =  today.getDate()+'-'+(verifyMounth(today.getMonth() ))  + '-' +today.getFullYear()
+        console.log(verifyMounth(today.getMonth() ));
         return datee
     }
+
+
  
    
        const chargerData = () => { 
@@ -181,7 +255,7 @@ const TestNet = (props) => {
                             { 
                                 currentPosts.map( 
                                     (p, key) => 
-                                    <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
+                                    <tr key={key} style={{background:`${(dateNow(p.date_alert) === dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                         <td>
                                         <input
                                             onChange={event => {
@@ -253,7 +327,7 @@ table2=(
                             <tbody >
                             {  currentPosts2.map( 
                                 (p, key) => 
-                                <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
+                                <tr key={key} style={{background:`${(dateNow(p.date_alert) === dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                     <td>
                                     <input
                                         onChange={event => {

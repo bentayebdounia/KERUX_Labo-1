@@ -40,17 +40,17 @@ const ModelAlert = (props) => {
             
         })
 
-    })
+    },[])
 
     const dateRester = (dateAlert) => {
         var date1 = new Date (dateAlert)
         var date2 = new Date
-        console.log(date2)
+      //  console.log(date2)
         var diffTime = Math.abs(date1 - date2);
 
         var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        console.log(diffTime);
+       // console.log(diffTime);
         return diffDays
     }
 
@@ -71,17 +71,17 @@ const ModelAlert = (props) => {
         else if (etape === 'nettoyage'){
             
             setControleCoupage(true)
-            console.log(' click nettoyage ');
+           // console.log(' click nettoyage ');
            // props.handleClose()
         }
         else if (etape === 'coupage'){
             setControleCondit(true)
-            console.log(' click coupage ');
+           // console.log(' click coupage ');
            // props.handleClose()
         }
         else if (etape === 'conditionnement'){
             setControleSortie(true)
-            console.log(' click conditionnement ');
+           // console.log(' click conditionnement ');
             //props.handleClose()
         }
         

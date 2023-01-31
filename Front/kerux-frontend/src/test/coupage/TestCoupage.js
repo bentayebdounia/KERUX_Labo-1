@@ -7,7 +7,7 @@ import ModalSortieStock from '../Stock/Modal.sortieStock'
 import Pagination from '../pagination/pagination'
 import moment from 'moment'
 import serviceAlert from '../../service/service.alert'
-
+import serviceActuelProcess from '../../service/sevice.actuelProcess'
 const TestCoupage = (props) => {
 
     
@@ -77,6 +77,7 @@ const TestCoupage = (props) => {
     
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(8);
+    const [produitBloquant, setProduitbloquant] = useState(false)
     //les operation de pagination 
 
     const indexOfLastPost = currentPage * postsPerPage;
@@ -90,18 +91,35 @@ const TestCoupage = (props) => {
 
 
     useEffect(()=>{ 
-        CoupageService.getActualProcess() 
-        .then((res)=>{ 
-                setTabledonnees(res.data) 
+        serviceActuelProcess.getActualProcessBlock('nettoyage') 
+            .then((res)=>{ 
+                console.log(res.data.length);
+                if (res.data.length ===0){
+                    console.log('actuel process non bloquant');
+                    setProduitbloquant(true)
+                    serviceActuelProcess.getActualProcess('nettoyage')
+                    .then((res) =>{
+                        setTabledonnees(res.data) 
+                    })
+                }
+                else setTabledonnees(res.data) 
             }) 
         
-        CoupageService.getActualProcessStock()
-        .then((res)=>{ 
-            setTabledonneesstocker(res.data)
-        }) 
+            serviceActuelProcess.getActualProcesssStockBlock('nettoyage') 
+            .then((res)=>{ 
+                if (res.data.length===0){
+                    setProduitbloquant(true)
+                    serviceActuelProcess.getActualProcesssStock('nettoyage')
+                    .then((res) =>{
+                        console.log('actuel process stock non bloquant');
+                        setTabledonneesstocker(res.data) 
+                    })
+                }
+                else setTabledonneesstocker(res.data) 
+            })  
 
          
-     }) 
+     },[]) 
 
      useEffect(()=>{
         setBoxcoupagetab (JSON.parse(localStorage.getItem('boxCoupage') || "[]"))

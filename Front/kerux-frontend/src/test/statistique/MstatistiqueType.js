@@ -35,7 +35,7 @@ const StatistiqueTypeProduit = (props) => {
     setChoux(calassificate('choux'))
     setCaroute(calassificate('carotte'))
 
-  },frite,tomate,laitue,oignon,choux, caroute)
+  },[])
 
   useEffect(()=>{
     setPoulet(calassificate('poulet'))
@@ -45,7 +45,7 @@ const StatistiqueTypeProduit = (props) => {
     setDips(calassificate('dips'))
     setHotdogs(calassificate('hotDogs'))
 
-  },poulet,tendres,wings,legs,dips, hotdogs)
+  },[])
 
 
     function calassificate (categorie) {
