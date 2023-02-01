@@ -78,6 +78,7 @@ const TestCoupage = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(8);
     const [produitBloquant, setProduitbloquant] = useState(false)
+    const [produitBloquantStock, setProduitbloquantstock] = useState(false)
     //les operation de pagination 
 
     const indexOfLastPost = currentPage * postsPerPage;
@@ -96,13 +97,17 @@ const TestCoupage = (props) => {
                 console.log(res.data.length);
                 if (res.data.length ===0){
                     console.log('actuel process non bloquant');
-                    setProduitbloquant(true)
+                    
                     serviceActuelProcess.getActualProcess('nettoyage')
                     .then((res) =>{
                         setTabledonnees(res.data) 
+                        setProduitbloquant(false)
                     })
                 }
-                else setTabledonnees(res.data) 
+                else {
+                    setProduitbloquant(true)
+                    setTabledonnees(res.data)
+                } 
             }) 
         
             serviceActuelProcess.getActualProcesssStockBlock('nettoyage') 
@@ -112,10 +117,14 @@ const TestCoupage = (props) => {
                     serviceActuelProcess.getActualProcesssStock('nettoyage')
                     .then((res) =>{
                         console.log('actuel process stock non bloquant');
+                        setProduitbloquantstock(false)
                         setTabledonneesstocker(res.data) 
                     })
                 }
-                else setTabledonneesstocker(res.data) 
+                else {
+                    setProduitbloquantstock(false)
+                    setTabledonneesstocker(res.data) 
+                }
             })  
 
          
@@ -146,6 +155,7 @@ const TestCoupage = (props) => {
     return id
     }
     var id_generate
+
     const ajouterBoxCouper = (id_produit, id_enregistrement, id_nettoyage, id_process) => {
          id_generate = generateId(id_produit ,id_nettoyage)
         setId_generateNet( id_generate )
@@ -165,7 +175,8 @@ const TestCoupage = (props) => {
         }
         boxCoupageTab.push(tab)
         console.log(boxCoupageTab);
-        localStorage.setItem ('boxCoupage', JSON.stringify(boxCoupageTab))
+        console.log(boxes);
+        //localStorage.setItem ('boxCoupage', JSON.stringify(boxCoupageTab))
         //setBoxcoupagetab()
     }
 /*
@@ -197,92 +208,104 @@ const TestCoupage = (props) => {
         e.preventDefault();
         console.log("box.id_box== "+boxes[0].id_box);
 
-        CoupageService.getProcessById(boxes[0].id_box).then((res) => {
-            //console.log(res.data)
-           // console.log(res.data.fk_proditfourni) 
-            setProcess(res.data)
-            if (res.data === "ID n'existe pas"){
-                setMessage("ID n'existe pas pour cette etape ")
-                handleShow(true)
-                
+      
+            
+            if (produitBloquant === false && produitBloquantStock ===false) {
+                serviceActuelProcess.getIdProcess("nettoyage" , boxes[0].id_box)
+                .then((res) => {
+                    if(res.data === "boxe n'existe pas"){
+                        setMessage("Vérifier votre ID  ") 
+                        handleShow(true) 
+                    }
+    
+                    else if (res.data.fk_stock===null){ 
+                        console.log(test); 
+                        setProcess(res.data) 
+                        if (boxCoupageTab.length === 0){
+                            handleShow2(true)
+                            ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box , res.data.id_process )
+                            //console.log("nombre= "+res.data.nombre);
+                            setPoids(poids+res.data.poids)
+                            setNombre(nombre+res.data.nombre)
+                            ajouterBox() 
+                            
+                            
+                        }
+                        else {
+                            console.log(boxCoupageTab);
+                            var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
+                            console.log( found  );
+                            if (found === undefined) {
+                                handleShow2(true)
+                                ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
+                                //console.log("nombre= "+res.data.nombre);
+                                setPoids(poids+res.data.poids)
+                                setNombre(nombre+res.data.nombre)
+                                ajouterBox() 
+                                
+                            }
+                            else{
+                                setMessage("Vous avez déjà selectionné ce produit")
+                                handleShow(true)
+                            }
+                        }
+                       // props.nettoypBtnV()
+                     
+                    } 
+                        else {  
+                            setProcess(res.data) 
+                            handleShow2() 
+                           } 
+                })
             }
-            else if(res.data==="box deja couper"){
-                    
-                    setMessage("le produit est deja couper")
-                    handleShow(true)
-            }   
-                else 
-                    {
-                        
-                        if(res.data.fk_stock!==null){
-                                  // il faut ajouter un autre teste pour confirmer que l'agent il a bien fait la sortie de stock avant l'enregistrer au process de coupage
-                
-                                //ajouter le box couper et generer un identifiant
-                                
-                                if (boxCoupageTab.length === 0){
-                                    handleShow2(true)
-                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box , res.data.id_process )
-                                    //console.log("nombre= "+res.data.nombre);
-                                    setPoids(poids+res.data.poids)
-                                    setNombre(nombre+res.data.nombre)
-                                    ajouterBox() 
-                                    
-                                    
-                                }
-                                else {
-                                    console.log(boxCoupageTab);
-                                    var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
-                                    console.log( found  );
-                                    if (found === undefined) {
-                                        handleShow2(true)
-                                        ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
-                                        //console.log("nombre= "+res.data.nombre);
-                                        setPoids(poids+res.data.poids)
-                                        setNombre(nombre+res.data.nombre)
-                                        ajouterBox() 
-                                        
-                                    }
-                                    else{
-                                        setMessage("Vous avez déjà selectionné ce produit")
-                                        handleShow(true)
-                                    }
-                                }
-
-                                
+            else {
+                serviceActuelProcess.getIdBloquant("nettoyage" , boxes[0].id_box)
+                .then((res) => {
+                    if(res.data === "boxe n'existe pas"){
+                        setMessage("Vérifier votre ID ") 
+                        handleShow(true) 
+                    }
+    
+                    else if (res.data.fk_stock===null){ 
+                        //console.log(test); 
+                        setProcess(res.data) 
+                        if (boxCoupageTab.length === 0){
+                            //ajouter le box couper et generer un identifiant
+                            ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
+                            //  console.log("nombre= "+res.data.nombre);
+                            setPoids(poids+res.data.poids)
+                            setNombre(nombre+res.data.nombre)
+                            ajouterBox() 
                         }
 
-                        else{
-
-                            if (boxCoupageTab.length === 0){
+                        else {
+                            console.log(boxes);
+                            var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
+                            console.log( found  );
+                            if (found === undefined) {
                                 //ajouter le box couper et generer un identifiant
                                 ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
                                 //  console.log("nombre= "+res.data.nombre);
                                 setPoids(poids+res.data.poids)
                                 setNombre(nombre+res.data.nombre)
-                                ajouterBox() 
+                                ajouterBox()
+                           
                             }
+                            else  {
+                                setMessage("Vous avez déjà selectionné ce produit")
+                                handleShow(true)
+                            }}
+                       // props.nettoypBtnV()
+                     
+                    } 
+                        else { 
+                            setProcess(res.data)  
+                            handleShow2() 
+                           } 
+                })
+    
+            }
 
-                            else {
-                                console.log(boxCoupageTab);
-                                var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
-                                console.log( found  );
-                                if (found === undefined) {
-                                    //ajouter le box couper et generer un identifiant
-                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
-                                    //  console.log("nombre= "+res.data.nombre);
-                                    setPoids(poids+res.data.poids)
-                                    setNombre(nombre+res.data.nombre)
-                                    ajouterBox()
-                               
-                                }
-                                else  {
-                                    setMessage("Vous avez déjà selectionné ce produit")
-                                    handleShow(true)
-                                }
-}
-                        }                     
-                }
-            })     
       }
 
       const confirmer = (e) => {
@@ -316,12 +339,43 @@ const TestCoupage = (props) => {
     //console.log(id_generate);
     //console.log(boxes);
 
-    const dateModif = (d) => {
-        var date=  moment.utc(d).format('DD-MM-YY')
+    const dateModif = (date1) => {
+        var date=  moment.utc(date1).format('DD-MM-YYYY')
         const words = date.split('-');
-        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-       // console.log(a+1)
-        return a
+        //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
+
+        var d = new Date(words[2], words[1]-1 ,words[0]);
+        var nextDay = new Date(d.getTime());
+        nextDay.setDate(d.getDate() + 1);
+        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+        return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    }
+
+    const verifyMounth = (month) => {
+        if (month<9){
+            return 0+""+(month+1)
+        }
+        else if(month >= 9 && month < 12 ) 
+        return month+1
+             else  return month+1
+    }
+
+    const verifyDay = (day) => {
+        if (day<10){
+            return 0+""+day
+        }
+        else  return day
+             
+    }
+
+    
+
+    const dateToday = () => {
+        var today = new Date
+        var datee = verifyDay( today.getDate())+'/'+(verifyMounth(today.getMonth() ))  + '/' +today.getFullYear()
+        //console.log(verifyMounth(today.getMonth() ));
+        return datee
     }
 
     const chargerData = () => { 
@@ -345,12 +399,7 @@ const TestCoupage = (props) => {
 
        }
      
-       const dateToday = () => {
-        var today = new Date
-        var datee =  today.getDate()+'-'+(today.getMonth() +1)  + '-' +today.getFullYear()
-        return datee
-    }
-   
+       
  if(buttonColor)
     {table=(
         <>
@@ -373,8 +422,8 @@ const TestCoupage = (props) => {
                                 </tr> 
                             </thead> 
                             <tbody >
-                            { 
-                                currentPosts.map( 
+                            { ((produitBloquant===false && produitBloquantStock===false) || produitBloquant===true )
+                              &&  currentPosts.map( 
                                     (p, key) => 
                                     <tr key={key} style={{background:`${(dateModif(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                         <td>
@@ -448,7 +497,8 @@ if(buttonColor2)
                                 </tr> 
                             </thead> 
                             <tbody >
-                            {  currentPosts2.map( 
+                            { ((produitBloquant===false && produitBloquantStock===false) || produitBloquantStock===true )
+                              && currentPosts2.map( 
                                 (p, key) => 
                                 <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                     <td>
@@ -495,6 +545,11 @@ if(buttonColor2)
     )
 }
 
+const supprimerBox = (key) => {
+    boxes.splice(key,1)
+    boxCoupageTab.splice(key,1)
+
+}
 
     return ( 
         <>
@@ -507,15 +562,16 @@ if(buttonColor2)
                      {boxes.map((box,key) => {
                          return ( 
                              <div className="input-group col-sm-10" key={key}>
-                                     <BoxCoupage id_box = {box.id_box} onIdChange={newId_box => {
+                                     <BoxCoupage id_box = {box.id_box} k={key} supprimerBox={supprimerBox} onIdChange={newId_box => {
                                          const newBoxes = [...boxes]
                                          newBoxes[key].id_box = newId_box
+                                         
                                          setBoxes(newBoxes)
                                      }} />
                                  {key === 0 && <>
                                             <button className="btn" style={{background: '#7B170F' }} type="button" id="button-addon2"
                                                   onClick={(e) => plusId(e)} >
-                                                 <i className="bi bi-plus-lg" style={{color: "white" , fontSize:"15px"}}></i>
+                                                 <i className="bi bi-plus-lg" style={{color: "white" , fontSize:"20px"}}></i>
                                             </button>
                                            <button className="btn" style={{background: '#4F8B2A',marginLeft:'2px' ,color: "white" }} type="button" id="button-addon2" onClick={(e)=> confirmer(e)}>
                                                    <i className="bi bi-check-lg" > </i> Confirmer

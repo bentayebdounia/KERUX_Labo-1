@@ -62,7 +62,7 @@ const TestNet = (props) => {
     
     const [message,setMessage] = useState() 
     const [produitBloquant, setProduitbloquant] = useState(false)
-     
+    const [produitBloquantStock, setProduitbloquantstock] = useState(false)
 
     //les operation de pagination 
     const indexOfLastPost = currentPage * postsPerPage;
@@ -72,33 +72,40 @@ const TestNet = (props) => {
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-     useEffect(()=>{ 
+     useEffect(  ()=>{ 
 
-        serviceActuelProcess.getActualProcessBlock('enregistrement') 
-            .then((res)=>{ 
+         serviceActuelProcess.getActualProcessBlock('enregistrement') 
+            .then( (res)=>{ 
                 console.log(res.data.length);
                 if (res.data.length ===0){
                     console.log('actuel process non bloquant');
-                    setProduitbloquant(true)
-                    serviceActuelProcess.getActualProcess('enregistrement')
+                    
+                     serviceActuelProcess.getActualProcess('enregistrement')
                     .then((res) =>{
                         setTabledonnees(res.data) 
+                        setProduitbloquant(false)
                     })
                 }
-                else setTabledonnees(res.data) 
+                else {
+                    setTabledonnees(res.data) 
+                    setProduitbloquant(true)}
             }) 
         
-            serviceActuelProcess.getActualProcesssStockBlock('enregistrement') 
-            .then((res)=>{ 
+             serviceActuelProcess.getActualProcesssStockBlock('enregistrement') 
+            .then(  (res)=>{ 
                 if (res.data.length===0){
-                    setProduitbloquant(true)
-                    serviceActuelProcess.getActualProcesssStock('enregistrement')
+                    
+                     serviceActuelProcess.getActualProcesssStock('enregistrement')
                     .then((res) =>{
                         console.log('actuel process stock non bloquant');
-                        setTabledonneesstocker(res.data) 
+                        setTabledonneesstocker(res.data)
+                        setProduitbloquantstock(false) 
                     })
                 }
-                else setTabledonneesstocker(res.data) 
+                else {
+                    setTabledonneesstocker(res.data)
+                    setProduitbloquantstock(true)
+                } 
             }) 
             //setTabledonneesstocker(res.data) 
         
@@ -141,21 +148,23 @@ const TestNet = (props) => {
            
         ) */
 
-        if (produitBloquant === true) {
+        if (produitBloquant === false && produitBloquantStock ===false) {
             serviceActuelProcess.getIdProcess("enregistrement" , id)
             .then((res) => {
                 if(res.data === "boxe n'existe pas"){
-                    setMessage("Vérifier votre ID") 
+                    setMessage("Vérifier votre ID  ") 
                     handleShow(true) 
                 }
 
                 else if (res.data.fk_stock===null){ 
                     console.log(test); 
+                    setProcess(res.data) 
                     toggleshow() 
                     props.nettoypBtnV()
                  
                 } 
                     else {  
+                        setProcess(res.data) 
                         handleShow2() 
                        } 
             })
@@ -164,17 +173,19 @@ const TestNet = (props) => {
             serviceActuelProcess.getIdBloquant("enregistrement" , id)
             .then((res) => {
                 if(res.data === "boxe n'existe pas"){
-                    setMessage("Vérifier votre ID") 
+                    setMessage("Vérifier votre ") 
                     handleShow(true) 
                 }
 
                 else if (res.data.fk_stock===null){ 
                     console.log(test); 
+                    setProcess(res.data) 
                     toggleshow() 
                     props.nettoypBtnV()
                  
                 } 
-                    else {  
+                    else { 
+                        setProcess(res.data)  
                         handleShow2() 
                        } 
             })
@@ -268,8 +279,8 @@ const TestNet = (props) => {
                                 </tr> 
                             </thead> 
                             <tbody >
-                            { 
-                                currentPosts.map( 
+                            { ((produitBloquant===false && produitBloquantStock===false) || produitBloquant===true )
+                              &&  currentPosts.map( 
                                     (p, key) => 
                                     <tr key={key} style={{background:`${(dateNow(p.date_alert) === dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                         <td>
@@ -341,7 +352,8 @@ table2=(
                                 </tr> 
                             </thead> 
                             <tbody >
-                            {  currentPosts2.map( 
+                            { ((produitBloquant===false && produitBloquantStock===false) || produitBloquantStock===true )
+                              && currentPosts2.map( 
                                 (p, key) => 
                                 <tr key={key} style={{background:`${(dateNow(p.date_alert) === dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                     <td>
@@ -371,7 +383,7 @@ table2=(
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids}</td> 
                                     <td>{p.nombre}</td> 
-                                    <td>{p.datee}</td> 
+                                    <td>{dateNow (p.datee)}</td> 
                                     <td>{p.heure}</td> 
                                     <td>{p.nom_entrepot}</td>  
                                 
