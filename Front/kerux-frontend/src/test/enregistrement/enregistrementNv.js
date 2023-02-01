@@ -74,7 +74,7 @@ const Enregistrement = (props) => {
     
     setProduitsfourni (JSON.parse(localStorage.getItem('produitsFournis') || "[]"))
     //return produitFourni
-   },[]) // l'erreur est la ***********************************************************************************************************************
+   },[produitsFourni]) // l'erreur est la ***********************************************************************************************************************
 
     function plus () {
 

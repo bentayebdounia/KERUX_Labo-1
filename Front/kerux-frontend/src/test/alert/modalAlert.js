@@ -8,7 +8,7 @@ import TestCoupage from '../coupage/TestCoupage'
 
 import TestCondit from '../conditionnemet/testCondit'
 import TestSortie from '../sortieProcess/TestSortie'
-
+import moment from 'moment'; 
 const ModelAlert = (props) => {
     const [alertDanger, setAlertdanger] = useState([])
     const [alertWarnning, setAlertwarnning] = useState([])
@@ -42,11 +42,24 @@ const ModelAlert = (props) => {
 
     },[])
 
+    const dateNow = (date1) => {
+        var date=  moment.utc(date1).format('DD-MM-YYYY')
+        const words = date.split('-');
+        //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
+
+        var d = new Date(words[2], words[1]-1 ,words[0]);
+        var nextDay = new Date(d.getTime());
+        nextDay.setDate(d.getDate() + 1);
+        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+        return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    }
+
     const dateRester = (dateAlert) => {
         var date1 = new Date (dateAlert)
         var date2 = new Date
-      //  console.log(date2)
-        var diffTime = Math.abs(date1 - date2);
+        console.log(dateAlert)
+        var diffTime = Math.abs(  date1 - date2);
 
         var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
@@ -122,7 +135,7 @@ const ModelAlert = (props) => {
                                     <i className="bi-info-circle-fill me-2"></i>
                                     Le produit de ID: <span style={{fontWeight:"bold"}}> {key.id_gnerate} </span> est en attente à l'étape: <span style={{fontWeight:"bold"}}> {key.etape} </span>   
                                     <br/>
-                                    il vous reste <span style={{fontWeight:"bold"}}> {dateRester(key.date_alert)} jours </span>
+                                    il vous reste <span style={{fontWeight:"bold"}}> {dateRester( key.date_alert)} jours </span>  {dateNow( key.date_alert)}
                                     
                                 </div>
                             </Alert>

@@ -5,7 +5,7 @@ import ModelReponse from '../../Models/Model.repense'
 import Pagination from '../pagination/pagination'
 import moment from 'moment'
 import ModalSortieStock from '../Stock/Modal.sortieStock'
-
+import serviceActuelProcess from '../../service/sevice.actuelProcess'
 const TestSortie = (props) => {
 
     const [test, setTest] = useState(false)
@@ -30,7 +30,7 @@ const TestSortie = (props) => {
 
     const [buttonColor, setButtoncolor] = useState(true)
     const [buttonColor2, setButtoncolor2] = useState(false)
-    
+    const [produitBloquant, setProduitbloquant] = useState(false)
     
      const [process, setProcess] = useState({
         id_process: "",
@@ -72,63 +72,113 @@ const TestSortie = (props) => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
      
      useEffect(()=>{ 
-        serviceProcess.getActualProcess() 
+        serviceActuelProcess.getActualProcessBlock('conditionnement') 
             .then((res)=>{ 
-                setTabledonnees(res.data) 
+                console.log(res.data.length);
+                if (res.data.length ===0){
+                    console.log('actuel process non bloquant');
+                    setProduitbloquant(true)
+                    serviceActuelProcess.getActualProcess('conditionnement')
+                    .then((res) =>{
+                        setTabledonnees(res.data) 
+                    })
+                }
+                else setTabledonnees(res.data) 
             }) 
         
-            serviceProcess.getActualProcesssStock()
-        .then((res)=>{ 
-            setTabledonneesstocker(res.data)
-        }) 
-     }) 
+            serviceActuelProcess.getActualProcesssStockBlock('conditionnement') 
+            .then((res)=>{ 
+                if (res.data.length===0){
+                    setProduitbloquant(true)
+                    serviceActuelProcess.getActualProcesssStock('conditionnement')
+                    .then((res) =>{
+                        console.log('actuel process stock non bloquant');
+                        setTabledonneesstocker(res.data) 
+                    })
+                }
+                else setTabledonneesstocker(res.data) 
+            })  
+     },[]) 
 
 
     const getProcess = (e) => {
         e.preventDefault();
-        
-            serviceProcess.getProcesaById(id).then((res) => {
-                console.log(res.data)
-                console.log(res.data.fk_proditfourni) 
-                setProcess(res.data)
-                if (res.data === "ID n'existe pas"){
-                    setMessage("ID n'existe pas pour cette etape ")
-                    handleShow(true)
-                    
+        if (produitBloquant === true) {
+            serviceActuelProcess.getIdProcess("conditionnement" , id)
+            .then((res) => {
+                if(res.data === "boxe n'existe pas"){
+                    setMessage("Vérifier votre ID") 
+                    handleShow(true) 
                 }
-                else if(res.data==="box deja sortie"){
-                        
-                        setMessage("le produit est deja sortie")
-                        handleShow(true)
-                }   
-                    else if(res.data.fk_stock===null){
-                        console.log(test)
-                        toggleshow()
-                        props.sortieBtnV()
-                    
-                    }
+
+                else if (res.data.fk_stock===null){ 
+                    console.log(test); 
+                    toggleshow() 
+                    props.nettoypBtnV()
+                 
+                } 
                     else {  
                         handleShow2() 
-                        props.sortieBtnV()
-                     } 
-                
-           }
-           
-        )
+                       } 
+            })
+        }
+        else {
+            serviceActuelProcess.getIdBloquant("conditionnement" , id)
+            .then((res) => {
+                if(res.data === "boxe n'existe pas"){
+                    setMessage("Vérifier votre ID") 
+                    handleShow(true) 
+                }
+
+                else if (res.data.fk_stock===null){ 
+                    console.log(test); 
+                    toggleshow() 
+                    props.nettoypBtnV()
+                 
+                } 
+                    else {  
+                        handleShow2() 
+                       } 
+            })
+
+        }
      
       }
 
-      const dateNow = (d) => {
-        var date=  moment.utc(d).format('DD-MM-YY')
+      const dateNow = (date1) => {
+        var date=  moment.utc(date1).format('DD-MM-YYYY')
         const words = date.split('-');
-        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-        console.log(a+1)
-        return a
+        //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
+
+        var d = new Date(words[2], words[1]-1 ,words[0]);
+        var nextDay = new Date(d.getTime());
+        nextDay.setDate(d.getDate() + 1);
+        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+        return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    }
+
+    const verifyMounth = (month) => {
+        if (month<9){
+            return 0+""+(month+1)
+        }
+        else if(month >= 9 && month < 12 ) 
+        return month+1
+             else  return month+1
+    }
+
+    const verifyDay = (day) => {
+        if (day<10){
+            return 0+""+day
+        }
+        else  return day
+             
     }
 
     const dateToday = () => {
         var today = new Date
-        var datee =  today.getDate()+'-'+(today.getMonth() +1)  + '-' +today.getFullYear()
+        var datee = verifyDay( today.getDate())+'/'+(verifyMounth(today.getMonth() ))  + '/' +today.getFullYear()
+        //console.log(verifyMounth(today.getMonth() ));
         return datee
     }
 

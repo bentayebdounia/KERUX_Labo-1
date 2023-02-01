@@ -183,12 +183,17 @@ const TestNet = (props) => {
     
       } 
 
-      const dateNow = (d) => {
-        var date=  moment.utc(d).format('DD-MM-YYYY')
+      const dateNow = (date1) => {
+        var date=  moment.utc(date1).format('DD-MM-YYYY')
         const words = date.split('-');
-        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-       // console.log(a+1)
-        return a
+        //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
+
+        var d = new Date(words[2], words[1]-1 ,words[0]);
+        var nextDay = new Date(d.getTime());
+        nextDay.setDate(d.getDate() + 1);
+        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+        return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
     }
 
     const verifyMounth = (month) => {
@@ -199,10 +204,21 @@ const TestNet = (props) => {
         return month+1
              else  return month+1
     }
+
+    const verifyDay = (day) => {
+        if (day<10){
+            return 0+""+day
+        }
+        else  return day
+             
+    }
+
+    
+
     const dateToday = () => {
         var today = new Date
-        var datee =  today.getDate()+'-'+(verifyMounth(today.getMonth() ))  + '-' +today.getFullYear()
-        console.log(verifyMounth(today.getMonth() ));
+        var datee = verifyDay( today.getDate())+'/'+(verifyMounth(today.getMonth() ))  + '/' +today.getFullYear()
+        //console.log(verifyMounth(today.getMonth() ));
         return datee
     }
 
@@ -355,7 +371,7 @@ table2=(
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids}</td> 
                                     <td>{p.nombre}</td> 
-                                    <td>{dateNow (p.datee)}</td> 
+                                    <td>{p.datee}</td> 
                                     <td>{p.heure}</td> 
                                     <td>{p.nom_entrepot}</td>  
                                 

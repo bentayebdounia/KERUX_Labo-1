@@ -4,6 +4,7 @@ import Conditionnement from './conditionnement'
 import ModelReponse from '../../Models/Model.repense'
 import ModalSortieStock from '../Stock/Modal.sortieStock'
 import Pagination from '../pagination/pagination'
+import serviceActuelProcess from '../../service/sevice.actuelProcess'
 import moment from 'moment'
 
 const TestCondit = (props) => {
@@ -55,7 +56,7 @@ const TestCondit = (props) => {
  
     const [tableCoupage, setTableCoupage] = useState([])
     const [tableconditionnement, setTableconditionnement] = useState([]) 
-    
+    const [produitBloquant, setProduitbloquant] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(8);
     //les operation de pagination 
@@ -66,70 +67,116 @@ const TestCondit = (props) => {
     const paginate = pageNumber => setCurrentPage(pageNumber);
      
      useEffect(()=>{ 
-        ConditService.getCoupageTable() 
-        .then((res)=>{ 
-            setTableCoupage(res.data) 
-        }) 
-
-        ConditService.getActualProcess() 
-        .then((res)=>{ 
-            setTabledonnees(res.data) 
-        }) 
-    
-        ConditService.getActualProcesssStock()
-        .then((res)=>{ 
-            setTabledonneesstocker(res.data) 
-        }) 
-     }) 
+        serviceActuelProcess.getActualProcessBlock('coupage') 
+            .then((res)=>{ 
+                console.log(res.data.length);
+                if (res.data.length ===0){
+                    console.log('actuel process non bloquant');
+                    setProduitbloquant(true)
+                    serviceActuelProcess.getActualProcess('coupage')
+                    .then((res) =>{
+                        setTabledonnees(res.data) 
+                    })
+                }
+                else setTabledonnees(res.data) 
+            }) 
+        
+            serviceActuelProcess.getActualProcesssStockBlock('coupage') 
+            .then((res)=>{ 
+                if (res.data.length===0){
+                    setProduitbloquant(true)
+                    serviceActuelProcess.getActualProcesssStock('coupage')
+                    .then((res) =>{
+                        console.log('actuel process stock non bloquant');
+                        setTabledonneesstocker(res.data) 
+                    })
+                }
+                else setTabledonneesstocker(res.data) 
+            }) 
+     },[]) 
  
     const getProcess = (e) => {
         e.preventDefault();
         
-        ConditService.getProcesaById(id).then((res) => {
-                console.log(res.data)
-                console.log(res.data.fk_proditfourni) 
-                setProcess(res.data)
-                if (res.data === "ID n'existe pas"){
-                    setMessage("ID n'existe pas pour cette etape ")
-                    handleShow(true)
-                    
+        if (produitBloquant === true) {
+            serviceActuelProcess.getIdProcess("coupage" , id)
+            .then((res) => {
+                if(res.data === "boxe n'existe pas"){
+                    setMessage("Vérifier votre ID") 
+                    handleShow(true) 
                 }
-                else if(res.data==="box deja conditionner"){
-                        setMessage("le box est deja conditionne")
-                        handleShow(true)
+
+                else if (res.data.fk_stock===null){ 
+                    console.log(test); 
+                    toggleShow() 
+                    props.nettoypBtnV()
+                 
+                } 
+                    else {  
+                        handleShow2() 
+                       } 
+            })
+        }
+        else {
+            serviceActuelProcess.getIdBloquant("coupage" , id)
+            .then((res) => {
+                if(res.data === "boxe n'existe pas"){
+                    setMessage("Vérifier votre ID") 
+                    handleShow(true) 
                 }
-                        
-                    else {
-                        if(res.data.fk_stock ===null){
-                            toggleShow()
-                            props.conditBtnV()
-                        }
-                        else {
-                            handleShow2(true)
-                        }
-              
-                    }
-                console.log("produit fourni=  "+process.fk_proditfourni + "\n categorie= "+ process.categorie + "\n produit= " + process.nom_produit + "\n stock= " + process.stock, "\n etape= " + process.etape)
-             
-           }
-          
-        )
+
+                else if (res.data.fk_stock===null){ 
+                    console.log(test); 
+                    toggleShow() 
+                    props.nettoypBtnV()
+                 
+                } 
+                    else {  
+                        handleShow2() 
+                       } 
+            })
+
+        }
+    
    
       }
 
     var conditionnemet , testCondit
 
-    const dateNow = (d) => {
-        var date=  moment.utc(d).format('DD-MM-YY')
+    const dateNow = (date1) => {
+        var date=  moment.utc(date1).format('DD-MM-YYYY')
         const words = date.split('-');
-        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-        console.log(a+1)
-        return a
+        //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
+
+        var d = new Date(words[2], words[1]-1 ,words[0]);
+        var nextDay = new Date(d.getTime());
+        nextDay.setDate(d.getDate() + 1);
+        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+        return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
+    }
+
+    const verifyMounth = (month) => {
+        if (month<9){
+            return 0+""+(month+1)
+        }
+        else if(month >= 9 && month < 12 ) 
+        return month+1
+             else  return month+1
+    }
+
+    const verifyDay = (day) => {
+        if (day<10){
+            return 0+""+day
+        }
+        else  return day
+             
     }
 
     const dateToday = () => {
         var today = new Date
-        var datee =  today.getDate()+'-'+(today.getMonth() +1)  + '-' +today.getFullYear()
+        var datee = verifyDay( today.getDate())+'/'+(verifyMounth(today.getMonth() ))  + '/' +today.getFullYear()
+        //console.log(verifyMounth(today.getMonth() ));
         return datee
     }
 
