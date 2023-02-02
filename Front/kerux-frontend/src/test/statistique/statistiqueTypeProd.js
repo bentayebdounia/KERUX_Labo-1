@@ -29,13 +29,21 @@ const CategorieStatistique = (props) => {
                         labels: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Aout', 'Septembre', 'Octobre', 'Novembre', 'Decembre'],
                         datasets: [
                             {
-                            label: props.label,
+                            label: 'Poulet',
                             data: props.database,
                             backgroundColor:props.backgroundColor,
                             
                             borderColor: props.borderColor,
                             borderWidth: 1,
                             },
+                            {
+                                label: 'Legume',
+                                data: props.database2,
+                                backgroundColor:props.backgroundColor2,
+                                
+                                borderColor: props.borderColor2,
+                                borderWidth: 1,
+                                }
                             
                         ],
                         }}
@@ -48,7 +56,7 @@ const CategorieStatistique = (props) => {
                               ticks: {
                                 backdropPadding: {
                                     x: 5,
-                                    y: 4
+                                    y: 5
                                 }
                               }}}
                         }}

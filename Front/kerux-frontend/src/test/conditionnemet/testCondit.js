@@ -57,6 +57,7 @@ const TestCondit = (props) => {
     const [tableCoupage, setTableCoupage] = useState([])
     const [tableconditionnement, setTableconditionnement] = useState([]) 
     const [produitBloquant, setProduitbloquant] = useState(false)
+    const [produitBloquantStock, setProduitbloquantstock] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(8);
     //les operation de pagination 
@@ -72,13 +73,16 @@ const TestCondit = (props) => {
                 console.log(res.data.length);
                 if (res.data.length ===0){
                     console.log('actuel process non bloquant');
-                    setProduitbloquant(true)
+                    
                     serviceActuelProcess.getActualProcess('coupage')
                     .then((res) =>{
                         setTabledonnees(res.data) 
+                        setProduitbloquant(false)
                     })
                 }
-                else setTabledonnees(res.data) 
+                else {
+                    setTabledonnees(res.data) 
+                    setProduitbloquant(true)} 
             }) 
         
             serviceActuelProcess.getActualProcesssStockBlock('coupage') 
@@ -88,17 +92,21 @@ const TestCondit = (props) => {
                     serviceActuelProcess.getActualProcesssStock('coupage')
                     .then((res) =>{
                         console.log('actuel process stock non bloquant');
-                        setTabledonneesstocker(res.data) 
+                        setTabledonneesstocker(res.data)
+                        setProduitbloquantstock(false) 
                     })
                 }
-                else setTabledonneesstocker(res.data) 
+                else {
+                    setTabledonneesstocker(res.data)
+                    setProduitbloquantstock(true)
+                }  
             }) 
      },[]) 
  
     const getProcess = (e) => {
         e.preventDefault();
         
-        if (produitBloquant === true) {
+        if (produitBloquant === false && produitBloquantStock ===false) {
             serviceActuelProcess.getIdProcess("coupage" , id)
             .then((res) => {
                 if(res.data === "boxe n'existe pas"){
@@ -223,8 +231,8 @@ const TestCondit = (props) => {
                                 </tr> 
                             </thead> 
                             <tbody >
-                            { 
-                                currentPosts.map( 
+                            { ((produitBloquant===false && produitBloquantStock===false) || produitBloquant===true )
+                              && currentPosts.map( 
                                     (p, key) => 
                                     <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                         <td>
@@ -297,7 +305,8 @@ if(buttonColor2)
                                 </tr> 
                             </thead> 
                             <tbody >
-                            {  currentPosts2.map( 
+                            { ((produitBloquant===false && produitBloquantStock===false) || produitBloquantStock===true )
+                              &&  currentPosts2.map( 
                                 (p, key) => 
                                 <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}} > 
                                     <td>

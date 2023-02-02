@@ -37,6 +37,7 @@ const AffichageBoxes = (props) => {
                 poids: d.poids,
                 nombre: d.nombre,
                 stock: d.stock,
+                date_alert:d.date_alert
 
                 
             
@@ -103,6 +104,7 @@ const AffichageBoxes = (props) => {
                     boxe[i].id_stock =entrepot
                     console.log(boxe[i].id_stock);
                     boxe[i].stock = ""
+                    tab[i].date_alert=""
                 }
 
                 else {

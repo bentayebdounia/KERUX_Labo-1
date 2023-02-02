@@ -282,13 +282,22 @@ const TestCoupage = (props) => {
                             console.log(boxes);
                             var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
                             console.log( found  );
+                            
                             if (found === undefined) {
-                                //ajouter le box couper et generer un identifiant
-                                ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
-                                //  console.log("nombre= "+res.data.nombre);
-                                setPoids(poids+res.data.poids)
-                                setNombre(nombre+res.data.nombre)
-                                ajouterBox()
+                                var found2 = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage.substring(0,6) === '002016');
+                                 console.log( found2  );
+                                 if(found2 !== undefined){
+                                    //ajouter le box couper et generer un identifiant
+                                    ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
+                                    //  console.log("nombre= "+res.data.nombre);
+                                    setPoids(poids+res.data.poids)
+                                    setNombre(nombre+res.data.nombre)
+                                    ajouterBox()
+                                  }
+                                  else{
+                                    setMessage("Veillez entrer des boxes qui ont le meme id bon et id produit")
+                                    handleShow(true)
+                                  }
                            
                             }
                             else  {

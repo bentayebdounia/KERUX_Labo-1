@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
-import CategorieStatistique from './statistiqueCategorie'
+import CategorieStatistique from './statistiqueTypeProd'
 import seviceStatistique from '../../service/sevice.statistique'
 
 
@@ -56,18 +56,17 @@ const StatistiqueProduitFourni = (props) => {
 
     
     return(
-        <Modal   fullscreen={true} scrollable={true} show={props.show} onHide={()=> {props.handleClose() }}>
+        <Modal   size='lg' scrollable={true} show={props.show} onHide={()=> {props.handleClose() }}>
             <Modal.Header closeButton>
             <Modal.Title>Satatistique de produits fournis</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               
             <div className="row" >
-              <div className='col-sm-5' style={{width:"45%" , marginLeft:"3%" }}>
-                <CategorieStatistique  database={poulet} label={'Poulet'} backgroundColor={'rgba(255, 159, 64, 0.2)'} borderColor= {'rgb(255, 159, 64)'} />
-                </div>
-                <div className='col-sm-5' style={{width:"45%" }}>
-                <CategorieStatistique  database={legume} label={'Legume'} backgroundColor={'rgba(255, 205, 86, 0.2)'} borderColor= {'rgb(255, 205, 86)'} />
+              <div className='col-sm-5' style={{width:"90%" , marginLeft:"3%" , textAlign: 'center' }}>
+                <CategorieStatistique  database={poulet}  backgroundColor={'rgba(255, 99, 132, 0.2)'} borderColor= {'rgb(255, 99, 132)'} 
+                 database2={legume}  backgroundColor2={'rgba(255, 159, 64, 0.2)'} borderColor2= {'rgb(255, 159, 64)'} 
+                 />
                 
               </div>
               
