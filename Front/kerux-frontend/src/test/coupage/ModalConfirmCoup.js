@@ -14,21 +14,21 @@ const ModalConfirmCoup = (props) => {
 
     const ajouterCle = (categorie, type, numeroBox) => {
         if (categorie === "poulet"){
-            if (type === "poulet") return 'PP'+ numero_box(numeroBox)
-            else if (type === "tendres") return 'PT'+ numero_box(numeroBox)
-                 else if (type === "wings") return 'PW'+ numero_box(numeroBox)
-                      else if (type === "dips") return 'PD'+ numero_box(numeroBox)
-                            else if (type === "hotDogs") return 'PH'+ numero_box(numeroBox)
-                                 else if (type === "legs") return 'PL'+ numero_box(numeroBox)
+            if (type === "poulet") return 'PP'+ numeroBox
+            else if (type === "tendres") return 'PT'+ numeroBox
+                 else if (type === "wings") return 'PW'+ numeroBox
+                      else if (type === "dips") return 'PD'+ numeroBox
+                            else if (type === "hotDogs") return 'PH'+ numeroBox
+                                 else if (type === "legs") return 'PL'+ numeroBox
         }
 
         else if (categorie === "legume"){
-            if (type === "frite") return 'LF'+ numero_box(numeroBox)
-            else if (type === "laitue") return 'LL'+numero_box(numeroBox)
-                else if (type === "tomate") return 'LT'+numero_box(numeroBox)
-                    else if (type === "oignon") return 'LO'+numero_box(numeroBox)
-                            else if (type === "choux") return 'LCH'+numero_box(numeroBox)
-                                else if (type === "carotte") return 'LC'+numero_box(numeroBox)
+            if (type === "frite") return 'LF'+ numeroBox
+            else if (type === "laitue") return 'LL'+ numeroBox
+                else if (type === "tomate") return 'LT'+ numeroBox
+                    else if (type === "oignon") return 'LO'+ numeroBox
+                            else if (type === "choux") return 'LCH'+ numeroBox
+                                else if (type === "carotte") return 'LC'+ numeroBox
         }
 
             else return 'A'+numeroBox

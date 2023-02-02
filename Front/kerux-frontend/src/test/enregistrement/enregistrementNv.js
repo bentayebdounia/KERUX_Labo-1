@@ -68,6 +68,7 @@ const Enregistrement = (props) => {
    const [poidsRester, setPoidsrester] = useState()
    const [nombreRester, setNombrerester] = useState()
     const [p , setP] = useState()
+    const [n , setN] = useState()
    const [length, setLength] = useState()
    
    useEffect(()=>{
@@ -197,6 +198,29 @@ const Enregistrement = (props) => {
          
         localStorage.setItem('produitsFournis', JSON.stringify(tab))
         localStorage.removeItem('boxes'+id)
+      }
+      const modifierPoidsRester = (idProd, poidRester ) => {
+        var tab= []
+        tab= JSON.parse(localStorage.getItem('produitsFournis'))
+        for (let i = 0; i < tab.length; i++) {
+            if(tab[i].id_prod === idProd)
+              tab[i].poidsRester= poidRester*1000
+           
+        }
+        
+        setP(poidRester)
+        localStorage.setItem('produitsFournis', JSON.stringify(tab))
+      }
+      const modifierNombreRester = (idProd, nombreRester ) => {
+        var tab= []
+        tab= JSON.parse(localStorage.getItem('produitsFournis'))
+        for (let i = 0; i < tab.length; i++) {
+            if(tab[i].id_prod === idProd)
+              tab[i].nombreRester= nombreRester
+           
+        }
+        setN(nombreRester)
+        localStorage.setItem('produitsFournis', JSON.stringify(tab))
       }
 
       if(categorie === "poulet"){
@@ -417,6 +441,8 @@ const Enregistrement = (props) => {
                                 handleShow= {handleShowAffichage}
                                 id= {produit_id}
                                 poidsRester = {p}
+                                nombreRester = {n}
+                                modifierPoidsRester= {modifierPoidsRester}
                                 />}
 
             {showRecap &&     <Recape       show= {showRecap} 

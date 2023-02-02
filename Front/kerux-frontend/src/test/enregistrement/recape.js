@@ -100,12 +100,12 @@ const Recape = (props) => {
                 }
 
                 else if (categorie === "legume"){
-                    if (type === "frite") return 'LF'+ numero_box(numeroBox)
-                    else if (type === "laitue") return 'LL'+numero_box(numeroBox)
-                        else if (type === "tomate") return 'LT'+numero_box(numeroBox)
-                            else if (type === "oignon") return 'LO'+numero_box(numeroBox)
-                                    else if (type === "choux") return 'LCH'+numero_box(numeroBox)
-                                        else if (type === "carotte") return 'LC'+numero_box(numeroBox)
+                    if (type === "frite") return 'LF'+ numeroBox
+                    else if (type === "laitue") return 'LL'+numeroBox
+                        else if (type === "tomate") return 'LT'+numeroBox
+                            else if (type === "oignon") return 'LO'+numeroBox
+                                    else if (type === "choux") return 'LCH'+numeroBox
+                                        else if (type === "carotte") return 'LC'+numeroBox
                 }
 
                     else return 'A'+numeroBox

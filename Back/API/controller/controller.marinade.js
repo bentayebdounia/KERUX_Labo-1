@@ -38,27 +38,31 @@ const TimeNow = () => {
 //     return id
 // }
 
-
+const day = (day) => {
+    if (day<10) return 0+''+0+''+day
+    else if (day >=10 && day<100) return 0 +''+day
+         else return day
+}
 const generieIdMarinade = (id) => {
     var today = new Date()
     var datt = 0 
     switch (today.getMonth()) {
-        case 0: datt= today.getDate()
+        case 0: datt= day( today.getDate())
             break;
 
-        case 1: datt=31+ today.getDate()
+        case 1: datt=day( 31+ today.getDate())
             break;
         
-        case 2: datt=60+ today.getDate()
+        case 2: datt= day (60+ today.getDate())
             break;
         
-        case 3: datt=91+ today.getDate()
+        case 3: datt= day (91+ today.getDate())
             break;
 
-        case 4: datt=121+ today.getDate()
+        case 4: datt= 121+ today.getDate()
             break;
         
-        case 5: datt=152+ today.getDate()
+        case 5: datt=  152+ today.getDate()
             break;
         case 6: datt=182+ today.getDate()
             break;
@@ -84,7 +88,7 @@ const generieIdMarinade = (id) => {
     
       const year = today.getFullYear().toString().split('');
     
-    var n = (id.substring(0,id.length-7)+""+datt+""+ year[3]+""+id.substring(id.length-4))  
+    var n = (id.substring(0,6)+""+datt+""+ year[3]+""+id.substring(10))  
     return n
 }
 

@@ -9,7 +9,7 @@ const updateAlert = "UPDATE alert SET existe=$1 WHERE fk_processs=$2 "
 
 const updateDateAlert = "UPDATE alert SET  date_alert=$1 WHERE fk_processs=$2 "
 
-const countAlert = " SELECT COUNT(*) FROM alert WHERE existe=true "
+const countAlert = " SELECT COUNT(*) FROM alert WHERE  existe=true AND date_alert >= $1"
 
 const countAlertPrimary = " SELECT COUNT(*) FROM alert WHERE existe=true AND date_alert > $1"
 

@@ -149,7 +149,7 @@ const TestCoupage = (props) => {
         return heure
     }
     const generateId = (fk_proditFourni, id_nettoyage) =>{
-        var n= id_nettoyage.substring(0,id_nettoyage.length-7)
+        var n= id_nettoyage.substring(0,6)
         var id = (fk_proditFourni+"id"+dateNow()+""+TimeNow()+"-"+n)  
         //console.log("id_generate= "+id);
     return id
@@ -284,7 +284,7 @@ const TestCoupage = (props) => {
                             console.log( found  );
                             
                             if (found === undefined) {
-                                var found2 = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage.substring(0,6) === '002016');
+                                var found2 = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage.substring(0,6) === boxes[0].id_box);
                                  console.log( found2  );
                                  if(found2 !== undefined){
                                     //ajouter le box couper et generer un identifiant
@@ -578,12 +578,12 @@ const supprimerBox = (key) => {
                                          setBoxes(newBoxes)
                                      }} />
                                  {key === 0 && <>
-                                            <button className="btn" style={{background: '#7B170F' }} type="button" id="button-addon2"
+                                            <button className="btn" style={{background: '#7B170F', height:'38px', textAlign: 'center' }} type="button" id="button-addon2"
                                                   onClick={(e) => plusId(e)} >
                                                  <i className="bi bi-plus-lg" style={{color: "white" , fontSize:"20px"}}></i>
                                             </button>
-                                           <button className="btn" style={{background: '#4F8B2A',marginLeft:'2px' ,color: "white" }} type="button" id="button-addon2" onClick={(e)=> confirmer(e)}>
-                                                   <i className="bi bi-check-lg" > </i> Confirmer
+                                           <button className="btn" style={{background: '#4F8B2A',marginLeft:'2px' ,color: "white" , height:'38px' ,textAlign: 'center' }} type="button" id="button-addon2" onClick={(e)=> confirmer(e)}>
+                                                   <i className="bi bi-check-lg" > </i> CONFIRMER
                                             </button> 
                                             </> }
                                      

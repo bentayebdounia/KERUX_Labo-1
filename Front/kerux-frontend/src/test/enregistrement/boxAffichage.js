@@ -6,7 +6,7 @@ import serviceEntrepot from '../../service/service.entrepot'
 const AffichageBoxes = (props) => {
 
     const [entrepots, setEntrepots] = useState([])
-    const [entrepot, setEntrepot] = useState()
+    const [entrepot, setEntrepot] = useState('')
     const [stock , setStock] = useState()
     const [toggle, setToggle] = useState(false)
     const toggleOn = () => setToggle(true)
@@ -15,6 +15,7 @@ const AffichageBoxes = (props) => {
     
     const [poids, setPoids] = useState('')
     const [nombre, setNombre] = useState('')
+    const [date_alert , setDatealert] = useState('')
     
     useEffect(()=> {
         serviceEntrepot.getEntrepot()
@@ -64,69 +65,94 @@ const AffichageBoxes = (props) => {
       }
     
     //console.log(props.tableBox);
+    const champtVerify = () => {
+        
+        if (entrepot === "" ) return true
+        else if (entrepot !== ""  && date_alert !== "") {
+             alert(date_alert) 
+             return  true
+            }
+        else return false
+    }
     const enregistrer = (id, key, poid, nbr) => {
 
-        if (poid < poids && props.poidsRester === 0) alert ("erreur")
+       if (Math.abs(poid - poids) <= props.poidsRester ) {
+            setPoids('')
+            setNombre('')
+            setEntrepot('')
+            setDatealert('') 
+            return false
+     }
+        
+        else if (nombre !=='' && poids !== ''  && champtVerify() )
+        {
+            var tab= []
+            tab= JSON.parse(localStorage.getItem('boxes'+props.id))
+            //console.log(boxe);
+            const n = entrepots.find(({ id_entrepot }) => id_entrepot === parseInt(entrepot))
+           // console.log('entrepot='+ entrepot);
 
-            else if (nombre !=='' && poids !== '' )
-{
-        var tab= []
-        tab= JSON.parse(localStorage.getItem('boxes'+props.id))
-        console.log(boxe);
-        const n = entrepots.find(({ id_entrepot }) => id_entrepot === parseInt(entrepot))
-        console.log('entrepot='+ entrepot);
-        for(var i=0; i<tab.length; i++){
-            console.log((key));
-            console.log(boxe.date);
-            if (i === key){
-                console.log((poids));
-                if (poids !== '')
-                    {tab[i].poids=poids
-                     boxe[i].poids =poids
+            for(var i=0; i<tab.length; i++){
+                //console.log((key));
+                //console.log(boxe.date);
+                if (i === key){
+                    console.log((poids));
+                    if (poids !== '')
+                        {
+                        var poidsResterNv = props.poidsRester + tab[i].poids
+                        tab[i].poids=poids
+                        boxe[i].poids =poids
+                        props.modifierPoidsRester(tab[i].id_produit , poidsResterNv-tab[i].poids )
+                        }
+                    else {
+                        tab[i].poids = poid
+                        boxe[i].poids =poid
                     }
-                else {
-                    tab[i].poids = poid
-                    boxe[i].poids =poid
-                }
-                if (nombre !== ''){
-                    tab[i].nombre = nombre
-                    boxe[i].nombre =nombre
-                }
-                else{
-                    tab[i].nombre = nbr
-                    boxe[i].nombre =nbr
-                }
-                if (entrepot === undefined){
-                    console.log('id box');
-                    tab[i].id_stock = entrepot
-                    console.log(tab[i].id_stock);
-                    tab[i].stock=""
-                    boxe[i].id_stock =entrepot
-                    console.log(boxe[i].id_stock);
-                    boxe[i].stock = ""
-                    tab[i].date_alert=""
-                }
+                    if (nombre !== ''){
+                        tab[i].nombre = nombre
+                        boxe[i].nombre =nombre
+                    }
+                    else{
+                        tab[i].nombre = nbr
+                        boxe[i].nombre =nbr
+                    }
+                    if (entrepot === '' ){
+                        console.log('id box');
+                        tab[i].id_stock = entrepot
+                        console.log(tab[i].id_stock);
+                        tab[i].stock=""
+                        boxe[i].id_stock =entrepot
+                        console.log(boxe[i].id_stock);
+                        boxe[i].stock = ""
+                        tab[i].date_alert=""
+                        boxe[i].date_alert = ""
+                    }
 
-                else {
-                    console.log('id box');
-                    tab[i].id_stock = entrepot
-                    console.log(tab[i].id_stock);
-                    tab[i].stock=n.nom_entrepot
-                    boxe[i].id_stock =entrepot
-                    console.log(boxe[i].id_stock);
-                    boxe[i].stock = n.nom_entrepot
-                }
+                    else {
+                        console.log('id box');
+                        tab[i].id_stock = entrepot
+                        console.log(tab[i].id_stock);
+                        tab[i].stock=n.nom_entrepot
+                        tab[i].date_alert=date_alert
+                        boxe[i].id_stock =entrepot
+                        console.log(boxe[i].id_stock);
+                        boxe[i].stock = n.nom_entrepot
+                        boxe[i].date_alert = date_alert
+
+
+                    }
                 
-            }
-       }
-       console.log(tab);
-       localStorage.setItem('boxes'+props.id, JSON.stringify(tab))
-       setPoids(null)
-       setNombre(null)
-       setEntrepot(null)
-       return false
+                }
+                }
+                console.log(tab);
+                localStorage.setItem('boxes'+props.id, JSON.stringify(tab))
+                setPoids('')
+                setNombre('')
+                setEntrepot('')
+                setDatealert('')
+                return false
     }
-    else return true
+            else return true
     }
 
     return (  
@@ -146,9 +172,10 @@ const AffichageBoxes = (props) => {
                                                     <th scope="col">ID</th>
                                                     <th scope="col">Categorie</th>
                                                     <th scope="col">Nom produit</th>
-                                                    <th scope="col">Poids</th>
+                                                    <th scope="col">Poids(Kg) </th>
                                                     <th scope="col">Nombre</th>
                                                     <th scope="col">stock</th>
+                                                    <th scope="col">Date alerte</th>
                                                     <th scope="col"></th>
 
                                                 
@@ -166,6 +193,7 @@ const AffichageBoxes = (props) => {
                                                                 <td>{p.poids}</td>
                                                                 <td>{p.nombre}</td>
                                                                 <td>{p.stock}</td>
+                                                                <td>{p.date_alert}</td>
                                                                 <td>
                                                                 <input
                                                                     onClick={() => {
@@ -213,6 +241,11 @@ const AffichageBoxes = (props) => {
                                                                                 
                                                                             </select>  
                                                                         </td>
+                                                                        <td>{  entrepot !== '' &&
+                                                                            <input  type="date" className="form-control " value={date_alert} onChange={(e)=> setDatealert(e.target.value)}/>
+                                                                            }
+                                                                            { entrepot !== ''  && date_alert==='' && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter la date d'alerte  </p>}
+                                                                            </td>
                                                                         <td>
                                                                         <input
                                                                             onClick={() => {
@@ -239,6 +272,10 @@ const AffichageBoxes = (props) => {
                                                                     onClick={() => {
                                                                        
                                                                         let checked = false;
+                                                                        setPoids('')
+                                                                        setNombre('')
+                                                                        setEntrepot('')
+                                                                        setDatealert('')
                                                                         setBoxe(
                                                                         boxe.map((data,k) => {
                                                                             if (key === k) {
@@ -255,7 +292,12 @@ const AffichageBoxes = (props) => {
                                                                     checked={p.select}
                                                                     ></input>
                                                                                     </td>
+
+                                                          
                                                                                </>
+                                                                
+
+                                                                
                                                                                }
                                                                 
                                                                 

@@ -25,6 +25,7 @@ updateAlert = (req, res) => {
 }
 
 updateDateAlert = (req, res) => {
+    
     const fk_processs = req.params.fk_processs
     const { date_alert } = req.body
     pool.query(queries.updateDateAlert,[date_alert, fk_processs],
@@ -36,8 +37,8 @@ updateDateAlert = (req, res) => {
 
 countAlert = (req, res) => {
     //const date_alert = req.params.date_alert
-
-    pool.query(queries.countAlert , 
+    var date_alert= new Date
+    pool.query(queries.countAlert , [date_alert], 
         (error, result) => {
             if (error) throw error
             res.status(200).json(result.rows)

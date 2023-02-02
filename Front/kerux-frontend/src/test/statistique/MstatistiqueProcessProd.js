@@ -263,9 +263,7 @@ const StatistiqueProcess = (props) => {
                 
  
              </Modal.Body>
-             <Modal.Footer>
-                     <button type="button" className="btn btn-dark" data-bs-dismiss="modal" >OK</button>
-             </Modal.Footer>
+             
        </Modal>
        )
 

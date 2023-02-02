@@ -135,7 +135,7 @@ const ModelAlert = (props) => {
                                     <i className="bi-info-circle-fill me-2"></i>
                                     Le produit de ID: <span style={{fontWeight:"bold"}}> {key.id_gnerate} </span> est en attente à l'étape: <span style={{fontWeight:"bold"}}> {key.etape} </span>   
                                     <br/>
-                                    il vous reste <span style={{fontWeight:"bold"}}> {dateRester( key.date_alert)} jours </span>  {dateNow( key.date_alert)}
+                                    il vous reste <span style={{fontWeight:"bold"}}> {dateRester( key.date_alert)} jours </span>  
                                     
                                 </div>
                             </Alert>
