@@ -45,7 +45,7 @@ const TestNet = (props) => {
         etape: "" 
     }) 
 
-    var nettoyage , testNet, table , table1,table2 
+    var  table ,table2 
     
 
     const [toggle1, setToggle1] = useState ()  
@@ -56,7 +56,6 @@ const TestNet = (props) => {
     const toggleshow2 = () => setToggle2(true) 
     const toggleDisplay2 = () => setToggle2 (false) 
 
-    const [loading, setLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(8);
     

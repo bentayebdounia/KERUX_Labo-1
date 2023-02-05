@@ -182,7 +182,7 @@ const StatistiqueProcess = (props) => {
      return(
          <Modal   fullscreen={true} scrollable={true} show={props.show} onHide={()=> {props.handleClose() }}>
              <Modal.Header closeButton>
-             <Modal.Title>Satatistique des process </Modal.Title>
+             <Modal.Title> Satatistique des process </Modal.Title>
              </Modal.Header>
              <Modal.Body>
 

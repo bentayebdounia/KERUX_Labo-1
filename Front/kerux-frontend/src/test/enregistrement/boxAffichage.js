@@ -76,7 +76,7 @@ const AffichageBoxes = (props) => {
     }
     const enregistrer = (id, key, poid, nbr) => {
 
-       if (Math.abs(poid - poids) <= props.poidsRester ) {
+       if (Math.abs(poid - parseFloat (poids)) <= props.poidsRester ) {
             setPoids('')
             setNombre('')
             setEntrepot('')
