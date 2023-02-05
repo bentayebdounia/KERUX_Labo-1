@@ -6,7 +6,7 @@ import serviceEntrepot from '../../service/service.entrepot'
 const AffichageBoxes = (props) => {
 
     const [entrepots, setEntrepots] = useState([])
-    const [entrepot, setEntrepot] = useState('')
+    const [entrepot, setEntrepot] = useState("")
     const [stock , setStock] = useState()
     const [toggle, setToggle] = useState(false)
     const toggleOn = () => setToggle(true)
@@ -15,7 +15,7 @@ const AffichageBoxes = (props) => {
     
     const [poids, setPoids] = useState('')
     const [nombre, setNombre] = useState('')
-    const [date_alert , setDatealert] = useState('')
+    const [date_alert , setDatealert] = useState("")
     
     useEffect(()=> {
         serviceEntrepot.getEntrepot()
@@ -65,32 +65,41 @@ const AffichageBoxes = (props) => {
       }
     
     //console.log(props.tableBox);
+    
+
     const champtVerify = () => {
         
-        if (entrepot === "" ) return true
-        else if (entrepot !== ""  && date_alert !== "") {
+        if (entrepot === "" || entrepot ===undefined || entrepot===null ) return true
+        else if ( (entrepot !== "" || entrepot !==undefined || entrepot!==null)  && date_alert !== "") {
              alert(date_alert) 
              return  true
             }
-        else return false
+        else{ 
+           
+            return false}
     }
     const enregistrer = (id, key, poid, nbr) => {
-
-       if (Math.abs(poid - parseFloat (poids)) <= props.poidsRester ) {
+        //console.log('entrepot'+ entrepot)
+        
+       if (parseFloat (poids*1000) > (props.poidsRester + poid)) {
             setPoids('')
             setNombre('')
-            setEntrepot('')
-            setDatealert('') 
+            setEntrepot("")
+            setDatealert("") 
+            alert( props.poidsRester + poid)
+            alert( parseFloat (poids*1000))
             return false
      }
         
         else if (nombre !=='' && poids !== ''  && champtVerify() )
         {
+            
             var tab= []
             tab= JSON.parse(localStorage.getItem('boxes'+props.id))
             //console.log(boxe);
             const n = entrepots.find(({ id_entrepot }) => id_entrepot === parseInt(entrepot))
-           // console.log('entrepot='+ entrepot);
+            console.log('entrepot='+ entrepot);
+            //alert(n)
 
             for(var i=0; i<tab.length; i++){
                 //console.log((key));
@@ -99,13 +108,15 @@ const AffichageBoxes = (props) => {
                     console.log((poids));
                     if (poids !== '')
                         {
-                        var poidsResterNv = props.poidsRester + tab[i].poids
-                        tab[i].poids=poids
-                        boxe[i].poids =poids
-                        props.modifierPoidsRester(tab[i].id_produit , poidsResterNv-tab[i].poids )
+                        //alert(entrepot)
+                        var poidsResterNv = parseFloat( props.poidsRester) +  parseFloat( tab[i].poids)
+                        tab[i].poids=poids*1000
+                        boxe[i].poids =poids*1000
+                        alert("rest"+ poidsResterNv-parseFloat(  tab[i].poids) )
+                        props.modifierPoidsRester(tab[i].id_produit , poidsResterNv-parseFloat( tab[i].poids) )
                         }
                     else {
-                        tab[i].poids = poid
+                        tab[i].poids = poid*1000
                         boxe[i].poids =poid
                     }
                     if (nombre !== ''){
@@ -116,7 +127,8 @@ const AffichageBoxes = (props) => {
                         tab[i].nombre = nbr
                         boxe[i].nombre =nbr
                     }
-                    if (entrepot === '' ){
+                    if (entrepot === "" || entrepot ===undefined || entrepot===null){
+                        alert(entrepot)
                         console.log('id box');
                         tab[i].id_stock = entrepot
                         console.log(tab[i].id_stock);
@@ -128,7 +140,7 @@ const AffichageBoxes = (props) => {
                         boxe[i].date_alert = ""
                     }
 
-                    else {
+                    else if(entrepot !== "" || entrepot !==undefined || entrepot!==null) {
                         console.log('id box');
                         tab[i].id_stock = entrepot
                         console.log(tab[i].id_stock);
@@ -148,8 +160,8 @@ const AffichageBoxes = (props) => {
                 localStorage.setItem('boxes'+props.id, JSON.stringify(tab))
                 setPoids('')
                 setNombre('')
-                setEntrepot('')
-                setDatealert('')
+                setEntrepot("")
+                setDatealert("")
                 return false
     }
             else return true
@@ -190,7 +202,7 @@ const AffichageBoxes = (props) => {
                                                                 <td>{p.id_produit}</td>
                                                                 <td>{p.categorie}</td>
                                                                 <td>{p.nom_produit}</td>
-                                                                <td>{p.poids}</td>
+                                                                <td>{p.poids /1000      }</td>
                                                                 <td>{p.nombre}</td>
                                                                 <td>{p.stock}</td>
                                                                 <td>{p.date_alert}</td>
@@ -231,7 +243,7 @@ const AffichageBoxes = (props) => {
                                                                         </td>
                                                                         <td> 
                                                                             <select className="form-select" aria-label="Default select example" id="entrepot" value={entrepot} onChange={(e)=> setEntrepot(e.target.value)} >
-                                                                                 <option value={""} ></option>
+                                                                                 <option defaultValue={""} ></option>
                                                                                 {entrepots.map( (entrepot,key) =>
                                                                                    <> 
                                                                                     
@@ -274,8 +286,8 @@ const AffichageBoxes = (props) => {
                                                                         let checked = false;
                                                                         setPoids('')
                                                                         setNombre('')
-                                                                        setEntrepot('')
-                                                                        setDatealert('')
+                                                                        setEntrepot("")
+                                                                        setDatealert("")
                                                                         setBoxe(
                                                                         boxe.map((data,k) => {
                                                                             if (key === k) {

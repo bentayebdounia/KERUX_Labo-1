@@ -123,7 +123,7 @@ const Enregistrement = (props) => {
             console.log(poids);
             return poids*1000
         }
-        else return poids
+        else if(unite==="gramme") return poids
     }
 
     function verificationPoids(poids, nombre , unite){
@@ -204,7 +204,7 @@ const Enregistrement = (props) => {
         tab= JSON.parse(localStorage.getItem('produitsFournis'))
         for (let i = 0; i < tab.length; i++) {
             if(tab[i].id_prod === idProd)
-              tab[i].poidsRester= poidRester*1000
+              tab[i].poidsRester= poidRester
            
         }
         

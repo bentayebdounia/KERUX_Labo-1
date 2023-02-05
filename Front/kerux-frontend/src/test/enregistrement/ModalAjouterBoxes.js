@@ -60,14 +60,7 @@ const ModalAjoutBoxes = (props) => {
        //console.log("produitFourni: "+ props.produitFourni);  props.produitFourni.nombre_fourni
        //console.log("categorier= "+props.produitFourni.categorie+ "\n id produit " +props.produitFourni.id_produit);
 
-       function transforme(unite, poids){
-        console.log(unite);
-        if (unite==="kg") {
-            console.log(poids);
-            return poids*1000
-        }
-        else return poids
-    }
+       
 
     function verificationPoids(poids, nombre , unite){
         
@@ -76,10 +69,21 @@ const ModalAjoutBoxes = (props) => {
 
     }
 
+    function transforme(unite, poids){
+        console.log(unite);
+        if (unite==="kg") {
+            console.log(poids);
+            return poids*1000
+        }
+        else if(unite==="gramme") return poids
+    }
+
     function plus () {
         setConteur(conteur+1)
         setPoidsaccumuler(parseFloat(poidsAccumuler)+parseFloat(transforme(boxe[0].unite, boxe[0].poids))) 
         setNbrAccumuler (parseFloat(nbrAccumuler)+parseFloat(boxe[0].nombre))
+
+        boxe[0].poids=transforme(boxe[0].unite, boxe[0].poids)
         const newBoxe = [...boxe]
         
                
