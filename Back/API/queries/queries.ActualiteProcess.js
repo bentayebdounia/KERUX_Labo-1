@@ -14,7 +14,7 @@ const ActualProcessEnStock = "SELECT * FROM process, alert,stock, entrepot WHERE
 const ActualProcessBlock = "SELECT * FROM process, alert WHERE etape=$1 AND id_process=fk_processs AND existe='true' AND  fk_stock IS NULL AND date_alert=$2 ORDER BY date_alert  ASC" 
 const ActualProcessEnStockBlock = "SELECT * FROM process, alert,stock, entrepot WHERE etape=$1 AND id_process=fk_processs AND fk_stock=id_stock AND fk_entrepot=id_entrepot AND existe='true' AND date_alert=$2 ORDER BY date_alert  ASC"
 const getIdBloquant = "SELECT * FROM process, alert WHERE etape=$1 AND id_process=fk_processs AND existe='true' AND date_alert=$2  AND id_gnerate=$3"
-const getIdProcess = "SELECT * FROM process, alert WHERE etape=$1 AND id_process=fk_processs AND existe='true' AND date_alert>$2  AND id_gnerate=$3"
+const getIdProcess = "SELECT * FROM process, alert WHERE etape=$1 AND id_process=fk_processs AND existe='true' AND date_alert>=$2  AND id_gnerate=$3"
 
 module.exports ={
     ActualProcess,
