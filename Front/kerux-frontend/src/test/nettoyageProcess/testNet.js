@@ -319,11 +319,11 @@ const TestNet = (props) => {
                                 </tbody> 
                                 </table> 
                                 
-                                <Pagination
+                                {currentPosts.length!==0 && <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={tableDonnees.length}
                                     paginate={paginate}
-                                />
+                                />}
                                 
                                 
             </>
@@ -391,11 +391,11 @@ table2=(
                                 </tbody> 
                                 </table> 
 
-                                <Pagination
+                                {currentPosts2.length !==0 && <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={tableDonneesStocker.length}
                                     paginate={paginate}
-                                />
+                                />}
     
             </>
     )

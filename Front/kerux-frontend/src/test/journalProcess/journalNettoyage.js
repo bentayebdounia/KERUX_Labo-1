@@ -75,7 +75,7 @@ const JournalNettoyage = (props) => {
                 serviceEnregistrement.getProcessByEtapes_idGnerate(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
 
@@ -84,7 +84,7 @@ const JournalNettoyage = (props) => {
                 serviceEnregistrement.getProcessByEtapes_categorie(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
             else if (comboBox ==='nom_produit'){
@@ -92,7 +92,7 @@ const JournalNettoyage = (props) => {
                 serviceEnregistrement.getProcessByEtapes_produit(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
         }
@@ -103,7 +103,7 @@ const JournalNettoyage = (props) => {
                 NettoyageService.getProcessByEtapes_idGnerate(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
 
@@ -112,7 +112,7 @@ const JournalNettoyage = (props) => {
                 NettoyageService.getProcessByEtapes_categorie(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
             else if (comboBox ==='nom_produit'){
@@ -120,7 +120,7 @@ const JournalNettoyage = (props) => {
                 NettoyageService.getProcessByEtapes_produit(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
         }
@@ -132,7 +132,7 @@ const JournalNettoyage = (props) => {
                 serviceCoupage.getProcessByEtapes_idGnerate(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
 
@@ -141,7 +141,7 @@ const JournalNettoyage = (props) => {
                 serviceCoupage.getProcessByEtapes_categorie(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
             else if (comboBox ==='nom_produit'){
@@ -149,7 +149,7 @@ const JournalNettoyage = (props) => {
                 serviceCoupage.getProcessByEtapes_produit(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
         }
@@ -160,7 +160,7 @@ const JournalNettoyage = (props) => {
                 serviceCondi.getProcessByEtapes_idGnerate(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
 
@@ -169,7 +169,7 @@ const JournalNettoyage = (props) => {
                 serviceCondi.getProcessByEtapes_categorie(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
             else if (comboBox ==='nom_produit'){
@@ -177,7 +177,7 @@ const JournalNettoyage = (props) => {
                 serviceCondi.getProcessByEtapes_produit(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
         }
@@ -187,7 +187,7 @@ const JournalNettoyage = (props) => {
                 serviceMarinade.getProcessByEtapes_idGnerate(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
 
@@ -195,14 +195,14 @@ const JournalNettoyage = (props) => {
                 serviceMarinade.getProcessByEtapes_categorie(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
             else if (comboBox ==='nom_produit'){
                 serviceMarinade.getProcessByEtapes_produit(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
         }
@@ -212,7 +212,7 @@ const JournalNettoyage = (props) => {
                 serviceSorti.getProcessByEtapes_idGnerate(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
 
@@ -220,14 +220,14 @@ const JournalNettoyage = (props) => {
                 serviceSorti.getProcessByEtapes_categorie(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
             else if (comboBox ==='nom_produit'){
                 serviceSorti.getProcessByEtapes_produit(serchValue)
                 .then((res) => {
                     setProcessRecheche(res.data)
-                    console.log(res.data);
+                    //console.log(res.data);
                 })
             }
         }
@@ -237,7 +237,7 @@ const JournalNettoyage = (props) => {
         var date=  moment.utc(d).format('DD-MM-YY')
         const words = date.split('-');
         var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-        console.log(a+1)
+        //console.log(a+1)
         return a
     }
    
@@ -278,9 +278,9 @@ const JournalNettoyage = (props) => {
         }
     
     return ( 
-        <Modal size="fullscreen" scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
+        <Modal size="xl" scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
             <Modal.Header closeButton>
-            <Modal.Title>Journal {props.journalprocess}</Modal.Title>
+            <Modal.Title style={{color: "#7B170F" }}><i className="bi bi-journals" style={{color: "#7B170F" , fontSize:"25px"}} ></i> Journal {props.journalprocess}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div style={{margin:"5%", marginRight:"5%"}}>
@@ -321,12 +321,14 @@ const JournalNettoyage = (props) => {
                             </tbody>
                             </table>
 
-                            {comboBox==='' && <Pagination
+                            {comboBox==='' && process.length>6 &&
+                                <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={process.length}
                                     paginate={paginate}
                                 />}
-                            {(comboBox==='id_gnerate'|| comboBox==='categorie' || comboBox==='nom_produit') && <Pagination
+                            {(comboBox==='id_gnerate'|| comboBox==='categorie' || comboBox==='nom_produit') && processRecherche.length>6 &&
+                                <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={processRecherche.length}
                                     paginate={paginate}
@@ -337,9 +339,7 @@ const JournalNettoyage = (props) => {
                 
                    
             </Modal.Body>
-            <Modal.Footer>
-                    <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>OK</button>
-            </Modal.Footer>
+            
       </Modal>
      );
 }

@@ -79,7 +79,7 @@ const StatistiqueTypeProduit = (props) => {
     return(
         <Modal   fullscreen={true} scrollable={true} show={props.show} onHide={()=> {props.handleClose() }}>
             <Modal.Header closeButton>
-            <Modal.Title>Satatistique de produits fournis</Modal.Title>
+            <Modal.Title style={{color: "#7B170F" }}><i className="bi bi-graph-up" style={{color: "#7B170F" , fontSize:"25px"}} ></i> Satatistique de produits fournis</Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <div className="row mb-3">

@@ -116,11 +116,13 @@ const TestCondit = (props) => {
 
                 else if (res.data.fk_stock===null){ 
                     console.log(test); 
-                    toggleShow() 
-                    props.nettoypBtnV()
+                    toggleShow()
+                    setProcess(res.data) 
+                    //props.nettoypBtnV()
                  
                 } 
                     else {  
+                        setProcess(res.data)
                         handleShow2() 
                        } 
             })
@@ -134,12 +136,14 @@ const TestCondit = (props) => {
                 }
 
                 else if (res.data.fk_stock===null){ 
+                    setProcess(res.data)
                     console.log(test); 
                     toggleShow() 
-                    props.nettoypBtnV()
+                    //props.nettoypBtnV()
                  
                 } 
                     else {  
+                        setProcess(res.data)
                         handleShow2() 
                        } 
             })
@@ -270,11 +274,11 @@ const TestCondit = (props) => {
                                     </tr>    )} 
                                 </tbody> 
                                 </table>
-                                <Pagination
+                                {currentPosts.length !==0 && <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={currentPosts.length}
                                     paginate={paginate}
-                                /> 
+                                />} 
     
             </>
 
@@ -343,11 +347,11 @@ if(buttonColor2)
                                   )} 
                                 </tbody> 
                                 </table> 
-                                <Pagination
+                                {currentPosts2.length !==0 && <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={currentPosts2.length}
                                     paginate={paginate}
-                                />
+                                />}
             </>
     )
 }

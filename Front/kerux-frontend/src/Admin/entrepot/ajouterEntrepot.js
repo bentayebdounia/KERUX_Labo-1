@@ -50,7 +50,7 @@ const AjouterEntrepot = (props) => {
         <>
             <Modal size="lg" show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>Ajouter un entrepot</Modal.Title>
+            <Modal.Title style={{color: "#7B170F"}}><i className="bi bi-house-fill" style={{color: "#7B170F" , fontSize:"25px"}}   > </i>Ajouter un entrepot</Modal.Title>
             </Modal.Header>
             
             <Modal.Body>

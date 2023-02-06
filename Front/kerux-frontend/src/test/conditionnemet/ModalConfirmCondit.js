@@ -48,11 +48,7 @@ const ModalConfirmCondit = (props) => {
     const confirmNCondit = async (e) => {
         e.preventDefault();
         var etape="conditionnement"
-        var today = new Date()
-        var datee =today.getFullYear()+'-'+(today.getMonth() + 1) + '-' + today.getDate()
-        var heure = today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
-        console.log(datee)
-        console.log(heure)
+        console.log(props.process.categorie, props.process.nom_produit, etape, parseFloat(props.poids) ,parseFloat(props.nombre) , props.process.id_nettoyage, props.id_box, props.process.fk_proditfourni, cle);
         
         var cle = ajouterCle(props.process.categorie, props.process.nom_produit, props.numeroBox)
         await ConditService.ajouterConditionnement( props.process.categorie, props.process.nom_produit, etape, parseFloat(props.poids) ,parseFloat(props.nombre) , props.process.id_nettoyage, props.id_box, props.process.fk_proditfourni, cle)

@@ -122,10 +122,12 @@ const TestSortie = (props) => {
                 else if (res.data.fk_stock===null){ 
                     console.log(test); 
                     toggleshow() 
-                    props.nettoypBtnV()
+                    setProcess(res.data) 
+                    //props.nettoypBtnV()
                  
                 } 
                     else {  
+                        setProcess(res.data) 
                         handleShow2() 
                        } 
             })
@@ -141,10 +143,12 @@ const TestSortie = (props) => {
                 else if (res.data.fk_stock===null){ 
                     console.log(test); 
                     toggleshow() 
-                    props.nettoypBtnV()
+                    setProcess(res.data) 
+                    //props.nettoypBtnV()
                  
                 } 
-                    else {  
+                    else { 
+                        setProcess(res.data)  
                         handleShow2() 
                        } 
             })
@@ -273,11 +277,11 @@ const TestSortie = (props) => {
                                     </tr>    )} 
                                 </tbody> 
                                 </table> 
-                                <Pagination
+                                {currentPosts.length !==0 && <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={tableDonnees.length}
                                     paginate={paginate}
-                                />
+                                />}
     
             </>
 
@@ -346,11 +350,11 @@ if(buttonColor2)
                                   )} 
                                 </tbody> 
                                 </table> 
-                                <Pagination
+                                {currentPosts2.length !==0 && <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={tableDonneesStocker.length}
                                     paginate={paginate}
-                                />
+                                />}
     
             </>
     )

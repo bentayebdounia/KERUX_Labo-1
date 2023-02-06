@@ -302,7 +302,7 @@ const ModalAjoutBoxes = (props) => {
                                             <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
                                              onClick={(e) => plusId(e)} >
                                                 <i className="bi bi-plus-lg" style={{color: "white"}}> Ajouter box </i> 
-                                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark">
+                                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill " style={{background: "#f0f0f0" , color: "black" , fontStyle:"normal"}}>
                                                     {conteur}
                                                     <span class="visually-hidden">unread messages</span>
                                                 </span>

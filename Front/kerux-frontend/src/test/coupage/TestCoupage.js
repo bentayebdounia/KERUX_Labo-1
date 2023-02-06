@@ -471,11 +471,11 @@ const TestCoupage = (props) => {
                                 </tbody> 
                                 </table> 
 
-                                <Pagination
+                                {currentPosts.length !==0 && <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={tableDonnees.length}
                                     paginate={paginate}
-                                />
+                                />}
     
             </>
 
@@ -544,11 +544,11 @@ if(buttonColor2)
                                   )} 
                                 </tbody> 
                                 </table> 
-                                <Pagination
+                                {currentPosts2.length !==0 && <Pagination
                                     postsPerPage={postsPerPage}
                                     totalPosts={tableDonneesStocker.length}
                                     paginate={paginate}
-                                />
+                                />}
     
             </>
     )
@@ -579,11 +579,11 @@ const supprimerBox = (key) => {
                                      }} />
                                  {key === 0 && <>
                                             <button className="btn" style={{background: '#7B170F', height:'38px', textAlign: 'center' }} type="button" id="button-addon2"
-                                                  onClick={(e) => plusId(e)} >
-                                                 <i className="bi bi-plus-lg" style={{color: "white" , fontSize:"20px"}}></i>
+                                                   >
+                                                 <i className="bi bi-plus-lg" style={{color: "white" , fontSize:"18px"}} onClick={(e) => plusId(e)}></i>
                                             </button>
                                            <button className="btn" style={{background: '#4F8B2A',marginLeft:'2px' ,color: "white" , height:'38px' ,textAlign: 'center' }} type="button" id="button-addon2" onClick={(e)=> confirmer(e)}>
-                                                   <i className="bi bi-check-lg" > </i> CONFIRMER
+                                                   <i className="bi bi-check-lg" style={{color: "white" , fontSize:"18px"}}> </i> CONFIRMER
                                             </button> 
                                             </> }
                                      

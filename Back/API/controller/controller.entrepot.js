@@ -1,5 +1,5 @@
 const pool =require ("../db")
-const queries= require("../queries/queries")
+const queries= require("../queries/querie.entrepot")
 
 
 
@@ -19,8 +19,15 @@ getEntrepot = (req, res) => {
         res.status(200).json(result.rows)
     })
 }
+getAllEntrepot = (req, res) => {
+    pool.query(queries.getAllEnrepots, (error, result) => {
+        if (error) throw error 
+        res.status(200).json(result.rows)
+    })
+}
 
 module.exports = {
     ajouterEntrepot,
-    getEntrepot
+    getEntrepot,
+    getAllEntrepot
 }

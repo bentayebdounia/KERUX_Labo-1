@@ -118,9 +118,9 @@ const JournalProduitsFournis = (props) => {
         }
     
     return ( 
-        <Modal   fullscreen={true} scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
+        <Modal   size="xl" scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
             <Modal.Header closeButton>
-            <Modal.Title>Journal de produits fournis</Modal.Title>
+            <Modal.Title style={{color: "#7B170F" }}><i className="bi bi-journals" style={{color: "#7B170F" , fontSize:"25px"}} ></i> Journal de produits fournis</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div style={{margin:"5%", marginRight:"5%"}}>
@@ -188,9 +188,7 @@ const JournalProduitsFournis = (props) => {
                 
                    
             </Modal.Body>
-            <Modal.Footer>
-                    <button type="button" className="btn btn-dark" data-bs-dismiss="modal" onClick={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>OK</button>
-            </Modal.Footer>
+            
       </Modal>
      );
 }

@@ -18,10 +18,7 @@ const getRoleByNom = "SELECT id_role FROM role WHERE nom_role = $1"
 
 const getPersonneByNomOrPrenom = "SELECT id_personne, nom , prenom  FROM personne WHERE nom ILIKE $1 OR prenom ILIKE $2"
 
-/////// Entrepot *********************************
-const ajouterEntrepot = "INSERT INTO entrepot ( nom_entrepot, type_entrepot, air_stockage, capacite, adresse, exist ,date_enregistrement_entrepot)"
-                        +"VALUES ( $1, $2, $3, $4, $5, $6, $7 )"
-const getEnrepot = "SELECT id_entrepot, nom_entrepot,air_stockage FROM entrepot WHERE exist=TRUE"
+
 /////// Stock *********************************
 // --ajouter  au stock
 const ajouterStock = "INSERT INTO stock ( date_entree, fk_entrepot) VALUES ( $1, $2 ) RETURNING id_stock"
@@ -112,9 +109,6 @@ module.exports={
     ajouterProcessMarinadeHist,
     ModifyProcessMarinade,
     ModifyProcessMarinadeHist,
-
-    ajouterEntrepot,
-    getEnrepot,
 
     ajouterStock,
     ModifyStock,

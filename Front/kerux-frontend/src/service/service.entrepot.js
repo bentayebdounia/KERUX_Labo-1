@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const POST_ENTREPOT = "http://localhost:8080/entrepot/ajouterEntrepot";
 const GET_ENTREPOT = "http://localhost:8080/entrepot/getEntrepot"
+const GET_ALL_ENTREPOT = "http://localhost:8080/entrepot/getAllEntrepot"
 
 class ServiceEntrepot {
 
@@ -14,5 +15,10 @@ class ServiceEntrepot {
     getEntrepot() {
         return axios.get(GET_ENTREPOT)
     }
+
+    getAllEntrepot() {
+        return axios.get(GET_ALL_ENTREPOT)
+    }
+
 }
 export default new ServiceEntrepot()

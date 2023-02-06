@@ -24,7 +24,7 @@ const ModalQStock = (props) => {
     }
 
     const non = () => {
-        window.print();
+        //window.print();
         props.handleClose3 ()
         props.toggleDisplay()
 

@@ -60,7 +60,7 @@ const ModifierAlert = (props) => {
         <>
             <Modal size="xl" scrollable={true} show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title><i className="bi bi-bell-fill" style={{color: "black"}}  > </i>  Modifier un alerte</Modal.Title>
+                    <Modal.Title style={{color: "#7B170F" }}><i className="bi bi-bell-fill" style={{color: "#7B170F" , fontSize:"25px"}} ></i>  Modifier un alerte</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     

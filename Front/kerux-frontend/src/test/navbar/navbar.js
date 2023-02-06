@@ -1,7 +1,7 @@
 import React ,{useState,useEffect} from 'react'
 import { Link, useHistory , useLocation} from 'react-router-dom'
 
-import AjouterEntrepot from '../entrepot/ajouterEntrepot'
+import AjouterEntrepot from '../../Admin/entrepot/ajouterEntrepot'
 import Etape from '../etapeMenu/component.etap'
 import JournalNettoyage from '../journalProcess/journalNettoyage'
 import JournalReception from '../journalProcess/journalRecetion'
@@ -116,14 +116,14 @@ const Navbar = () => {
               Stock   
           </Link>
           <ul className="dropdown-menu menubar" style={{marginLeft:'45%'}}>
-            <li> <button className="dropdown-item"  type="button" onClick={handleShow4}>Entrepot</button> </li>
+            
             <li> <button className="dropdown-item"  type="button" onClick={handleShowMouvementStock}>Movement de stock</button> </li>
             
           </ul>
 
 
           <Link className="nav-link active me-5" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#">
-          <i className="bi bi-bar-chart-line-fill me-2" ></i>
+          <i className="bi bi-graph-up me-2" ></i>
           Statistique
             </Link>
           <ul className="dropdown-menu menubar" style={{marginLeft:'50%'}}>
