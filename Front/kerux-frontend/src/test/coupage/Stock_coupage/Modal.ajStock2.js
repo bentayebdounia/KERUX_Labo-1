@@ -30,14 +30,14 @@ const ModalAjouterStock = (props) => {
        
         await ServiceStock.ajouterStock(entrepot).then((res) => {
             setStock(res.data)
-            console.log(res.data)
+           // console.log(res.data)
             //console.log(stock.id_stock)
             ServiceStock.modifierProcess(props.result.id_gnerate, res.data.id_stock).then( (res) => {
                 console.log(res.data)
             })
             
             serviceAlert.updateDateAlert(props.result.id_process, dateAlert ).then( (res) => {
-                console.log(res.data)
+                //console.log(res.data)
                 alert (res.data)
             })
         })     
@@ -51,7 +51,7 @@ const ModalAjouterStock = (props) => {
         if(props.PorcentagePoids >90 && props.PorcentagePoids < 100) {
             handleShowQnote()
             
-            console.log("PorcentagePoids= " + props.PorcentagePoids)
+            //console.log("PorcentagePoids= " + props.PorcentagePoids)
             
         }
         else if ( props.PorcentagePoids >= 100) props.toggleDisplay()

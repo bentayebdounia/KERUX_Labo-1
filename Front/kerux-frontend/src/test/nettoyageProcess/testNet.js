@@ -266,7 +266,7 @@ const TestNet = (props) => {
                                 <th scope="col">ID </th> 
                                 <th scope="col">Categorie</th> 
                                 <th scope="col">Nom produit</th> 
-                                <th scope="col">Poids</th> 
+                                <th scope="col">Poids(Kg) </th> 
                                 <th scope="col">Nombre</th> 
                                 <th scope="col">Date</th> 
                                 <th scope="col">Heure</th> 
@@ -308,7 +308,7 @@ const TestNet = (props) => {
                                         <td>{p.id_gnerate} </td> 
                                         <td>{p.categorie}</td> 
                                         <td>{p.nom_produit}</td> 
-                                        <td>{p.poids}</td> 
+                                        <td>{p.poids/1000}</td> 
                                         <td>{p.nombre}</td> 
                                         <td>{dateNow (p.datee)}</td> 
                                         <td>{p.heure}</td> 
@@ -342,7 +342,7 @@ table2=(
                                 <th scope="col">ID </th> 
                                 <th scope="col">Categorie</th> 
                                 <th scope="col">Nom produit</th> 
-                                <th scope="col">Poids</th> 
+                                <th scope="col">Poids(Kg) </th> 
                                 <th scope="col">Nombre</th> 
                                 <th scope="col">Date</th> 
                                 <th scope="col">Heure</th> 
@@ -380,7 +380,7 @@ table2=(
                                     <td>{p.id_gnerate} </td> 
                                     <td>{p.categorie}</td> 
                                     <td>{p.nom_produit}</td> 
-                                    <td>{p.poids}</td> 
+                                    <td>{p.poids/1000}</td> 
                                     <td>{p.nombre}</td> 
                                     <td>{dateNow (p.datee)}</td> 
                                     <td>{p.heure}</td> 

@@ -29,12 +29,12 @@ const ModalQStock = (props) => {
         if(props.PorcentagePoids>90 && props.PorcentagePoids < 100) {
             handleShowQnote()
             
-            console.log("PorcentagePoids= " + props.PorcentagePoids)
+           // console.log("PorcentagePoids= " + props.PorcentagePoids)
             
         }
         else {if ( props.PorcentagePoids >= 100  ) props.toggleDisplay()}
-        window.print();
-        console.log(props.result);
+        //window.print();
+       // console.log(props.result);
         props.handleClose3 ()
 
     }

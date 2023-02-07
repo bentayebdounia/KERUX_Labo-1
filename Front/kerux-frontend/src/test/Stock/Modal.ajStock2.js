@@ -50,7 +50,7 @@ const ModalAjouterStock = (props) => {
         props.handleClose4()
         props.toggleDisplay()
     }
-console.log('date alert = '+dateAlert);
+//console.log('date alert = '+dateAlert);
     return ( 
         <Modal show={props.show4} onHide={props.handleClose4}>
             <Modal.Header closeButton>

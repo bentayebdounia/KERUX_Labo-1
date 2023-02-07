@@ -94,7 +94,7 @@ const MouvementStock = (props) => {
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
-                            <td>{p.poids}</td>
+                            <td>{p.poids/1000}</td>
                             <td>{p.nombre}</td>
                             <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
@@ -132,14 +132,14 @@ const MouvementStock = (props) => {
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
-                            <td>{p.poids}</td>
+                            <td>{p.poids/1000}</td>
                             <td>{p.nombre}</td>
                             <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
                             <td>{dateNow(p.date_entree)}</td>
                             <td>{dateNow(p.date_sortie)}</td>
-                            <td>{p.poids_sortie}</td>
+                            <td>{p.poids_sortie/1000}</td>
                     
                     </tr>
                 )
@@ -164,14 +164,14 @@ const MouvementStock = (props) => {
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
-                            <td>{p.poids}</td>
+                            <td>{p.poids/1000}</td>
                             <td>{p.nombre}</td>
                             <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
                             <td>{dateNow(p.date_entree)}</td>
                             <td>{dateNow(p.date_sortie)}</td>
-                            <td>{p.poids_sortie}</td>
+                            <td>{p.poids_sortie/1000}</td>
                     
                     </tr>
                 )
@@ -190,7 +190,7 @@ const MouvementStock = (props) => {
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
-                            <td>{p.poids}</td>
+                            <td>{p.poids/1000}</td>
                             <td>{p.nombre}</td>
                             <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
@@ -215,14 +215,14 @@ const MouvementStock = (props) => {
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
                             <td>{p.etape}</td>
-                            <td>{p.poids}</td>
+                            <td>{p.poids/1000}</td>
                             <td>{p.nombre}</td>
                             <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
                             <td>{dateNow(p.date_entree)}</td>
                             <td>{dateNow(p.date_sortie)}</td>
-                            <td>{p.poids_sortie}</td>
+                            <td>{p.poids_sortie/1000}</td>
                     
                     </tr>
                 )
@@ -265,14 +265,14 @@ const MouvementStock = (props) => {
                                 <th scope="col">Categorie</th>
                                 <th scope="col">Nom_produit</th>
                                 <th scope="col">Etape</th>
-                                <th scope="col">Poids</th>
+                                <th scope="col">Poids(Kg)</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Heure</th>
                                 <th scope="col">ID enrepot</th>
                                 <th scope="col">Date entre au stock</th>
                                 {comboBox!== 'en stock' && <th scope="col">Date sortie de stock</th>}
-                                {comboBox!== 'en stock' && <th scope="col">Poids des sortie</th>}
+                                {comboBox!== 'en stock' && <th scope="col">Poids des sortie(Kg)</th>}
                                 
                                 </tr>
                             </thead>

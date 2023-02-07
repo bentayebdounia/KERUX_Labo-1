@@ -32,6 +32,7 @@ const Coupage = (props) => {
     const [idAgent, setIdAgent]= useState([])
 
     const [numeroBox, setNumerobox] = useState(1)
+    const [unite, setUnite]= useState('kg')
     
     //const [note , setNote] = useState(false)
     const [nomAgent, setNomAgent ] = useState([])
@@ -99,7 +100,7 @@ const Coupage = (props) => {
             console.log(props.poids);
             console.log(poids);
             
-            calculPoids.push(parseFloat (poids))
+            calculPoids.push(parseFloat (transforme(poids)))
             console.log(calculPoids);
             let sum =calculPoids.reduce(myFunction)
             
@@ -109,7 +110,14 @@ const Coupage = (props) => {
             return porcentagePoids
         }
 
-
+        function transforme(unite, poids){
+            console.log(unite);
+            if (unite==="kg") {
+                console.log(poids);
+                return poids*1000
+            }
+            else if(unite==="gramme") return poids
+        }
 
         const valider = (e) => {
             e.preventDefault()
@@ -233,9 +241,20 @@ const Coupage = (props) => {
                         </div>
                         <div className="mb-3 row">
                             <label htmlFor="poids" className="col-sm-2 col-form-label">Poids</label>
-                            <div className="col-sm-10">
-                            <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> {setPoids(e.target.value);}} required/>
+                            <div className="col-sm-8">
+                                <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> {setPoids(e.target.value);}} required/>
                             
+                            </div>
+                            <div className="col-sm-2">
+                                <select className="form-select" aria-label="Default select example" id="categorie"
+                                    value={unite} 
+                                    onChange={event => setUnite(event.target.value)}
+                                    
+                                    required>
+                                
+                                    <option value="kg">Kg</option>
+                                    <option value="gramme">Gr</option>
+                                </select>
                             </div>
                             <label htmlFor="poids" className="col-sm-3 col-form-label">
                                 <div className="progress"> Poids
@@ -290,8 +309,8 @@ const Coupage = (props) => {
                                 id_box={props.id}  
                                 categorie={props.process.categorie}  
                                 typeProd={typeProd}
-                                agents={idAgent}  
-                                poids={poids} 
+                                agents= {agentNettoyageSelect}  
+                                poids={transforme(unite, poids)} 
                                 nombre={nombre} 
                                 fk_proditfourni={props.process.fk_proditfourni}   
                                 confirmeCoupageTrue= {confirmeCoupageTrue}  

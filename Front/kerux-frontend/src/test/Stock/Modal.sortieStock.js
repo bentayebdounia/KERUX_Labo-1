@@ -7,10 +7,20 @@ const ModalSortieStock = (props) => {
     
 
     const [poids, setPoids] = useState()
+    const [unite, setUnite]= useState('kg')
+
+    function transforme(unite, poids){
+        console.log(unite);
+        if (unite==="kg") {
+            console.log(poids);
+            return poids*1000
+        }
+        else if(unite==="gramme") return poids
+    }
 
 
     const sortieStock = (e) => {
-        ServiceStock.modifierStock(poids , props.process.fk_stock)
+        ServiceStock.modifierStock(transforme(unite, poids) , props.process.fk_stock)
         .then( (res)=> {
             console.log(res.data)
         })
@@ -27,7 +37,7 @@ const ModalSortieStock = (props) => {
 
     return (  
         <>
-            <Modal show={props.show2} onHide={props.handleClose2}>
+            <Modal size='lg' show={props.show2} onHide={props.handleClose2}>
             <Modal.Header closeButton>
             <Modal.Title>Sortie de stock</Modal.Title>
             </Modal.Header>
@@ -56,9 +66,20 @@ const ModalSortieStock = (props) => {
 
                 <div className="mb-3 row">
                     <label htmlFor="poids"  className="col-sm-2 col-form-label">Poids de sortie</label>
-                    <div className="col-sm-10">
+                    <div className="col-sm-7">
                         <input type="text"  className="form-control" id="poids"  value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
                     </div>
+                    <div className="col-sm-3">
+                                <select className="form-select" aria-label="Default select example" id="categorie"
+                                    value={unite} 
+                                    onChange={event => setUnite(event.target.value)}
+                                    
+                                    required>
+                                
+                                    <option value="kg">Kg</option>
+                                    <option value="gramme">Gr</option>
+                                </select>
+                            </div>
                 </div>
 
                 

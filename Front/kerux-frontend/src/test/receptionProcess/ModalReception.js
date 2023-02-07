@@ -31,17 +31,20 @@ const ModalReception = (props) => {
     return (
       <Modal show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>Voulez-vous valider?</Modal.Title>
+            <Modal.Title>Voulez-vous valider cette réception?</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                   <p style = {{fontWeight: "bold"}} >Fournisseur:  </p>  {props.nom_fournisseur}  
-                   
-                  { props.acheteur !==''  && <p style = {{fontWeight: "bold"}} >Acheteur:  </p>   } {props.acheteur}
-                  { props.livreur !==''  && <p style = {{fontWeight: "bold"}} >Livreur:  </p>  }  {props.livreur}
-                   
-                   <p style = {{fontWeight: "bold"}}>Type de bon:  </p>  {props.type_bon} 
-                   
-                   <p style = {{fontWeight: "bold"}} >Récepteur:  </p>   {props.recepteur}
+
+                <div class="list-group">
+
+                    <span  className="list-group-item ">  <span className='attributs'>Fournisseur:</span>  {props.nom_fournisseur}  </span>
+                    { props.acheteur !==''  &&<span  className="list-group-item  list-group-item-light"> <span className='attributs'>Acheteur:</span> {props.acheteur}</span>}
+                    { props.livreur !==''  && <span className="list-group-item  list-group-item-light"> <span className='attributs'>Livreur:</span> {props.livreur} </span>}
+                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Type de bon:</span> {props.type_bon} </span>
+                    <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Récepteur:</span> {props.recepteur} </span>
+                    
+                </div>
+
                    
                    
             </Modal.Body>

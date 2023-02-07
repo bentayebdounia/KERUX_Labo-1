@@ -84,7 +84,7 @@ const JournalProduitsFournis = (props) => {
                             <td>{p.recepteur}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
-                            <td>{p.poids_fourni}</td>
+                            <td>{p.poids_fourni/1000}</td>
                             <td>{p.nombre_fourni}</td>
                             <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
@@ -107,7 +107,7 @@ const JournalProduitsFournis = (props) => {
                         <td>{p.recepteur}</td>
                         <td>{p.categorie}</td>
                         <td>{p.nom_produit}</td>
-                        <td>{p.poids_fourni}</td>
+                        <td>{p.poids_fourni/1000}</td>
                         <td>{p.nombre_fourni}</td>
                         <td>{dateNow(p.datee)}</td>
                         <td>{p.heure}</td>
@@ -123,7 +123,7 @@ const JournalProduitsFournis = (props) => {
             <Modal.Title style={{color: "#7B170F" }}><i className="bi bi-journals" style={{color: "#7B170F" , fontSize:"25px"}} ></i> Journal de produits fournis</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div style={{margin:"5%", marginRight:"5%"}}>
+                <div style={{margin:"1%", marginRight:"1%"}}>
                     <div className="mb-4 row agent">
                         <select className="form-select" aria-label="Default select example" id="roleAgent" style={{width:"15%" , marginLeft:"15px"}} value={comboBox} onChange={(e)=> setComboBox(e.target.value)} >
                             <option  selected></option>
@@ -157,7 +157,7 @@ const JournalProduitsFournis = (props) => {
                                 <th scope="col">Recepteur</th>
                                 <th scope="col">Categorie</th>
                                 <th scope="col">Produit</th>
-                                <th scope="col">Poids</th>
+                                <th scope="col">Poids(Kg) </th>
                                 <th scope="col">Nombre</th>
 
 

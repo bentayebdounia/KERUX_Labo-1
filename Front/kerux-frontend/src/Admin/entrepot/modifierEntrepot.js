@@ -4,7 +4,7 @@ import serviceEntrepot from '../../service/service.entrepot'
 import Pagination from '../../test/pagination/pagination'
 import moment from 'moment'
 
-const ListeEntrepot = (props) => {
+const ModifierEntrepot = (props) => {
 
     const [entrepot, setEntrepot] = useState([])
     const [currentPage, setCurrentPage] = useState(1);
@@ -49,7 +49,6 @@ const ListeEntrepot = (props) => {
                     <table className="table table-bordered"  >
                     <thead>
                         <tr>
-                        <th scope="col">#</th>
                         <th scope="col">ID</th>
                         <th scope="col">Nom d'entrepot</th>
                         <th scope="col">Type d'entrepot</th>
@@ -58,6 +57,7 @@ const ListeEntrepot = (props) => {
                         <th scope="col">Adress</th>
                         <th scope="col">Date d'enregistrement d'entrepot</th>
                         <th scope="col">L'existance</th>
+                        <th scope="col"></th>
 
                         </tr>
                     </thead>
@@ -75,6 +75,10 @@ const ListeEntrepot = (props) => {
                                 <td>{dateNow(p.date_enregistrement_entrepot)}</td>
                                 {p.exist === true && <td><i className="bi bi-check-circle-fill" style={{color: "#4F8B2A" , fontSize:"20px"}}></i></td>}
                                 {p.exist === false && <td><i className="bi bi-x-circle-fill"style={{color: "#7B170F" , fontSize:"20px"}}></i></td>}
+                                <td>
+                                    
+
+                                </td>
                             </tr>
                     )}
                         
@@ -103,4 +107,4 @@ const ListeEntrepot = (props) => {
      )
 }
  
-export default ListeEntrepot;
+export default ModifierEntrepot;

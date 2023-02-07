@@ -1,11 +1,11 @@
 import React ,{useState,useEffect} from 'react'
 
-import Modal from 'react-bootstrap/Modal';
+import Modal from 'react-bootstrap/Modal'
 import NettoyageService from '../../service/service.nettoyage'
 import ModalQStock from '../Stock/Modal.ajouterEnStock'
 import Service_AgentProcess from '../../service/service.agentProcess'
-import serviceAlert from '../../service/service.alert';
-
+import serviceAlert from '../../service/service.alert'
+import './modalConfirm.css'
 //import Print from './print';
 const ModalConfirmNet = (props) => {
 
@@ -41,7 +41,7 @@ const ModalConfirmNet = (props) => {
         e.preventDefault();
         var etape="nettoyage"
        
-        await NettoyageService.ajouterNettoyage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.fk_proditfourni )
+        await NettoyageService.ajouterNettoyage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id , props.fk_proditfourni )
         .then( (res)=> {
             console.log(res.data)
             setResult(res.data)
@@ -81,27 +81,32 @@ const ModalConfirmNet = (props) => {
     
     return ( 
         <>
-            <Modal show={props.show2} onHide={props.handleClose2}> 
+            <Modal size="l"  show={props.show2} onHide={props.handleClose2}> 
                 <Modal.Header closeButton>
                 <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="hidden-print">
-                        <p style = {{fontWeight: "bold"}} > ID box: </p> {props.id_enregistrement}
-                        <p style = {{fontWeight: "bold"}} > Categorie: </p> {props.categorie}
-                        <p style = {{fontWeight: "bold"}} > Type de produit: </p> {props.typeProd}
-                        <p style = {{fontWeight: "bold"}} > Agent: </p> {props.agents.id_personne}
-                        {props.agents.map((value, key) => {
-                                        return (
-                                            
-                                        <p > {value.id_personne} . {value.nom} {value.prenom} </p>
-                                            
-                                        )
-                                    })}
-                        <p style = {{fontWeight: "bold"}} > Poids: </p> {props.poids}
-                        <p style = {{fontWeight: "bold"}} > Nombre: </p> {props.nombre} 
-                        <br/>  
-                    </div>
+                <div class="list-group">
+                    <span  className="list-group-item ">  <span className='attributs'>ID boxe:</span>  {props.id} </span>
+                    <span  className="list-group-item  list-group-item-light"> <span className='attributs'>Categorie:</span> {props.categorie}</span>
+                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Type de produit:</span> {props.typeProd} </span>
+                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Agent:</span> 
+                        
+                            {props.agents.map((value, key) => {
+                                                return (
+                                                    
+                                                <li > {value.id_personne} . {value.nom} {value.prenom} </li>
+                                                    
+                                                )
+                                            })}
+                        
+                    </span>
+                    <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Poids:</span> {props.poids /1000} Kg</span>
+                    {props.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
+                    
+                </div>
+
+                    
                    
                 </Modal.Body>
                 <Modal.Footer>
@@ -126,3 +131,5 @@ const ModalConfirmNet = (props) => {
 }
  
 export default ModalConfirmNet;
+
+

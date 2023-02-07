@@ -16,7 +16,7 @@ const ModalQStock = (props) => {
     const getEntrepot = () =>{
         
        
-        window.print();
+        //window.print();
         handleShow4()
         props.handleClose3()
         

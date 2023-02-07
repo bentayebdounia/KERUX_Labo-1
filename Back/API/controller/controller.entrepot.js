@@ -26,8 +26,19 @@ getAllEntrepot = (req, res) => {
     })
 }
 
+updateEntrepot = (req, res) => {
+    const id_entrepot = req.params.id_entrepot
+    
+    const { air_stockage, exist} = req.body
+    pool.query(queries.updateEntrepot, [ air_stockage, exist, id_entrepot], (error, result) => {
+        if (error) throw error 
+        res.status(200).json(result.rows)
+    })
+}
+
 module.exports = {
     ajouterEntrepot,
     getEntrepot,
-    getAllEntrepot
+    getAllEntrepot,
+    updateEntrepot
 }

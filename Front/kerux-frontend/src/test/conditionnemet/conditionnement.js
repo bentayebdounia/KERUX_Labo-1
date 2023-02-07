@@ -32,6 +32,7 @@ const Conditionnement = (props) => {
     const [poidsControl, setPoidControl] = useState()
     const [note , setNote] = useState(false)
     const [numeroBox, setNumerobox] = useState(1)
+    const [unite, setUnite]= useState('kg')
     
     var  bouttonMarinade, agents
 
@@ -108,10 +109,16 @@ const Conditionnement = (props) => {
            })
            handleShow4()
             setAgent('')
-                
-            
-            
-            
+           
+        }
+
+        function transforme(unite, poids){
+            console.log(unite);
+            if (unite==="kg") {
+                console.log(poids);
+                return poids*1000
+            }
+            else if(unite==="gramme") return poids
         }
 
     const valider = (e) => {
@@ -227,15 +234,27 @@ const Conditionnement = (props) => {
                 </div>
                 <div className="mb-3 row">
                     <label for="poids" className="col-sm-2 col-form-label">Poids</label>
-                    <div className="col-sm-10">
-                    <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
-                    <label htmlFor="poids" className="col-sm-3 col-form-label">
-                         <div className="progress"> Poids
-                          
-                            <div className="progress-bar " role="progressbar" aria-label="Example with label" style={{width: PorcentagePoids+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {PorcentagePoids} </div>
-                        </div>
-                    </label>
+                    <div className="col-sm-8">
+                        <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
+                        
+                        <label htmlFor="poids" className="col-sm-3 col-form-label">
+                            <div className="progress"> Poids
+                            
+                                <div className="progress-bar " role="progressbar" aria-label="Example with label" style={{width: PorcentagePoids+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {PorcentagePoids} </div>
+                            </div>
+                        </label>
                     </div>
+                    <div className="col-sm-2">
+                                <select className="form-select" aria-label="Default select example" id="categorie"
+                                    value={unite} 
+                                    onChange={event => setUnite(event.target.value)}
+                                    
+                                    required>
+                                
+                                    <option value="kg">Kg</option>
+                                    <option value="gramme">Gr</option>
+                                </select>
+                            </div>
                 </div>
                 <div className="mb-3 row">
                     {nbr}
@@ -284,12 +303,13 @@ const Conditionnement = (props) => {
                                     handleShow={handleShow}
                                     id_box={props.id}
                                     process={props.process}
-                                    poids={poids}
+                                    poids={transforme(unite, poids)}
                                     nombre={nombre}
                                     confirmeConditionnemetTrue= {confirmeConditionnemetTrue}  
                                     toggleDisplay = {props.toggleDisplay} 
                                     PorcentagePoids = {PorcentagePoids}
                                     numeroBox= {numeroBox}
+                                    agents={agentNettoyageSelect}
             />
             {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
                                     message={message} 

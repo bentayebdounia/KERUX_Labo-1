@@ -355,7 +355,7 @@ const Enregistrement = (props) => {
                                 required>
                             <option defaultValue=""></option>
                             <option value="kg">Kg</option>
-                            <option value="gramme">G</option>
+                            <option value="gramme">Gr</option>
                         </select>
                         {unite === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner l'unité </p>}
                     </div>

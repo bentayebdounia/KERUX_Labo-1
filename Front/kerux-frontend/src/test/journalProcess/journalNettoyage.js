@@ -250,7 +250,7 @@ const JournalNettoyage = (props) => {
                             <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
-                            <td>{p.poids}</td>
+                            <td>{p.poids/1000}</td>
                             <td>{p.nombre}</td>
                             <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
@@ -268,7 +268,7 @@ const JournalNettoyage = (props) => {
                             <td>{p.id_gnerate}</td>
                             <td>{p.categorie}</td>
                             <td>{p.nom_produit}</td>
-                            <td>{p.poids}</td>
+                            <td>{p.poids/1000}</td>
                             <td>{p.nombre}</td>
                             <td>{dateNow(p.datee)}</td>
                             <td>{p.heure}</td>
@@ -308,7 +308,7 @@ const JournalNettoyage = (props) => {
                                 <th scope="col">ID</th>
                                 <th scope="col">Categorie</th>
                                 <th scope="col">Nom produit</th>
-                                <th scope="col">Poids</th>
+                                <th scope="col">Poids(Kg) </th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Heure</th>

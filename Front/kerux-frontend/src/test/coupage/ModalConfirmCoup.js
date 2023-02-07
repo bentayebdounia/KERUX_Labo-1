@@ -70,7 +70,7 @@ const ModalConfirmCoup = (props) => {
             //ajouter les agents  de nettoyage au bdd
             for(var i=0 ; i<props.agents.length ;i++) {
                 console.log(props.agents[i]);
-                Service_AgentProcess.ajouterAgentProcess(res.data.id_gnerate , props.agents[i])
+                Service_AgentProcess.ajouterAgentProcess(res.data.id_gnerate , props.agents[i].id_personne)
                 .then((result)=>{
                     console.log(result.data)
                             })
@@ -95,17 +95,26 @@ const ModalConfirmCoup = (props) => {
                 <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <span style = {{fontWeight: "bold"}} > ID box: </span> {props.id_box}
-                    <br/>  
-                    <span style = {{fontWeight: "bold"}} > Categorie: </span> {props.categorie}
-                    <br/>
-                    <span style = {{fontWeight: "bold"}} > Type de produit: </span> {props.typeProd}
-                    <br/>
-                    <span style = {{fontWeight: "bold"}} > Agent de coupage:: </span> {props.agent}
-                    <br/>
-                    <span style = {{fontWeight: "bold"}} > Poids: </span> {props.poids}
-                    <br/>
-                    <span style = {{fontWeight: "bold"}} > Nombre: </span> {props.nombre} 
+                     
+                <div class="list-group">
+                    
+                    <span  className="list-group-item  list-group-item-light"> <span className='attributs'>Categorie:</span> {props.categorie}</span>
+                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Type de produit:</span> {props.typeProd} </span>
+                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Agent:</span> 
+                        
+                            {props.agents.map((value, key) => {
+                                                return (
+                                                    
+                                                <li > {value.id_personne} . {value.nom} {value.prenom} </li>
+                                                    
+                                                )
+                                            })}
+                        
+                    </span>
+                    <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Poids:</span> {props.poids /1000} Kg</span>
+                    {props.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
+                    
+                </div>
                    
                 </Modal.Body>
                 <Modal.Footer>

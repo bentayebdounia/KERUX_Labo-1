@@ -179,7 +179,7 @@ const Recape = (props) => {
                                                     <th scope="col">ID Produit</th>
                                                     <th scope="col">Categorie</th>
                                                     <th scope="col">Nom produit</th>
-                                                    <th scope="col">Poids</th>
+                                                    <th scope="col">Poids(Kg) </th>
                                                     <th scope="col">Nombre</th>
                                                     <th scope="col">stock</th>
                                                 
@@ -194,7 +194,7 @@ const Recape = (props) => {
                                                                 <td>{p.id_produit}</td>
                                                                 <td>{p.categorie}</td>
                                                                 <td>{p.nom_produit}</td>
-                                                                <td>{p.poids}</td>
+                                                                <td>{p.poids/1000}</td>
                                                                 <td>{p.nombre}</td>
                                                                 <td>{p.stock}</td>
                                                             </tr>

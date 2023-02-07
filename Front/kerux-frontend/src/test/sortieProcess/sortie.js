@@ -22,6 +22,7 @@ const Sortie = (props) => {
     const [poids , setPoids] = useState()
     const [nombre , setNombre] = useState()
     const [agent , setAgent] = useState('')
+    const [unite, setUnite]= useState('kg')
 
     const [idAgent, setIdAgent]= useState([])
 
@@ -61,14 +62,19 @@ const Sortie = (props) => {
        })
         handleShow2()
         setAgent('')
-            
-        
-        
-        
+           
+    }
+
+    function transforme(unite, poids){
+        console.log(unite);
+        if (unite==="kg") {
+            console.log(poids);
+            return poids*1000
+        }
+        else if(unite==="gramme") return poids
     }
                 
-
-           
+     
     const valider = (e) => {
         e.preventDefault()
         props.sortieBtn()
@@ -115,7 +121,7 @@ const Sortie = (props) => {
                             <div className="contenaireBox">
                                 <label id="id_box"> ID Box: </label>
                                 
-                                <label  id="id_boxValue" >{props.id}   /  {props.process.id_process}</label>
+                                <label  id="id_boxValue" >{props.id}   </label>
                                 
                             </div>
 
@@ -160,9 +166,20 @@ const Sortie = (props) => {
                 </div>
                 <div className="mb-3 row">
                     <label for="poids" className="col-sm-2 col-form-label">Poids</label>
-                    <div className="col-sm-10">
-                    <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
+                    <div className="col-sm-8">
+                        <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
                     </div>
+                    <div className="col-sm-2">
+                                <select className="form-select" aria-label="Default select example" id="categorie"
+                                    value={unite} 
+                                    onChange={event => setUnite(event.target.value)}
+                                    
+                                    required>
+                                
+                                    <option value="kg">Kg</option>
+                                    <option value="gramme">Gr</option>
+                                </select>
+                            </div>
                 </div>
                 <div className="mb-3 row">
                      {nbr}
@@ -208,8 +225,8 @@ const Sortie = (props) => {
                                 categorie={props.process.categorie}
                                 typeProd={props.process.nom_produit}
                                 id_process={props.process.id_process}
-                                agent={agent} 
-                                poids={poids} 
+                                agents={agentNettoyageSelect} 
+                                poids={transforme(unite, poids)} 
                                 nombre={nombre} 
                                 id_enregistrement= {props.process.id_enregistrement} 
                                 id_nettoyage= {props.process.id_nettoyage}

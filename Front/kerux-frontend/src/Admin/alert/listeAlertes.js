@@ -85,7 +85,7 @@ const ListeAlerte = (props) => {
                     </tbody>
                     </table>
 
-                    {alerts.length>=6 && <Pagination
+                    {alerts.length>6 && <Pagination
                             postsPerPage={postsPerPage}
                             totalPosts={alerts.length}
                             paginate={paginate}

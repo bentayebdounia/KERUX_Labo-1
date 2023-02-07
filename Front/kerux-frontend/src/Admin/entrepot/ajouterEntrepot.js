@@ -14,19 +14,19 @@ const AjouterEntrepot = (props) => {
 
     const verificetionChamp = () => {
         if((nomEntrepot !=='' ) && type !=='' && airStock !=='' && capacite !=='' && adr !==''){
-            console.log(verifier);
-            setVerifier(true)}
+            //console.log(verifier);
+            return true }
         else {
-            console.log(verifier);
-            setVerifier(false)
+            //console.log(verifier);
+            return false 
         }
-        return verifier
+       
     }
     
     const ajouterEntrepot =  (e) => {
         e.preventDefault()
-        verificetionChamp()
-        if (verifier===true){
+        //verificetionChamp()
+        if (verificetionChamp() === true){
             ServiceEntrepot.postEntrepot(nomEntrepot, type, airStock, capacite, adr)
             .then(
                 (res)=>{
@@ -60,7 +60,7 @@ const AjouterEntrepot = (props) => {
                             <div className="col-sm-10">
                             <input  type="text"  className="form-control" id="nomEntrepot" value={nomEntrepot} onChange={(e)=> setNomEtrepot(e.target.value)}  />
                             
-                            {(verifier===false && nomEntrepot==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir le nom de l'entrepot</p>}
+                            {(verificetionChamp()===false && nomEntrepot==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez saisir le nom de l'entrepot</p>}
                             </div>
                             
                             
@@ -75,7 +75,7 @@ const AjouterEntrepot = (props) => {
                                     <option value="entrepot">Entrepot</option>
                                     
                                 </select>
-                                {(verifier===false && type==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez selectionner un type d'entrepot</p>}
+                                {(verificetionChamp()===false && type==='') && <p style={{ color:'red', fontSize:"11px" }}> *Veillez selectionner un type d'entrepot</p>}
                             </div>
                         </div>
 
@@ -87,7 +87,7 @@ const AjouterEntrepot = (props) => {
                                     <option value="Refrigerer -positif">Refrigerer -positif</option>
                                     <option value="Refrigerer -negatif">Refrigerer -negatif</option>
                                 </select>
-                                {(verifier===false && airStock==='') && <p style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner l'air de stockage </p>}
+                                {(verificetionChamp()===false && airStock==='') && <p style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner l'air de stockage </p>}
                             </div>
                         </div>
 
@@ -95,14 +95,14 @@ const AjouterEntrepot = (props) => {
                             <label htmlFor="capacite" className="col-sm-2 col-form-label " >Capacite</label>
                             <div className="col-sm-10">
                             <input type="text"  className="form-control" id="capacite" value={capacite} onChange={(e)=> setCapacite(e.target.value)} />
-                            {(verifier===false && capacite==='') && <p style={{ color:'red' , fontSize:"11px" }}> *Veillez saisir la capacite</p>}
+                            {(verificetionChamp()===false && capacite==='') && <p style={{ color:'red' , fontSize:"11px" }}> *Veillez saisir la capacite</p>}
                             </div>
                         </div>
                         <div className="mb-3 row">
                             <label htmlFor="adress" className="col-sm-2 col-form-label " >Adresse</label>
                             <div className="col-sm-10">
                             <input type="text"  className="form-control" id="adress" value={adr} onChange={(e)=> setAdr(e.target.value)} />
-                            {(verifier===false && adr==='') && <p style={{ color:'red' , fontSize:"11px"}}> *Veillez saisir l'adresse'</p>}
+                            {(verificetionChamp()===false && adr==='') && <p style={{ color:'red' , fontSize:"11px"}}> *Veillez saisir l'adresse'</p>}
                             </div>
                         </div>
                  

@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react'
 import ModalListAgent from '../../Models/modalListAgent'
-import ModalConfirmNet from './ModalConfirmNet'
+import ModalConfirmNet from '../modal-Confirmation-Process/ModalConfirm'
 import ModelReponse from '../../Models/Model.repense'
 import ServiceAdmin from '../../service/serviceAdmin'
 import './agentBarRecherch.css'
@@ -28,7 +28,7 @@ const Nettoyage = (props) => {
     const [poids , setPoids] = useState()
     const [nombre , setNombre] = useState()
     const [agent , setAgent] = useState('')
-    //const [datee, setDatee]= useState()
+    const [unite, setUnite]= useState('kg')
     //const [heure, setHeure]= useState()
 
     const [toggleRecomendation, setToggleRecomendation] = useState(true)
@@ -70,6 +70,17 @@ const Nettoyage = (props) => {
         setAgent('')  
         
     }
+
+    function transforme(unite, poids){
+        console.log(unite);
+        if (unite==="kg") {
+            console.log(poids);
+            return poids*1000
+        }
+        else if(unite==="gramme") return poids
+    }
+
+    
 
     
     const valider = (e) => {
@@ -161,8 +172,19 @@ const Nettoyage = (props) => {
                         </div>
                         <div className="mb-3 row">
                             <label htmlFor="poids" className="col-sm-2 col-form-label">Poids</label>
-                            <div className="col-sm-10">
+                            <div className="col-sm-8">
                             <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
+                            </div>
+                            <div className="col-sm-2">
+                                <select className="form-select" aria-label="Default select example" id="categorie"
+                                    value={unite} 
+                                    onChange={event => setUnite(event.target.value)}
+                                    
+                                    required>
+                                
+                                    <option value="kg">Kg</option>
+                                    <option value="gramme">Gr</option>
+                                </select>
                             </div>
                         </div>
                         <div className="mb-3 row">
@@ -208,19 +230,19 @@ const Nettoyage = (props) => {
             </div>
             
                             
-             <ModalConfirmNet show2={show2} handleClose2={handleClose2} handleShow2={handleShow2}
-                             id_enregistrement={props.id}  
-                             categorie={props.process.categorie}  
-                             typeProd={props.process.nom_produit}
-                             id_process={props.process.id_process}
-                             agent={agent}  
-                             poids={poids} 
-                             nombre={nombre} 
-                             fk_proditfourni={props.process.fk_proditfourni}
-                             test={props.test}
-                             toggleDisplay={props.toggleDisplay}
-                             agents= {agentNettoyageSelect}
-                             nettoypBtn = {props.nettoypBtn}
+             <ModalConfirmNet   show2={show2} handleClose2={handleClose2} handleShow2={handleShow2}
+                                id={props.id}  
+                                categorie={props.process.categorie}  
+                                typeProd={props.process.nom_produit}
+                                id_process={props.process.id_process}
+                                agent={agent}  
+                                poids={transforme(unite, poids)} 
+                                nombre={nombre} 
+                                fk_proditfourni={props.process.fk_proditfourni}
+                                test={props.test}
+                                toggleDisplay={props.toggleDisplay}
+                                agents= {agentNettoyageSelect}
+                                nettoypBtn = {props.nettoypBtn}
             />
 
             {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
