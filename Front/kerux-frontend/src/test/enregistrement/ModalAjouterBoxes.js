@@ -34,7 +34,7 @@ const ModalAjoutBoxes = (props) => {
         nom_produit: "",
         poids: 0,
         nombre: 0,
-        unite: "",
+        unite: "kg",
         id_stock:"",
         date:new Date(),
         date_alert: ""
@@ -61,7 +61,7 @@ const ModalAjoutBoxes = (props) => {
        //console.log("categorier= "+props.produitFourni.categorie+ "\n id produit " +props.produitFourni.id_produit);
 
        
-
+//FONCTION POUR LA VERIFICATION DE POIDS
     function verificationPoids(poids, nombre , unite){
         
         console.log(poids*1000/nombre)
@@ -69,6 +69,7 @@ const ModalAjoutBoxes = (props) => {
 
     }
 
+//fonction pour la transformation de poids en gramme
     function transforme(unite, poids){
         console.log(unite);
         if (unite==="kg") {
@@ -78,12 +79,14 @@ const ModalAjoutBoxes = (props) => {
         else if(unite==="gramme") return poids
     }
 
+//fonction d'ajout un box
     function plus () {
         setConteur(conteur+1)
         setPoidsaccumuler(parseFloat(poidsAccumuler)+parseFloat(transforme(boxe[0].unite, boxe[0].poids))) 
         setNbrAccumuler (parseFloat(nbrAccumuler)+parseFloat(boxe[0].nombre))
 
-        boxe[0].poids=transforme(boxe[0].unite, boxe[0].poids)
+        boxe[0].poids = transforme(boxe[0].unite, boxe[0].poids)
+        console.log(boxe);
         const newBoxe = [...boxe]
         
                
@@ -106,18 +109,13 @@ const ModalAjoutBoxes = (props) => {
             return 0
         }))
         
-       
-        
-
-
-        
     }
 
     const  plusId = () => {
         
-        console.log(props.poidsRestant);
+       // console.log(props.poidsRestant);
        // alert(poidsAccumuler) 
-        console.log(parseFloat(poidsAccumuler)+parseFloat(boxe[0].poids)*1000);
+       // console.log(parseFloat(poidsAccumuler)+parseFloat(boxe[0].poids)*1000);
         if(parseFloat(poidsAccumuler)+parseFloat(transforme(boxe[0].unite, boxe[0].poids))<= props.poidsRestant){
             //alert(boxe[0].unite)
             if (props.categorie==="poulet" ){
@@ -129,8 +127,8 @@ const ModalAjoutBoxes = (props) => {
     
                 if ( (boxe[0].poids !==0 && boxe[0].poids !=='' && boxe[0].poids !=='0') &&  (boxe[0].nombre !==0 && boxe[0].nombre !=='0' && boxe[0].nombre !=='') && boxe[0].unite !=='')
                     {
-                        console.log(props.categorie);
-                        console.log(verificationPoids(boxe[0].poids,boxe[0].nombre, boxe[0].unite  ))
+                       // console.log(props.categorie);
+                        //console.log(verificationPoids(boxe[0].poids,boxe[0].nombre, boxe[0].unite  ))
                             if(verificationPoids(boxe[0].poids,boxe[0].nombre, boxe[0].unite)>=1500 && verificationPoids(boxe[0].poids,boxe[0].nombre, boxe[0].unite )<=2000)
                                 {   console.log(transforme(boxe[0].unite, boxe[0].poids));
                                     plus() }
@@ -164,18 +162,10 @@ const ModalAjoutBoxes = (props) => {
         
         if(boxe.length >1){
             e.preventDefault();
-            var boxes= []
+  
             var i=1
-            while(i<boxe.length){
-               /* 
-                EnregistrementService.ajouerEnregistrement(props.produitFourni.categorie, props.produitFourni.nom_produit, "enregistrement", boxe[i].poids, boxe[i].nombre, props.produitFourni.id_produit)
-                .then((res) => {
-                    
-                    tableboxe.push(res.data)
-                    
-                })*/
 
-                
+            while(i<boxe.length){  
                 var b = {
                     date: new Date(),
                     categorie: props.produitFourni.categorie,

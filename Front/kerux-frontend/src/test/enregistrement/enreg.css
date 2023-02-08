@@ -1,15 +1,15 @@
 #produitFourni{
-   border-radius: 10px;
+    border-radius: 10px;
     padding: 20px;
-    margin-left: 7%;
-    background-color: #cfcfcf;
+    position:static;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    background-color: #d6d1d1;
+    width: 80%;
 }
 
-#boxBtn {
-    height: 30;
-    width: 35%;
-    margin-left: 65%;
-}
+
 
 #containerGlobal{
     padding: 0px;

@@ -1,0 +1,39 @@
+.divTable{
+    
+    height: 300px;
+    margin: 0px ;
+    overflow : auto;
+    position:static;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+
+}
+.tableProduitsFournis{
+    margin-top: 20px;
+   
+    width: 100%;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    
+}
+
+.tableProduitsFournis thead{
+background-color: #ffffff ;
+color: black;
+font-weight: normal;
+font-family: sans-serif;
+overflow-y: scroll; 
+}
+
+
+
+.tableProduitsFournis tbody {
+   
+    height: 200px;
+    overflow: scroll;
+    width: 100%;
+    
+}

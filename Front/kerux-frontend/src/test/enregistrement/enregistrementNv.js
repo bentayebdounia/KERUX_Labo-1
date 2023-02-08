@@ -1,20 +1,16 @@
 import React ,{useState,useEffect} from 'react'
 //import EnregitrementService from '../../service'
 import ModelReponse from '../../Models/Model.repense'
-import ProduitFourni from './produitFourni'
 import ModalAjoutBoxes from './ModalAjouterBoxes'
-import EnregistrementService from '../../service/service.enregistrement'
-import './enreg.css'
 import AffichageBoxes from './boxAffichage'
 import Recape from './recape'
-import TestNet from '../nettoyageProcess/testNet'
 import Reception from '../receptionProcess/reception'
+import './enreg.css'
+import '../styleCss/btn.css'
+import '../styleCss/tableau.css'
 
 const Enregistrement = (props) => {
 
-   // const [test, setTest] = useState(false)
-    
-    
 
     const [show, setShow] = useState(false)
     const handleClose = () => setShow(false)
@@ -39,7 +35,7 @@ const Enregistrement = (props) => {
     const [nom_produit, setNom_produit] = useState()
     const [poids_fourni, setPoids_fourni] = useState()
     const [nombre_fourni, setNombre_fourni] = useState()
-    const [unite, setUnite] = useState()
+    const [unite, setUnite] = useState('kg')
     var nbr, TypePoulet, TypeLegume
     
     const [poids, setPoids] = useState(0)
@@ -58,18 +54,18 @@ const Enregistrement = (props) => {
     const [erreurPoids, setErreurpoids] = useState(false)
     const [erreurNombre, setErreurnombre] = useState(false)
 
-   //les variable imegrer
-   const [produit_id, setProduit_id ]= useState() 
-   const [produit_type, setProduit_type] = useState()
-   const [produit_poids, setProduit_poids] = useState()
-   const [produit_nombe, setProduit_nombre] = useState()
-   const [produit_categorie, setProduit_categorie] = useState()
+    //les variable imegrer
+    const [produit_id, setProduit_id ]= useState() 
+    const [produit_type, setProduit_type] = useState()
+    const [produit_poids, setProduit_poids] = useState()
+    const [produit_nombe, setProduit_nombre] = useState()
+    const [produit_categorie, setProduit_categorie] = useState()
 
-   const [poidsRester, setPoidsrester] = useState()
-   const [nombreRester, setNombrerester] = useState()
+    const [poidsRester, setPoidsrester] = useState() //valeur de reste de poids fourni
+    const [nombreRester, setNombrerester] = useState() //valeur de reste de nombre de poulets fourni
     const [p , setP] = useState()
     const [n , setN] = useState()
-   const [length, setLength] = useState()
+    const [length, setLength] = useState()
    
    useEffect(()=>{
     
@@ -80,14 +76,7 @@ const Enregistrement = (props) => {
     function plus () {
 
         setConteur(conteur+1)
-        //const newProduits = [...produits]
-
-        // EnregistrementService.ajouterProduitFournit(produits[0].categorie, produits[0].nom_produit, transforme(produits[0].unite , produits[0].poids), produits[0].nombre, props.id_bon)
-        // .then((res) => {
-            
-        //     setProduitForuni(res.data[0])
-
-        // })
+        
 
         console.log(conteur);
         var prod= {
@@ -113,7 +102,7 @@ const Enregistrement = (props) => {
         setNom_produit("")
         setPoids_fourni("")
         setNombre_fourni("")
-        setUnite("")
+        
      
     }
 
@@ -237,18 +226,21 @@ const Enregistrement = (props) => {
         )
 
         nbr=(
-            
-            <div className="form-floating">
-                <input type="number" className="form-control" id="nbr"
-                           value={nombre_fourni} 
-                           onChange={event => setNombre_fourni(event.target.value) }
+            <>
+                <div className="col-2">
+                    <label htmlFor="nbr" >Nombre fourni</label>
+                </div>
+                <div  className="col-4">
+                    <input type="number" className="form-control" id="nbr"
+                            value={nombre_fourni} 
+                            onChange={event => setNombre_fourni(event.target.value) }
+                        
+                        />
                     
-                    />
-                <label htmlFor="nbr" style={{color:"#000" , fontWeight:"bold"}}>Nombre fourni</label>
-                {erreurNombre===true && (nombre_fourni === "" || nombre_fourni === "0" || nombre_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre fourni </p>}
-                
-            </div>
-            
+                    {erreurNombre===true && (nombre_fourni === "" || nombre_fourni === "0" || nombre_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le nombre fourni </p>}
+                    
+                </div>
+            </>
                
     )
 }
@@ -271,152 +263,161 @@ const Enregistrement = (props) => {
         <>
         {toggle === false && 
         <section id="etape_section">
-            <div className="container">
-             <div className=" row">
-                
-                <div>
-                
-                        
+            <div className="container" >
+                <div className="row" style={{alignItems: "center", justifyContent: "center",}}>
+                    
+                    
+                    
+                            <div className="col-sm-10 mb-3" id= "produitFourni" >
+                                <div className='row gy-2 gx-2 mb-3' >
+                                    <div className="contenaireBox col-4">
+                                        <label id="id_box"> Fournisseur: </label>
+                                        
+                                        <label  id="id_boxValue" >{props.nom_fournisseur} </label>
+                                        
+                                    </div>
 
-                        <div className="col-sm-10 mb-3" id= "produitFourni">
-                            <div className='row gy-2 gx-2'>
-                                <div className="contenaireBox col-4">
-                                    <label id="id_box"> Fournisseur </label>
+                                        <div className="contenerProd col-4" >
+                                            <label id="categorie"> Recepteur: </label>
+                                            
+                                            <label  id="categorieValue" >{props.recepteur} </label>
+                                            
+                                        </div>
+
+                                        <div className="contenerProd col-4" >
+                                            <label id="produit"> Type de bon: </label>
+                                            
+                                            <label  id="produitValue" >{props.type_bon} </label>
+                                            
+                                        </div>
                                     
-                                    <label  id="id_boxValue" >{props.nom_fournisseur} </label>
-                                    
+                                
                                 </div>
 
-                                    <div className="contenerProd col-4" >
-                                        <label id="categorie"> Recepteur: </label>
-                                        
-                                        <label  id="categorieValue" >{props.recepteur} </label>
-                                        
-                                    </div>
-
-                                    <div className="contenerProd col-4" >
-                                        <label id="produit"> Type de bon: </label>
-                                        
-                                        <label  id="produitValue" >{props.type_bon} </label>
-                                        
-                                    </div>
+                                <div className="row gy-2 gx-2 align-items-center">
                                 
+                                    <div className="row mb-2">
+                                        <div className="col-2 ">
+                                            <label  htmlFor="categorie" >  Categorie  </label>
+                                        </div>
+                                        <div className="col-4 ">
+                                            <select className="form-select col-2" aria-label="Default select example" 
+                                                    value={categorie} 
+                                                    onChange={event => setCategorie(event.target.value)} 
+                                            required>
+                                                <option defaultValue="" ></option>
+                                                <option value="poulet">Poulet</option>
+                                                <option value="legume">Legume</option>
+                                                <option value="autre">Autre</option>
+                                            </select>
+                                            {erreurCategorie ===true && categorie === ""  && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner une categorie </p>}
+                                        </div>
+                                        
+                                    
+                                        
+                                        <div className="col-2">
+                                            <label htmlFor="produit" >Type de produit</label>
+                                        </div>
+                                        <div className="col-4">
+                                            <select className="form-select" aria-label="Default select example" 
+                                                    value={nom_produit} 
+                                                    onChange={event => setNom_produit(event.target.value) }
+                                            required>
+                                            {TypePoulet}
+                                            {TypeLegume}
+
+                                            </select>
+                                            {erreurProduit === true && nom_produit === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner un type de produit </p>}
+                                        </div>
+                                    
+                                    </div>  
+                                    
+                                    <div className="row mb-3">
+                                        <div className="col-2 " style={{paddingRight:'0px'}}>
+                                            <label htmlFor="poids" >Poids fourni</label>
+                                        </div>
+
+                                        <div className="col-2">   
+                                            <input type="number" class="form-control" id="poids"
+                                                    value={poids_fourni} 
+                                                    onChange={event => setPoids_fourni(event.target.value) }
+                                                />
+                                                {erreurPoids ===true && (poids_fourni === "" || poids_fourni === "0" || poids_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le poids fourni </p>}
+                                        </div>
+
+                                        <div className="col-2 ">
+                                            <select className="form-select" aria-label="Default select example" 
+                                                    value={unite} 
+                                                    onChange={event => setUnite(event.target.value)}
+                                                    
+                                                        required>
+                                                    <option value="kg">Kg</option>
+                                                    <option value="gramme">Gr</option>
+                                            </select>
+                                            {unite === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner l'unité </p>}
+                                        </div>
+                                        
+                                            {nbr}
+                                        
+
+                                    </div>
+                                    
+                                    
+                                    
+                            
+                                </div>
+                                
+
+                                <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
+                                    onClick={(e) => ajouterProduitFourni(e)} >
+                                    <i className="bi bi-plus-lg" style={{color: "white" , fontStyle:"normal"}}> AJOUTER PRODUIT </i> 
+                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill " style={{background: "#f0f0f0" , color: "black" , fontStyle:"normal"}}>
+                                        {conteur}
+                                        <span className="visually-hidden">unread messages</span>
+                                    </span>
+                                </button>
                             
                             </div>
-
-                            <div className="row gy-2 gx-2 align-items-left">
-                
-                <div className="col-6">
-                    <div className="form-floating  ">
-                        <select className="form-select" aria-label="Default select example" id="categorie"
-                                value={categorie} 
-                                onChange={event => setCategorie(event.target.value)} 
-                        required>
-                        <option defaultValue></option>
-                        <option value="poulet">Poulet</option>
-                        <option value="legume">Legume</option>
-                        <option value="autre">Autre</option>
-                        </select>
-                        <label htmlFor="categorie" style={{color:"#000" , fontWeight:"bold"}} >  Categorie  </label>
-                    </div>
-                    {erreurCategorie ===true && categorie === ""  && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner une categorie </p>}
-                </div>
-                <div className="col-6 ">  
-                    <div className="form-floating">
-                        <select className="form-select" aria-label="Default select example" id="produit"
-                                value={nom_produit} 
-                                onChange={event => setNom_produit(event.target.value) }
-                        required>
-                        {TypePoulet}
-                        {TypeLegume}
-
-                        </select>
-                        <label htmlFor="produit" style={{color:"#000", fontWeight:"bold"}} >Type de produit</label>
-                    </div>
-                    {erreurProduit === true && nom_produit === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner un type de produit </p>}
-                </div>  
-                    <div className="col-5 " style={{paddingRight:'0px'}}>
-                        <div className="form-floating">
-                            <input type="number" class="form-control" id="poids"
-                                value={poids_fourni} 
-                                onChange={event => setPoids_fourni(event.target.value) }
-                            />
-                            
-                            <label htmlFor="poids" style={{color:"#000", fontWeight:"bold"}}>Poids fourni</label>
-                        </div>
-                        
-                        {erreurPoids ===true && (poids_fourni === "" || poids_fourni === "0" || poids_fourni === 0 ) && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez ajouter le poids fourni </p>}
-                    </div>
-                    <div className="col-1 mb-3" style={{ paddingLeft:'0px'}}>
-                        <select className="form-select" aria-label="Default select example" id="categorie"
-                                value={unite} 
-                                onChange={event => setUnite(event.target.value)}
-                                style={{height:"58px"}}
-                                required>
-                            <option defaultValue=""></option>
-                            <option value="kg">Kg</option>
-                            <option value="gramme">Gr</option>
-                        </select>
-                        {unite === "" && <p  style={{ color:'red' , fontSize:"11px"}}> *Veillez selectionner l'unité </p>}
-                    </div>
-                    <div className="col-6 mb-3">
-                        {nbr}
-                    </div>
+                            <p style={{borderBottom :'5px solid', borderRadius:"3px" , borderColor:'#a6a6a6'}}></p>
                     
-            
-            </div>
-                               
-
-                    <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
-                        onClick={(e) => ajouterProduitFourni(e)} >
-                        <i className="bi bi-plus-lg" style={{color: "white" , fontStyle:"normal"}}> AJOUTER PRODUIT </i> 
-                        <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill " style={{background: "#f0f0f0" , color: "black" , fontStyle:"normal"}}>
-                            {conteur}
-                            <span className="visually-hidden">unread messages</span>
-                        </span>
-                    </button>
                     
-                    </div>
-                    <p style={{borderBottom :'5px solid', borderRadius:"3px" , borderColor:'#a6a6a6'}}></p>
-               
+                    
                 </div>
-                
-                </div>
-                <div className="divTab" style={{width:"100%", height:"300px" , margin:"0px" , overflow : 'auto'}} >
-                    <table className="table table-bordered" style={{width:"90%" , marginLeft:"20"}} > 
-                    <thead style={{backgroundColor: "#16161"}}> 
-                        <tr> 
-                        <th scope='col'></th>
-                        <th scope="col">Categorie </th> 
-                        <th scope="col">Nom de produit</th> 
-                        <th scope="col">Poids (Kg)</th> 
-                        <th scope="col">Nombre</th> 
-                        <th scope="col"></th> 
-                        
-                        </tr> 
-                    </thead> 
-                    <tbody >
-                    { 
-                        produitsFourni.map( 
-                            (p, key) => 
-                            <tr key={key}> 
-                                 <td style={{textAlign:"center"}}><i className="bi bi-x-circle" style={{color:"black"}} onClick={()=> {supprimerProduitFourni(p.id_prod)}}></i></td>
-                                <td>{p.categorie}</td> 
-                                <td>{p.nom_produit}</td> 
-                                <td>{p.poids_fourni/ 1000}  / {p.poidsRester / 1000} </td> 
-                                <td>{p.nombre_fourni} / {p.nombreRester} </td> 
-                                <td style={{textAlign: 'center'}} >
-                                {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester ); setNombrerester(p.nombreRester);  handleShow()}}> ajouter </button>}
-                                {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod, p.poidsRester)} } > Afficher </button>}
-                                </td>
+                <div className="divTable" >
+                    <table className="table table-bordered tableProduitsFournis"  > 
+                        <thead style={{backgroundColor: "#16161"}}> 
+                            <tr> 
+                                <th scope='col'></th>
+                                <th scope="col">Categorie </th> 
+                                <th scope="col">Nom de produit</th> 
+                                <th scope="col">Poids (Kg)</th> 
+                                <th scope="col">Nombre</th> 
+                                <th scope="col"></th> 
+                            </tr> 
+                        </thead> 
+
+                        <tbody >
+                        { 
+                            produitsFourni.map( 
+                                (p, key) => 
+                                <tr key={key}> 
+                                    <td style={{textAlign:"center"}}><i className="bi bi-x-circle" style={{color:"black"}} onClick={()=> {supprimerProduitFourni(p.id_prod)}}></i></td>
+                                    <td>{p.categorie}</td> 
+                                    <td>{p.nom_produit}</td> 
+                                    <td>{p.poids_fourni/ 1000}  / {p.poidsRester / 1000} </td> 
+                                    <td>{p.nombre_fourni} / {p.nombreRester} </td> 
+                                    <td style={{textAlign: 'center'}} >
+                                    {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester ); setNombrerester(p.nombreRester);  handleShow()}}> ajouter </button>}
+                                    {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod, p.poidsRester)} } > Afficher </button>}
+                                    </td>
+                                    
+                                    
+                                    
                                 
-                                
-                                
-                            
-                            </tr>    )} 
+                                </tr>    )} 
                         </tbody> 
-                        </table> 
-                    </div>
+                    </table> 
+                </div>
                 
                 <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={() =>{alert(props.id_bon); handleShowRecap()}} >VALIDER LE PROCESS</button>
             

@@ -13,7 +13,7 @@ function TESTPRINT(props){
                         <li>Poids: {props.poids} </li>
                         <li>Nombre: {props.nombre} </li>
                         <li>Description: {props.categorie} </li>
-                        <tr> <Barcode  value={props.id.id_gnerate}  width= {1} fontSize= {12} /> </tr>              
+                        <tr> <Barcode  value={props.id}  width= {1} fontSize= {12} /> </tr>              
             </div>    
 
         </>

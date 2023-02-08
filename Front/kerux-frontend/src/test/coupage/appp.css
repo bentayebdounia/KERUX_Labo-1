@@ -1,4 +1,7 @@
-
+* {
+    font-size: 10px;
+    font-family: 'Times New Roman';
+}
 
 td,
 th,
@@ -10,8 +13,8 @@ table {
 
 td.description,
 th.description {
-    width: 75px;
-    max-width: 75px;
+    width: 58px;
+    max-width: 58px;
 }
 
 td.quantity,
@@ -34,33 +37,18 @@ th.price {
 }
 
 .ticket {
-    font-size: 12px;
-    font-family: 'Times New Roman';
-    width: 155px;
-    max-width: 155px;
-    height: 200px;
-    max-height: 250px;
+    width: 55px;
+    max-width: 58px;
 }
 
 img {
     max-width: inherit;
     width: inherit;
 }
-.ticket li{
-    border-bottom: 1px solid black;
-    border-collapse: collapse;
-}
 
 @media print {
     .hidden-print,
     .hidden-print * {
         display: none !important;
-    }
-}
-
-@media print {
-    .display-print,
-    .display-print * {
-        display: block !important ;
     }
 }
