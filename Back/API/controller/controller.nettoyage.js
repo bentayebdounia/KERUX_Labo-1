@@ -26,6 +26,8 @@ const day = (day) => {
          else return day
 }
 
+
+
 const generieIdNettoyage = (id) => {
     var today = new Date()
     var datt = 0 

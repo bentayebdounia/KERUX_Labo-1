@@ -234,25 +234,28 @@ const ModalAjoutBoxes = (props) => {
         <>
       <Modal size="xl" scrollable={true} show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
-            <Modal.Title>Ajouter des boxes</Modal.Title>
+            <Modal.Title style={{color: "#7B170F" }}><i className="bi bi-plus-lg" style={{color: "#7B170F" , fontSize:"25px"}} ></i> Ajouter des boxes</Modal.Title>
             </Modal.Header>
             <Modal.Body >
                 
                 <div className="mb-3 row"  >
-                    
-                    <p> {props.test}</p>
-                      
-                    <label htmlFor="poids" className="col-sm-3 form-label">
-                            <div className="progress"> POIDS
-                                <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.poidsRestant-poidsAccumuler)*100/props.poidsRestant)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {(props.poidsRestant-poidsAccumuler)/1000} Kg</div>
-                            </div>
-                    </label>
 
-                        {props.categorie==="poulet" &&  <label htmlFor="poids" className="col-sm-3 form-label">
-                                        <div className="progress"> NOMBRE
-                                            <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.nombreRestant-nbrAccumuler)*100/props.nombreRestant)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.nombreRestant-nbrAccumuler} </div>
-                                        </div>
-                        </label>}
+                    <div className="row" style={{alignItems: "center", justifyContent: "center"}}>
+                        <p> {props.test}</p>
+                        
+                        <label htmlFor="poids" className="col-3  form-label">
+                                <div className="progress"> POIDS
+                                    <div className="progress-bar " role="progressbar" aria-label="Example with label" style={{width: ((props.poidsRestant-poidsAccumuler)*100/props.poidsRestant)+"%" , background:'#4F8B2A' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {(props.poidsRestant-poidsAccumuler)/1000} Kg</div>
+                                </div>
+                        </label>
+
+                        {props.categorie==="poulet" &&  
+                            <label htmlFor="poids" className="col-3 form-label">
+                                    <div className="progress"> NOMBRE
+                                        <div className="progress-bar  " role="progressbar" aria-label="Example with label" style={{width: ((props.nombreRestant-nbrAccumuler)*100/props.nombreRestant)+"%" , background:'#4F8B2A' }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.nombreRestant-nbrAccumuler} </div>
+                                    </div>
+                            </label>}
+                    </div>
                     <div>
                     {boxe.map((box,key) => {
                         return ( 
@@ -313,8 +316,8 @@ const ModalAjoutBoxes = (props) => {
                    
             </Modal.Body>
             <Modal.Footer>
-                    <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={() => annuler()}>annuler</button>
-                    <button type="button" className="btn btn-success" onClick={(e)=>confirmAjoutBoxes(e) } >Valider</button>
+                    <button type="button" className="canclBtn " data-bs-dismiss="modal" onClick={() => annuler()}><i className=" bi bi-x-circle me-2" style={{color:"white"}}></i>ANNULER</button>
+                    <button type="button" className="validBtn" onClick={(e)=>confirmAjoutBoxes(e) } > <i className=" bi bi-check-circle me-2" style={{color:"white"}}></i> Valider</button>
             </Modal.Footer>
       </Modal>
 

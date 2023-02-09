@@ -25,3 +25,21 @@
     background: #ffffff;
     border: #ffffff;
 }
+.canclBtn{
+    border-radius: 10px;
+    height: 40px;
+    width: 150px;
+    color:#ffffff;
+    background: #DF4235;
+    border: #DF4235;
+}
+
+.validBtn{
+    border-radius: 10px;
+    height: 40px;
+    width: 150px;
+    color:#ffffff;
+    background: #4F8B2A;
+    border: #4F8B2A;
+}
+

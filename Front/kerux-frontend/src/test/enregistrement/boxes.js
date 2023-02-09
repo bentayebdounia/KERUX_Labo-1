@@ -29,7 +29,7 @@ export default function Boxes(props){
                     </div>
 
                  <div className="col-2 ">
-                        <select className="form-select" aria-label="Default select example" id="categorie"
+                        <select className="form-select" aria-label="Default select example" 
                                 value={props.unite} 
                                 onChange={event => { props.onUniteChange(event.target.value)}} 
                                 required>
