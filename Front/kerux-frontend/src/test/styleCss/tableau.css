@@ -7,12 +7,12 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    width: 80%;
+    display: 'flex';
+    width: 100%;
 
 }
 .tableProduitsFournis{
     margin-top: 20px;
-   
     width: 100%;
     text-align: center;
     align-content: center;

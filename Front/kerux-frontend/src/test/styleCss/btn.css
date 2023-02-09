@@ -5,4 +5,23 @@
     margin-left: 68%;
     background: #7B170F;
     border: #7B170F;
+    color: white;
+}
+
+.btnTableAjouer{
+    border-radius: 10px;
+    height: 30px;
+    width: 60px;
+   
+    background: #ffffff;
+    border: #ffffff;
+}
+
+.btnTableAfficher{
+    border-radius: 10px;
+    height: 30px;
+    width: 60px;
+    
+    background: #ffffff;
+    border: #ffffff;
 }

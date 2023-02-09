@@ -392,7 +392,7 @@ const Enregistrement = (props) => {
                                 <th scope="col">Nom de produit</th> 
                                 <th scope="col">Poids (Kg)</th> 
                                 <th scope="col">Nombre</th> 
-                                <th scope="col"></th> 
+                                <th scope="col">Action</th> 
                             </tr> 
                         </thead> 
 
@@ -401,14 +401,14 @@ const Enregistrement = (props) => {
                             produitsFourni.map( 
                                 (p, key) => 
                                 <tr key={key}> 
-                                    <td style={{textAlign:"center"}}><i className="bi bi-x-circle" style={{color:"black"}} onClick={()=> {supprimerProduitFourni(p.id_prod)}}></i></td>
+                                    <td style={{textAlign:"center"}}><i className="bi bi-x-circle" style={{color:"#7B170F"}} onClick={()=> {supprimerProduitFourni(p.id_prod)}}></i></td>
                                     <td>{p.categorie}</td> 
                                     <td>{p.nom_produit}</td> 
                                     <td>{p.poids_fourni/ 1000}  / {p.poidsRester / 1000} </td> 
                                     <td>{p.nombre_fourni} / {p.nombreRester} </td> 
                                     <td style={{textAlign: 'center'}} >
-                                    {p.poidsRester !==0 && <button className='btn1 me-2' style={{width:'40%' , backgroundColor:"black" }} onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester ); setNombrerester(p.nombreRester);  handleShow()}}> ajouter </button>}
-                                    {p.poidsRester < p.poids_fourni && <button className='btn1' style={{width:'40%' , backgroundColor: "gray" }}onClick={()=>{AfiicherBoxes(p.id_prod, p.poidsRester)} } > Afficher </button>}
+                                        {p.poidsRester !==0 && <button className='btnTableAjouer me-2'  onClick={()=>{ajouterBox(p.id_prod, p.categorie, p.nom_produit, p.poids_fourni, p.nombre_fourni); setPoidsrester( p.poidsRester ); setNombrerester(p.nombreRester);  handleShow()}}> <i className="bi bi-plus-lg" style={{color:"#7B170F"}}></i></button>}
+                                        {p.poidsRester < p.poids_fourni && <button className='btnTableAfficher' onClick={()=>{AfiicherBoxes(p.id_prod, p.poidsRester)} } > <i className="bi bi-list-ul" style={{color:"#7B170F"}}></i></button>}
                                     </td>
                                     
                                     

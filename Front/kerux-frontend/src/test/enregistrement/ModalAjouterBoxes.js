@@ -232,84 +232,81 @@ const ModalAjoutBoxes = (props) => {
   // console.log( prodF);
     return (
         <>
-      <Modal size="lg" scrollable={true} show={props.show} onHide={props.handleClose}>
+      <Modal size="xl" scrollable={true} show={props.show} onHide={props.handleClose}>
             <Modal.Header closeButton>
             <Modal.Title>Ajouter des boxes</Modal.Title>
             </Modal.Header>
             <Modal.Body >
                 
-                <div className="mb-3 row">
-                    
-                
+                <div className="mb-3 row"  >
                     
                     <p> {props.test}</p>
-                
-                    
-                <label htmlFor="poids" className="col-sm-3 form-label">
-                                    <div className="progress"> POIDS
-                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.poidsRestant-poidsAccumuler)*100/props.poidsRestant)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {(props.poidsRestant-poidsAccumuler)/1000} Kg</div>
-                                    </div>
+                      
+                    <label htmlFor="poids" className="col-sm-3 form-label">
+                            <div className="progress"> POIDS
+                                <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.poidsRestant-poidsAccumuler)*100/props.poidsRestant)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {(props.poidsRestant-poidsAccumuler)/1000} Kg</div>
+                            </div>
                     </label>
 
-                    {props.categorie==="poulet" &&  <label htmlFor="poids" className="col-sm-3 form-label">
-                                    <div className="progress"> NOMBRE
-                                        <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.nombreRestant-nbrAccumuler)*100/props.nombreRestant)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.nombreRestant-nbrAccumuler} </div>
-                                    </div>
-                    </label>}
-                <div>
-                {boxe.map((box,key) => {
-                    return ( 
-                        <>
-                        
-                        <div className="col-sm-10 mb-3" id= "produitFourni" key={key}>
-                                <Boxes 
-                                    categorie = {props.categorie}
-                                    n_produit={props.type}
-                                    nom_produit = {box.nom_produit} 
+                        {props.categorie==="poulet" &&  <label htmlFor="poids" className="col-sm-3 form-label">
+                                        <div className="progress"> NOMBRE
+                                            <div className="progress-bar bg-success " role="progressbar" aria-label="Example with label" style={{width: ((props.nombreRestant-nbrAccumuler)*100/props.nombreRestant)+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {props.nombreRestant-nbrAccumuler} </div>
+                                        </div>
+                        </label>}
+                    <div>
+                    {boxe.map((box,key) => {
+                        return ( 
+                            <div className="row" style={{alignItems: "center", justifyContent: "center"}}>
+                            
+                            <div className="col-sm-10 mb-3" id= "produitFourni" key={key}>
+                                    <Boxes 
+                                        categorie = {props.categorie}
+                                        n_produit={props.type}
+                                        nom_produit = {box.nom_produit} 
 
-                                    poids = {box.poids} onPoidsChange={newPoids => {
-                                        const newProduits = [...boxe]
-                                        newProduits[key].poids = newPoids
-                                        setBoxe(newProduits)
-                                        }} 
-
-                                        unite= {box.unite} onUniteChange={newUnite => {
+                                        poids = {box.poids} onPoidsChange={newPoids => {
                                             const newProduits = [...boxe]
-                                            newProduits[key].unite = newUnite
+                                            newProduits[key].poids = newPoids
                                             setBoxe(newProduits)
-                                            }}
+                                            }} 
 
-                                    erreurPoids = {erreurPoids}
-                                    erreurNombre ={erreurNombre}
-                                    nombre = {box.nombre} onNombreChange={newNombre => {
-                                        const newProduits = [...boxe]
-                                        newProduits[key].nombre = newNombre
-                                        setBoxe(newProduits)
-                                        }} 
-                              />
+                                            unite= {box.unite} onUniteChange={newUnite => {
+                                                const newProduits = [...boxe]
+                                                newProduits[key].unite = newUnite
+                                                setBoxe(newProduits)
+                                                }}
 
-                            {key === 0 && (<>
-                                            <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
-                                             onClick={(e) => plusId(e)} >
-                                                <i className="bi bi-plus-lg" style={{color: "white"}}> Ajouter box </i> 
-                                                <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill " style={{background: "#f0f0f0" , color: "black" , fontStyle:"normal"}}>
-                                                    {conteur}
-                                                    <span class="visually-hidden">unread messages</span>
-                                                </span>
-                                             </button>
-                                             
-                                                </> )
-                                             }
-                               
-                    </div>
-                    
-                    {key===0 && <p style={{borderBottom :'5px solid', borderRadius:"3px" , borderColor:'#a6a6a6'}}></p>}
-                    
-                    </>
+                                        erreurPoids = {erreurPoids}
+                                        erreurNombre ={erreurNombre}
+                                        nombre = {box.nombre} onNombreChange={newNombre => {
+                                            const newProduits = [...boxe]
+                                            newProduits[key].nombre = newNombre
+                                            setBoxe(newProduits)
+                                            }} 
+                                />
+
+                                {key === 0 && (<>
+                                                <button className="btn btn-dark btn-outline-dark position-relative" type="button" id="boxBtn"
+                                                onClick={(e) => plusId(e)} >
+                                                    <i className="bi bi-plus-lg" style={{color: "white"}}>  </i> AJOUTER BOXE
+                                                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill " style={{background: "#f0f0f0" , color: "black" , fontStyle:"normal"}}>
+                                                        {conteur}
+                                                        <span class="visually-hidden">unread messages</span>
+                                                    </span>
+                                                </button>
+                                                
+                                                    </> )
+                                                }
+                                
+                        </div>
                         
-                    ) })} 
-             
-                </div>
+                        {key===0 && <p style={{borderBottom :'5px solid', borderRadius:"3px" , borderColor:'#a6a6a6'}}></p>}
+                        
+                        </div>
+                            
+                        ) })} 
+                
+                    </div>
                 
                  
             </div>
