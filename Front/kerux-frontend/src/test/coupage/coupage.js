@@ -100,7 +100,7 @@ const Coupage = (props) => {
             console.log(props.poids);
             console.log(poids);
             
-            calculPoids.push(parseFloat (transforme(poids)))
+            calculPoids.push(parseFloat (transforme(unite, poids)))
             console.log(calculPoids);
             let sum =calculPoids.reduce(myFunction)
             

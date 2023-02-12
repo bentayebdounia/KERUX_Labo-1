@@ -89,7 +89,7 @@ const Conditionnement = (props) => {
             console.log(props.process.poids);
             console.log(poids);
             
-            calculPoids.push(parseFloat (poids))
+            calculPoids.push(parseFloat (transforme(unite, poids)))
             console.log(calculPoids);
             let sum =calculPoids.reduce(myFunction)
             
