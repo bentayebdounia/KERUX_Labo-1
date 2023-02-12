@@ -6,23 +6,21 @@ import seviceStatistique from '../../service/sevice.statistique'
 
 
 const StatistiqueProduitFourni = (props) => {
-     const [poulet, setPoulet] = useState([])
-     const [legume, setLegume] = useState([])
+     const [poulet, setPoulet] = useState(calassificate('poulet'))
+     const [legume, setLegume] = useState(calassificate('legume'))
     
     
       // setPoulet(calassificate('poulet'))
       // setLegume(calassificate('legume'))
-   
+ /*  
       useEffect( () =>{
         setPoulet(calassificate('poulet'))
-        
-      },[])
-
-      useEffect (()=>{
         setLegume(calassificate('legume'))
-      },[])
+      },[],[])
+*/
+      
     
-     function  calassificate (categorie) {
+      function  calassificate (categorie) {
        const categorie_prod = []
 
        
@@ -30,19 +28,19 @@ const StatistiqueProduitFourni = (props) => {
           
           if (i<12){
            // console.log(categorie+' '+i);
-               seviceStatistique.getCategorieproduitFourni(categorie,'2023-'+(i)+'-1', '2023-'+(i+1)+'-1')
+                seviceStatistique.getCategorieproduitFourni(categorie,'2023-'+(i)+'-1', '2023-'+(i+1)+'-1')
               .then( async (res) => {
                 //  console.log(res.data[0]);
-                  await categorie_prod.push(parseFloat (res.data[0].count))
+                await categorie_prod.push(parseFloat (res.data[0].count))
               })
               }
               
           else if (i===12){
            // console.log(categorie+' '+i);
-            seviceStatistique.getCategorieproduitFourni(categorie,'2023-'+i+'-1','2024-' +1+'-1')
+             seviceStatistique.getCategorieproduitFourni(categorie,'2023-'+i+'-1','2024-' +1+'-1')
                 .then(async (res) => {
                    //console.log(res.data[0]);
-                     await categorie_prod.push(parseFloat (res.data[0].count))
+                   await categorie_prod.push(parseFloat (res.data[0].count))
                 })
                 }
 
@@ -56,7 +54,7 @@ const StatistiqueProduitFourni = (props) => {
 
     
     return(
-        <Modal   size='lg' scrollable={true} show={props.show} onHide={()=> {props.handleClose() }}>
+        <Modal   size='xl' scrollable={true} show={props.show} onHide={()=> {props.handleClose() }}>
             <Modal.Header closeButton>
             <Modal.Title style={{color: "#7B170F" }}><i className="bi bi-graph-up" style={{color: "#7B170F" , fontSize:"25px"}} ></i> Satatistique de produits fournis</Modal.Title>
             </Modal.Header>
@@ -64,8 +62,9 @@ const StatistiqueProduitFourni = (props) => {
               
             <div className="row" >
               <div className='col-sm-5' style={{width:"90%" , marginLeft:"3%" , textAlign: 'center' }}>
-                <CategorieStatistique  database={poulet}  backgroundColor={'rgba(255, 99, 132, 0.2)'} borderColor= {'rgb(255, 99, 132)'} 
-                 database2={legume}  backgroundColor2={'rgba(255, 159, 64, 0.2)'} borderColor2= {'rgb(255, 159, 64)'} 
+                <CategorieStatistique  
+                    database={poulet}  backgroundColor={'rgba(255, 99, 132, 0.2)'} borderColor= {'rgb(255, 99, 132)'} 
+                    database2={legume}  backgroundColor2={'rgba(255, 159, 64, 0.2)'} borderColor2= {'rgb(255, 159, 64)'} 
                  />
                 
               </div>

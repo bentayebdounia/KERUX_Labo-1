@@ -73,7 +73,7 @@ const Reception = (props) => {
      useEffect(()=>{
         getFournisseur()
         getVlue()
-    })
+    },[])
 
     useEffect(()=>{
         toggleTrue()

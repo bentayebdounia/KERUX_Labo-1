@@ -9,11 +9,12 @@ function TESTPRINT(props){
         <>
         
             <div className="ticket">
-                 
-                        <li>Poids: {props.poids} </li>
-                        <li>Nombre: {props.nombre} </li>
-                        <li>Description: {props.categorie} </li>
-                        <tr> <Barcode  value={props.id}  width= {1} fontSize= {12} /> </tr>              
+                        <div className='row'>
+                        <span className='col-6'><span style={{fontWeight:'bold'}}>Poids: </span> {props.poids} </span>
+                        <span className='col-6'><span style={{fontWeight:'bold'}}>Qantite: </span> {props.nombre} </span>
+                        <span className='col-10'><span style={{fontWeight:'bold'}}>Description: </span>{props.categorie} </span>
+                        </div>
+                        <tr style={{textAlign: 'center'}}> <Barcode  value={props.id}  width= {1} fontSize= {12} /> </tr>              
             </div>    
 
         </>

@@ -66,13 +66,13 @@ const Enregistrement = (props) => {
     const [p , setP] = useState()
     const [n , setN] = useState()
     const [length, setLength] = useState()
-   
+ /*  
    useEffect(()=>{
     
     setProduitsfourni (JSON.parse(localStorage.getItem('produitsFournis') || "[]"))
     //return produitFourni
-   },[produitsFourni]) // l'erreur est la ***********************************************************************************************************************
-
+   },[]) // l'erreur est la ***********************************************************************************************************************
+*/
     function plus () {
 
         setConteur(conteur+1)
@@ -157,7 +157,9 @@ const Enregistrement = (props) => {
         props.toggleDisplay()
       }
 
-      
+      const mettreJourTabeauProduit = () => {
+        setProduitsfourni (JSON.parse(localStorage.getItem('produitsFournis') || "[]"))
+      }
 
       const ajouterBox = (id, categorie, type, poids, nombre) => {
         setProduit_id(id)
@@ -187,6 +189,7 @@ const Enregistrement = (props) => {
          
         localStorage.setItem('produitsFournis', JSON.stringify(tab))
         localStorage.removeItem('boxes'+id)
+        setProduitsfourni (JSON.parse(localStorage.getItem('produitsFournis') || "[]"))
       }
       const modifierPoidsRester = (idProd, poidRester ) => {
         var tab= []
@@ -199,6 +202,7 @@ const Enregistrement = (props) => {
         
         setP(poidRester)
         localStorage.setItem('produitsFournis', JSON.stringify(tab))
+        setProduitsfourni (JSON.parse(localStorage.getItem('produitsFournis') || "[]"))
       }
       const modifierNombreRester = (idProd, nombreRester ) => {
         var tab= []
@@ -435,6 +439,7 @@ const Enregistrement = (props) => {
                                 nombre= {produit_nombe}
                                 poidsRestant = {poidsRester}
                                 nombreRestant = {nombreRester}
+                                mettreJourTabeauProduit = {mettreJourTabeauProduit}
                                                       
                  />}
             {showAffichage && <AffichageBoxes   show= {showAffichage} 

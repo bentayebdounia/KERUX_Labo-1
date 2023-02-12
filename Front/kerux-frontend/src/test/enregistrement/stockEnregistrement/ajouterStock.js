@@ -38,7 +38,7 @@ const AjouterStock = (props) => {
             setEntrepots(res.data)
             
         })
-    })
+    },[])
  
     const  ajouterauStock = async(id_produit) =>{
        

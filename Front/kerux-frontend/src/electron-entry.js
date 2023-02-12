@@ -1,5 +1,7 @@
-const {app , BrowserWindow, Menu, ipcMain} = require('electron')
-const fs = require("fs");
+"use strict";
+
+const {app , BrowserWindow, ipcMain} = require('electron')
+//const fs = require("fs");
 const path = require("path");
 
 const {PosPrinter} = require('electron-pos-printer')
@@ -21,14 +23,14 @@ const creatWindow = () => {
     webPreferences: {
      nodeIntegration:false,
       
-      //preload: path.join( __dirname, './test/preload.js'),
-      
-      contextIsolation: false
+      preload: path.join( __dirname, 'preload.js'),
+      enableRemoteModule: false,
+      contextIsolation: true
     },
   })
   
-  //win.loadFile('./login/login.html')
-  win.loadURL("http://localhost:3000/login")
+  win.loadFile('./login/login.html')
+  win.loadURL("http://localhost:3000/appp")
   win.webContents.openDevTools()
   
    
@@ -49,14 +51,40 @@ app.on('activate', function() {
     }
 })
 
-ipcMain.on('print' , (event, arg) => {
-    const data = JSON.parse(arg)
-    //printer
-    PosPrinter.print( data, {
-      printerName: 'XPC-80',
-      silent: true,
-      preview: true
-    }
-).catch(error => console.error(error))
-  })
+//-------------------- print function -----------------
+
+// List of all options at -
+
+const printOptions = {
+  silent: false,
+  printBackground: true,
+  color: true,
+  margin: {
+    marginType: "printableArea",
+  },
+  landscape: false,
+  pagesPerSheet: 1,
+  width: 55,
+  height: 45,
+  preview: false,
+  printerName: 'XP-80C',  //nom d'impremente
+  collate: false,
+  copies: 1,
+  header: "Page header",
+  footer: "Page footer",
+};
+//handle print
+ipcMain.handle("printComponent", async (event, url) => {
+  const win = new BrowserWindow({show: false});
+
+  win.webContents.on("did-finish-load", () => {
+    win.webContents.print(printOptions, (success, failureReason) => {
+      console.log("Print Initiated in Main...");
+      if (!success) console.log(failureReason);
+    });
+  });
+
+  await win.loadURL(url);
+  return "shown print dialog";
+});
 

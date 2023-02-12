@@ -85,7 +85,7 @@ const ModalAjoutBoxes = (props) => {
         setPoidsaccumuler(parseFloat(poidsAccumuler)+parseFloat(transforme(boxe[0].unite, boxe[0].poids))) 
         setNbrAccumuler (parseFloat(nbrAccumuler)+parseFloat(boxe[0].nombre))
 
-        boxe[0].poids = transforme(boxe[0].unite, boxe[0].poids)
+       // boxe[0].poids = transforme(boxe[0].unite, boxe[0].poids)
         console.log(boxe);
         const newBoxe = [...boxe]
         
@@ -171,7 +171,7 @@ const ModalAjoutBoxes = (props) => {
                     categorie: props.produitFourni.categorie,
                     nom_produit: props.produitFourni.nom_produit,
                     etape: "enregistrement",
-                    poids: boxe[i].poids,
+                    poids: transforme(boxe[i].unite, boxe[i].poids),
                     nombre: boxe[i].nombre,
                     id_produit: props.id,
                     id_stock: null,
@@ -207,6 +207,7 @@ const ModalAjoutBoxes = (props) => {
             tableboxe.splice("")
             boxe.splice("")
             setConteur(0)
+            props.mettreJourTabeauProduit()
         }
             else {
                 setMsg('vous pouvez pas valider')
