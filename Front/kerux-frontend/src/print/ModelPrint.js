@@ -10,7 +10,7 @@ function TESTPRINT(props){
         
             <div className="ticket">
                         <div className='row'>
-                        <span className='col-6'><span style={{fontWeight:'bold'}}>Poids: </span> {props.poids} </span>
+                        <span className='col-6'><span style={{fontWeight:'bold'}}>Poids: </span> {parseFloat( props.poids)/1000}Kg </span>
                         <span className='col-6'><span style={{fontWeight:'bold'}}>Qantite: </span> {props.nombre} </span>
                         <span className='col-10'><span style={{fontWeight:'bold'}}>Description: </span>{props.categorie} </span>
                         </div>

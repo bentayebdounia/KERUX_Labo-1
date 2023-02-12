@@ -55,9 +55,11 @@ const ModalConfirmCoup = (props) => {
         console.log(heure)
 
         var cle = ajouterCle(props.categorie, props.typeProd, props.numeroBox)
-        console.log(  props.fk_proditfourni)
+        console.log(  props.poids)
         
-        await CoupageService.ajouterCoupage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_box, props.fk_proditfourni, cle).then( (res)=> {
+        await CoupageService.ajouterCoupage( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_box,  props.fk_proditfourni, 
+            
+            ).then( (res)=> {
             console.log(res.data)
             setResult(res.data)
 
@@ -124,7 +126,7 @@ const ModalConfirmCoup = (props) => {
                 
             </Modal>
 
-            <ModalQStock 
+            {show3 && <ModalQStock 
                                 show3={show3} 
                                 handleClose3={handleClose3} 
                                 handleShow3={handleShow3}  
@@ -132,7 +134,7 @@ const ModalConfirmCoup = (props) => {
                                 toggleDisplay = {props.toggleDisplay}
                                 PorcentagePoids = { props.PorcentagePoids}
                                 poids= {props.poids} nombre= {props.nombre} categorie={props.categorie}
-                                />
+                                />}
         </>
      );
 }

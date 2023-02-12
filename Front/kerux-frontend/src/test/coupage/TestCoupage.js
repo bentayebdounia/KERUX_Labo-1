@@ -163,7 +163,7 @@ const TestCoupage = (props) => {
         /*CoupageService.ajouterBoxCouper(id_produit, id_enregistrement, id_nettoyage, id_generate).then( (res) => {
             console.log(res.data)
         })*/
-        alert(id_process)
+        //alert(id_process)
         var tab = {
             id_produit: id_produit, 
             id_enregistrement: id_enregistrement, 
@@ -287,6 +287,7 @@ const TestCoupage = (props) => {
                                 var found2 = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage.substring(0,6) === boxes[0].id_box);
                                  console.log( found2  );
                                  if(found2 !== undefined){
+
                                     //ajouter le box couper et generer un identifiant
                                     ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
                                     //  console.log("nombre= "+res.data.nombre);
@@ -356,7 +357,7 @@ const TestCoupage = (props) => {
         var d = new Date(words[2], words[1]-1 ,words[0]);
         var nextDay = new Date(d.getTime());
         nextDay.setDate(d.getDate() + 1);
-        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+       // console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
         return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
     }

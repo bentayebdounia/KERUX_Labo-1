@@ -6,8 +6,6 @@ const path = require("path");
 
 const {PosPrinter} = require('electron-pos-printer')
 
-let win
-
 
 
 const creatWindow = () => {
@@ -30,7 +28,7 @@ const creatWindow = () => {
   })
   
   win.loadFile('./login/login.html')
-  win.loadURL("http://localhost:3000/appp")
+  win.loadURL("http://localhost:3000/login")
   win.webContents.openDevTools()
   
    
@@ -64,14 +62,13 @@ const printOptions = {
   },
   landscape: false,
   pagesPerSheet: 1,
-  width: 55,
-  height: 45,
+  pageSize: '58mm',
   preview: false,
-  printerName: 'XP-80C',  //nom d'impremente
+  printerName: 'Xprinter XP-350B',  //nom d'impremente
   collate: false,
   copies: 1,
-  header: "Page header",
-  footer: "Page footer",
+  
+  
 };
 //handle print
 ipcMain.handle("printComponent", async (event, url) => {

@@ -45,7 +45,7 @@ const ModalAjoutBoxes = (props) => {
         nom_produit: "",
         poids: 0,
         nombre: 0,
-        unite: "",
+        unite: "kg",
         id_stock:"",
         date: new Date(),
         date_alert: ""
@@ -95,7 +95,7 @@ const ModalAjoutBoxes = (props) => {
             nom_produit:'',
             poids:0,
             nombre:0,
-            unite:"",
+            unite: "kg",
             id_stock:"",
             date: new Date(),
             date_alert: ""

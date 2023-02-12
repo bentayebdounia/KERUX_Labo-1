@@ -33,7 +33,7 @@ export default function Boxes(props){
                                 value={props.unite} 
                                 onChange={event => { props.onUniteChange(event.target.value)}} 
                                 required>
-                            <option defaultValue=""></option>
+                            
                             <option value="kg">Kg</option>
                             <option value="gramme">Gr</option>
                         </select>
