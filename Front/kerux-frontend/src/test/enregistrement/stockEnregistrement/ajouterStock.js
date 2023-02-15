@@ -31,7 +31,7 @@ const AjouterStock = (props) => {
             }
         })
         )
- 
+        let table
     useEffect(()=> {
         ServiceEntrepot.getEntrepot()
         .then ((res)=> {
@@ -40,6 +40,9 @@ const AjouterStock = (props) => {
         })
     },[])
  
+    useEffect(()=>{
+        
+    })
     const  ajouterauStock = async(id_produit) =>{
        
       /*  await ServiceStock.ajouterStock(entrepot).then((res) => {
@@ -55,7 +58,7 @@ const AjouterStock = (props) => {
         
     }
    
-    const ajout = async() => {
+    const ajout = () => {
         var tab= []
         tab= JSON.parse(localStorage.getItem('boxes'+props.id))
         console.log(entrepots);
@@ -76,24 +79,24 @@ const AjouterStock = (props) => {
                 }
                 
         }
-
+        console.log(tab);
+        
+        localStorage.setItem('boxes'+props.id, JSON.stringify(tab))  
       
         var j =0
         while (j<boxe.length) {
             if (boxe[j].select === true){
                   
                 boxe.splice(j,1)
-                j=j
+                //j=j
                 }
-                else j++
+            else j++
         }
        
 
         
         //props.handleClose()  
-        console.log(tab);
         
-        localStorage.setItem('boxes'+props.id, JSON.stringify(tab))  
         
     }
 
@@ -156,7 +159,7 @@ const AjouterStock = (props) => {
                                                     <th scope="col">ID</th>
                                                     <th scope="col">Categorie</th>
                                                     <th scope="col">Nom produit</th>
-                                                    <th scope="col">Poids</th>
+                                                    <th scope="col">Poids(Kg)</th>
                                                     <th scope="col">Nombre</th>
                                                     
                                                 
@@ -187,7 +190,7 @@ const AjouterStock = (props) => {
                                                                 <td>{p.id_produit}</td>
                                                                 <td>{p.categorie}</td>
                                                                 <td>{p.nom_produit}</td>
-                                                                <td>{p.poids}</td>
+                                                                <td>{p.poids/1000}</td>
                                                                 <td>{p.nombre}</td>
                                                                 
                                                             </tr>

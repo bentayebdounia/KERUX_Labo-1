@@ -76,7 +76,7 @@ const ModalQStock = (props) => {
                    
                    <div style={{display:"none"}}>
                         <Bill ref={billRef}
-                              id={props.result.id_gnerate}
+                              id={props.result}
                               poids= {props.poids}
                               nombre= {props.nombre}
                               categorie = {props.categorie}
@@ -90,7 +90,7 @@ const ModalQStock = (props) => {
             </Modal.Footer>
              </Modal>
 
-             <ModalAjouterStock 
+             {show4 && <ModalAjouterStock 
                                     show4={show4}
                                     handleClose4={handleClose4} 
                                     handleShow4={handleShow4} 
@@ -98,7 +98,7 @@ const ModalQStock = (props) => {
                                     result={props.result}
                                     toggleDisplay={props.toggleDisplay} 
                                     
-                                    />
+                                    />}
         </>
         
         

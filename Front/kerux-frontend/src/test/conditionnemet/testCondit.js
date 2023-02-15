@@ -54,8 +54,8 @@ const TestCondit = (props) => {
     const toggleshow2 = () => setToggle2(true) 
     const toggleDisplay2 = () => setToggle2 (false) 
  
-    const [tableCoupage, setTableCoupage] = useState([])
-    const [tableconditionnement, setTableconditionnement] = useState([]) 
+    //const [tableCoupage, setTableCoupage] = useState([])
+    //const [tableconditionnement, setTableconditionnement] = useState([]) 
     const [produitBloquant, setProduitbloquant] = useState(false)
     const [produitBloquantStock, setProduitbloquantstock] = useState(false)
     const [currentPage, setCurrentPage] = useState(1);
@@ -63,6 +63,7 @@ const TestCondit = (props) => {
     //les operation de pagination 
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    
     const currentPosts = tableDonnees.slice(indexOfFirstPost, indexOfLastPost);
     const currentPosts2 = tableDonneesStocker.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = pageNumber => setCurrentPage(pageNumber);
@@ -118,7 +119,7 @@ const TestCondit = (props) => {
                     console.log(test); 
                     toggleShow()
                     setProcess(res.data) 
-                    //props.nettoypBtnV()
+                    props.conditBtnV()
                  
                 } 
                     else {  
@@ -139,7 +140,7 @@ const TestCondit = (props) => {
                     setProcess(res.data)
                     console.log(test); 
                     toggleShow() 
-                    //props.nettoypBtnV()
+                    props.conditBtnV()
                  
                 } 
                     else {  
@@ -358,7 +359,13 @@ if(buttonColor2)
 
     
       if(toggle){
-        conditionnemet = (<Conditionnement id={id} process={process} test={test} toggleDisplay = {toggleDisplay}/>)
+        conditionnemet = (
+                    <Conditionnement    id={id} 
+                                        process={process} 
+                                        test={test} 
+                                        toggleDisplay = {toggleDisplay}
+                                        conditBtn={props.conditBtn}
+                                        />)
       }
 
       if(!toggle){

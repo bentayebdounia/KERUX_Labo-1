@@ -15,21 +15,21 @@ const ModalConfirmCondit = (props) => {
 
     const ajouterCle = (categorie, type, numeroBox) => {
         if (categorie === "poulet"){
-            if (type === "poulet") return 'PP'+ numero_box(numeroBox)
-            else if (type === "tendres") return 'PT'+ numero_box(numeroBox)
-                 else if (type === "wings") return 'PW'+ numero_box(numeroBox)
-                      else if (type === "dips") return 'PD'+ numero_box(numeroBox)
-                            else if (type === "hotDogs") return 'PH'+ numero_box(numeroBox)
-                                 else if (type === "legs") return 'PL'+ numero_box(numeroBox)
+            if (type === "poulet") return 'PP'+ numeroBox
+            else if (type === "tendres") return 'PT'+ numeroBox
+                 else if (type === "wings") return 'PW'+ numeroBox
+                      else if (type === "dips") return 'PD'+ numeroBox
+                            else if (type === "hotDogs") return 'PH'+ numeroBox
+                                 else if (type === "legs") return 'PL'+ numeroBox
         }
 
         else if (categorie === "legume"){
-            if (type === "frite") return 'LF'+ numero_box(numeroBox)
-            else if (type === "laitue") return 'LL'+numero_box(numeroBox)
-                else if (type === "tomate") return 'LT'+numero_box(numeroBox)
-                    else if (type === "oignon") return 'LO'+numero_box(numeroBox)
-                            else if (type === "choux") return 'LCH'+numero_box(numeroBox)
-                                else if (type === "carotte") return 'LC'+numero_box(numeroBox)
+            if (type === "frite") return 'LF'+ numeroBox
+            else if (type === "laitue") return 'LL'+numeroBox
+                else if (type === "tomate") return 'LT'+numeroBox
+                    else if (type === "oignon") return 'LO'+numeroBox
+                            else if (type === "choux") return 'LCH'+numeroBox
+                                else if (type === "carotte") return 'LC'+numeroBox
         }
 
             else return 'A'+numeroBox
@@ -58,11 +58,11 @@ const ModalConfirmCondit = (props) => {
             setResult(res.data)
 
             serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
-                alert (result.data)
+                console.log(result.data)
             })
             
             serviceAlert.updateAlert(props.process.id_process).then ((result) =>{
-                alert (result.data)
+                console.log(result.data)
             })
 
             for(var i=0 ; i<props.agents.length ;i++) {
@@ -90,9 +90,9 @@ const ModalConfirmCondit = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                 <div class="list-group">
-                    <span  className="list-group-item ">  <span className='attributs'>ID boxe:</span>  {props.id_enregistrement} </span>
-                    <span  className="list-group-item  list-group-item-light"> <span className='attributs'>Categorie:</span> {props.categorie}</span>
-                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Type de produit:</span> {props.typeProd} </span>
+                    <span  className="list-group-item ">  <span className='attributs'>ID boxe:</span>  {props.id_box} </span>
+                    <span  className="list-group-item  list-group-item-light"> <span className='attributs'>Categorie:</span> {props.process.categorie}</span>
+                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Type de produit:</span> {props.process.nom_produit} </span>
                     <span className="list-group-item  list-group-item-light"> <span className='attributs'>Agent:</span> 
                         
                             {props.agents.map((value, key) => {
@@ -105,7 +105,7 @@ const ModalConfirmCondit = (props) => {
                         
                     </span>
                     <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Poids:</span> {props.poids /1000} Kg</span>
-                    {props.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
+                    {props.process.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
                     
                 </div>
         
@@ -123,7 +123,10 @@ const ModalConfirmCondit = (props) => {
                             result={result} 
                             toggleDisplay = {props.toggleDisplay} 
                             PorcentagePoids = {props.PorcentagePoids}
-                            poids= {props.poids} nombre= {props.nombre} categorie={props.process.categorie}
+                            poids= {props.poids} 
+                            nombre= {props.nombre} 
+                            categorie={props.process.categorie}
+                            btnC={props.btnC}
                             />
         </>
      );

@@ -71,7 +71,7 @@ const AffichageBoxes = (props) => {
         
         if (entrepot === "" || entrepot ===undefined || entrepot===null ) return true
         else if ( (entrepot !== "" || entrepot !==undefined || entrepot!==null)  && date_alert !== "") {
-             alert(date_alert) 
+             //alert(date_alert) 
              return  true
             }
         else{ 
@@ -86,14 +86,14 @@ const AffichageBoxes = (props) => {
             setNombre('')
             setEntrepot("")
             setDatealert("") 
-            alert( props.poidsRester + poid)
-            alert( parseFloat (poids*1000))
+            //alert( props.poidsRester + poid)
+            //alert( parseFloat (poids*1000))
             return false
      }
         
         else if (nombre !=='' && poids !== ''  && champtVerify() )
         {
-            
+            const today = new Date
             var tab= []
             tab= JSON.parse(localStorage.getItem('boxes'+props.id))
             //console.log(boxe);
@@ -112,7 +112,7 @@ const AffichageBoxes = (props) => {
                         var poidsResterNv = parseFloat( props.poidsRester) +  parseFloat( tab[i].poids)
                         tab[i].poids=poids*1000
                         boxe[i].poids =poids*1000
-                        alert("rest"+ poidsResterNv-parseFloat(  tab[i].poids) )
+                        //alert("rest"+ poidsResterNv-parseFloat(  tab[i].poids) )
                         props.modifierPoidsRester(tab[i].id_produit , poidsResterNv-parseFloat( tab[i].poids) )
                         }
                     else {
@@ -128,7 +128,7 @@ const AffichageBoxes = (props) => {
                         boxe[i].nombre =nbr
                     }
                     if (entrepot === "" || entrepot ===undefined || entrepot===null){
-                        alert(entrepot)
+                        //alert(entrepot)
                         console.log('id box');
                         tab[i].id_stock = entrepot
                         console.log(tab[i].id_stock);
@@ -136,7 +136,7 @@ const AffichageBoxes = (props) => {
                         boxe[i].id_stock =entrepot
                         console.log(boxe[i].id_stock);
                         boxe[i].stock = ""
-                        tab[i].date_alert=""
+                        tab[i].date_alert= ""
                         boxe[i].date_alert = ""
                     }
 

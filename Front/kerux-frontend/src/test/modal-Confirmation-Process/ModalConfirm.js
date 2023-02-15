@@ -115,7 +115,7 @@ const ModalConfirmNet = (props) => {
                 </Modal.Footer>    
             </Modal>
 
-            {show3 && <ModalQStock    
+             <ModalQStock    
                             show3={show3} 
                             handleClose3={handleClose3} 
                             handleShow3={handleShow3} 
@@ -125,7 +125,7 @@ const ModalConfirmNet = (props) => {
                             poids= {props.poids} 
                             nombre= {props.nombre}
                             categorie={props.categorie}
-                        />}
+                        />
             
             
         </>

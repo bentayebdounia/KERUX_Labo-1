@@ -102,6 +102,7 @@ ajouterProcessEnregistrement =(req, res) => {
     console.log(datee);
     const { categorie, nom_produit, etape, poids, nombre, fk_proditFourni, fk_fournisseur, fk_bon, cle} = req.body
     var id_gnerate = generieIdEnreg(fk_fournisseur, fk_bon, cle)
+    console.log(id_gnerate);
     pool.query(queries.ajouterProcessEnreg, [categorie, nom_produit, etape, poids, nombre, datee, heure,  fk_proditFourni , id_gnerate ] ,
          (error, result) =>{
             if (error) throw error

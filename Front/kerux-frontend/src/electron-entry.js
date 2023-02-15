@@ -6,6 +6,8 @@ const path = require("path");
 
 const {PosPrinter} = require('electron-pos-printer')
 
+let win
+
 
 
 const creatWindow = () => {
@@ -62,12 +64,12 @@ const printOptions = {
   },
   landscape: false,
   pagesPerSheet: 1,
-  pageSize: '58mm',
+  width: 55,
+  height: 45,
   preview: false,
-  printerName: 'Xprinter XP-350B',  //nom d'impremente
+  printerName: 'XP-80C',  //nom d'impremente
   collate: false,
   copies: 1,
-  
   
 };
 //handle print

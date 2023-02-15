@@ -54,13 +54,18 @@ const ModalQStock = (props) => {
            // console.log("PorcentagePoids= " + props.PorcentagePoids)
             
         }
-        else {if ( props.PorcentagePoids >= 100  ) props.toggleDisplay()}
+        else {if ( props.PorcentagePoids >= 100  ){ 
+                   props.btnC()
+                  props.toggleDisplay()
+                }}
         handleBillPrint()
        // console.log(props.result);
         props.handleClose3 ()
 
     }
     
+    console.log("p= "+props.poids);
+ console.log("n= "+props.nombre);
    
 
     return (  
@@ -73,7 +78,7 @@ const ModalQStock = (props) => {
                    <h3> Voulez-vous vraiment ajouter ce box au stock? </h3>
                    <div style={{display:"none"}}>
                         <Bill ref={billRef}
-                              id={props.result.id_gnerate}
+                              id={props.result}
                               poids= {props.poids}
                               nombre= {props.nombre}
                               categorie = {props.categorie}

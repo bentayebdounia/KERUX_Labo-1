@@ -7,6 +7,7 @@ import ModalListAgent from '../../Models/modalListAgent'
 import ServiceAdmin from '../../service/serviceAdmin'
 import Tableau from '../nettoyageProcess/tableau';
 import '../nettoyageProcess/process.css'
+import Service_AgentProcess from '../../service/service.agentProcess'
 
 const ModalMarinade = (props) => {
     const [idAgent, setIdAgent]= useState([])
@@ -74,8 +75,19 @@ const ModalMarinade = (props) => {
         MarinadeService.ajouterMarinade( props.process.categorie, props.process.nom_produit, etape, props.process.poids, props.process.nombre, marine, miCuissan, props.process.id_nettoyage, props.id_box, props.process.fk_proditfourni)
         .then( (res)=> {
             console.log(res.data)
+            for(var i=0 ; i<agentNettoyageSelect.length ;i++) {
+                console.log(agentNettoyageSelect[i].id_personne);
+                Service_AgentProcess.ajouterAgentProcess(res.data.id_gnerate , agentNettoyageSelect[i].id_personne)
+                .then((result)=>{
+                    console.log(result.data)
+                            })
+            } 
         
-        })  
+        }) 
+
+        
+        
+        props.afficherMarinade(agentNettoyageSelect, marine, miCuissan)
         props.handleClose2()
     }
 
@@ -103,7 +115,7 @@ const ModalMarinade = (props) => {
       
 
         if(props.process.nom_produit !== 'tendres'){
-            mi_cuissan =(
+            mi_cuissan = (
                 <>
                     <div>
                         <Form.Check aria-label="option 1" label="Mi-cuissan" value={miCuissan} onChange= {()=> handleChange2('mi-cuissan')}/>
@@ -117,6 +129,7 @@ const ModalMarinade = (props) => {
             toggleRecomendationFalse()
            
         }
+
         agents= (
             <>
                 <div className='dataResults'>
@@ -133,44 +146,41 @@ const ModalMarinade = (props) => {
     
     return ( 
         <>
-            <Modal show={props.show2} onHide={props.handleClose2}> 
+            <Modal size='lg' show={props.show2} onHide={props.handleClose2}> 
                 <Modal.Header closeButton>
                 <Modal.Title>Marinade </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                 
+                        <div className="contenerProd " >
+                            <label id="produit"> Type de produit: </label>
                             
-
-                                <div className="contenerProd " >
-                                    <label id="produit"> Type de produit: </label>
-                                    
-                                    <label  id="produitValue" >{props.process.nom_produit} </label>
-                                    
+                            <label  id="produitValue" > {props.process.nom_produit} </label>
+                            
+                        </div>
+                            
+                        <div className="mb-3 row">
+                            <label htmlFor="recepteur"  className="col-sm-4 col-form-label">Agent de marinade</label>
+                            <div className="col-sm-7 dropdown">
+                                <div className="input-group">
+                                    <input type="text" className="form-control " id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
+                                    <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
+                                        <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
+                                    </button>
                                 </div>
-                            
-                    <div className="mb-3 row">
-                        <label htmlFor="recepteur"  className="col-sm-4 col-form-label">Agent de marinade</label>
-                        <div className="col-sm-7 dropdown">
-                            <div className="input-group">
-                                <input type="text" className="form-control " id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
-                                <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
-                                <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
-                                 </button>
-                             </div>
-                                    {agents}
+                                        {agents}
 
-                            </div>
-                                    {show2 && <Tableau show={show2} 
-                                        handleClose={handleClose2} 
-                                        handleShow={handleShow2} 
-                                        agentNettoyage={agentNettoyageSelect}
-                                        
-                                    />}
-                    </div>
-                    <div>
-                        <Form.Check aria-label="option 1" label="Marinade" value={marine} onChange= {()=> handleChange('marine')} />
-                        {mi_cuissan}
-                    </div>
+                                </div>
+                                        {show2 && <Tableau  show={show2} 
+                                                            handleClose={handleClose2} 
+                                                            handleShow={handleShow2} 
+                                                            agentNettoyage={agentNettoyageSelect}
+                                                    />}
+                        </div>
+                        <div>
+                            <Form.Check aria-label="option 1" label="Marinade" value={marine} onChange= {()=> handleChange('marine')} />
+                            {mi_cuissan}
+                        </div>
                     
                 </Modal.Body>
                 <Modal.Footer>
@@ -179,9 +189,11 @@ const ModalMarinade = (props) => {
                 </Modal.Footer>
             </Modal>
 
-            <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
-                                    message={message} 
-                                    titre={"marinade"} 
+            <ModelReponse   show={show3} 
+                            handleClose={handleClose3} 
+                            handleShow={handleShow3}
+                            message={message} 
+                            titre={"marinade"} 
                                     />
 
             

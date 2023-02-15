@@ -77,7 +77,7 @@ const Sortie = (props) => {
      
     const valider = (e) => {
         e.preventDefault()
-        props.sortieBtn()
+        
         handleShow()
     }
 
@@ -234,6 +234,7 @@ const Sortie = (props) => {
                                 fk_proditfourni={props.process.fk_proditfourni}
                                 test={props.test}
                                 toggleDisplay = {props.toggleDisplay}
+                                sortieBtn={props.sortieBtn}
             />
 
             {show3 && <ModelReponse   show={show3} handleClose={handleClose3} 

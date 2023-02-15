@@ -45,11 +45,13 @@ const Coupage = (props) => {
 
     const [calculPoids, setCalculPoids] = useState([])
     const [id_personne, setIdpersonne] = useState()
+
     const [agentNettoyage, setAgentNettoyage] = useState([{
         id_personne:"",
         nom: "",
         prenom: ""
     }])
+
     const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
     //get personnes
     useEffect(()=>{
@@ -106,7 +108,7 @@ const Coupage = (props) => {
             
             console.log("calcule poids= " +sum);
             porcentagePoids = sum*100/props.poids
-            console.log("porcentage= "+ porcentagePoids);
+            console.log("porcentage = "+ porcentagePoids);
             return porcentagePoids
         }
 
@@ -121,7 +123,9 @@ const Coupage = (props) => {
 
         const valider = (e) => {
             e.preventDefault()
-            handleShow()
+            //console.log(ControlerPoids(poids));
+            
+                handleShow()
             
         }
 
@@ -317,6 +321,7 @@ const Coupage = (props) => {
                                 toggleDisplay = {props.toggleDisplay} 
                                 PorcentagePoids = {PorcentagePoids}
                                 numeroBox= {numeroBox}
+                                btnC = {props.btnC}
 
                  />
 

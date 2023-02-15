@@ -5,6 +5,7 @@ var Barcode = require('react-barcode')
 
 function TESTPRINT(props){
  console.log(props.id);
+ 
     return (
         <>
         

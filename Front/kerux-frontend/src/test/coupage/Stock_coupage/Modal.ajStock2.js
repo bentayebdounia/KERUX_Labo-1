@@ -54,7 +54,11 @@ const ModalAjouterStock = (props) => {
             //console.log("PorcentagePoids= " + props.PorcentagePoids)
             
         }
-        else if ( props.PorcentagePoids >= 100) props.toggleDisplay()
+        else if ( props.PorcentagePoids >= 100){ 
+            props.toggleDisplay()
+            
+        
+        }
 
         
         props.handleClose4()

@@ -130,9 +130,7 @@ const TestCoupage = (props) => {
          
      },[]) 
 
-     useEffect(()=>{
-        setBoxcoupagetab (JSON.parse(localStorage.getItem('boxCoupage') || "[]"))
-      },[])
+    
 
     const dateNow = () => {
         var today = new Date 
@@ -213,6 +211,7 @@ const TestCoupage = (props) => {
             if (produitBloquant === false && produitBloquantStock ===false) {
                 serviceActuelProcess.getIdProcess("nettoyage" , boxes[0].id_box)
                 .then((res) => {
+                    console.log(res.data);
                     if(res.data === "boxe n'existe pas"){
                         setMessage("Vérifier votre ID  ") 
                         handleShow(true) 
@@ -261,6 +260,7 @@ const TestCoupage = (props) => {
             else {
                 serviceActuelProcess.getIdBloquant("nettoyage" , boxes[0].id_box)
                 .then((res) => {
+                    console.log(res.data);
                     if(res.data === "boxe n'existe pas"){
                         setMessage("Vérifier votre ID ") 
                         handleShow(true) 
@@ -284,7 +284,7 @@ const TestCoupage = (props) => {
                             console.log( found  );
                             
                             if (found === undefined) {
-                                var found2 = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage.substring(0,6) === boxes[0].id_box);
+                                var found2 = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage.substring(0,6) === (boxes[0].id_box).substring(0,6));
                                  console.log( found2  );
                                  if(found2 !== undefined){
 
@@ -329,7 +329,7 @@ const TestCoupage = (props) => {
                            
                     })
                     serviceAlert.updateAlert(boxCoupageTab[i].id_process).then ((result) =>{
-                        alert (result.data)
+                       // alert (result.data)
                     })
                 }
                     toggleshow()
@@ -438,8 +438,12 @@ const TestCoupage = (props) => {
                                     <tr key={key} style={{background:`${(dateModif(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
                                         <td>
                                         <input
+                                           
+                                            type="checkbox"
+                                            checked={p.select}
                                             onChange={event => {
                                                 let checked = event.target.checked;
+                                                
                                                 setEnattente(
                                                     tableDonnees.map(data => {
                                                     if (p.id_gnerate === data.id_gnerate) {
@@ -447,15 +451,18 @@ const TestCoupage = (props) => {
                                                         boxes[0].id_box=p.id_gnerate
                                                          
                                                     }
-                                                    else 
-                                                        data.select=""
+                                                    else {
+                                                        data.select=false
+                                                        
+                                                        //boxes[0].id_box=""
+                                                    }
                                                     
                                                     return data;
                                                 })
                                                 );
                                             }}
-                                            type="checkbox"
-                                            checked={p.select}
+                                            
+                                            
                                             ></input>
                                             </td> 
                                         <td>{p.id_gnerate}</td> 
@@ -558,8 +565,10 @@ if(buttonColor2)
 const supprimerBox = (key) => {
     boxes.splice(key,1)
     boxCoupageTab.splice(key,1)
+    
 
 }
+
 
     return ( 
         <>
@@ -572,7 +581,7 @@ const supprimerBox = (key) => {
                      {boxes.map((box,key) => {
                          return ( 
                              <div className="input-group col-sm-10" key={key}>
-                                     <BoxCoupage id_box = {box.id_box} k={key} supprimerBox={supprimerBox} onIdChange={newId_box => {
+                                     <BoxCoupage id_box = {box.id_box} k={key} supprimerBox={supprimerBox}  onIdChange={newId_box => {
                                          const newBoxes = [...boxes]
                                          newBoxes[key].id_box = newId_box
                                          
@@ -652,7 +661,7 @@ const supprimerBox = (key) => {
                             nombre={nombre}
                             process={process}  
                             toggleDisplay = {toggleDisplay}
-
+                            btnC = {props.coupBtn}
                              />}
             
             

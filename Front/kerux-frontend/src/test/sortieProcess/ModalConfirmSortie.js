@@ -37,7 +37,7 @@ const ModalConfirmNet = (props) => {
             
         })
 
-        //window.print()
+        props.sortieBtn()
         props.toggleDisplay()
         props.handleClose2()
             

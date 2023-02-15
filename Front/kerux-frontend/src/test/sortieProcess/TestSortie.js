@@ -123,7 +123,7 @@ const TestSortie = (props) => {
                     console.log(test); 
                     toggleshow() 
                     setProcess(res.data) 
-                    //props.nettoypBtnV()
+                    props.sortieBtnV()
                  
                 } 
                     else {  
@@ -144,7 +144,7 @@ const TestSortie = (props) => {
                     console.log(test); 
                     toggleshow() 
                     setProcess(res.data) 
-                    //props.nettoypBtnV()
+                    props.sortieBtnV()
                  
                 } 
                     else { 
@@ -363,7 +363,12 @@ if(buttonColor2)
     var sortie , testSortie
 
       if(toggle){
-        sortie = (<Sortie id={id} process={process} test={test} toggleDisplay={toggleDisplay} sortieBtn={props.sortieBtn}/>)
+        sortie = (
+                    <Sortie     id={id} process={process} 
+                                test={test} 
+                                toggleDisplay={toggleDisplay} 
+                                sortieBtn={props.sortieBtn}
+                                />)
       }
 
       else{

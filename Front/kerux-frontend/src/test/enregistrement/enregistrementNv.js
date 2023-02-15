@@ -423,7 +423,7 @@ const Enregistrement = (props) => {
                     </table> 
                 </div>
                 
-                <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={() =>{alert(props.id_bon); handleShowRecap()}} >VALIDER LE PROCESS</button>
+                <button className="btn1" style={{width:"20%" , marginLeft:"70%"}} onClick={() =>{handleShowRecap()}} >VALIDER LE PROCESS</button>
             
             </div>
 

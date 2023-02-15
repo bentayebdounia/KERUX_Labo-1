@@ -59,7 +59,7 @@ const Recape = (props) => {
             while(i<box.length){
                 console.log(i+1)
                 var cle = ajouterCle(box[i].categorie, box[i].nom_produit,i+1)
-                if (box[i].id_stock === null){
+                if (box[i].id_stock === null || box[i].id_stock === ""){
                     await EnregistrementService.ajouerEnregistrement(box[i].categorie, box[i].nom_produit, "enregistrement",parseFloat (box[i].poids),parseInt (box[i].nombre), id_produit, props.fk_fournisseur, props.id_bon, cle)
                     
                     .then((res) => {
@@ -67,20 +67,20 @@ const Recape = (props) => {
                         console.log(res.data);
                         
                         serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
-                            alert (result.data)
+                            //alert (result.data)
                         })
                         
                         
                     })
             }
-            if (box[i].id_stock !== null) {
+            else if (box[i].id_stock !== null || box[i].id_stock !== "") {
                 await EnregistrementService.ajouerEnregistrement(box[i].categorie, box[i].nom_produit, "enregistrement",parseFloat (box[i].poids),parseInt (box[i].nombre), id_produit, props.fk_fournisseur, props.id_bon, cle)
                     
                     .then((res) => {
                         
                         console.log(res.data);
                         serviceAlert.ajouterAlert(res.data.id_process,  box[i].date_alert).then ((result) =>{
-                            alert (result.data)
+                            //alert (result.data)
                         })
                         ajouterauStock(res.data.id_gnerate,box[i].id_stock)
                         
@@ -127,7 +127,7 @@ const Recape = (props) => {
               //console.log(stock.id_stock)
               serviceStock.modifierProcess(id_gnerate, res.data.id_stock).then( (res) => {
                   console.log(res.data)
-                  alert(res.data+ "bien ajout")
+                  //alert(res.data+ "bien ajout")
               })
               
           })  

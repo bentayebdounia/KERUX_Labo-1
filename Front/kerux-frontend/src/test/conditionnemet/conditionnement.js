@@ -6,6 +6,7 @@ import ModelReponse from '../../Models/Model.repense'
 import ServiceAdmin from '../../service/serviceAdmin'
 import Tableau from '../nettoyageProcess/tableau'
 import '../nettoyageProcess/process.css'
+import ModalAfficherMarinade from './afficherMarinade'
 const Conditionnement = (props) => {
 
     const [show, setShow] = useState(false)
@@ -23,6 +24,11 @@ const Conditionnement = (props) => {
     const [show4, setShow4] = useState(false)
     const handleClose4 = () => setShow4(false)
     const handleShow4 = () => setShow4(true)
+
+    const [showAffichgeMarinade, setShow_affichagemarinade] = useState(false)
+    const handelCloseAffichageMarinade = () => setShow_affichagemarinade(false)
+    const handelShowAffichageMarinade = () => setShow_affichagemarinade(true)
+
 
     const [typeProd , setTypeProd] = useState('')
     const [poids , setPoids] = useState('')
@@ -58,6 +64,12 @@ const Conditionnement = (props) => {
         prenom: ""
     }])
     const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
+    const [listeAgentMarinade, setListe_agentMarinade] = useState([])
+    const [marinade, setMarinade] = useState()
+    const [micuissan, seMicuissan] = useState()
+    const [affichage_marinade, setAffichage_marinade] = useState(false)
+    let porcentagePoids 
+
     //get personnes
     useEffect(()=>{
         ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
@@ -79,10 +91,10 @@ const Conditionnement = (props) => {
         }
     })
 
-    function myFunction(total, value, index, array) {
-        return total + value;
-      }
-    let porcentagePoids 
+        function myFunction(total, value, index, array) {
+            return total + value;
+        }
+    
 
         const ControlerPoids = () => {
             console.log("nombreTotale= "+props.nombre)
@@ -121,6 +133,13 @@ const Conditionnement = (props) => {
             else if(unite==="gramme") return poids
         }
 
+        function afficherMarinade (liste, marinade, micuissan) {
+            setListe_agentMarinade(liste)
+            setMarinade(marinade)
+            seMicuissan(micuissan)
+            setAffichage_marinade(true)
+        } 
+
     const valider = (e) => {
         e.preventDefault()
         handleShow()
@@ -143,8 +162,8 @@ const Conditionnement = (props) => {
         bouton = ( <>
             <div class="d-grid gap-3 mb-3 d-md-flex justify-content-md-end" >
         
-                <button className="btn1" style={{background:"#000000"}} type="submit" onClick={handleShow2} >Marinade</button>
-              
+               {affichage_marinade===false && <button className="btn1" style={{background:"#000000" }} type="submit" onClick={handleShow2} >Marinade</button>}
+               {affichage_marinade===true && <button className="btn1" style={{background:"#000000", width:"250px"}} type="submit" onClick={handelShowAffichageMarinade} >Afficher marinade</button>}
             </div>
          </>
     )
@@ -293,9 +312,23 @@ const Conditionnement = (props) => {
                         })()
                 }
             </div>
-            {show2 && <ModalMarinade show2={show2} handleClose2={handleClose2} handleShow2={handleShow2} id_box={props.id}
-             process={props.process}
-             numeroBox= {numeroBox}
+
+            {show2 && <ModalMarinade    show2={show2} 
+                                        handleClose2={handleClose2} 
+                                        handleShow2={handleShow2} 
+                                        id_box={props.id}
+                                        process={props.process}
+                                        numeroBox= {numeroBox}
+                                        afficherMarinade={afficherMarinade}
+              />}
+
+              {showAffichgeMarinade && <ModalAfficherMarinade   show={showAffichgeMarinade} 
+                                                                handleClose = {handelCloseAffichageMarinade} 
+                                                                handleShow = {handelShowAffichageMarinade} 
+                                                                process={props.process}
+                                                                marinade = {marinade}
+                                                                micuissan = {micuissan}
+                                                                agents = {listeAgentMarinade}
               />}
             
              <ModalConfirmCondit    show={show} 
@@ -310,6 +343,7 @@ const Conditionnement = (props) => {
                                     PorcentagePoids = {PorcentagePoids}
                                     numeroBox= {numeroBox}
                                     agents={agentNettoyageSelect}
+                                    btnC={props.conditBtn}
             />
             {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
                                     message={message} 
