@@ -1,30 +1,60 @@
-import React ,{useState,useEffect} from 'react'
+import React ,{useState,createRef} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import TESTPRINT from '../../print/ModelPrint'
 import serviceAlert from '../../service/service.alert'
 import SortieService from '../../service/service.sorti'
 import Service_AgentProcess from '../../service/service.agentProcess'
+import { Bill } from '../coupage/bill'
+import {useReactToPrint} from "react-to-print";
+
 const ModalConfirmNet = (props) => {
 
     const [result, setResult] = useState()
     const [verificate, setVerificate] = useState(false)
     const functionTrue = () => setVerificate(true)
-    
+    var print
 
+    const billRef = createRef();
+ 
+
+    // Send print request to the Main process
+    const handlePrint = function (target) {
+        return new Promise(() => {
+        console.log("forwarding print request to the main process...");
+
+        const data = target.contentWindow.document.documentElement.outerHTML;
+        //console.log(data);
+        const blob = new Blob([data], {type: "text/html"});
+        const url = URL.createObjectURL(blob);
+
+        window.electronAPI.printComponent(url, (response) => {
+            console.log("Main: ", response);
+        });
+        //console.log('Main: ', data);
+        });
+    };
+
+    const handleBillPrint = useReactToPrint({
+        content: () => billRef.current,
+        documentTitle: "Bill component",
+        print: handlePrint,
+    });
     const confirmNettoyage = async (e) => {
         e.preventDefault();
         var etape="sortie"
         
+        
+    
         console.log(props.id_process);
-        //categorie, nom_produit, etape, poids, nombre, datee, heure, id_nettoyage, fk_proditFourni
-
-        //const nettoyage = {props.id_box, props.categorie, props.typeProd, props.poids, props.nombrs }      nom_produit, etape, poids, nombre, id_enregistrement, fk_proditFourni
-        await SortieService.ajouterSortie( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.id_nettoyage , props.id_coupage, props.id_box , props.fk_proditfourni).then( (res)=> {
+        //********************ajouter sortie process*/
+        await SortieService.ajouterSortie( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.id_nettoyage , props.id_coupage, props.id_box , props.fk_proditfourni)
+        .then( (res)=> {
             console.log(res.data)
             serviceAlert.updateAlert(props.id_process).then ((result) =>{
-                alert (result.data)
+                //alert (result.data)
             })
             setResult(res.data)
+
 
             for(var i=0 ; i<props.agents.length ;i++) {
                 console.log(props.agents[i].id_personne);
@@ -33,14 +63,23 @@ const ModalConfirmNet = (props) => {
                     console.log(result.data)
                             })
             }    
+            print = (   <div style={{display:"none"}}>
+                            <Bill   ref={billRef}
+                                    id={res.data}
+                                    categorie = {props.categorie}
+                                 />
+                        </div>)
             functionTrue()
+           
+            
             
         })
-
-        props.sortieBtn()
-        props.toggleDisplay()
-        props.handleClose2()
-            
+        if (verificate){
+                        handleBillPrint()
+                        props.sortieBtn()
+                        props.toggleDisplay()
+                        props.handleClose2()
+            }
       
     }
 
@@ -75,8 +114,10 @@ const ModalConfirmNet = (props) => {
                     {props.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
                     
                 </div>
-
-                    
+                        {print}
+                            
+                                       
+                
                     
                         
                     

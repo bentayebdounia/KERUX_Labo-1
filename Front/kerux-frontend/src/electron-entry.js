@@ -4,7 +4,7 @@ const {app , BrowserWindow, ipcMain} = require('electron')
 //const fs = require("fs");
 const path = require("path");
 
-const {PosPrinter} = require('electron-pos-printer')
+//const {PosPrinter} = require('electron-pos-printer')
 
 let win
 
@@ -56,18 +56,19 @@ app.on('activate', function() {
 // List of all options at -
 
 const printOptions = {
-  silent: false,
+  silent: true,
   printBackground: true,
+  isDefault: true,
   color: true,
-  margin: {
-    marginType: "printableArea",
-  },
   landscape: false,
-  pagesPerSheet: 1,
+  pagesPerSheet: 0,
+  pageRanges: [{
+    from: 0,
+    to: 1
+  }],
   width: 55,
-  height: 45,
+  height: 20,
   preview: false,
-  printerName: 'XP-80C',  //nom d'impremente
   collate: false,
   copies: 1,
   

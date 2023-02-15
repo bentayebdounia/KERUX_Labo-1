@@ -3,7 +3,7 @@ import TESTPRINT from "../../print/ModelPrint";
 import "./appp.css";
 
 export const Bill = forwardRef((props, ref) => (
-    <div style={{height: "45mm", width: "55mm"}} ref={ref}>
+    <div style={{height: "45mm", width: "58mm"}} ref={ref}>
 
       <TESTPRINT  id= {props.id.id_gnerate} 
                   poids= {props.id.poids}    

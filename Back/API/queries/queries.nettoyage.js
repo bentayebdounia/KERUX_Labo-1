@@ -1,7 +1,7 @@
 
 // -- process Nettoyage ******************
 const ajouterProcessNettoy = "INSERT INTO process (categorie, nom_produit, etape, poids, nombre, datee, heure, id_enregistrement, fk_proditFourni, id_gnerate)"
-                                +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9, $10) RETURNING id_process , id_gnerate , datee , heure"
+                                +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9, $10) RETURNING *"
 
 const ajouterProcessNettoyHist = "INSERT INTO process_historique (categorie, nom_produit, etape, poids, nombre, datee, heure, id_enregistrement, fk_proditFourni, id_gnerate)"
                                 +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9, $10) " 
