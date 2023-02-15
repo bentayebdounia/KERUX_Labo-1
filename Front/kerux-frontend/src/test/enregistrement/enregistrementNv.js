@@ -16,6 +16,10 @@ const Enregistrement = (props) => {
     const handleClose = () => setShow(false)
     const handleShow = () => setShow(true)
 
+    const [show2, setShow2] = useState(false)
+    const handleClose2 = () => setShow2(false)
+    const handleShow2 = () => setShow2(true)
+
     const [showAffichage, setShowaffichage] = useState(false)
     const handleCloseAffichage = () => setShowaffichage(false)
     const handleShowAffichage = () => setShowaffichage(true)
@@ -66,6 +70,7 @@ const Enregistrement = (props) => {
     const [p , setP] = useState()
     const [n , setN] = useState()
     const [length, setLength] = useState()
+    const [message, setMessage] = useState()
  /*  
    useEffect(()=>{
     
@@ -130,7 +135,10 @@ const Enregistrement = (props) => {
                     console.log(poids_fourni);
                     if(verificationPoids( poids_fourni, nombre_fourni, unite)>=1500 && verificationPoids(poids_fourni, nombre_fourni, unite)<=2500)
                         plus()
-                    else alert ('le nombre est incorrect' )
+                    else {
+                        setMessage ('le nombre est incorrect' )
+                        handleShow2()
+                    }
                 }
                 else setErreurnombre(true)
             } 
@@ -460,6 +468,10 @@ const Enregistrement = (props) => {
                                             toggleshow = {toggleshow}
                                             
                                 />}
+                      {show2 &&          <ModelReponse show={show2} handleClose={handleClose2} handleShow={handleShow2}
+                                    message={message} 
+                                    titre={" d'erreur"} 
+                                    />}
 
             
             
