@@ -67,7 +67,7 @@ const printOptions = {
     to: 1
   }],
   width: 55,
-  height: 20,
+  //height: 20,
   preview: false,
   collate: false,
   copies: 1,
