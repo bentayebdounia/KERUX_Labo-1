@@ -79,11 +79,7 @@ const ModalConfirmNet = (props) => {
             
             
         })
-        
-                        
-                        
-            
-      
+    
     }
     if(verificate2){
         handleBillPrint()
@@ -103,10 +99,7 @@ const ModalConfirmNet = (props) => {
                                     categorie = {props.categorie}
                                  />
                         </div>
-        )
-
-        
-        
+        )   
     }
     
     
