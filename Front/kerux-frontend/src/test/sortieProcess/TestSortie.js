@@ -71,8 +71,19 @@ const TestSortie = (props) => {
     const currentPosts = tableDonnees.slice(indexOfFirstPost, indexOfLastPost);
     const currentPosts2 = tableDonneesStocker.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = pageNumber => setCurrentPage(pageNumber);
+
+    useEffect(  ()=>{ 
+        getData()
+    },[]) 
+
+     useEffect(  ()=>{ 
+         window.setInterval(() =>{
+            getData()
+        },7000)
+    
+     },[]) 
      
-     useEffect(()=>{ 
+     const getData =()=>{ 
         serviceActuelProcess.getActualProcessBlock('conditionnement') 
             .then((res)=>{ 
                 console.log(res.data.length);
@@ -106,7 +117,7 @@ const TestSortie = (props) => {
                     setProduitbloquantstock(true)
                 } 
             })  
-     },[]) 
+     }
 
 
     const getProcess = (e) => {

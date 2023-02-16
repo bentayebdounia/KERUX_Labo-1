@@ -14,7 +14,7 @@ function TESTPRINT(props){
                         <span className='col-6'><span style={{fontWeight:'bold'}}>Poids: </span> {parseFloat( props.poids)/1000}Kg </span>
                         <span className='col-6'><span style={{fontWeight:'bold'}}>Qantite: </span> {props.nombre} </span>
                         <span className='col-10'><span style={{fontWeight:'bold'}}>Description: </span>{props.categorie} </span>
-                        <div className='col-10'> <Barcode  value={props.id}  width= {1} fontSize= {12} /> </div>
+                        <div className='col-10'> <Barcode  value={props.id}  width= {1} height={60} fontSize= {10} /> </div>
                         </div>
                                 
             </div>    

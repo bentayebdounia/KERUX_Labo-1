@@ -152,7 +152,7 @@ const ModalAjoutBoxes = (props) => {
                     plus()
                      }}
         }
-        else {  setMsg( " "+(poidsAccumuler+parseFloat(transforme(boxe[0].unite, boxe[0].poids)))+"<="+props.poidsRestant)
+        else {  setMsg( " "+(transforme(boxe[0].unite, boxe[0].poids))+">"+poidsAccumuler)
                 handleShow()  }
         
         

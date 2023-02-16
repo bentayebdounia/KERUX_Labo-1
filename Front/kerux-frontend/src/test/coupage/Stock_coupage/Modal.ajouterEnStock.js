@@ -4,7 +4,7 @@ import {useReactToPrint} from "react-to-print";
 import ModalAjouterStock from './Modal.ajStock2'
 import ModelQnote from './Modal.Qnote'
 import '../../../print/modelPrint.css'
-import { Bill } from '../bill'
+import { Bill } from '../../../print/bill'
 import "../appp.css";
 
 const ModalQStock = (props) => {
@@ -15,6 +15,7 @@ const ModalQStock = (props) => {
     const [showQnote, setShowQnote] = useState(false)
     const handleCloseQnote = () => setShowQnote(false)
     const handleShowQnote = () => setShowQnote(true)
+    
     const billRef = createRef();
     // Send print request to the Main process
   const handlePrint = function (target) {
@@ -79,8 +80,7 @@ const ModalQStock = (props) => {
                    <div style={{display:"none"}}>
                         <Bill ref={billRef}
                               id={props.result}
-                              poids= {props.poids}
-                              nombre= {props.nombre}
+                              
                               categorie = {props.categorie}
                         />
                    </div>

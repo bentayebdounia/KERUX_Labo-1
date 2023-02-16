@@ -4,15 +4,22 @@ import TESTPRINT from '../../print/ModelPrint'
 import serviceAlert from '../../service/service.alert'
 import SortieService from '../../service/service.sorti'
 import Service_AgentProcess from '../../service/service.agentProcess'
-import { Bill } from '../coupage/bill'
+import { Bill } from '../../print/bill'
 import {useReactToPrint} from "react-to-print";
 
 const ModalConfirmNet = (props) => {
 
-    const [result, setResult] = useState()
+    const [result, setResult] = useState({
+        id_gnerate:'',
+        poids:'',
+        nombre:''
+    })
     const [verificate, setVerificate] = useState(false)
     const functionTrue = () => setVerificate(true)
-    var print
+    
+    const [verificate2, setVerificate2] = useState(false)
+    const functionTrue2 = () => setVerificate2(true)
+    //const [result, setresult] = useState()
 
     const billRef = createRef();
  
@@ -39,7 +46,9 @@ const ModalConfirmNet = (props) => {
         documentTitle: "Bill component",
         print: handlePrint,
     });
-    const confirmNettoyage = async (e) => {
+
+
+    const confirmSortie = async (e) => {
         e.preventDefault();
         var etape="sortie"
         
@@ -62,31 +71,46 @@ const ModalConfirmNet = (props) => {
                 .then((result)=>{
                     console.log(result.data)
                             })
-            }    
-            print = (   <div style={{display:"none"}}>
-                            <Bill   ref={billRef}
-                                    id={res.data}
-                                    categorie = {props.categorie}
-                                 />
-                        </div>)
+            }   
+             
+            
             functionTrue()
            
             
             
         })
-        if (verificate){
-                        handleBillPrint()
-                        props.sortieBtn()
-                        props.toggleDisplay()
-                        props.handleClose2()
-            }
+        
+                        
+                        
+            
       
     }
+    if(verificate2){
+        handleBillPrint()
+        
+    }
 
-    
-    
-    
+    if (verificate ===true){
+        setVerificate2()
+        props.sortieBtn()
+        props.toggleDisplay() 
+        props.handleClose2()
+        console.log(result);
+        return (
+            <div style={{display:"none"}}>
+                            <Bill   ref={billRef}
+                                    id={result}
+                                    categorie = {props.categorie}
+                                 />
+                        </div>
+        )
 
+        
+        
+    }
+    
+    
+ else
     return ( 
         <div>
            
@@ -114,7 +138,8 @@ const ModalConfirmNet = (props) => {
                     {props.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
                     
                 </div>
-                        {print}
+
+                
                             
                                        
                 
@@ -124,7 +149,7 @@ const ModalConfirmNet = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                         <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={props.handleClose2}>Non</button>
-                        <button type="button" className="btn btn-success" onClick={(e)=>confirmNettoyage(e)}>Oui</button>
+                        <button type="button" className="btn btn-success" onClick={(e)=>confirmSortie(e)}>Oui</button>
                 </Modal.Footer>
             </Modal>
 

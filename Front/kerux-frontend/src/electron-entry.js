@@ -61,13 +61,13 @@ const printOptions = {
   isDefault: true,
   color: true,
   landscape: false,
-  pagesPerSheet: 0,
+  pagesPerSheet: 1,
   pageRanges: [{
     from: 0,
-    to: 1
+    to: 0
   }],
-  width: 55,
-  //height: 20,
+  width: '58mm',
+  height: '20mm',
   preview: false,
   collate: false,
   copies: 1,

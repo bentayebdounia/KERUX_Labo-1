@@ -1,9 +1,9 @@
 import React, {forwardRef} from "react";
-import TESTPRINT from "../../print/ModelPrint";
-import "./appp.css";
+import TESTPRINT from "./ModelPrint";
+
 
 export const Bill = forwardRef((props, ref) => (
-    <div style={{height: "45mm", width: "58mm"}} ref={ref}>
+    <div style={{height: "40mm", width: "55mm"}} ref={ref}>
 
       <TESTPRINT  id= {props.id.id_gnerate} 
                   poids= {props.id.poids}    

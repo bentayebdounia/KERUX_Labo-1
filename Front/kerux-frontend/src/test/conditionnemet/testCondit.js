@@ -68,7 +68,18 @@ const TestCondit = (props) => {
     const currentPosts2 = tableDonneesStocker.slice(indexOfFirstPost, indexOfLastPost);
     const paginate = pageNumber => setCurrentPage(pageNumber);
      
-     useEffect(()=>{ 
+    useEffect(  ()=>{ 
+        getData()
+    },[]) 
+
+     useEffect(  ()=>{ 
+         window.setInterval(() =>{
+            getData()
+        },7000)
+    
+     },[]) 
+     
+     const getData =()=>{ 
         serviceActuelProcess.getActualProcessBlock('coupage') 
             .then((res)=>{ 
                 console.log(res.data.length);
@@ -102,7 +113,7 @@ const TestCondit = (props) => {
                     setProduitbloquantstock(true)
                 }  
             }) 
-     },[]) 
+     }
  
     const getProcess = (e) => {
         e.preventDefault();

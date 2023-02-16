@@ -91,7 +91,18 @@ const TestCoupage = (props) => {
     const [boxCoupageTab, setBoxcoupagetab ] = useState([])
 
 
-    useEffect(()=>{ 
+    useEffect(  ()=>{ 
+        getData()
+    },[]) 
+
+     useEffect(  ()=>{ 
+         window.setInterval(() =>{
+            getData()
+        },7000)
+    
+     },[]) 
+     
+     const getData =()=>{ 
         serviceActuelProcess.getActualProcessBlock('nettoyage') 
             .then((res)=>{ 
                 console.log(res.data.length);
@@ -128,7 +139,7 @@ const TestCoupage = (props) => {
             })  
 
          
-     },[]) 
+     } 
 
     
 
@@ -333,9 +344,11 @@ const TestCoupage = (props) => {
                     })
                 }
                     toggleshow()
-                    setBoxes([1])
+                    setBoxes([0])
                     props.coupBtnV()
-                    localStorage.removeItem('boxCoupage')
+                    boxes.splice("")
+                    boxCoupageTab.splice("")
+                    //localStorage.removeItem('boxCoupage')
                 }
         else {
             setMessage("Ajouter des boxes")

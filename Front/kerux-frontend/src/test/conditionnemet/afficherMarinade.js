@@ -24,9 +24,18 @@ const ModalAfficherMarinade = (props) => {
                                             })}
                         
                     </span>
-                    <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Marinade</span> <i className="bi bi-check-circle-fill" style={{color: "#4F8B2A" , fontSize:"20px"}}></i> </span>
-                    <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Mi-cuissan</span> <i className="bi bi-check-circle-fill" style={{color: "#4F8B2A" , fontSize:"20px"}}></i> </span>
-                    
+                    {props.marinade && 
+                                    <span className="list-group-item list-group-item-action list-group-item-light">     
+                                        <span className='attributs'>Marinade</span>     
+                                        <i className="bi bi-check-circle-fill" style={{color: "#4F8B2A" , fontSize:"20px"}}></i> 
+                                    </span>}
+                                    
+                    {props.micuissan && 
+                                    <span className="list-group-item list-group-item-action list-group-item-light"> 
+                                        <span className='attributs'>Mi-cuissan</span> 
+                                        <i className="bi bi-check-circle-fill" style={{color: "#4F8B2A" , fontSize:"20px"}}></i>
+                                    </span>
+                    }
                     
                 </div>
         

@@ -4,7 +4,7 @@ import ServiceEntrepot from '../../service/service.entrepot'
 import ModalAjouterStock from './Modal.ajStock2'
 import '../../print/modelPrint.css'
 
-import { Bill } from '../coupage/bill'
+import { Bill } from '../../print/bill'
 import {useReactToPrint} from "react-to-print";
 import "../coupage/appp.css";
 

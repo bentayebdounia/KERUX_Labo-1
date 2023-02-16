@@ -71,9 +71,19 @@ const TestNet = (props) => {
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-     useEffect(  ()=>{ 
+    useEffect(  ()=>{ 
+        getData()
+    },[]) 
 
-         serviceActuelProcess.getActualProcessBlock('enregistrement') 
+     useEffect(  ()=>{ 
+         window.setInterval(() =>{
+            getData()
+        },7000)
+    
+     },[]) 
+    
+     const getData = () => {
+        serviceActuelProcess.getActualProcessBlock('enregistrement') 
             .then( (res)=>{ 
                 console.log(res.data.length);
                 if (res.data.length ===0){
@@ -106,10 +116,7 @@ const TestNet = (props) => {
                     setProduitbloquantstock(true)
                 } 
             }) 
-            //setTabledonneesstocker(res.data) 
-        
-     },[]) 
-    
+     }
   
      
 

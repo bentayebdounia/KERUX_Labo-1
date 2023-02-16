@@ -65,8 +65,8 @@ const Conditionnement = (props) => {
     }])
     const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
     const [listeAgentMarinade, setListe_agentMarinade] = useState([])
-    const [marinade, setMarinade] = useState()
-    const [micuissan, seMicuissan] = useState()
+    const [marinade, setMarinade] = useState(false)
+    const [micuissan, seMicuissan] = useState(false)
     const [affichage_marinade, setAffichage_marinade] = useState(false)
     let porcentagePoids 
 

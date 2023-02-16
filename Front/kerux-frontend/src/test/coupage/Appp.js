@@ -1,6 +1,6 @@
 import React, {createRef} from "react";
 import {useReactToPrint} from "react-to-print";
-import { Bill } from "./bill";
+import { Bill } from "../../print/bill";
 import "./appp.css";
 
 const MyComponent = () => {
