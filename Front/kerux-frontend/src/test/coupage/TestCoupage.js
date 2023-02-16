@@ -201,7 +201,7 @@ const TestCoupage = (props) => {
         const newBoxes = [...boxes]
         newBoxes.push({
             id_box:'',
-            date:new Date()
+            date:new Date
         })
         setBoxes(newBoxes.sort((a,b) => {
             if(a.date < b.date)
@@ -344,9 +344,15 @@ const TestCoupage = (props) => {
                     })
                 }
                     toggleshow()
-                    setBoxes([0])
-                    props.coupBtnV()
                     boxes.splice("")
+                    setBoxes([
+                        {
+                            id_box:'',
+                            date:new Date()
+                        }
+                    ])
+                    props.coupBtnV()
+                    
                     boxCoupageTab.splice("")
                     //localStorage.removeItem('boxCoupage')
                 }
