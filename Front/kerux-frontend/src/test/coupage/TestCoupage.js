@@ -106,9 +106,9 @@ const TestCoupage = (props) => {
      const getData =()=>{ 
         serviceActuelProcess.getActualProcessBlock('nettoyage') 
             .then((res)=>{ 
-                console.log(res.data.length);
+                ///console.log(res.data.length);
                 if (res.data.length ===0){
-                    console.log('actuel process non bloquant');
+                    //console.log('actuel process non bloquant');
                     
                     serviceActuelProcess.getActualProcess('nettoyage')
                     .then((res) =>{
@@ -128,7 +128,7 @@ const TestCoupage = (props) => {
                     setProduitbloquant(true)
                     serviceActuelProcess.getActualProcesssStock('nettoyage')
                     .then((res) =>{
-                        console.log('actuel process stock non bloquant');
+                        //console.log('actuel process stock non bloquant');
                         setProduitbloquantstock(false)
                         setTabledonneesstocker(res.data) 
                     })
@@ -147,7 +147,7 @@ const TestCoupage = (props) => {
     const dateNow = () => {
         var today = new Date 
         var datee = today.getFullYear()+''+(today.getMonth() + 1) + '' + today.getDate()
-        console.log("dateeee "+datee );
+       // console.log("dateeee "+datee );
         return datee
     }
     
@@ -155,7 +155,7 @@ const TestCoupage = (props) => {
     const TimeNow = () => {
         var today = new Date 
         var heure = today.getHours() 
-        console.log("heure "+heure );
+       // console.log("heure "+heure );
         return heure
     }
     const generateId = (fk_proditFourni, id_nettoyage) =>{
@@ -184,8 +184,8 @@ const TestCoupage = (props) => {
 
         }
         boxCoupageTab.push(tab)
-        console.log(boxCoupageTab);
-        console.log(boxes);
+        //console.log(boxCoupageTab);
+        //console.log(boxes);
         //localStorage.setItem ('boxCoupage', JSON.stringify(boxCoupageTab))
         //setBoxcoupagetab()
     }
@@ -216,21 +216,21 @@ const TestCoupage = (props) => {
 
       const plusId = (e) => {
         e.preventDefault();
-        console.log("box.id_box== "+boxes[0].id_box);
+        //console.log("box.id_box== "+boxes[0].id_box);
 
       
             
             if (produitBloquant === false && produitBloquantStock ===false) {
                 serviceActuelProcess.getIdProcess("nettoyage" , boxes[0].id_box)
                 .then((res) => {
-                    console.log(res.data);
+                    //console.log(res.data);
                     if(res.data === "boxe n'existe pas"){
                         setMessage("Vérifier votre ID  ") 
                         handleShow(true) 
                     }
     
                     else if (res.data.fk_stock===null){ 
-                        console.log(test); 
+                       // console.log(test); 
                         setProcess(res.data) 
                         if (boxCoupageTab.length === 0){
                             handleShow2(true)
@@ -245,7 +245,7 @@ const TestCoupage = (props) => {
                         else {
                             console.log(boxCoupageTab);
                             var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
-                            console.log( found  );
+                           // console.log( found  );
                             if (found === undefined) {
                                 handleShow2(true)
                                 ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
@@ -272,7 +272,7 @@ const TestCoupage = (props) => {
             else {
                 serviceActuelProcess.getIdBloquant("nettoyage" , boxes[0].id_box)
                 .then((res) => {
-                    console.log(res.data);
+                   // console.log(res.data);
                     if(res.data === "boxe n'existe pas"){
                         setMessage("Vérifier votre ID ") 
                         handleShow(true) 
@@ -291,13 +291,13 @@ const TestCoupage = (props) => {
                         }
 
                         else {
-                            console.log(boxes);
+                            //console.log(boxes);
                             var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
-                            console.log( found  );
+                            //console.log( found  );
                             
                             if (found === undefined) {
                                 var found2 = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage.substring(0,6) === (boxes[0].id_box).substring(0,6));
-                                 console.log( found2  );
+                                // console.log( found2  );
                                  if(found2 !== undefined){
 
                                     //ajouter le box couper et generer un identifiant
@@ -331,13 +331,13 @@ const TestCoupage = (props) => {
       }
 
       const confirmer = (e) => {
-        console.log("length= "+boxes.length);
+        //console.log("length= "+boxes.length);
         if(boxes.length >1)
                 {
                     for (var i =0 ; i< boxCoupageTab.length ; i++) {
                         CoupageService.ajouterBoxCouper(boxCoupageTab[i].id_produit, boxCoupageTab[i].id_enregistrement, boxCoupageTab[i].id_nettoyage, boxCoupageTab[i].id_generate)
                         .then( (res) => {
-                            console.log(res.data)
+                            //console.log(res.data)
                            
                     })
                     serviceAlert.updateAlert(boxCoupageTab[i].id_process).then ((result) =>{

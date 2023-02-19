@@ -85,9 +85,9 @@ const TestNet = (props) => {
      const getData = () => {
         serviceActuelProcess.getActualProcessBlock('enregistrement') 
             .then( (res)=>{ 
-                console.log(res.data.length);
+               // console.log(res.data.length);
                 if (res.data.length ===0){
-                    console.log('actuel process non bloquant');
+                    //console.log('actuel process non bloquant');
                     
                      serviceActuelProcess.getActualProcess('enregistrement')
                     .then((res) =>{
@@ -106,7 +106,7 @@ const TestNet = (props) => {
                     
                      serviceActuelProcess.getActualProcesssStock('enregistrement')
                     .then((res) =>{
-                        console.log('actuel process stock non bloquant');
+                       // console.log('actuel process stock non bloquant');
                         setTabledonneesstocker(res.data)
                         setProduitbloquantstock(false) 
                     })
@@ -163,7 +163,7 @@ const TestNet = (props) => {
                 }
 
                 else if (res.data.fk_stock===null){ 
-                    console.log(test); 
+                  //  console.log(test); 
                     setProcess(res.data) 
                     toggleshow() 
                     props.nettoypBtnV()
@@ -184,7 +184,7 @@ const TestNet = (props) => {
                 }
 
                 else if (res.data.fk_stock===null){ 
-                    console.log(test); 
+                   // console.log(test); 
                     setProcess(res.data) 
                     toggleshow() 
                     props.nettoypBtnV()
@@ -208,7 +208,7 @@ const TestNet = (props) => {
         var d = new Date(words[2], words[1]-1 ,words[0]);
         var nextDay = new Date(d.getTime());
         nextDay.setDate(d.getDate() + 1);
-        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+       // console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
         return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
     }

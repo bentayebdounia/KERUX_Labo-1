@@ -1,4 +1,4 @@
-import React ,{useState,useEffect, createRef} from 'react'
+import React ,{useState,useEffect, createRef, useRef} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import serviceStock from '../../service/service.stock'
 import EnregistrementService from '../../service/service.enregistrement'
@@ -11,21 +11,33 @@ const Recape = (props) => {
     var [boxe,setBoxe] = useState([])
     var produitFourni= []
     produitFourni= JSON.parse(localStorage.getItem('produitsFournis') || '[]')
-    const [result, setResult] = useState([])
-    const [verificate, setVerificate] = useState(false)
-    const billRef = createRef();
+    const result = []
+    const [result2, setResult2] = useState({
+        id_gnerate:'',
+        poids:'',
+        nombre:'',
+        
+    })
+    const billRef = useRef(null);
  
     useEffect(() => {
-        if(verificate){
-            for (var i = 0 ; i< result.length; i++){
-                console.log("hhhhhhhhhhhhhhhhhhhhh");
-                handleBillPrint()}
+        console.log(result2);
+        if(result2.length){
+            
+            for (var i = 0 ; i< result2.length ; i++){
+                //console.log(result2[i])
+                billRef.current= result2[i].ref.current
+                handleBillPrint()
+                console.log(result2[i])
+            }
             // props.handleClose () 
             // props.toggleshow ()
             // props.recepBtn ()
             
         }
-    },[verificate])
+    },[result2.length])
+
+   
 
     // Send print request to the Main process
     const handlePrint = function (target) {
@@ -44,7 +56,9 @@ const Recape = (props) => {
         });
     };
 
-    const handleBillPrint = useReactToPrint({
+    
+
+    const handleBillPrint =  useReactToPrint({
         content: () => billRef.current,
         documentTitle: "Bill component",
         print: handlePrint,
@@ -105,7 +119,9 @@ const Recape = (props) => {
                         result.push({
                             id_gnerate:res.data.id_gnerate,
                             poids: res.data.poids,
-                            nombre: res.data.nombre
+                            nombre: res.data.nombre,
+                            ref: createRef()
+
                         });
 
                         console.log(result);
@@ -122,7 +138,13 @@ const Recape = (props) => {
                     
                     .then((res) => {
                         
-                        result.push(res.data);
+                        result.push({
+                            id_gnerate:res.data.id_gnerate,
+                            poids: res.data.poids,
+                            nombre: res.data.nombre,
+                            ref: createRef()
+                        });
+
                         serviceAlert.ajouterAlert(res.data.id_process,  box[i].date_alert).then ((result) =>{
                             //alert (result.data)
                         })
@@ -133,7 +155,7 @@ const Recape = (props) => {
             }
                 i++
             }
-            setVerificate(true)
+            setResult2(result)
         }
 
             const ajouterCle = (categorie, type, numeroBox) => {
@@ -251,11 +273,11 @@ const Recape = (props) => {
                                     
                                 </div> 
 
-                                { verificate && 
-                                    result.map((key) =>
+                                { result2.length && 
+                                    result2.map((value) =>
                                         <div >
-                                            <Bill   ref={billRef}
-                                                    id={key.result}
+                                            <Bill   ref={value.ref}
+                                                    id={value}
                                                     categorie = {props.categorie}
                                             />
                                         </div>

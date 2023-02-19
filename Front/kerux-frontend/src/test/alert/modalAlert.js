@@ -50,7 +50,7 @@ const ModelAlert = (props) => {
         var d = new Date(words[2], words[1]-1 ,words[0]);
         var nextDay = new Date(d.getTime());
         nextDay.setDate(d.getDate() + 1);
-        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+        //console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
         return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
     }
@@ -58,7 +58,7 @@ const ModelAlert = (props) => {
     const dateRester = (dateAlert) => {
         var date1 = new Date (dateAlert)
         var date2 = new Date
-        console.log(dateAlert)
+        //console.log(dateAlert)
         var diffTime = Math.abs(  date1 - date2);
 
         var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
@@ -78,7 +78,7 @@ const ModelAlert = (props) => {
     const click = (etape) => {
         if (etape === 'enregistrement'){
             setControleNettoyage(true)
-            console.log(' click enregistrement ' );
+            //console.log(' click enregistrement ' );
             //props.handleClose()
             }
         else if (etape === 'nettoyage'){

@@ -82,9 +82,9 @@ const TestCondit = (props) => {
      const getData =()=>{ 
         serviceActuelProcess.getActualProcessBlock('coupage') 
             .then((res)=>{ 
-                console.log(res.data.length);
+              //  console.log(res.data.length);
                 if (res.data.length ===0){
-                    console.log('actuel process non bloquant');
+                    //console.log('actuel process non bloquant');
                     
                     serviceActuelProcess.getActualProcess('coupage')
                     .then((res) =>{
@@ -103,7 +103,7 @@ const TestCondit = (props) => {
                     setProduitbloquant(true)
                     serviceActuelProcess.getActualProcesssStock('coupage')
                     .then((res) =>{
-                        console.log('actuel process stock non bloquant');
+                       // console.log('actuel process stock non bloquant');
                         setTabledonneesstocker(res.data)
                         setProduitbloquantstock(false) 
                     })
@@ -127,7 +127,7 @@ const TestCondit = (props) => {
                 }
 
                 else if (res.data.fk_stock===null){ 
-                    console.log(test); 
+                   // console.log(test); 
                     toggleShow()
                     setProcess(res.data) 
                     props.conditBtnV()
@@ -149,7 +149,7 @@ const TestCondit = (props) => {
 
                 else if (res.data.fk_stock===null){ 
                     setProcess(res.data)
-                    console.log(test); 
+                    //console.log(test); 
                     toggleShow() 
                     props.conditBtnV()
                  
@@ -175,7 +175,7 @@ const TestCondit = (props) => {
         var d = new Date(words[2], words[1]-1 ,words[0]);
         var nextDay = new Date(d.getTime());
         nextDay.setDate(d.getDate() + 1);
-        console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+       // console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
         return nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' })
     }

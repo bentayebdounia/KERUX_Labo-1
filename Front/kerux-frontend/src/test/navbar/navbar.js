@@ -82,7 +82,7 @@ const Navbar = () => {
     })
    
     
-    console.log(alerte);
+    //console.log(alerte);
 /* 
 <Link className="nav-link active"  to="#" onClick={() =>  {  handleShowProcess ()}}>
           <i className="bi bi-bar-chart-steps me-2" ></i>
