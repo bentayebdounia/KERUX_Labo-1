@@ -45,7 +45,7 @@ const ajouterProduitFourni = "INSERT INTO produit_fourni (categorie, nom_produit
 
                                 // -- process enregistrement ******************
 const ajouterProcessEnreg = "INSERT INTO process (categorie, nom_produit, etape, poids, nombre, datee, heure,  fk_proditFourni, id_gnerate)"
-                                +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9) RETURNING id_process , categorie, nom_produit,poids, nombre, id_gnerate "
+                                +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9) RETURNING * "
 
 const ajouterProcessEnregHist = "INSERT INTO process_historique (categorie, nom_produit, etape, poids, nombre, datee, heure,  fk_proditFourni, id_gnerate)"
                                 +" VALUES ($1, $2, $3, $4, $5, $6, $7 , $8, $9)"

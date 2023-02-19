@@ -92,7 +92,8 @@ const TestCoupage = (props) => {
 
 
     useEffect(  ()=>{ 
-        getData()
+        if(!toggle)
+            getData()
     },[]) 
 
      useEffect(  ()=>{ 
@@ -584,7 +585,6 @@ if(buttonColor2)
 const supprimerBox = (key) => {
     boxes.splice(key,1)
     boxCoupageTab.splice(key,1)
-    
 
 }
 

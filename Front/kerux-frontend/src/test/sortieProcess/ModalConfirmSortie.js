@@ -1,6 +1,6 @@
-import React ,{useState,createRef} from 'react'
+import React ,{useState,createRef, useEffect} from 'react'
 import Modal from 'react-bootstrap/Modal'
-import TESTPRINT from '../../print/ModelPrint'
+
 import serviceAlert from '../../service/service.alert'
 import SortieService from '../../service/service.sorti'
 import Service_AgentProcess from '../../service/service.agentProcess'
@@ -14,15 +14,19 @@ const ModalConfirmNet = (props) => {
         poids:'',
         nombre:''
     })
-    const [verificate, setVerificate] = useState(false)
-    const functionTrue = () => setVerificate(true)
-    
-    const [verificate2, setVerificate2] = useState(false)
-    const functionTrue2 = () => setVerificate2(true)
+   
     //const [result, setresult] = useState()
 
     const billRef = createRef();
  
+    useEffect(() => {
+        if(!!result.id_gnerate){
+            handleBillPrint()
+            props.sortieBtn()
+            props.toggleDisplay() 
+            props.handleClose2()
+        }
+    },[result.id_gnerate])
 
     // Send print request to the Main process
     const handlePrint = function (target) {
@@ -51,9 +55,7 @@ const ModalConfirmNet = (props) => {
     const confirmSortie = async (e) => {
         e.preventDefault();
         var etape="sortie"
-        
-        
-    
+       
         console.log(props.id_process);
         //********************ajouter sortie process*/
         await SortieService.ajouterSortie( props.categorie, props.typeProd, etape, props.poids, props.nombre, props.id_enregistrement , props.id_nettoyage , props.id_coupage, props.id_box , props.fk_proditfourni)
@@ -74,36 +76,23 @@ const ModalConfirmNet = (props) => {
             }   
              
             
-            functionTrue()
-           
+            
             
             
         })
-    
-    }
-    if(verificate2){
-        handleBillPrint()
-        
-    }
 
-    if (verificate ===true){
-        setVerificate2()
-        props.sortieBtn()
-        props.toggleDisplay() 
-        props.handleClose2()
-        console.log(result);
-        return (
-            <div style={{display:"none"}}>
-                            <Bill   ref={billRef}
-                                    id={result}
-                                    categorie = {props.categorie}
-                                 />
-                        </div>
-        )   
+        //handleBillPrint()
+        
+
+        
+            
+        
+    
     }
     
-    
- else
+   
+      
+ 
     return ( 
         <div>
            
@@ -133,7 +122,14 @@ const ModalConfirmNet = (props) => {
                 </div>
 
                 
-                            
+                { !!result.id_gnerate  && 
+                                <div style={{display:"none"}}>
+                                    <Bill   ref={billRef}
+                                            id={result}
+                                            categorie = {props.categorie}
+                                     />
+                                </div>
+                }  
                                        
                 
                     
@@ -146,11 +142,7 @@ const ModalConfirmNet = (props) => {
                 </Modal.Footer>
             </Modal>
 
-            {(verificate===true) &&
-                    <div className='display-print' style={{display:"none" , margin: '0px'}}>
-                            <TESTPRINT id= {result} poids= {props.poids} nombre= {props.nombre} categorie={props.categorie} />
-                    </div>
-                }
+            
             
         </div>
      );

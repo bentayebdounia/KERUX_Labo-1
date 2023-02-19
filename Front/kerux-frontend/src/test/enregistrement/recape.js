@@ -1,17 +1,55 @@
-import React ,{useState,useEffect} from 'react'
+import React ,{useState,useEffect, createRef} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import serviceStock from '../../service/service.stock'
 import EnregistrementService from '../../service/service.enregistrement'
 import serviceAlert from '../../service/service.alert';
+import {useReactToPrint} from "react-to-print";
+import { Bill } from '../../print/bill'
 
 const Recape = (props) => {
     const [stock , setStock] = useState()
-   
     var [boxe,setBoxe] = useState([])
     var produitFourni= []
     produitFourni= JSON.parse(localStorage.getItem('produitsFournis') || '[]')
-    
-    
+    const [result, setResult] = useState([])
+    const [verificate, setVerificate] = useState(false)
+    const billRef = createRef();
+ 
+    useEffect(() => {
+        if(verificate){
+            for (var i = 0 ; i< result.length; i++){
+                console.log("hhhhhhhhhhhhhhhhhhhhh");
+                handleBillPrint()}
+            // props.handleClose () 
+            // props.toggleshow ()
+            // props.recepBtn ()
+            
+        }
+    },[verificate])
+
+    // Send print request to the Main process
+    const handlePrint = function (target) {
+        return new Promise(() => {
+        console.log("forwarding print request to the main process...");
+
+        const data = target.contentWindow.document.documentElement.outerHTML;
+        //console.log(data);
+        const blob = new Blob([data], {type: "text/html"});
+        const url = URL.createObjectURL(blob);
+
+        window.electronAPI.printComponent(url, (response) => {
+            console.log("Main: ", response);
+        });
+        //console.log('Main: ', data);
+        });
+    };
+
+    const handleBillPrint = useReactToPrint({
+        content: () => billRef.current,
+        documentTitle: "Bill component",
+        print: handlePrint,
+    });
+
     
     for(var i=0 ; i<produitFourni.length; i++){
         //console.log(produitFourni[i].id_prod)
@@ -64,7 +102,13 @@ const Recape = (props) => {
                     
                     .then((res) => {
                         
-                        console.log(res.data);
+                        result.push({
+                            id_gnerate:res.data.id_gnerate,
+                            poids: res.data.poids,
+                            nombre: res.data.nombre
+                        });
+
+                        console.log(result);
                         
                         serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
                             //alert (result.data)
@@ -78,7 +122,7 @@ const Recape = (props) => {
                     
                     .then((res) => {
                         
-                        console.log(res.data);
+                        result.push(res.data);
                         serviceAlert.ajouterAlert(res.data.id_process,  box[i].date_alert).then ((result) =>{
                             //alert (result.data)
                         })
@@ -88,7 +132,9 @@ const Recape = (props) => {
                     })
             }
                 i++
-            }}
+            }
+            setVerificate(true)
+        }
 
             const ajouterCle = (categorie, type, numeroBox) => {
                 if (categorie === "poulet"){
@@ -152,9 +198,7 @@ const Recape = (props) => {
         ajouterBon()  
         
         //props.recepBtn ()
-        props.handleClose () 
-        props.toggleshow ()
-        props.recepBtn ()
+        
 
     }
     
@@ -206,6 +250,17 @@ const Recape = (props) => {
                                         </div>
                                     
                                 </div> 
+
+                                { verificate && 
+                                    result.map((key) =>
+                                        <div >
+                                            <Bill   ref={billRef}
+                                                    id={key.result}
+                                                    categorie = {props.categorie}
+                                            />
+                                        </div>
+                                        )
+                }  
                     
                 </Modal.Body>
                 <Modal.Footer>
