@@ -24,12 +24,15 @@ const Recape = (props) => {
         console.log(result2);
         if(result2.length){
             
-            for (var i = 0 ; i< result2.length ; i++){
-                //console.log(result2[i])
-                billRef.current= result2[i].ref.current
-                handleBillPrint()
-                console.log(result2[i])
-            }
+                for (var i = 0 ; i< result2.length ; i++){
+                    //console.log(result2[i])
+                    
+                    billRef.current= result2[i].ref.current
+                    handleBillPrint()
+                    console.log(result2[i])
+                }
+            
+            
             // props.handleClose () 
             // props.toggleshow ()
             // props.recepBtn ()
@@ -92,7 +95,6 @@ const Recape = (props) => {
         if (categorie === "poulet" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+7)
         }
-
         else if (categorie === "legume" ){
             return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+(d.getDate()+3)
         }*/

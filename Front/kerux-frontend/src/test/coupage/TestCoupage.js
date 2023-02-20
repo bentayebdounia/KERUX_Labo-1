@@ -88,7 +88,7 @@ const TestCoupage = (props) => {
 
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
-    const [boxCoupageTab, setBoxcoupagetab ] = useState([])
+    const boxCoupageTab = []
 
 
     useEffect(  ()=>{ 
@@ -245,7 +245,7 @@ const TestCoupage = (props) => {
                         else {
                             console.log(boxCoupageTab);
                             var found = boxCoupageTab.find(({id_nettoyage}) => id_nettoyage === boxes[0].id_box);
-                           // console.log( found  );
+                            console.log( found  );
                             if (found === undefined) {
                                 handleShow2(true)
                                 ajouterBoxCouper(res.data.fk_proditfourni, res.data.id_enregistrement, boxes[0].id_box, res.data.id_process)
@@ -504,11 +504,7 @@ const TestCoupage = (props) => {
                                     totalPosts={tableDonnees.length}
                                     paginate={paginate}
                                 />}
-    
             </>
-
-    
-
     )
 }
 
@@ -527,10 +523,7 @@ if(buttonColor2)
                                 <th scope="col">Date</th> 
                                 <th scope="col">Heure</th> 
                                 <th scope="col">entrepot</th> 
- 
- 
-                                 
-                                 
+  
                                 </tr> 
                             </thead> 
                             <tbody >
@@ -583,11 +576,11 @@ if(buttonColor2)
 }
 
 const supprimerBox = (key) => {
-    boxes.splice(key,1)
-    boxCoupageTab.splice(key,1)
-
+    
+        boxes.splice(key,1)
+        boxCoupageTab.splice(key,1)
+    
 }
-
 
     return ( 
         <>
