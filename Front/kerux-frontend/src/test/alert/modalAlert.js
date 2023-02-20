@@ -57,9 +57,16 @@ const ModelAlert = (props) => {
 
     const dateRester = (dateAlert) => {
         var date1 = new Date (dateAlert)
-        var date2 = new Date
+       var date2 = new Date();
+       var today = new Date(
+         date2.getFullYear() +
+           "-" +
+           (date2.getMonth() + 1) +
+           "-" +
+           date2.getDate()
+       );
         //console.log(dateAlert)
-        var diffTime = Math.abs(  date1 - date2);
+        var diffTime = Math.abs(  date1 - today);
 
         var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 

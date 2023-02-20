@@ -1,7 +1,7 @@
-const {Router} = require("express")
-const agentprocess = require ("../controller/controller.agenProcess")
-const router = Router()
+const { Router } = require("express");
+const agentprocess = require("../controller/controller.agenProcess");
+const router = Router();
 
-router.post("/ajouter", agentprocess.ajouterProcess)
+router.post("/ajouter", agentprocess.ajouterProcess);
 
-module.exports = router
+module.exports = router;

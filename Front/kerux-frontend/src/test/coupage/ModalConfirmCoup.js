@@ -64,7 +64,7 @@ const ModalConfirmCoup = (props) => {
             setResult(res.data)
 
             serviceAlert.ajouterAlert(res.data.id_process, dateAlert()).then ((result) =>{
-                //alert (result.data)
+                console.log (result.data)
             })
 
             

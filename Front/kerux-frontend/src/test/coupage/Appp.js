@@ -1,59 +1,64 @@
-import React, {createRef} from "react";
-import {useReactToPrint} from "react-to-print";
-import { Bill } from "../../print/bill";
-import "./appp.css";
+import React, { useState } from 'react';
 
-const MyComponent = () => {
-  const billRef = createRef();
-  const chartRef = createRef();
+function Tableau() {
+  const [tableau, setTableau] = useState([
+    { id: 1, nom: 'Element 1' },
+    { id: 2, nom: 'Element 2' },
+    { id: 3, nom: 'Element 3' },
+    { id: 4, nom: 'Element 4' },
+    { id: 5, nom: 'Element 5' },
+  ]);
+  const [selection, setSelection] = useState([]);
 
-  // Send print request to the Main process
-  const handlePrint = function (target) {
-    return new Promise(() => {
-      console.log("forwarding print request to the main process...");
-
-      const data = target.contentWindow.document.documentElement.outerHTML;
-      //console.log(data);
-      const blob = new Blob([data], {type: "text/html"});
-      const url = URL.createObjectURL(blob);
-
-      window.electronAPI.printComponent(url, (response) => {
-        console.log("Main: ", response);
-      });
-      //console.log('Main: ', data);
-    });
+  const estSelectionne = (id) => {
+    return selection.indexOf(id) !== -1;
   };
 
-  const handleBillPrint = useReactToPrint({
-    content: () => billRef.current,
-    documentTitle: "Bill component",
-    print: handlePrint,
-  });
-  
+  const selectionnerLigne = (id) => {
+    const nouveauSelection = [...selection];
+    if (estSelectionne(id)) {
+      nouveauSelection.splice(nouveauSelection.indexOf(id), 1);
+    } else {
+      nouveauSelection.push(id);
+    }
+    setSelection(nouveauSelection);
+  };
+
+  const supprimerLignesSelectionnees = () => {
+    const nouveauTableau = tableau.filter((element) => !estSelectionne(element.id));
+    setTableau(nouveauTableau);
+    setSelection([]);
+  };
 
   return (
-    <div className="App">
-        
-        <div style={{height: "45px", width: "55px"}}>
-          <hr/>
-          <br/>
-          <span>
-            <button
-                onClick={handleBillPrint}
-                style={{marginLeft: "1rem"}}>Print </button>
-            
-          </span>
-          <div style={{display:"none"}}>
-            <Bill ref={billRef}/>
-          </div>
-          
-          <hr/>
-          <br/>
-
-          
-        </div>
-      </div>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Selection</th>
+          </tr>
+        </thead>
+        <tbody>
+          {tableau.map((element) => (
+            <tr key={element.id} className={estSelectionne(element.id) ? 'selectionne' : ''}>
+              <td>{element.id}</td>
+              <td>{element.nom}</td>
+              <td>
+                <input
+                  type="checkbox"
+                  checked={estSelectionne(element.id)}
+                  onChange={() => selectionnerLigne(element.id)}
+                />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <button onClick={supprimerLignesSelectionnees}>Supprimer les lignes sélectionnées</button>
+    </div>
   );
-};
+}
 
-export default MyComponent;
+export default Tableau;
