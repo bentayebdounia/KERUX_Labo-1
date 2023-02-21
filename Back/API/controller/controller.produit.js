@@ -21,6 +21,20 @@ postProduit = (req, res) => {
   );
 };
 
+updateProduit = (req, res) => {
+  const id_produit = req.params.id_produit;
+
+  const { nom_produit, duree_experation } = req.body;
+  pool.query(
+    queries.updateEntrepot,
+    [nom_produit, duree_experation, id_produit],
+    (error, result) => {
+      if (error) throw error;
+      res.status(200).json(result.rows);
+    }
+  );
+}
+
 getProduit = (req, res) => {
   pool.query(queries.getProduit, (error, result) => {
     if (error) throw error;
@@ -53,6 +67,7 @@ getCategorie = (req, res) => {
 module.exports = {
   postCategorie,
   postProduit,
+  updateProduit,
   getProduit,
   getProduitBy_Categorie,
   getCategorie,

@@ -1,10 +1,16 @@
 //ajouter categorie
 const postCategorie = "INSERT INTO categorie (nom_categorie ) "
                         +"VALUES ($1)"
+// modifier une categorie
+const updateCategorie =
+  "UPDATE categorie SET nom_categorie= $1  WHERE id_categorie= $2 "; 
 
 // ajouter produit
 const postProduit = "INSERT INTO produit (fk_categorie, nom_produit, duree_experation) "
                         +"VALUES ($1, $2, $3)"
+// modifier un produit
+const updateProduit =
+  "UPDATE produit SET nom_produit= $1, duree_experation= $2  WHERE id_produit= $3 "; 
 
 // get produit
 const getProduit = "SELECT * FROM produit"
@@ -14,9 +20,12 @@ const getProduitByCategorie = "SELECT * FROM produit, categorie WHERE fk_categor
 
 // get categorie
 const getCategorie = "SELECT * FROM categorie"
+
 module.exports={
     postCategorie,
+    updateCategorie,
     postProduit,
+    updateProduit,
     getProduit,
     getProduitByCategorie,
     getCategorie

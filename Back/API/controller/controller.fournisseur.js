@@ -12,6 +12,42 @@ ajouterFournisseur = (req, res) => {
              }) 
 }
 
+updateFournisseur = (req, res) => {
+  const id_fournisseur = req.params.id_fournisseur;
+
+  const {
+    nom_fournisseur,
+    forme_juridique,
+    adresse_fournisseur,
+    email,
+    activite,
+    modalite_paiement,
+    type_paiement,
+    nature_livraison,
+    categorie,
+  } = req.body;
+
+  pool.query(
+    queries.updateFournisseur,
+    [
+      nom_fournisseur,
+      forme_juridique,
+      adresse_fournisseur,
+      email,
+      activite,
+      modalite_paiement,
+      type_paiement,
+      nature_livraison,
+      categorie,
+      id_fournisseur,
+    ],
+    (error, result) => {
+      if (error) throw error;
+      res.status(200).json(result.rows);
+    }
+  );
+};
+
 ajouterContact = (req, res) => {
     const  {fk_fournisseur, nom_contact, numero_telephone}= req.body
     pool.query(queries.ajouterContact , [fk_fournisseur, nom_contact, numero_telephone],
@@ -56,6 +92,7 @@ getFournisseurByNomCategorie = (req, res) => {
 
 module.exports ={
     ajouterFournisseur,
+    updateFournisseur,
     ajouterContact,
     getFournisseurByNom,
     getAllFournisseur, 

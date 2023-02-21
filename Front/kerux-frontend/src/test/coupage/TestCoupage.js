@@ -105,7 +105,7 @@ const TestCoupage = (props) => {
     serviceActuelProcess.getActualProcessBlock("nettoyage").then((res) => {
       console.log(res.data.length);
       if (res.data.length === 0) {
-        console.log("actuel process non bloquant");
+        // console.log("actuel process non bloquant");
 
         serviceActuelProcess.getActualProcess("nettoyage").then((res) => {
           setTabledonnees(res.data);
@@ -125,7 +125,7 @@ const TestCoupage = (props) => {
           serviceActuelProcess
             .getActualProcesssStock("nettoyage")
             .then((res) => {
-              console.log("actuel process stock non bloquant");
+              //console.log("actuel process stock non bloquant");
               setProduitbloquantstock(false);
               setTabledonneesstocker(res.data);
             });
@@ -140,7 +140,7 @@ const TestCoupage = (props) => {
     var today = new Date();
     var datee =
       today.getFullYear() + "" + (today.getMonth() + 1) + "" + today.getDate();
-    console.log("dateeee " + datee);
+    //console.log("dateeee " + datee);
     return datee;
   };
 

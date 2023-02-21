@@ -14,6 +14,29 @@ AjouterPersonne = (req, res) => {
   );
 };
 
+updatePersonne = (req, res) => {
+  const id_personne = req.params.id_personne;
+
+  const { nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe } =
+    req.body;
+  pool.query(
+    queries.updatePersonne,
+    [
+      nom,
+      prenom,
+      date_naissance,
+      num_tel,
+      adresse,
+      fk_role,
+      mot_passe,
+      id_personne,
+    ],
+    (error, result) => {
+      if (error) throw error;
+      res.status(200).json(result.rows);
+    }
+  );
+};
 getId = (req, res) => {
   const id = parseInt(req.params.id_personne);
   pool.query(queries.getPersonneById, [id], (error, result) => {
@@ -53,7 +76,7 @@ getPrenom = (req, res) => {
 };
 
 getAllPersonne = (req, res) => {
-  pool.query("SELECT * FROM personne", (error, result) => {
+  pool.query("SELECT * FROM personne ORDER BY id_personne", (error, result) => {
     if (error) throw error;
     res.status(200).json(result.rows);
   });
@@ -88,6 +111,7 @@ getPersonneByNomOrPnom = (req, res) => {
 
 module.exports = {
   AjouterPersonne,
+  updatePersonne,
   getId,
   Login,
   getAllPersonne,

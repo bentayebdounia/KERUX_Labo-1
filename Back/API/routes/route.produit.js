@@ -4,6 +4,7 @@ const router = Router();
 
 router.post("/ajouterCategorie", produit.postCategorie);
 router.post("/ajouterProduit", produit.postProduit);
+router.put("/modifierProduit/:id_produit", produit.updateProduit);
 router.get("/getproduit", produit.getProduit);
 router.get(
   "/getProduitByCategorie/:nom_categorie",

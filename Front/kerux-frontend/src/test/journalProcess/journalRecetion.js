@@ -42,13 +42,22 @@ const JournalReception = (props) => {
         
     }
    
-    const dateNow = (d) => {
-        var date=  moment.utc(d).format('DD-MM-YY')
-        const words = date.split('-');
-        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-        console.log(a+1)
-        return a
-    }
+    const dateNow = (date1) => {
+      var date = moment.utc(date1).format("DD-MM-YYYY");
+      const words = date.split("-");
+      //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
+
+      var d = new Date(words[2], words[1] - 1, words[0]);
+      var nextDay = new Date(d.getTime());
+      nextDay.setDate(d.getDate() + 1);
+      //console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+      return nextDay.toLocaleString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      });
+    };
     
     if (comboBox===''){
             tableGeneral = (

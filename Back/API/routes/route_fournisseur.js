@@ -4,6 +4,7 @@ const router = Router();
 
 router.post("/ajouterFournisseur", fournisseur.ajouterFournisseur);
 router.post("/ajouetrContact", fournisseur.ajouterContact);
+router.put("/modifierFournisseur/:id_fournisseur", fournisseur.updateFournisseur);
 router.get(
   "/getFournisseurbyCategorie/:categorie",
   fournisseur.getFournisseurByNom
