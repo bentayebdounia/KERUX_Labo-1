@@ -3,6 +3,7 @@ import serviceRole from "../../service/service.role";
 import serviceAdmin from "../../service/serviceAdmin";
 import ModelReponse from "../../Models/Model.repense";
 
+
 export default function AjouterAgent() {
   const [nom, setNom] = useState("");
   const [prenom, setPrenom] = useState("");
@@ -17,7 +18,12 @@ export default function AjouterAgent() {
   const [confirmation, setConfirmation] = useState(false);
 
   const [verifier, setVerifier] = useState();
-  var response;
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  const [message , setMessage ] = useState("")
+
+ 
 
   useEffect(() => {
     serviceRole.getRole().then((res) => {
@@ -68,7 +74,7 @@ export default function AjouterAgent() {
       console.log("agent =>" + JSON.stringify(agent));
       serviceAdmin.ajouterAgent(agent).then((res) => {
         console.log(res.data);
-        if (res.data === "Agent bien ajouter") {
+        if (!! res.data.id_personne ) {
           setNom("");
           setPrenom("");
           setDateN("");
@@ -77,11 +83,12 @@ export default function AjouterAgent() {
           setFk_role("");
           setPassword("");
 
-          response = <ModelReponse titre={""} message={"Agent bien ajouter"} />;
-        } else
-          response = (
-            <ModelReponse titre={""} message={"Agent n'a pas bien ajouter"} />
-          );
+          setMessage("Agent bien ajouter et son ID = " + res.data.id_personne);
+          handleShow();
+        } else {
+          setMessage("Agent n'est pas bien ajouter");
+          handleShow();
+        }
       });
     }
   };
@@ -255,7 +262,7 @@ export default function AjouterAgent() {
           </button>
         </div>
       </section>
-      {response}
+      {show && <ModelReponse show = {show} handleClose= {handleClose} titre={""} message={message} />}
     </div>
   );
 }

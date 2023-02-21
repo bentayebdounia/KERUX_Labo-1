@@ -103,7 +103,8 @@ const MouvementStock = (props) => {
                             <td>{p.heure}</td>
                             <td>{p.fk_entrepot}</td>
                             <td>{dateNow(p.date_entree)}</td>
-                            <td>{dateNow(p.date_sortie)}</td>
+                            
+                            <td>{ p.date_sortie!==null && dateNow(p.date_sortie)}</td>
                             <td>{p.poids_sortie}</td>
                         </tr>
                 )
@@ -126,27 +127,23 @@ const MouvementStock = (props) => {
 
                 </>
             )
-            tableCondition = (
-                currentPosts2.map(
-                    (p, key) =>
-                    <tr key={key}>
-                            <td>{key+1}</td>
-                            <td>{p.id_gnerate}</td>
-                            <td>{p.categorie}</td>
-                            <td>{p.nom_produit}</td>
-                            <td>{p.etape}</td>
-                            <td>{p.poids/1000}</td>
-                            <td>{p.nombre}</td>
-                            <td>{dateNow(p.datee)}</td>
-                            <td>{p.heure}</td>
-                            <td>{p.fk_entrepot}</td>
-                            <td>{dateNow(p.date_entree)}</td>
-                            <td>{dateNow(p.date_sortie)}</td>
-                            <td>{p.poids_sortie/1000}</td>
-                    
-                    </tr>
-                )
-            )
+            tableCondition = currentPosts2.map((p, key) => (
+              <tr key={key}>
+                <td>{key + 1}</td>
+                <td>{p.id_gnerate}</td>
+                <td>{p.categorie}</td>
+                <td>{p.nom_produit}</td>
+                <td>{p.etape}</td>
+                <td>{p.poids / 1000}</td>
+                <td>{p.nombre}</td>
+                <td>{dateNow(p.datee)}</td>
+                <td>{p.heure}</td>
+                <td>{p.fk_entrepot}</td>
+                <td>{dateNow(p.date_entree)}</td>
+                <td>{p.date_sortie !== null && dateNow(p.date_sortie)}</td>
+                <td>{p.poids_sortie / 1000}</td>
+              </tr>
+            ));
             
         }
 
@@ -158,27 +155,23 @@ const MouvementStock = (props) => {
 
                 </>
             )
-            tableCondition = (
-                currentPosts2.map(
-                    (p, key) =>
-                    <tr key={key}>
-                             <td>{key+1}</td>
-                            <td>{p.id_gnerate}</td>
-                            <td>{p.categorie}</td>
-                            <td>{p.nom_produit}</td>
-                            <td>{p.etape}</td>
-                            <td>{p.poids/1000}</td>
-                            <td>{p.nombre}</td>
-                            <td>{dateNow(p.datee)}</td>
-                            <td>{p.heure}</td>
-                            <td>{p.fk_entrepot}</td>
-                            <td>{dateNow(p.date_entree)}</td>
-                            <td>{dateNow(p.date_sortie)}</td>
-                            <td>{p.poids_sortie/1000}</td>
-                    
-                    </tr>
-                )
-            )
+            tableCondition = currentPosts2.map((p, key) => (
+              <tr key={key}>
+                <td>{key + 1}</td>
+                <td>{p.id_gnerate}</td>
+                <td>{p.categorie}</td>
+                <td>{p.nom_produit}</td>
+                <td>{p.etape}</td>
+                <td>{p.poids / 1000}</td>
+                <td>{p.nombre}</td>
+                <td>{dateNow(p.datee)}</td>
+                <td>{p.heure}</td>
+                <td>{p.fk_entrepot}</td>
+                <td>{dateNow(p.date_entree)}</td>
+                <td>{p.date_sortie !== null && dateNow(p.date_sortie)}</td>
+                <td>{p.poids_sortie / 1000}</td>
+              </tr>
+            ));
             
         }
 

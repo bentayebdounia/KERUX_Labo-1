@@ -115,10 +115,10 @@ const AjouterStock = (props) => {
                   required
                 >
                   <option defaultValue={""}></option>
-                  {entrepots.map((entrepot, key) => (
+                  {entrepots.map((entrepot) => (
                     <option value={entrepot.id_entrepot}>
                       {" "}
-                      {entrepot.nom_entrepot}{" "}
+                      {entrepot.nom_entrepot} | {entrepot.air_stockage}{" "}
                     </option>
                   ))}
                 </select>

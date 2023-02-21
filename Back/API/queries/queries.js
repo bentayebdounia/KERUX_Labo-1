@@ -1,8 +1,9 @@
 //// table perrsonne ***********************************************
 
 //--ajouter personne 
-const postPersonne = "INSERT INTO personne (nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe) "
-                        +"VALUES ($1, $2, $3, $4, $5, $6, $7)"
+const postPersonne =
+  "INSERT INTO personne (nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe) " +
+  "VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id_personne";
 
 const updatePersonne =
   "UPDATE personne SET nom= $1, prenom= $2 ,date_naissance = $3, num_tel= $4, adresse= $5, fk_role= $6, mot_passe= $7  WHERE id_personne= $8 "; 

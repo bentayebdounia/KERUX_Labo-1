@@ -9,7 +9,7 @@ AjouterPersonne = (req, res) => {
     [nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe],
     (error, result) => {
       if (error) throw error;
-      res.status(200).send("Agent bien ajouter");
+      res.status(200).json(result.rows[0]);
     }
   );
 };

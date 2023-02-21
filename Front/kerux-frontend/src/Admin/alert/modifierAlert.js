@@ -13,6 +13,9 @@ const ModifierAlert = (props) => {
     const [show, setShow] = useState(false) 
     const handleClose = () => setShow(false) 
     const handleShow = () => setShow(true) 
+
+   
+    
     
  
     const chercher = async() => {
@@ -45,7 +48,8 @@ const ModifierAlert = (props) => {
         
             serviceAlert.updateDateAlert(idProcess, dateAlert ).then( (res) => {
                 console.log(res.data)
-                alert (res.data)
+                setMessage(res.data)
+                handleShow()
             })
         
         

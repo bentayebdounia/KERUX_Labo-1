@@ -29,18 +29,26 @@ const ListFournisseur = () => {
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = fournisseurs.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  if (rechercheValue === "") {
-    serviceFournisseur.getAllFournisseur().then((res) => {
-      setFournisseurs(res.data);
-    });
-  }
+  useEffect(() => {
+    
+      serviceFournisseur.getAllFournisseur().then((res) => {
+        setFournisseurs(res.data);
+      });
+    
+  },[])
+  
 
   const getFournisseur = () => {
     serviceFournisseur
-      .getFournisseurByNomOrCategorie(rechercheValue)
+      .getFournisseurByNomOrCategorie(rechercheValue, rechercheValue)
       .then((res) => {
         setFournisseurs(res.data);
       });
+    if (rechercheValue === '') {
+      serviceFournisseur.getAllFournisseur().then((res) => {
+        setFournisseurs(res.data);
+      });
+    }
   };
 
   const modifier = (
@@ -155,7 +163,7 @@ const ListFournisseur = () => {
               </table>
               <Pagination
                 postsPerPage={postsPerPage}
-                totalPosts={fournisseur.length}
+                totalPosts={fournisseurs.length}
                 paginate={paginate}
               />
             </div>

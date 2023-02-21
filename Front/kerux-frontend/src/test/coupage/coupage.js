@@ -54,13 +54,13 @@ const Coupage = (props) => {
 
     const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
     //get personnes
-    useEffect(()=>{
-        ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
-        .then((res) => {
-            setAgentNettoyage(res.data)
+    useEffect(() => {
+        
+          ServiceAdmin.getPersonneByNomOrPrenom(agent, agent).then((res) => {
+            setAgentNettoyage(res.data);
             console.log(agentNettoyage);
-        })
-    })
+          });
+    },[agent])
     
     const ajouterAgent=(e) => {
         e.preventDefault()
@@ -110,7 +110,8 @@ const Coupage = (props) => {
             porcentagePoids = sum*100/props.poids
             console.log("porcentage = "+ porcentagePoids);
             return porcentagePoids
-        }
+    }
+    
 
         function transforme(unite, poids){
             console.log(unite);
@@ -124,8 +125,7 @@ const Coupage = (props) => {
         const valider = (e) => {
             e.preventDefault()
             //console.log(ControlerPoids(poids));
-            
-                handleShow()
+              handleShow()
             
         }
 

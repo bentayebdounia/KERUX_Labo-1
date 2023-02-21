@@ -50,7 +50,8 @@ const Conditionnement = (props) => {
     const [nomAgent, setNomAgent ] = useState([])
 
     const [message,setMessage] = useState()
-    const [calculPoids, setCalculPoids] = useState([])
+    const calculPoids = []
+    const  [poidsRester, setPoidsrester]=useState( props.process.poids);
     const [PorcentagePoids, setPorcentagePoids] = useState()
     
     const [toggleRecomendation, setToggleRecomendation] = useState(true)
@@ -71,13 +72,12 @@ const Conditionnement = (props) => {
     let porcentagePoids 
 
     //get personnes
-    useEffect(()=>{
-        ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
-        .then((res) => {
-            setAgentNettoyage(res.data)
-            console.log(agentNettoyage);
-        })
-    })
+    useEffect(() => {
+      ServiceAdmin.getPersonneByNomOrPrenom(agent, agent).then((res) => {
+        setAgentNettoyage(res.data);
+        console.log(agentNettoyage);
+      });
+    }, [agent]);
 
     useEffect(()=>{
         if(confirmeConditionnement){
@@ -109,7 +109,14 @@ const Conditionnement = (props) => {
             porcentagePoids = sum*100/props.process.poids
             console.log("porcentage= "+ porcentagePoids);
             return porcentagePoids
-        }
+    }
+
+    const ControlerPoids2 = (poids) => {
+     // setPoidsrester(poidsRester - parseFloat(transforme(unite, poids)));
+
+      return poidsRester - parseFloat(transforme(unite, poids));
+    };
+    
 
         const ajouterAgent=(e) => {
             e.preventDefault()
@@ -197,165 +204,205 @@ const Conditionnement = (props) => {
         </>
     )
 
-    return ( 
-        <div>
-            <section id="etape_section">
-                <div className="container">
-                
-                <div className='row gy-2 gx-2'>
-                            <div className="contenaireBox">
-                                <label id="id_box"> ID Box: </label>
-                                
-                                <label  id="id_boxValue" >{props.id} </label>
-                                
-                            </div>
+    return (
+      <div>
+        <section id="etape_section">
+          <div className="container">
+            <div className="row gy-2 gx-2">
+              <div className="contenaireBox">
+                <label id="id_box"> ID Box: </label>
 
-                            
-                            
-                                <div className="contenerProd col-6" >
-                                    <label id="categorie"> Categorie de produit: </label>
-                                    
-                                    <label  id="categorieValue" >{props.process.categorie} </label>
-                                    
-                                </div>
+                <label id="id_boxValue">{props.id} </label>
+              </div>
 
-                                <div className="contenerProd col-6" >
-                                    <label id="produit"> Type de produit: </label>
-                                    
-                                    <label  id="produitValue" >{props.process.nom_produit} </label>
-                                    
-                                </div>
-                            
-                        
-                        </div>
+              <div className="contenerProd col-6">
+                <label id="categorie"> Categorie de produit: </label>
 
-                {bouton}
-                <form class="needs-validation" noValidate>
+                <label id="categorieValue">{props.process.categorie} </label>
+              </div>
 
-                <div className="mb-3 row">
-                    <label for="recepteur"  className="col-sm-2 col-form-label">Agent de Conditionnemt</label>
-                    <div className="col-sm-10 dropdown">
-                            <div className="input-group">
-                                <input type="text" className="form-control" id="agentIdNettoyage" placeholder="" value={agent} onChange={(e)=> setAgent(e.target.value)} onClick={select}/>
-                                <button className="btn" style={{background: '#7B170F' }} type="button" onClick={(e)=>ajouterAgent(e)} >
-                                <i className="bi bi-plus" style={{color: "white" , fontSize:"15px"}}></i>
-                                 </button>
-                             </div>
-                                    {agents}
+              <div className="contenerProd col-6">
+                <label id="produit"> Type de produit: </label>
 
-                            </div>
-                                    {show4 && <Tableau show={show4} 
-                                        handleClose={handleClose4} 
-                                        handleShow={handleShow4} 
-                                        agentNettoyage={agentNettoyageSelect}
-                                        
-                                    />}
-                </div>
-                <div className="mb-3 row">
-                    <label for="poids" className="col-sm-2 col-form-label">Poids</label>
-                    <div className="col-sm-8">
-                        <input type="number"  className="form-control" id="poids" value={poids} onChange={(e)=> setPoids(e.target.value)} required/>
-                        
-                        <label htmlFor="poids" className="col-sm-3 col-form-label">
-                            <div className="progress"> Poids
-                            
-                                <div className="progress-bar " role="progressbar" aria-label="Example with label" style={{width: PorcentagePoids+"%" }} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> {PorcentagePoids} </div>
-                            </div>
-                        </label>
-                    </div>
-                    <div className="col-sm-2">
-                                <select className="form-select" aria-label="Default select example" id="categorie"
-                                    value={unite} 
-                                    onChange={event => setUnite(event.target.value)}
-                                    
-                                    required>
-                                
-                                    <option value="kg">Kg</option>
-                                    <option value="gramme">Gr</option>
-                                </select>
-                            </div>
-                </div>
-                <div className="mb-3 row">
-                    {nbr}
-                </div>
-
-                
-                <div class="d-grid gap-3 d-md-flex justify-content-md-end" >
-                    
-                    <button className="btn2" onClick={annuler} >Annuler</button>
-                    <button className="btn1" type="submit" >Valider</button>
-                
-                </div>
-                </form>
-                {
-                  (function () {
-                            'use strict'
-                        
-                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                            var forms = document.querySelectorAll('.needs-validation')
-                        
-                            // Loop over them and prevent submission
-                            Array.prototype.slice.call(forms)
-                            .forEach(function (form) {
-                                form.addEventListener('submit', function (event) {
-                                if (!form.checkValidity()) {
-                                    event.preventDefault()
-                                    event.stopPropagation()
-    
-                                }
-                                if (form.checkValidity()) valider(event)
-                                
-                        
-                                form.classList.add('was-validated')
-                                }, false)
-                            })
-                        })()
-                }
+                <label id="produitValue">{props.process.nom_produit} </label>
+              </div>
+              {ControlerPoids2(poids)}
             </div>
 
-            {show2 && <ModalMarinade    show2={show2} 
-                                        handleClose2={handleClose2} 
-                                        handleShow2={handleShow2} 
-                                        id_box={props.id}
-                                        process={props.process}
-                                        numeroBox= {numeroBox}
-                                        afficherMarinade={afficherMarinade}
-              />}
+            {bouton}
+            <form class="needs-validation" noValidate>
+              <div className="mb-3 row">
+                <label for="recepteur" className="col-sm-2 col-form-label">
+                  Agent de Conditionnemt
+                </label>
+                <div className="col-sm-10 dropdown">
+                  <div className="input-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="agentIdNettoyage"
+                      placeholder=""
+                      value={agent}
+                      onChange={(e) => setAgent(e.target.value)}
+                      onClick={select}
+                    />
+                    <button
+                      className="btn"
+                      style={{ background: "#7B170F" }}
+                      type="button"
+                      onClick={(e) => ajouterAgent(e)}
+                    >
+                      <i
+                        className="bi bi-plus"
+                        style={{ color: "white", fontSize: "15px" }}
+                      ></i>
+                    </button>
+                  </div>
+                  {agents}
+                </div>
+                {show4 && (
+                  <Tableau
+                    show={show4}
+                    handleClose={handleClose4}
+                    handleShow={handleShow4}
+                    agentNettoyage={agentNettoyageSelect}
+                  />
+                )}
+              </div>
+              <div className="mb-3 row">
+                <label for="poids" className="col-sm-2 col-form-label">
+                  Poids
+                </label>
+                <div className="col-sm-8">
+                  <input
+                    type="number"
+                    className="form-control"
+                    id="poids"
+                    value={poids}
+                    onChange={(e) => setPoids(e.target.value)}
+                    required
+                  />
 
-              {showAffichgeMarinade && <ModalAfficherMarinade   show={showAffichgeMarinade} 
-                                                                handleClose = {handelCloseAffichageMarinade} 
-                                                                handleShow = {handelShowAffichageMarinade} 
-                                                                process={props.process}
-                                                                marinade = {marinade}
-                                                                micuissan = {micuissan}
-                                                                agents = {listeAgentMarinade}
-              />}
-            
-             <ModalConfirmCondit    show={show} 
-                                    handleClose={handleClose} 
-                                    handleShow={handleShow}
-                                    id_box={props.id}
-                                    process={props.process}
-                                    poids={transforme(unite, poids)}
-                                    nombre={nombre}
-                                    confirmeConditionnemetTrue= {confirmeConditionnemetTrue}  
-                                    toggleDisplay = {props.toggleDisplay} 
-                                    PorcentagePoids = {PorcentagePoids}
-                                    numeroBox= {numeroBox}
-                                    agents={agentNettoyageSelect}
-                                    btnC={props.conditBtn}
+                  <label htmlFor="poids" className="col-sm-3 col-form-label">
+                    <div className="progress">
+                      {" "}
+                      Poids
+                      <div
+                        className="progress-bar "
+                        role="progressbar"
+                        aria-label="Example with label"
+                        style={{ width: PorcentagePoids + "%" }}
+                        aria-valuenow="25"
+                        aria-valuemin="0"
+                        aria-valuemax="100"
+                      >
+                        {" "}
+                        {PorcentagePoids}{" "}
+                      </div>
+                    </div>
+                  </label>
+                </div>
+                <div className="col-sm-2">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    id="categorie"
+                    value={unite}
+                    onChange={(event) => setUnite(event.target.value)}
+                    required
+                  >
+                    <option value="kg">Kg</option>
+                    <option value="gramme">Gr</option>
+                  </select>
+                </div>
+              </div>
+              <div className="mb-3 row">{nbr}</div>
+
+              <div class="d-grid gap-3 d-md-flex justify-content-md-end">
+                <button className="btn2" onClick={annuler}>
+                  Annuler
+                </button>
+                <button className="btn1" type="submit">
+                  Valider
+                </button>
+              </div>
+            </form>
+            {(function () {
+              "use strict";
+
+              // Fetch all the forms we want to apply custom Bootstrap validation styles to
+              var forms = document.querySelectorAll(".needs-validation");
+
+              // Loop over them and prevent submission
+              Array.prototype.slice.call(forms).forEach(function (form) {
+                form.addEventListener(
+                  "submit",
+                  function (event) {
+                    if (!form.checkValidity()) {
+                      event.preventDefault();
+                      event.stopPropagation();
+                    }
+                    if (form.checkValidity()) valider(event);
+
+                    form.classList.add("was-validated");
+                  },
+                  false
+                );
+              });
+            })()}
+          </div>
+
+          {show2 && (
+            <ModalMarinade
+              show2={show2}
+              handleClose2={handleClose2}
+              handleShow2={handleShow2}
+              id_box={props.id}
+              process={props.process}
+              numeroBox={numeroBox}
+              afficherMarinade={afficherMarinade}
             />
-            {show3 && <ModelReponse show={show3} handleClose={handleClose3} handleShow={handleShow3}
-                                    message={message} 
-                                    titre={"conditionnement"} 
-                                    />}
-            
-            
+          )}
 
-            </section>
- 
-        </div>
-     );
+          {showAffichgeMarinade && (
+            <ModalAfficherMarinade
+              show={showAffichgeMarinade}
+              handleClose={handelCloseAffichageMarinade}
+              handleShow={handelShowAffichageMarinade}
+              process={props.process}
+              marinade={marinade}
+              micuissan={micuissan}
+              agents={listeAgentMarinade}
+            />
+          )}
+
+          <ModalConfirmCondit
+            show={show}
+            handleClose={handleClose}
+            handleShow={handleShow}
+            id_box={props.id}
+            process={props.process}
+            poids={transforme(unite, poids)}
+            nombre={nombre}
+            confirmeConditionnemetTrue={confirmeConditionnemetTrue}
+            toggleDisplay={props.toggleDisplay}
+            PorcentagePoids={PorcentagePoids}
+            numeroBox={numeroBox}
+            agents={agentNettoyageSelect}
+            btnC={props.conditBtn}
+          />
+          {show3 && (
+            <ModelReponse
+              show={show3}
+              handleClose={handleClose3}
+              handleShow={handleShow3}
+              message={message}
+              titre={"conditionnement"}
+            />
+          )}
+        </section>
+      </div>
+    );
 }
  
 export default Conditionnement;

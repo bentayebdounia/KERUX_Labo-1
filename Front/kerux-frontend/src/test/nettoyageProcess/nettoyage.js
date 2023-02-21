@@ -49,14 +49,14 @@ const Nettoyage = (props) => {
     const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
     //get personnes
     useEffect(()=>{
-        if(agent !==''){ 
+        
             ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
             .then((res) => {
                 setAgentNettoyage(res.data)
                 console.log(agentNettoyage);
             })
-        }
-    })
+        
+    },[agent])
 
     const ajouterAgent=(e) => {
         e.preventDefault()

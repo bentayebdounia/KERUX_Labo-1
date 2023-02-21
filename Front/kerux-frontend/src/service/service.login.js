@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const PRODUIT_API_LOGIN = "http://localhost:8080/agent/login/";
-const PRODUIT_API_ID = "http://localhost:8080/agent/getPersonne/id/";
+const PRODUIT_API_ID = "http://localhost:8080/agent/getPersonne/";
 
 class LoginServer {
     login(id,password){

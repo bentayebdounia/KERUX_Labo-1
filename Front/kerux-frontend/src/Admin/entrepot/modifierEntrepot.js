@@ -1,110 +1,182 @@
-import React ,{useState,useEffect} from 'react'
-import Modal from 'react-bootstrap/Modal'
-import serviceEntrepot from '../../service/service.entrepot'
-import Pagination from '../../test/pagination/pagination'
-import moment from 'moment'
+import Modal from "react-bootstrap/Modal";
+import React, { useState, useEffect } from "react";
+
+import serviceEntrepot from "../../service/service.entrepot";
 
 const ModifierEntrepot = (props) => {
 
-    const [entrepot, setEntrepot] = useState([])
-    const [currentPage, setCurrentPage] = useState(1);
-    const [postsPerPage] = useState(6);
-    //les operation de pagination 
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const entrepots= entrepot.slice(indexOfFirstPost, indexOfLastPost);
-    const paginate = pageNumber => setCurrentPage(pageNumber);
- 
-    
-    useEffect ( () => {
-        serviceEntrepot.getAllEntrepot().then((res)=> {
-            setEntrepot(res.data)
-            
-        })
-    })
-    
+  const [nomEntrepot, setNomEtrepot] = useState(props.nom_entrepot);
+  const [type, setType] = useState(props.type_entrepot);
+  const [airStock, setAirStock] = useState(props.air_stockage);
+  const [capacite, setCapacite] = useState(props.capacite);
+  const [adr, setAdr] = useState(props.adresse);
 
-    const dateNow = (d) => {
-        var date=  moment.utc(d).format('DD-MM-YY')
-        const words = date.split('-');
-        var a = parseInt(words[0])+1+'-'+(words[1])+'-'+(words[2])
-        //console.log(a+1)
-        return a
+  const verificetionChamp = () => {
+    if (
+      nomEntrepot !== "" &&
+      type !== "" &&
+      airStock !== "" &&
+      capacite !== "" &&
+      adr !== ""
+    ) {
+      //console.log(verifier);
+      return true;
+    } else {
+      //console.log(verifier);
+      return false;
     }
+  };
 
-    const annuler = () => {
-        props.handleClose ()  
-    }   
+  const modifier = async (e) => {
+    if (verificetionChamp) {
+      await serviceEntrepot.updateEntrepot(
+        nomEntrepot,
+        type,
+        airStock,
+        capacite,
+        adr
+      );
+      setNomEtrepot("");
+      setType("");
+      setAirStock("");
+      setAdr("");
+      setCapacite("");
+      
+      props.handleClose();
+    }
+  };
 
+  return (
+    <Modal size="xl" show={props.show} onHide={props.handleClose}>
+      <Modal.Header closeButton>
+        <Modal.Title>Modifier Agent</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className="mb-3 row">
+          <label htmlFor="nomEntrepot" className="col-sm-2 -form-label ">
+            Nom d'entrepot
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id="nomEntrepot"
+              value={nomEntrepot}
+              onChange={(e) => setNomEtrepot(e.target.value)}
+            />
 
-    return (  
-        <>
-            <Modal size="xl" scrollable={true} show={props.show} onHide={props.handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title style={{color: "#7B170F"}}><i className="bi bi-house-fill" style={{color: "#7B170F" , fontSize:"25px"}}   > </i>  Liste Des Entrepots</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                 
-                <div className="divTab" style={{width:"100%" , margin:"0px"}}>
-                    <table className="table table-bordered"  >
-                    <thead>
-                        <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Nom d'entrepot</th>
-                        <th scope="col">Type d'entrepot</th>
-                        <th scope="col">Air de stockage</th>
-                        <th scope="col">Capacité</th>
-                        <th scope="col">Adress</th>
-                        <th scope="col">Date d'enregistrement d'entrepot</th>
-                        <th scope="col">L'existance</th>
-                        <th scope="col"></th>
+            {verificetionChamp() === false && nomEntrepot === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez saisir le nom de l'entrepot
+              </p>
+            )}
+          </div>
+        </div>
 
-                        </tr>
-                    </thead>
-                    <tbody >
-                        {entrepots.map(
-                        (p, key) =>
-                            <tr key={key+1}>
-                                <td>{key}</td>
-                                <td>{p.id_entrepot}</td>
-                                <td>{p.nom_entrepot}</td>
-                                <td>{p.type_entrepot}</td>
-                                <td>{p.air_stockage}</td>
-                                <td>{p.capacite}</td>
-                                <td>{p.adresse}</td>
-                                <td>{dateNow(p.date_enregistrement_entrepot)}</td>
-                                {p.exist === true && <td><i className="bi bi-check-circle-fill" style={{color: "#4F8B2A" , fontSize:"20px"}}></i></td>}
-                                {p.exist === false && <td><i className="bi bi-x-circle-fill"style={{color: "#7B170F" , fontSize:"20px"}}></i></td>}
-                                <td>
-                                    
+        <div className="mb-3 row">
+          <label htmlFor="typeEntrepot" className="col-sm-2 col-form-label">
+            Type d'entrepot
+          </label>
+          <div className="col-sm-10">
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              id="typeEntrepot"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              <option selected></option>
+              <option value="chambre froide">Chambre froide</option>
+              <option value="entrepot">Entrepot</option>
+            </select>
+            {verificetionChamp() === false && type === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez selectionner un type d'entrepot
+              </p>
+            )}
+          </div>
+        </div>
 
-                                </td>
-                            </tr>
-                    )}
-                        
-                    </tbody>
-                    </table>
+        <div className="mb-3 row">
+          <label htmlFor="airStockage" className="col-sm-2 col-form-label">
+            L'air de stockage
+          </label>
+          <div className="col-sm-10">
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              id="airStockage"
+              value={airStock}
+              onChange={(e) => setAirStock(e.target.value)}
+            >
+              <option selected></option>
+              <option value="Refrigerer -positif">Refrigerer -positif</option>
+              <option value="Refrigerer -negatif">Refrigerer -negatif</option>
+            </select>
+            {verificetionChamp() === false && airStock === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez selectionner l'air de stockage{" "}
+              </p>
+            )}
+          </div>
+        </div>
 
-                    {entrepots.length>6 && <Pagination
-                            postsPerPage={postsPerPage}
-                            totalPosts={entrepot.length}
-                            paginate={paginate}
-                        />}
-                    
-                </div>
-                    
+        <div className="mb-3 row">
+          <label htmlFor="capacite" className="col-sm-2 col-form-label ">
+            Capacite
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id="capacite"
+              value={capacite}
+              onChange={(e) => setCapacite(e.target.value)}
+            />
+            {verificetionChamp() === false && capacite === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez saisir la capacite
+              </p>
+            )}
+          </div>
+        </div>
+        <div className="mb-3 row">
+          <label htmlFor="adress" className="col-sm-2 col-form-label ">
+            Adresse
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id="adress"
+              value={adr}
+              onChange={(e) => setAdr(e.target.value)}
+            />
+            {verificetionChamp() === false && adr === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez saisir l'adresse'
+              </p>
+            )}
+          </div>
+        </div>
+      </Modal.Body>
+      <Modal.Footer>
+        <button
+          className="btn1"
+          type="submit"
+          id="ajouterbtn"
+          onClick={(e) => modifier(e)}
+        >
+          MODIFIER
+        </button>
+      </Modal.Footer>
+    </Modal>
+  );
+};
 
-                    
-                </Modal.Body>
-                
-             </Modal>
-
-             
-             
-        </>
-        
-        
-     )
-}
- 
 export default ModifierEntrepot;

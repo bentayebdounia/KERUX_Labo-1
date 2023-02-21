@@ -27,11 +27,11 @@ const ModalAjouterStock = (props) => {
             //console.log(res.data)
             //console.log(stock.id_stock)
             ServiceStock.modifierProcess(props.result.id_gnerate, res.data.id_stock).then( (res) => {
-                console.log(res.data)
+                //console.log(res.data)
             })
             serviceAlert.updateDateAlert(props.result.id_process, dateAlert ).then( (res) => {
                 console.log(res.data)
-                alert (res.data)
+                //alert (res.data)
             })
             
         })     

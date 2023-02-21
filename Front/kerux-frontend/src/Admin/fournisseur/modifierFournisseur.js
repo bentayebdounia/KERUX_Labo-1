@@ -4,11 +4,11 @@ import serviceRole from "../../service/service.role";
 import serviceFournisseur from "../../service/service.fournisseur";
 
 const ModifierFournisseur = (props) => {
-  const [idFournisseur, setIdfournisseur] = useState(props.idFournisseur);
+  const [idFournisseur, setIdfournisseur] = useState(props.id_fournisseur);
   const [nomFournisseur, setNomFournisseur] = useState(props.nomFournisseur);
   const [categorie, setCategorie] = useState(props.categorie);
   const [formJuridique, setFormJuridique] = useState(props.formJuridique);
-  const [adresse, setAdresse] = useState(props.adresse);
+  const [adresse, setAdresse] = useState(props.adress);
   const [email, setEmail] = useState(props.email);
   const [activite, setActivite] = useState(props.activite);
   const [modalite, setModalite] = useState(props.modalite);
@@ -40,14 +40,14 @@ const ModifierFournisseur = (props) => {
       await serviceFournisseur.modifierFournisseur(
         idFournisseur,
         nomFournisseur,
-        categorie,
         formJuridique,
         adresse,
         email,
         activite,
         modalite,
         typePaiement,
-        natureLivraison
+        natureLivraison,
+        categorie
       );
       setIdfournisseur('')
       setNomFournisseur('')

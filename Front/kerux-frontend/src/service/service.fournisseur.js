@@ -43,6 +43,7 @@ class ServiceFournisseur {
     return axios.post(AJOUTER_CONTACT, contact);
   }
   modifierFournisseur(
+    id_fournisseur,
     nom_fournisseur,
     forme_juridique,
     adresse_fournisseur,
@@ -51,8 +52,8 @@ class ServiceFournisseur {
     modalite_paiement,
     type_paiement,
     nature_livraison,
-    categorie,
-    id_fournisseur
+    categorie
+    
   ) {
     const fournisseur = {
       nom_fournisseur,

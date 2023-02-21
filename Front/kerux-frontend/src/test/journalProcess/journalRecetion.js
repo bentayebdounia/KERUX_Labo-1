@@ -27,7 +27,7 @@ const JournalReception = (props) => {
             setProcess(res.data)
         })
               
-    })
+    },[])
 
 
     const recherche = (e) => {
@@ -39,6 +39,11 @@ const JournalReception = (props) => {
                 console.log(res.data);
             })
         } 
+        else if (serchValue==="") {
+          ProcessService.getBonOrderByDate().then((res) => {
+            setProcess(res.data);
+          });
+        }
         
     }
    
