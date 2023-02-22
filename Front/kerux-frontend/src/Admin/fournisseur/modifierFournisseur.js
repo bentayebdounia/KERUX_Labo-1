@@ -152,6 +152,7 @@ const ModifierFournisseur = (props) => {
               required
             >
               <option selected></option>
+              <option value="personne physique">Personne physique</option>
               <option value="SARL">SARL</option>
               <option value="EURL">EURL</option>
             </select>

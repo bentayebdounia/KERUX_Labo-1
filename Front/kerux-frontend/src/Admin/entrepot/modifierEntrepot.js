@@ -10,7 +10,10 @@ const ModifierEntrepot = (props) => {
   const [airStock, setAirStock] = useState(props.air_stockage);
   const [capacite, setCapacite] = useState(props.capacite);
   const [adr, setAdr] = useState(props.adresse);
-
+  const [exist, setExist] = useState(props.exist);
+  const toggleSwitch = () => {
+    setExist(!exist);
+  };
   const verificetionChamp = () => {
     if (
       nomEntrepot !== "" &&
@@ -34,14 +37,17 @@ const ModifierEntrepot = (props) => {
         type,
         airStock,
         capacite,
-        adr
+        adr,
+        exist,
+        props.id_entrepot
       );
       setNomEtrepot("");
       setType("");
       setAirStock("");
       setAdr("");
       setCapacite("");
-      
+      setExist("");
+
       props.handleClose();
     }
   };
@@ -161,6 +167,30 @@ const ModifierEntrepot = (props) => {
                 {" "}
                 *Veillez saisir l'adresse'
               </p>
+            )}
+          </div>
+        </div>
+        <div className="mb-3 row">
+          <div className="form-check form-switch col-sm-2 ">
+            <input
+              className="form-check-input mx-1"
+              type="checkbox"
+              role="switch"
+              id="flexSwitchCheckDefault"
+              checked={exist}
+              onChange={toggleSwitch}
+            />
+          </div>
+          <div className="col-sm-7">
+            {exist === true && (
+              <label className="form-check-label" for="flexSwitchCheckDefault">
+                Exite
+              </label>
+            )}
+            {exist === false && (
+              <label className="form-check-label" for="flexSwitchCheckDefault">
+                N'existe pas
+              </label>
             )}
           </div>
         </div>

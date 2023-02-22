@@ -34,7 +34,7 @@ const Navbar = () => {
           
               <Link className="nav-link active  me-5"  to='/test'  >
                 <i className="bi bi-door-open-fill me-2" ></i>
-                Passer au mode agent
+                Mode agent
               </Link>
 
               <Link className="nav-link active "  to='#' role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{marginLeft:"3%"}}  >

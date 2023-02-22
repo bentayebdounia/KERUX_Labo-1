@@ -91,7 +91,7 @@ const JournalProduitsFournis = (props) => {
         <td>{p.categorie}</td>
         <td>{p.nom_produit}</td>
         <td>{p.poids_fourni / 1000}</td>
-        <td>{p.nombre_fourni}</td>
+        <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
         <td>{dateNow(p.datee)}</td>
         <td>{p.heure}</td>
       </tr>
@@ -117,7 +117,7 @@ const JournalProduitsFournis = (props) => {
         <td>{p.categorie}</td>
         <td>{p.nom_produit}</td>
         <td>{p.poids_fourni / 1000}</td>
-        <td>{p.nombre_fourni}</td>
+        <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
         <td>{dateNow(p.datee)}</td>
         <td>{p.heure}</td>
       </tr>

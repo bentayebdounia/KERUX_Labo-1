@@ -251,39 +251,33 @@ const JournalNettoyage = (props) => {
     };
    
     if (comboBox===''){
-            tableGeneral = (
-                currentPosts.map(
-                    (p, key) =>
-                        <tr key={key}>
-                            <td>{key +1}</td>
-                            <td>{p.id_gnerate}</td>
-                            <td>{p.categorie}</td>
-                            <td>{p.nom_produit}</td>
-                            <td>{p.poids/1000}</td>
-                            <td>{p.nombre}</td>
-                            <td>{dateNow(p.datee)}</td>
-                            <td>{p.heure}</td>
-                        </tr>
-                )
-            )
+            tableGeneral = currentPosts.map((p, key) => (
+              <tr key={key}>
+                <td>{key + 1}</td>
+                <td>{p.id_gnerate}</td>
+                <td>{p.categorie}</td>
+                <td>{p.nom_produit}</td>
+                <td>{p.poids / 1000}</td>
+                <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
+                <td>{dateNow(p.datee)}</td>
+                <td>{p.heure}</td>
+              </tr>
+            ));
         }
 
         else{
-            tableCondition = (
-                currentPosts2.map(
-                    (p, key) =>
-                        <tr key={key+1}>
-                            <td>{key}</td>
-                            <td>{p.id_gnerate}</td>
-                            <td>{p.categorie}</td>
-                            <td>{p.nom_produit}</td>
-                            <td>{p.poids/1000}</td>
-                            <td>{p.nombre}</td>
-                            <td>{dateNow(p.datee)}</td>
-                            <td>{p.heure}</td>
-                        </tr>
-                )
-            )
+            tableCondition = currentPosts2.map((p, key) => (
+              <tr key={key + 1}>
+                <td>{key}</td>
+                <td>{p.id_gnerate}</td>
+                <td>{p.categorie}</td>
+                <td>{p.nom_produit}</td>
+                <td>{p.poids / 1000}</td>
+                <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
+                <td>{dateNow(p.datee)}</td>
+                <td>{p.heure}</td>
+              </tr>
+            ));
         }
     
     return ( 

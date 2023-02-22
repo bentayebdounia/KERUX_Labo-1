@@ -463,6 +463,7 @@ const Enregistrement = (props) => {
                       <td>
                         {p.poids_fourni / 1000} / {p.poidsRester / 1000}{" "}
                       </td>
+                      
                       <td>
                         {p.nombre_fourni} / {p.nombreRester}{" "}
                       </td>

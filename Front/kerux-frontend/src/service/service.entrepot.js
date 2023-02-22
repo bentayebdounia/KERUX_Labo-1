@@ -15,9 +15,24 @@ class ServiceEntrepot {
     };
     return axios.post(POST_ENTREPOT, entrepot);
   }
-  updateEntrepot(air_stockage, exist, id_entrepot) {
-    const entrepot = { air_stockage, exist };
-    return axios.get(UPDATE_ENTREPOT + "/" + id_entrepot, entrepot);
+  updateEntrepot(
+    nom_entrepot,
+    type_entrepot,
+    air_stockage,
+    capacite,
+    adresse,
+    exist,
+    id_entrepot
+  ) {
+    const entrepot = {
+      nom_entrepot,
+      type_entrepot,
+      air_stockage,
+      capacite,
+      adresse,
+      exist,
+    };
+    return axios.put(UPDATE_ENTREPOT + "/" + id_entrepot, entrepot);
   }
 
   getEntrepot() {

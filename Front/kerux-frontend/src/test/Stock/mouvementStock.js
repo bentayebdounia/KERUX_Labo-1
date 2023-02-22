@@ -88,27 +88,24 @@ const MouvementStock = (props) => {
     }
    
     if (comboBox===''){
-            tableGeneral = (
-                currentPosts.map(
-                    (p, key) =>
-                        <tr key={key}>
-                            <td>{key+1}</td>
-                            <td>{p.id_gnerate}</td>
-                            <td>{p.categorie}</td>
-                            <td>{p.nom_produit}</td>
-                            <td>{p.etape}</td>
-                            <td>{p.poids/1000}</td>
-                            <td>{p.nombre}</td>
-                            <td>{dateNow(p.datee)}</td>
-                            <td>{p.heure}</td>
-                            <td>{p.fk_entrepot}</td>
-                            <td>{dateNow(p.date_entree)}</td>
-                            
-                            <td>{ p.date_sortie!==null && dateNow(p.date_sortie)}</td>
-                            <td>{p.poids_sortie}</td>
-                        </tr>
-                )
-            )
+            tableGeneral = currentPosts.map((p, key) => (
+              <tr key={key}>
+                <td>{key + 1}</td>
+                <td>{p.id_gnerate}</td>
+                <td>{p.categorie}</td>
+                <td>{p.nom_produit}</td>
+                <td>{p.etape}</td>
+                <td>{p.poids / 1000}</td>
+                <td>{p.nombre !== null && p.nombre !==0 && p.nombre}</td>
+                <td>{dateNow(p.datee)}</td>
+                <td>{p.heure}</td>
+                <td>{p.fk_entrepot}</td>
+                <td>{dateNow(p.date_entree)}</td>
+
+                <td>{p.date_sortie !== null && dateNow(p.date_sortie)}</td>
+                <td>{p.poids_sortie !== null && p.poids_sortie / 1000}</td>
+              </tr>
+            ));
         }
 
         else if(comboBox==='etape'){
@@ -135,7 +132,7 @@ const MouvementStock = (props) => {
                 <td>{p.nom_produit}</td>
                 <td>{p.etape}</td>
                 <td>{p.poids / 1000}</td>
-                <td>{p.nombre}</td>
+                <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
                 <td>{dateNow(p.datee)}</td>
                 <td>{p.heure}</td>
                 <td>{p.fk_entrepot}</td>
@@ -163,7 +160,7 @@ const MouvementStock = (props) => {
                 <td>{p.nom_produit}</td>
                 <td>{p.etape}</td>
                 <td>{p.poids / 1000}</td>
-                <td>{p.nombre}</td>
+                <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
                 <td>{dateNow(p.datee)}</td>
                 <td>{p.heure}</td>
                 <td>{p.fk_entrepot}</td>
@@ -177,52 +174,42 @@ const MouvementStock = (props) => {
 
         else if(comboBox==='en stock'){
             
-            tableCondition = (
-                currentPosts3.map(
-                    (p, key) =>
-                    <tr key={key}>
-                            <td>{key+1}</td>
-                            <td>{p.id_gnerate}</td>
-                            <td>{p.categorie}</td>
-                            <td>{p.nom_produit}</td>
-                            <td>{p.etape}</td>
-                            <td>{p.poids/1000}</td>
-                            <td>{p.nombre}</td>
-                            <td>{dateNow(p.datee)}</td>
-                            <td>{p.heure}</td>
-                            <td>{p.fk_entrepot}</td>
-                            <td>{dateNow(p.date_entree)}</td>
-                            
-                            
-                    
-                    </tr>
-                )
-            )
+            tableCondition = currentPosts3.map((p, key) => (
+              <tr key={key}>
+                <td>{key + 1}</td>
+                <td>{p.id_gnerate}</td>
+                <td>{p.categorie}</td>
+                <td>{p.nom_produit}</td>
+                <td>{p.etape}</td>
+                <td>{p.poids / 1000}</td>
+                <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
+                <td>{dateNow(p.datee)}</td>
+                <td>{p.heure}</td>
+                <td>{p.fk_entrepot}</td>
+                <td>{dateNow(p.date_entree)}</td>
+              </tr>
+            ));
             
         }
         else if(comboBox==='sortie de stock'){
             
-            tableCondition = (
-                currentPosts4.map(
-                    (p, key) =>
-                    <tr key={key}>
-                            <td>{key+1}</td>
-                            <td>{p.id_gnerate}</td>
-                            <td>{p.categorie}</td>
-                            <td>{p.nom_produit}</td>
-                            <td>{p.etape}</td>
-                            <td>{p.poids/1000}</td>
-                            <td>{p.nombre}</td>
-                            <td>{dateNow(p.datee)}</td>
-                            <td>{p.heure}</td>
-                            <td>{p.fk_entrepot}</td>
-                            <td>{dateNow(p.date_entree)}</td>
-                            <td>{dateNow(p.date_sortie)}</td>
-                            <td>{p.poids_sortie/1000}</td>
-                    
-                    </tr>
-                )
-            )
+            tableCondition = currentPosts4.map((p, key) => (
+              <tr key={key}>
+                <td>{key + 1}</td>
+                <td>{p.id_gnerate}</td>
+                <td>{p.categorie}</td>
+                <td>{p.nom_produit}</td>
+                <td>{p.etape}</td>
+                <td>{p.poids / 1000}</td>
+                <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
+                <td>{dateNow(p.datee)}</td>
+                <td>{p.heure}</td>
+                <td>{p.fk_entrepot}</td>
+                <td>{dateNow(p.date_entree)}</td>
+                <td>{dateNow(p.date_sortie)}</td>
+                <td>{p.poids_sortie / 1000}</td>
+              </tr>
+            ));
             
         }
     

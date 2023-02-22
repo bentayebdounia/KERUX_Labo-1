@@ -492,7 +492,7 @@ const TestCoupage = (props) => {
                   <td>{p.categorie}</td>
                   <td>{p.nom_produit}</td>
                   <td>{p.poids / 1000}</td>
-                  <td>{p.nombre}</td>
+                  <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
                   <td>{dateModif(p.datee)}</td>
                   <td>{p.heure}</td>
                 </tr>
@@ -566,7 +566,7 @@ const TestCoupage = (props) => {
                   <td>{p.categorie}</td>
                   <td>{p.nom_produit}</td>
                   <td>{p.poids / 1000}</td>
-                  <td>{p.nombre}</td>
+                  <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
                   <td>{dateModif(p.datee)}</td>
                   <td>{p.heure}</td>
                   <td>{p.nom_entrepot}</td>

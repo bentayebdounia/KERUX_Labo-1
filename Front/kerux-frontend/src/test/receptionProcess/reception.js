@@ -61,19 +61,19 @@ const Reception = (props) => {
     }
 
     const getVlue =() =>{
-        if (nom_fournisseur !== '' && !toggle){
+        
             serviceFournisseur.getFournisseurByNomOrCategorie(nom_fournisseur,nom_fournisseur)
             .then((res) => {
                 setFournisseur2(res.data)
          })
-        }
+        
     }
 
      //get all fournisseur
-     useEffect(()=>{
-        getFournisseur()
-        getVlue()
-    },[])
+     useEffect(() => {
+       getFournisseur();
+       getVlue();
+     }, [nom_fournisseur]);
 
     useEffect(()=>{
         toggleTrue()
@@ -116,7 +116,7 @@ const Reception = (props) => {
                          {fournisseur.map((value) => {
                                      return (
                                          <a className='dataItem' key={value.id_fournisseur} onClick={()=>{setNomFournisseur(value.nom_fournisseur); setFk_fournisseur(value.id_fournisseur)}}>
-                                             <p > {value.nom_fournisseur}</p>
+                                             <p >{value.id_fournisseur }. {value.nom_fournisseur}</p>
                                          </a>
                                      )
                                  })}
@@ -127,10 +127,25 @@ const Reception = (props) => {
                          (<div className='dataResult'>
                          {fournisseur2.map((value) => {
                                      return (
-                                         <a className='dataItem' key={value.id_fournisseur} onClick={()=>{setNomFournisseur(value.nom_fournisseur); setFk_fournisseur(value.id_fournisseur) }} >
-                                             <p > {value.nom_fournisseur}</p>
-                                         </a>
-                                     )
+                                       <a
+                                         className="dataItem"
+                                         key={value.id_fournisseur}
+                                         onClick={() => {
+                                           setNomFournisseur(
+                                             value.nom_fournisseur
+                                           );
+                                           setFk_fournisseur(
+                                             value.id_fournisseur
+                                           );
+                                         }}
+                                       >
+                                         <p>
+                                           {" "}
+                                           {value.id_fournisseur}.{" "}
+                                           {value.nom_fournisseur}
+                                         </p>
+                                       </a>
+                                     );
                                  })}
                      </div>)
                          

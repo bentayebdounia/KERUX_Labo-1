@@ -226,146 +226,149 @@ const TestCondit = (props) => {
      
    
  if(buttonColor)
-    {table=(
-        <>
-        <table className="table table-bordered" style={{width:"90%" , margin:"3%" ,   }} > 
-                            <thead style={{backgroundColor: "#16161"}}> 
-                                <tr> 
-                                <th scope="col"></th>
-                                <th scope="col">ID </th> 
-                                <th scope="col">Categorie</th> 
-                                <th scope="col">Nom produit</th> 
-                                <th scope="col">Poids(Kg) </th> 
-                                <th scope="col">Nombre</th> 
-                                <th scope="col">Date</th> 
-                                <th scope="col">Heure</th> 
-                                
- 
- 
-                                 
-                                 
-                                </tr> 
-                            </thead> 
-                            <tbody >
-                            { ((produitBloquant===false && produitBloquantStock===false) || produitBloquant===true )
-                              && currentPosts.map( 
-                                    (p, key) => 
-                                    <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}}> 
-                                        <td>
-                                        <input
-                                            onChange={event => {
-                                                let checked = event.target.checked;
-                                                setEnattente(
-                                                    currentPosts.map(data => {
-                                                    if (p.id_gnerate === data.id_gnerate) {
-                                                        data.select = checked;
-                                                        setId(p.id_gnerate)
-                                                    }
-                                                    else 
-                                                        data.select=""
-                                                        
-                                                    
-                                                    return data;
-                                                })
-                                                );
-                                            }}
-                                            type="checkbox"
-                                            checked={p.select}
-                                            ></input>
-                                            </td> 
-                                        <td>{p.id_gnerate}</td> 
-                                        <td>{p.categorie}</td> 
-                                        <td>{p.nom_produit}</td> 
-                                        <td>{p.poids/1000}</td> 
-                                        <td>{p.nombre}</td> 
-                                        <td>{dateNow (p.datee)}</td> 
-                                        <td>{p.heure}</td> 
-                                        
-                                        
-                                    
-                                    </tr>    )} 
-                                </tbody> 
-                                </table>
-                                {currentPosts.length !==0 && <Pagination
-                                    postsPerPage={postsPerPage}
-                                    totalPosts={currentPosts.length}
-                                    paginate={paginate}
-                                />} 
-    
-            </>
+    {table = (
+      <>
+        <table
+          className="table table-bordered"
+          style={{ width: "90%", margin: "3%" }}
+        >
+          <thead style={{ backgroundColor: "#16161" }}>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">ID </th>
+              <th scope="col">Categorie</th>
+              <th scope="col">Nom produit</th>
+              <th scope="col">Poids(Kg) </th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Date</th>
+              <th scope="col">Heure</th>
+            </tr>
+          </thead>
+          <tbody>
+            {((produitBloquant === false && produitBloquantStock === false) ||
+              produitBloquant === true) &&
+              currentPosts.map((p, key) => (
+                <tr
+                  key={key}
+                  style={{
+                    background: `${
+                      dateNow(p.date_alert) <= dateToday() ? "#E8C4C4" : "white"
+                    }`,
+                  }}
+                >
+                  <td>
+                    <input
+                      onChange={(event) => {
+                        let checked = event.target.checked;
+                        setEnattente(
+                          currentPosts.map((data) => {
+                            if (p.id_gnerate === data.id_gnerate) {
+                              data.select = checked;
+                              setId(p.id_gnerate);
+                            } else data.select = "";
 
-    
-
-    )
+                            return data;
+                          })
+                        );
+                      }}
+                      type="checkbox"
+                      checked={p.select}
+                    ></input>
+                  </td>
+                  <td>{p.id_gnerate}</td>
+                  <td>{p.categorie}</td>
+                  <td>{p.nom_produit}</td>
+                  <td>{p.poids / 1000}</td>
+                  <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
+                  <td>{dateNow(p.datee)}</td>
+                  <td>{p.heure}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        {currentPosts.length !== 0 && (
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={currentPosts.length}
+            paginate={paginate}
+          />
+        )}
+      </>
+    );
 }
 
 if(buttonColor2)
-    {table2=(
-        <>
-        <table className="table table-bordered" style={{width:"90%" , margin:"3%" ,   }} > 
-                            <thead style={{backgroundColor: "#16161"}}> 
-                                <tr> 
-                                <th scope="col"></th>
-                                <th scope="col">ID </th> 
-                                <th scope="col">Categorie</th> 
-                                <th scope="col">Nom produit</th> 
-                                <th scope="col">Poids(Kg) </th> 
-                                <th scope="col">Nombre</th> 
-                                <th scope="col">Date</th> 
-                                <th scope="col">Heure</th> 
-                                <th scope="col">entrepot</th> 
- 
- 
-                                 
-                                 
-                                </tr> 
-                            </thead> 
-                            <tbody >
-                            { ((produitBloquant===false && produitBloquantStock===false) || produitBloquantStock===true )
-                              &&  currentPosts2.map( 
-                                (p, key) => 
-                                <tr key={key} style={{background:`${(dateNow(p.date_alert) <= dateToday()) ? '#E8C4C4' : 'white'  }`}} > 
-                                    <td>
-                                    <input
-                                        onChange={event => {
-                                            let checked = event.target.checked;
-                                            setEnstock(
-                                                currentPosts2.map(data => {
-                                                if (p.id_gnerate === data.id_gnerate) {
-                                                    data.select = checked;
-                                                    setId(p.id_gnerate)
-                                                }
-                                                else  data.select=""
-                                                    
-                                                
-                                                return data;
-                                            })
-                                            );
-                                        }}
-                                        type="checkbox"
-                                        checked={p.select}
-                                        ></input>
-                                        </td> 
-                                    <td>{p.id_gnerate}</td> 
-                                    <td>{p.categorie}</td> 
-                                    <td>{p.nom_produit}</td> 
-                                    <td>{p.poids/1000}</td> 
-                                    <td>{p.nombre}</td> 
-                                    <td>{dateNow (p.datee)}</td> 
-                                    <td>{p.heure}</td> 
-                                    <td>{p.nom_entrepot}</td>  
-                                
-                                </tr>  
-                                  )} 
-                                </tbody> 
-                                </table> 
-                                {currentPosts2.length !==0 && <Pagination
-                                    postsPerPage={postsPerPage}
-                                    totalPosts={currentPosts2.length}
-                                    paginate={paginate}
-                                />}
-            </>
-    )
+    {table2 = (
+      <>
+        <table
+          className="table table-bordered"
+          style={{ width: "90%", margin: "3%" }}
+        >
+          <thead style={{ backgroundColor: "#16161" }}>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">ID </th>
+              <th scope="col">Categorie</th>
+              <th scope="col">Nom produit</th>
+              <th scope="col">Poids(Kg) </th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Date</th>
+              <th scope="col">Heure</th>
+              <th scope="col">entrepot</th>
+            </tr>
+          </thead>
+          <tbody>
+            {((produitBloquant === false && produitBloquantStock === false) ||
+              produitBloquantStock === true) &&
+              currentPosts2.map((p, key) => (
+                <tr
+                  key={key}
+                  style={{
+                    background: `${
+                      dateNow(p.date_alert) <= dateToday() ? "#E8C4C4" : "white"
+                    }`,
+                  }}
+                >
+                  <td>
+                    <input
+                      onChange={(event) => {
+                        let checked = event.target.checked;
+                        setEnstock(
+                          currentPosts2.map((data) => {
+                            if (p.id_gnerate === data.id_gnerate) {
+                              data.select = checked;
+                              setId(p.id_gnerate);
+                            } else data.select = "";
+
+                            return data;
+                          })
+                        );
+                      }}
+                      type="checkbox"
+                      checked={p.select}
+                    ></input>
+                  </td>
+                  <td>{p.id_gnerate}</td>
+                  <td>{p.categorie}</td>
+                  <td>{p.nom_produit}</td>
+                  <td>{p.poids / 1000}</td>
+                  <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
+                  <td>{dateNow(p.datee)}</td>
+                  <td>{p.heure}</td>
+                  <td>{p.nom_entrepot}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
+        {currentPosts2.length !== 0 && (
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={currentPosts2.length}
+            paginate={paginate}
+          />
+        )}
+      </>
+    );
 }
 
     

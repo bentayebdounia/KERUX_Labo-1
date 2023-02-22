@@ -13,6 +13,7 @@ const ListeEntrepot = (props) => {
   const [air_stockage, setAir_stockage] = useState();
   const [capacite, setCapacite] = useState();
   const [adresse, setAdresse] = useState();
+  const [exist, setExist] = useState()
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -46,7 +47,8 @@ const ListeEntrepot = (props) => {
     typeEntrepot,
     airStockage,
     capacite,
-    adresse
+    adresse,
+    exist
   ) => {
     // e.preventDefault();
     setId_entrepot(id);
@@ -55,6 +57,7 @@ const ListeEntrepot = (props) => {
     setAir_stockage(airStockage);
     setCapacite(capacite);
     setAdresse(adresse);
+    setExist(exist)
 
     handleShow();
   };
@@ -108,7 +111,9 @@ const ListeEntrepot = (props) => {
                     <td>{p.type_entrepot}</td>
                     <td>{p.air_stockage}</td>
                     <td>{p.capacite}</td>
-                    <td>{p.adresse}</td>
+                    <td>
+                      {p.adresse} 
+                    </td>
                     <td>{dateNow(p.date_enregistrement_entrepot)}</td>
                     {p.exist === true && (
                       <td>
@@ -135,7 +140,8 @@ const ListeEntrepot = (props) => {
                             p.type_entrepot,
                             p.air_stockage,
                             p.capacite,
-                            p.adresse
+                            p.adresse,
+                            p.exist
                           )
                         }
                         type="button"
@@ -167,6 +173,7 @@ const ListeEntrepot = (props) => {
               air_stockage={air_stockage}
               capacite={capacite}
               adresse={adresse}
+              exist={exist}
             />
           )}
         </Modal.Body>
