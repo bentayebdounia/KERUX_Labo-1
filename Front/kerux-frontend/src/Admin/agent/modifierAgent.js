@@ -13,6 +13,7 @@ const ModifierAgent = (props) => {
   const [mot_passe, setPassword] = useState(props.password);
   const [verifier, setVerifier] = useState();
   const [fk_role, setFk_role] = useState(props.role);
+  const [fonction, setFonction] = useState(props.fonction);
   useEffect(() => {
     serviceRole.getRole().then((res) => {
       setRole(res.data);
@@ -56,6 +57,7 @@ const ModifierAgent = (props) => {
         date_naissance,
         num_tel,
         adresse,
+        fonction,
         fk_role,
         mot_passe
       );
@@ -178,6 +180,27 @@ const ModifierAgent = (props) => {
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
                 *Veillez saisir le numero de telephone
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="mb-3 row">
+          <label htmlFor="fonction" className="col-sm-3 col-form-label">
+            Fonction <span style={{ color: "red" }}>*</span>
+          </label>
+          <div className="col-sm-9">
+            <input
+              type="text"
+              className="form-control"
+              id="fonction"
+              value={fonction}
+              onChange={(e) => setFonction(e.target.value)}
+            />
+            {verifier === false && fonction === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez saisir la fonction de l'agent
               </p>
             )}
           </div>

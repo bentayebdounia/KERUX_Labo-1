@@ -16,6 +16,7 @@ export default function ListeAgent() {
   const [adr, setAdr] = useState("");
   const [tel, setTel] = useState("");
   const [password, setPassword] = useState("");
+  const [fonction, setFonction] = useState("");
   const [role_agent, setRole_agent] = useState("");
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -75,7 +76,7 @@ export default function ListeAgent() {
     });
   };
 
-  const modifier = (id, nom, prenom, dateN, adr, tel, role, mot_passe) => {
+  const modifier = (id, nom, prenom, dateN, adr, tel,fonction, role, mot_passe) => {
     // e.preventDefault();
     setId(id);
     setNom(nom);
@@ -83,6 +84,7 @@ export default function ListeAgent() {
     setDate_n(dateN);
     setAdr(adr);
     setTel(tel);
+    setFonction (fonction)
     setRole_agent(role);
     setPassword(mot_passe);
     handleShow();
@@ -136,6 +138,7 @@ export default function ListeAgent() {
                     <th scope="col">Date de naissance</th>
                     <th scope="col">Adresse</th>
                     <th scope="col">N° téléphone</th>
+                    <th scope="col">Fonction</th>
                     <th scope="col">Role</th>
                     <th scope="col">Mot de passe</th>
                     <th scope="col"> Action</th>
@@ -150,6 +153,7 @@ export default function ListeAgent() {
                       <td>{dateNow(personne.date_naissance)}</td>
                       <td>{personne.adresse}</td>
                       <td>{personne.num_tel}</td>
+                      <td>{personne.fonction}</td>
                       <td>{personne.fk_role}</td>
                       <td>{personne.mot_passe}</td>
                       <td>
@@ -162,6 +166,7 @@ export default function ListeAgent() {
                               personne.date_naissance,
                               personne.adresse,
                               personne.num_tel,
+                              personne.fonction,
                               personne.fk_role,
                               personne.mot_passe
                             )
@@ -194,6 +199,7 @@ export default function ListeAgent() {
           dateN={dateN}
           adr={adr}
           tel={tel}
+          fonction = {fonction}
           role={role_agent}
           password={password}
           show={show}

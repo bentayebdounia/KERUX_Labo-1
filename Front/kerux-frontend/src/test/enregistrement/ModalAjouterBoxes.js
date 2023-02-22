@@ -346,9 +346,11 @@ const ModalAjoutBoxes = (props) => {
                     <div
                       className="col-sm-10 mb-3"
                       id="produitFourni"
+                      style={{backgroundColor: '#f0f0f0' ,width:"90%"}}
                       key={key}
                     >
                       <Boxes
+                        key={key}
                         categorie={props.categorie}
                         n_produit={props.type}
                         nom_produit={box.nom_produit}
@@ -388,7 +390,7 @@ const ModalAjoutBoxes = (props) => {
                             >
                               {" "}
                             </i>{" "}
-                            AJOUTER BOXE
+                            AJOUTER BOX
                             <span
                               className="position-absolute top-0 start-100 translate-middle badge rounded-pill "
                               style={{

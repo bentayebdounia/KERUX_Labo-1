@@ -10,12 +10,13 @@ export default function AjouterAgent() {
   const [date_naissance, setDateN] = useState("");
   const [adresse, setAdr] = useState("");
   const [num_tel, setTel] = useState("");
+  const [fonction, setFonction] = useState("")
   const [role, setRole] = useState([]);
   const [mot_passe, setPassword] = useState("");
-  const [recherche, setRecherche] = useState("");
+  const [carteIdentite, setCarte_identite] = useState("")
 
-  const [fk_role, setFk_role] = useState();
-  const [confirmation, setConfirmation] = useState(false);
+  const [fk_role, setFk_role] = useState("");
+
 
   const [verifier, setVerifier] = useState();
   const [show, setShow] = useState(false);
@@ -37,7 +38,9 @@ export default function AjouterAgent() {
       date_naissance !== "" &&
       adresse !== "" &&
       num_tel !== "" &&
-      role !== ""
+      fk_role !== "" &&
+      fonction !== "" && 
+      carteIdentite !==""
     ) {
       if (fk_role !== "4") {
         if (mot_passe !== "") {
@@ -67,8 +70,10 @@ export default function AjouterAgent() {
       date_naissance,
       num_tel,
       adresse,
+      fonction,
       fk_role,
-      mot_passe,
+      mot_passe
+      
     };
     if (verificetionChamp()) {
       console.log("agent =>" + JSON.stringify(agent));
@@ -82,6 +87,7 @@ export default function AjouterAgent() {
           setTel("");
           setFk_role("");
           setPassword("");
+          setFonction("")
 
           setMessage("Agent bien ajouter et son ID = " + res.data.id_personne);
           handleShow();
@@ -100,7 +106,7 @@ export default function AjouterAgent() {
       <section className="section" id="ajouterAgent">
         <div className="mb-3 row">
           <label htmlFor="nomAgent" className="col-sm-3 col-form-label ">
-            Nom
+            Nom <span style={{ color: "red" }}>*</span>
           </label>
           <div className="col-sm-9">
             <input
@@ -121,7 +127,7 @@ export default function AjouterAgent() {
 
         <div className="mb-3 row">
           <label htmlFor="prenomAgent" className="col-sm-3 col-form-label ">
-            Prénom
+            Prénom <span style={{ color: "red" }}>*</span>
           </label>
           <div className="col-sm-9">
             <input
@@ -142,7 +148,7 @@ export default function AjouterAgent() {
 
         <div className="mb-3 row">
           <label htmlFor="DNagent" className="col-sm-3 col-form-label ">
-            Date de naissance
+            Date de naissance <span style={{ color: "red" }}>*</span>
           </label>
           <div className="col-sm-9">
             <input
@@ -163,7 +169,7 @@ export default function AjouterAgent() {
 
         <div className="mb-3 row">
           <label htmlFor="adresseAgent" className="col-sm-3 col-form-label ">
-            Adresse
+            Adresse <span style={{ color: "red" }}>*</span>
           </label>
           <div className="col-sm-9">
             <input
@@ -184,7 +190,7 @@ export default function AjouterAgent() {
 
         <div className="mb-3 row">
           <label htmlFor="numAgent" className="col-sm-3 col-form-label ">
-            N° téléphone
+            N° téléphone <span style={{ color: "red" }}>*</span>
           </label>
           <div className="col-sm-9">
             <input
@@ -204,8 +210,29 @@ export default function AjouterAgent() {
         </div>
 
         <div className="mb-3 row">
+          <label htmlFor="fonction" className="col-sm-3 col-form-label">
+            Fonction <span style={{ color: "red" }}>*</span>
+          </label>
+          <div className="col-sm-9">
+            <input
+              type="text"
+              className="form-control"
+              id="fonction"
+              value={fonction}
+              onChange={(e) => setFonction(e.target.value)}
+            />
+            {verifier === false && fonction === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez saisir la fonction de l'agent
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="mb-3 row">
           <label htmlFor="roleAgentAjout" className="col-sm-3 col-form-label">
-            Role
+            Role <span style={{ color: "red" }}>*</span>
           </label>
           <div className="col-sm-9">
             <select
@@ -220,7 +247,7 @@ export default function AjouterAgent() {
                 <option value={fk_role.id_role}> {fk_role.nom_role} </option>
               ))}
             </select>
-            {verifier === false && role === "" && (
+            {verifier === false && fk_role === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
                 *Veillez selectionner le role
@@ -232,11 +259,11 @@ export default function AjouterAgent() {
         {fk_role !== "4" && (
           <div className="mb-3 row">
             <label htmlFor="inputPassword" className="col-sm-3 col-form-label">
-              Mot de passe
+              Mot de passe <span style={{ color: "red" }}>*</span>
             </label>
             <div className="col-sm-9">
               <input
-                type="password"
+                type="text"
                 className="form-control"
                 id="password"
                 value={mot_passe}
@@ -251,6 +278,33 @@ export default function AjouterAgent() {
             </div>
           </div>
         )}
+
+        <div className="mb-3 row">
+          <label htmlFor="inputPassword" className="col-sm-3 col-form-label">
+            Carte d'identité <span style={{ color: "red" }}>*</span>
+          </label>
+          <div className="col-sm-9">
+            <div className="input-group ">
+              <input
+                type="file"
+                className="form-control"
+                id="inputfile"
+                aria-describedby="inputGroupFileAddon04"
+                aria-label="Upload"
+                value={carteIdentite}
+                onChange={(e) => setCarte_identite(e.target.value)}
+                required
+              />
+            </div>
+            {verifier === false && carteIdentite === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez selectionner le scanne de la carte d'identité
+              </p>
+            )}
+          </div>
+        </div>
+
         <div className="d-grid gap-2 my-4">
           <button
             className="btn1"
@@ -262,7 +316,14 @@ export default function AjouterAgent() {
           </button>
         </div>
       </section>
-      {show && <ModelReponse show = {show} handleClose= {handleClose} titre={""} message={message} />}
+      {show && (
+        <ModelReponse
+          show={show}
+          handleClose={handleClose}
+          titre={""}
+          message={message}
+        />
+      )}
     </div>
   );
 }

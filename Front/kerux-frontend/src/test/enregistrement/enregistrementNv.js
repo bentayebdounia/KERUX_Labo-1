@@ -222,7 +222,7 @@ const Enregistrement = (props) => {
     TypePoulet = (
       <>
         <option defaultValue={""}></option>
-        <option value={"poulet"}>poulet</option>
+        <option value={"poulet-entier"}>poulet-entier</option>
         <option value="tendres"> Tendres</option>
         <option value="wings">Wings</option>
         <option value=" dips">Dips</option>
@@ -233,7 +233,7 @@ const Enregistrement = (props) => {
     nbr = (
       <>
         <div className="col-2">
-          <label htmlFor="nbr">Nombre fourni</label>
+          <label htmlFor="nbr">Quantité fourni</label>
         </div>
         <div className="col-4">
           <input
@@ -441,7 +441,7 @@ const Enregistrement = (props) => {
                     <th scope="col">Categorie </th>
                     <th scope="col">Nom de produit</th>
                     <th scope="col">Poids (Kg)</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Quantité</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -463,7 +463,7 @@ const Enregistrement = (props) => {
                       <td>
                         {p.poids_fourni / 1000} / {p.poidsRester / 1000}{" "}
                       </td>
-                      
+
                       <td>
                         {p.nombre_fourni} / {p.nombreRester}{" "}
                       </td>

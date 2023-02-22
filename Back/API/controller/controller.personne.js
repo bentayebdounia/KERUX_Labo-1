@@ -2,11 +2,28 @@ const pool = require("../db");
 const queries = require("../queries/queries");
 
 AjouterPersonne = (req, res) => {
-  const { nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe } =
-    req.body;
+  const {
+    nom,
+    prenom,
+    date_naissance,
+    num_tel,
+    adresse,
+    fonction,
+     fk_role,
+    mot_passe,
+  } = req.body;
   pool.query(
     queries.postPersonne,
-    [nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe],
+    [
+      nom,
+      prenom,
+      date_naissance,
+      num_tel,
+      adresse,
+      fonction,
+      fk_role,
+      mot_passe,
+    ],
     (error, result) => {
       if (error) throw error;
       res.status(200).json(result.rows[0]);
@@ -17,8 +34,16 @@ AjouterPersonne = (req, res) => {
 updatePersonne = (req, res) => {
   const id_personne = req.params.id_personne;
 
-  const { nom, prenom, date_naissance, num_tel, adresse, fk_role, mot_passe } =
-    req.body;
+  const {
+    nom,
+    prenom,
+    date_naissance,
+    num_tel,
+    adresse,
+    fonction,
+    fk_role,
+    mot_passe,
+  } = req.body;
   pool.query(
     queries.updatePersonne,
     [
@@ -27,6 +52,7 @@ updatePersonne = (req, res) => {
       date_naissance,
       num_tel,
       adresse,
+      fonction,
       fk_role,
       mot_passe,
       id_personne,

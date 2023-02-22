@@ -17,17 +17,7 @@ const ModalConfirmNet = (props) => {
    
     //const [result, setresult] = useState()
 
-    const billRef = createRef();
- 
-    useEffect(() => {
-        if(!!result.id_gnerate){
-            handleBillPrint()
-            props.sortieBtn()
-            props.toggleDisplay() 
-            props.handleClose2()
-        }
-    },[result.id_gnerate])
-
+    
     // Send print request to the Main process
     const handlePrint = function (target) {
         return new Promise(() => {
@@ -45,12 +35,7 @@ const ModalConfirmNet = (props) => {
         });
     };
 
-    const handleBillPrint = useReactToPrint({
-        content: () => billRef.current,
-        documentTitle: "Bill component",
-        print: handlePrint,
-    });
-
+   
 
     const confirmSortie = async (e) => {
         e.preventDefault();
@@ -76,6 +61,9 @@ const ModalConfirmNet = (props) => {
             }   
              
             
+            props.sortieBtn();
+            props.toggleDisplay();
+            props.handleClose2();
             
             
             
@@ -122,14 +110,7 @@ const ModalConfirmNet = (props) => {
                 </div>
 
                 
-                { !!result.id_gnerate  && 
-                                <div style={{display:"none"}}>
-                                    <Bill   ref={billRef}
-                                            id={result}
-                                            categorie = {props.categorie}
-                                     />
-                                </div>
-                }  
+                
                                        
                 
                     

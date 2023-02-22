@@ -18,7 +18,7 @@ const AffichageBoxes = (props) => {
     serviceEntrepot.getEntrepot().then((res) => {
       setEntrepots(res.data);
     });
-  });
+  },[]);
 
   var n = props.id;
   const [boxe, setBoxe] = useState(
@@ -176,7 +176,7 @@ const AffichageBoxes = (props) => {
                     <th scope="col">Categorie</th>
                     <th scope="col">Nom produit</th>
                     <th scope="col">Poids(Kg) </th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Quantité</th>
                     <th scope="col">stock</th>
                     <th scope="col">Date alerte</th>
                     <th scope="col"></th>
@@ -206,12 +206,15 @@ const AffichageBoxes = (props) => {
                                     return data;
                                   })
                                 );
+                                setPoids(p.poids / 1000);
+                                setNombre(p.nombre);
                               }}
                               type="button"
                               className="btn"
                               style={{ background: "#4f8b2a", color: "white" }}
                               value="MODIFIER"
                               checked={p.select}
+                              
                             ></input>
                           </td>
                         </>
@@ -226,7 +229,7 @@ const AffichageBoxes = (props) => {
                             <input
                               value={poids}
                               type="number"
-                              placeholder={p.poids}
+                              placeholder={p.poids/1000}
                               onChange={(event) => {
                                 setPoids(event.target.value);
                               }}

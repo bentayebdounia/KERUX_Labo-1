@@ -21,8 +21,10 @@ class ServiceAdmin {
     date_naissance,
     num_tel,
     adresse,
+    fonction,
     fk_role,
     mot_passe
+    
   ) {
     const agent = {
       nom,
@@ -30,8 +32,10 @@ class ServiceAdmin {
       date_naissance,
       num_tel,
       adresse,
+      fonction,
       fk_role,
-      mot_passe,
+      mot_passe
+      
     };
     console.log(agent);
     return axios.put(AGENT_API_MODIFIER + id_personne, agent);

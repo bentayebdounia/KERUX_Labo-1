@@ -157,143 +157,216 @@ const Reception = (props) => {
 
     
 
-    return ( 
-       
-        <>
-            
-            
-                
+    return (
+      <>
+        {toggle === true && (
+          <section id="etape_section">
+            <div className="container">
+              <form className="needs-validation" noValidate>
+                <div>
+                  <div className="mb-3 row ">
+                    <label
+                      htmlFor="fournisseur"
+                      className="col-sm-2 col-form-label"
+                    >
+                      Fournisseur
+                    </label>
+                    <div className="col-sm-10 dropdown">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="fournisseur"
+                        value={nom_fournisseur}
+                        onChange={(e) => setNomFournisseur(e.target.value)}
+                        onClick={select}
+                        required
+                      />
+                      {Fournisseur}
+                    </div>
+                  </div>
+                </div>
 
-        {toggle === true && 
-            <section id="etape_section">
-           
-                 <div className="container">
-                    
-                    <form className="needs-validation" noValidate>
-                    <div>
-                    
-                        <div className="mb-3 row ">
-                            <label htmlFor="fournisseur"  className="col-sm-2 col-form-label" >Fournisseur</label>
-                            <div className="col-sm-10 dropdown">
-                            <input type="text"  className="form-control" id="fournisseur" value={nom_fournisseur} onChange={(e)=> setNomFournisseur(e.target.value)} onClick={select} required/>
-                             {Fournisseur}
-                            </div>
-                            
-                        </div>
-                        
-                    </div>
-                    
-        
-                    <div className="mb-3 row">
-                        <label htmlFor="acheteur" className="col-sm-2 col-form-label"  >Acheteur/Livreur</label>
-                        
-                    </div>
-    
-                    <div className="mb-3 row">
-                        <div className="col-sm-1 form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"  onChange={(e)=> {setAchetlivreur(false) ; setLivreur('')}} required/>
-                            <label className="form-check-label" >
-                               Acheteur   
-                            </label>
-                        </div>
-    
-                        <div className="col-sm-1 form-check">
-                            <input className="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2"  onChange={(e)=> {setAchetlivreur(true) ; setAcheteur('')}} required/>
-                            <label className="form-check-label" >
-                                Livreur
-                            </label>
-                        </div>
-    
-                        <div className="col-sm-10">
-                          <input type="text"  className="form-control" id="acheteur" value={achetLivreur ? livreur : acheteur} onChange={(e)=>{ achetLivreur  ? (setLivreur(e.target.value) ) : (setAcheteur(e.target.value) )}} required/>
-                        </div>
-    
-                    </div>
-        
-                    <div className="mb-3 row">
-                        <label htmlFor="typeBon" className="col-sm-2 col-form-label">Type de bon</label>
-                        <div className="col-sm-10">
-                          <select className="form-select" aria-label="Default select example" id="typeBon" value={type_bon} onChange={(e)=> setTypebon(e.target.value)}  required>
-                            <option defaultValue={""}></option>
-                            <option value="bon de livraison">Bon de livraison</option>
-                            <option value="bon d'achat">Bon d'achat</option>
-                          </select>
-                      </div>
-                    </div>
-        
-                    <div className="mb-3 row">
-                        <label htmlFor="recepteur"  className="col-sm-2 col-form-label">Récepteur</label>
-                        <div className="col-sm-10">
-                          <input type="text"  className="form-control" id="recepteur" value={recepteur} onChange={(e)=> setRecepteur(e.target.value)} required/>
-                        </div>
-                    </div>
-        
+                <div className="mb-3 row">
+                  <label htmlFor="acheteur" className="col-sm-2 col-form-label">
+                    Acheteur/Livreur
+                  </label>
+                </div>
+
+                <div className="mb-3 row">
+                  <div className="col-sm-1 form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault1"
+                      onChange={(e) => {
+                        setAchetlivreur(false);
+                        setLivreur("");
+                      }}
+                      required
+                    />
+                    <label className="form-check-label">Acheteur</label>
+                  </div>
+
+                  <div className="col-sm-1 form-check">
+                    <input
+                      className="form-check-input"
+                      type="radio"
+                      name="flexRadioDefault"
+                      id="flexRadioDefault2"
+                      onChange={(e) => {
+                        setAchetlivreur(true);
+                        setAcheteur("");
+                      }}
+                      required
+                    />
+                    <label className="form-check-label">Livreur</label>
+                  </div>
+
+                  <div className="col-sm-10">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="acheteur"
+                      value={achetLivreur ? livreur : acheteur}
+                      onChange={(e) => {
+                        achetLivreur
+                          ? setLivreur(e.target.value)
+                          : setAcheteur(e.target.value);
+                      }}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-3 row">
+                  <label htmlFor="typeBon" className="col-sm-2 col-form-label">
+                    Type de bon
+                  </label>
+                  <div className="col-sm-10">
+                    <select
+                      className="form-select"
+                      aria-label="Default select example"
+                      id="typeBon"
+                      value={type_bon}
+                      onChange={(e) => setTypebon(e.target.value)}
+                      required
+                    >
+                      <option defaultValue={""}></option>
+                      <option value="bon de livraison">Bon de livraison</option>
+                      <option value="bon d'achat">Bon d'achat</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="mb-3 row">
+                  <label
+                    htmlFor="recepteur"
+                    className="col-sm-2 col-form-label"
+                  >
+                    Récepteur
+                  </label>
+                  <div className="col-sm-10">
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="recepteur"
+                      value={recepteur}
+                      onChange={(e) => setRecepteur(e.target.value)}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="mb-3 row">
+                  <label
+                    htmlFor="recepteur"
+                    className="col-sm-2 col-form-label"
+                  >
+                    Scanne de bon
+                  </label>
+                  <div className="col-sm-10">
                     <div className="input-group">
-                        <input type="file" className="form-control" id="inputfile" aria-describedby="inputGroupFileAddon04" aria-label="Upload" value={bonScanner} onChange={(e)=> setBonScanner(e.target.value)} required/>
+                      <input
+                        type="file"
+                        className="form-control"
+                        id="inputfile"
+                        aria-describedby="inputGroupFileAddon04"
+                        aria-label="Upload"
+                        value={bonScanner}
+                        onChange={(e) => setBonScanner(e.target.value)}
+                        required
+                      />
                     </div>
-        
-                    <div className="d-grid gap-2 my-4">
-                        <button className="btn1" type="submit"  >VALIDER</button>
-                        
-                    </div>
-    
-                    </form>
-    
-                    {
-                       // Example starter JavaScript for disabling form submissions if there are invalid fields
-                            (function () {
-                                'use strict'
-                            
-                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                                var forms = document.querySelectorAll('.needs-validation')
-                            
-                                // Loop over them and prevent submission
-                                Array.prototype.slice.call(forms)
-                                .forEach(function (form) {
-                                    form.addEventListener('submit', function (event) {
-                                    if (!form.checkValidity()) {
-                                        event.preventDefault()
-                                        event.stopPropagation()
-    
-                                        
-                                        
-                                    }
-                                    if (form.checkValidity()) confirmer(event)
-                                    
-                            
-                                    form.classList.add('was-validated')
-                                    }, false)
-                                })
-                            })()
-                    }
-                        
-                    </div>
-                    {show && <ModalReception    show={show} 
-                                                handleClose={handleClose} 
-                                                handleShow={handleShow}
-                                                nom_fournisseur= {nom_fournisseur}
-                                                fk_fournisseur={fk_fournisseur}
-                                                id_bon={id_bon}
-                                                acheteur={acheteur}
-                                                livreur={livreur} 
-                                                type_bon={type_bon}
-                                                recepteur={recepteur}
-                                                toggleConfirmeTrue={toggleConfirmeTrue}
-                />}
-                </section>
-                    }
-        
-          {toggle === false && <Enregistrement recepBtn={props.recepBtn} enrgBtn ={props.enrgBtn}  toggleDisplay={toggleDisplay}  id_bon ={id_bon} fk_fournisseur= {fk_fournisseur}  nom_fournisseur={nom_fournisseur} recepteur={recepteur} type_bon={type_bon} />}
-                    
-               
-                
-            
+                  </div>
+                </div>
 
-        
-        
-        </>
-        
-     );
+                <div className="d-grid gap-2 my-4">
+                  <button className="btn1" type="submit">
+                    VALIDER
+                  </button>
+                </div>
+              </form>
+
+              {
+                // Example starter JavaScript for disabling form submissions if there are invalid fields
+                (function () {
+                  "use strict";
+
+                  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                  var forms = document.querySelectorAll(".needs-validation");
+
+                  // Loop over them and prevent submission
+                  Array.prototype.slice.call(forms).forEach(function (form) {
+                    form.addEventListener(
+                      "submit",
+                      function (event) {
+                        if (!form.checkValidity()) {
+                          event.preventDefault();
+                          event.stopPropagation();
+                        }
+                        if (form.checkValidity()) confirmer(event);
+
+                        form.classList.add("was-validated");
+                      },
+                      false
+                    );
+                  });
+                })()
+              }
+            </div>
+            {show && (
+              <ModalReception
+                show={show}
+                handleClose={handleClose}
+                handleShow={handleShow}
+                nom_fournisseur={nom_fournisseur}
+                fk_fournisseur={fk_fournisseur}
+                id_bon={id_bon}
+                acheteur={acheteur}
+                livreur={livreur}
+                type_bon={type_bon}
+                recepteur={recepteur}
+                toggleConfirmeTrue={toggleConfirmeTrue}
+              />
+            )}
+          </section>
+        )}
+
+        {toggle === false && (
+          <Enregistrement
+            recepBtn={props.recepBtn}
+            enrgBtn={props.enrgBtn}
+            toggleDisplay={toggleDisplay}
+            id_bon={id_bon}
+            fk_fournisseur={fk_fournisseur}
+            nom_fournisseur={nom_fournisseur}
+            recepteur={recepteur}
+            type_bon={type_bon}
+          />
+        )}
+      </>
+    );
 }
  
 export default Reception;

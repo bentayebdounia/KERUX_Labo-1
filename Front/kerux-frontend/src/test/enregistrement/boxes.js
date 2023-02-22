@@ -5,7 +5,7 @@ export default function Boxes(props) {
     <>
       <div className="row gy-2 gx-2 align-items-center">
         <div className=" col-12 mb-2">
-          <label id="produit">Type de produit: </label>
+          <label id="produit">Type de produit: {props.key} </label>
           <label id="produitValue"> {props.n_produit} </label>
         </div>
 
@@ -69,19 +69,19 @@ export default function Boxes(props) {
                     props.onNombreChange(event.target.value);
                   }}
                 />
-                {props.categorie === "poulet" &&
-                  (props.nombre === 0 ||
-                    props.nombre === "0" ||
-                    props.nombre === "") && (
-                    <p style={{ color: "red", fontSize: "11px" }}>
-                      {" "}
-                      *Veillez ajouter le nombre{" "}
-                    </p>
-                  )}
+                {(props.nombre === 0 ||
+                  props.nombre === "0" ||
+                  props.nombre === "") && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    *Veillez ajouter le nombre{" "}
+                  </p>
+                )}
               </div>
             </>
           )}
         </div>
+        
       </div>
     </>
   );

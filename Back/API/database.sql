@@ -26,7 +26,8 @@ CREATE TABLE personne(
     num_tel INT,
     adresse VARCHAR(500),
     fk_role INT REFERENCES role(id_role),
-    mot_passe VARCHAR(20)
+    mot_passe VARCHAR(20),
+    fonction VARCHAR (200)
 );
 
 
@@ -42,7 +43,11 @@ CREATE TABLE fournisseur (
     modalite_paiement VARCHAR (100),
     type_paiement VARCHAR (100),
     nature_livraison VARCHAR (100) ,
-    date_enregistement DATE
+    date_enregistement DATE,
+    r_c VARCHAR (100),
+    a_i INT ,
+    n_i_f INT,
+    n_i_s INT
 
 );
 
