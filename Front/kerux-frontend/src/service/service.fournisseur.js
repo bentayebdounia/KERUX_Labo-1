@@ -12,14 +12,18 @@ const GET_ALL_FOURNISSEUR =
 const GET_FOURNISSEUR_BY_NOM_CATEGORIE =
   "http://localhost:8080/fournisseur/getFournisseurByNomCategorie/";
 
+const GET_ID_FOURNISSEUR =
+  "http://localhost:8080/fournisseur/getIdFournisseur/";
+
 class ServiceFournisseur {
   ajouterFournisseur(
+    id_fournisseur,
     nom_fournisseur,
     forme_juridique,
-    RC,
-    AI,
-    NIF,
-    NIS,
+    r_c,
+    a_i,
+    n_i_f,
+    n_i_s,
     adresse_fournisseur,
     email,
     activite,
@@ -29,6 +33,7 @@ class ServiceFournisseur {
     categorie
   ) {
     const fournisseur = {
+      id_fournisseur,
       nom_fournisseur,
       forme_juridique,
       adresse_fournisseur,
@@ -38,10 +43,10 @@ class ServiceFournisseur {
       type_paiement,
       nature_livraison,
       categorie,
-      RC,
-      AI,
-      NIF,
-      NIS,
+      r_c,
+      a_i,
+      n_i_f,
+      n_i_s,
     };
 
     return axios.post(AJOUTER_FOURNISSEUR, fournisseur);
@@ -66,7 +71,6 @@ class ServiceFournisseur {
     n_i_f,
     n_i_s
   ) {
-
     const fournisseur = {
       nom_fournisseur,
       forme_juridique,
@@ -98,6 +102,10 @@ class ServiceFournisseur {
     return axios.get(
       GET_FOURNISSEUR_BY_NOM_CATEGORIE + nom_fournisseur + "/" + categoroie
     );
+  }
+
+  getIdFournisseure(id_fournisseur) {
+    return axios.get(GET_ID_FOURNISSEUR + id_fournisseur);
   }
 }
 

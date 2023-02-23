@@ -17,6 +17,7 @@ const Recape = (props) => {
     poids: "",
     nombre: "",
     categorie: "",
+    produit:""
   });
   const billRef = useRef(null);
 
@@ -115,6 +116,7 @@ const Recape = (props) => {
     while (i < box.length) {
       console.log(i + 1);
       var cle = ajouterCle(box[i].categorie, box[i].nom_produit, i + 1);
+      console.log(cle);
       if (box[i].id_stock === null || box[i].id_stock === "") {
         await EnregistrementService.ajouerEnregistrement(
           box[i].categorie,
@@ -132,6 +134,7 @@ const Recape = (props) => {
             poids: res.data.poids,
             nombre: res.data.nombre,
             categorie: res.data.categorie,
+            produit: res.data.nom_produit,
             ref: createRef(),
           });
 
@@ -144,7 +147,7 @@ const Recape = (props) => {
             });
         });
       } else if (box[i].id_stock !== null || box[i].id_stock !== "") {
-        await EnregistrementService.ajouerEnregistrement(
+        await EnregistrementService.ajouerEnregistrement( 
           box[i].categorie,
           box[i].nom_produit,
           "enregistrement",
@@ -178,7 +181,7 @@ const Recape = (props) => {
 
   const ajouterCle = (categorie, type, numeroBox) => {
     if (categorie === "poulet") {
-      if (type === "poulet") return "PP" + numeroBox;
+      if (type === "poulet-entier") return "PP" + numeroBox;
       else if (type === "tendres") return "PT" + numeroBox;
       else if (type === "wings") return "PW" + numeroBox;
       else if (type === "dips") return "PD" + numeroBox;
@@ -239,7 +242,10 @@ const Recape = (props) => {
         onHide={props.handleClose}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Recape de l'etape enregistrement</Modal.Title>
+          <Modal.Title style={{ color: "#7B170F" }}>
+            
+            Vous voulez vraiment valider cet étape?
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div style={{ margin: "5%", marginRight: "5%" }}>
@@ -251,8 +257,8 @@ const Recape = (props) => {
                     <th scope="col">Categorie</th>
                     <th scope="col">Nom produit</th>
                     <th scope="col">Poids(Kg) </th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">stock</th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">entrepot</th>
                   </tr>
                 </thead>
                 {boxe.length >= 1 && (

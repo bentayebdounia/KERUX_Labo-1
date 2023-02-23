@@ -102,7 +102,7 @@ export default function ListeAgent() {
               value={role}
               onChange={(e) => setRole(e.target.value)}
             >
-              <option selected></option>
+              <option value="" selected></option>
               <option value="id">ID</option>
               <option value="nom">Nom</option>
               <option value="prenom">Prénom</option>

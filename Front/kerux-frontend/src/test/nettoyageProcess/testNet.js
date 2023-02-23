@@ -46,7 +46,6 @@ const TestNet = (props) => {
     }) 
 
     var  table ,table2 
-    
 
     const [toggle1, setToggle1] = useState ()  
     const toggleshow1 = () => setToggle1(true) 
@@ -118,8 +117,6 @@ const TestNet = (props) => {
             }) 
      }
   
-     
-
     const getProcess = (e) => { 
         e.preventDefault(); 
          
@@ -230,8 +227,6 @@ const TestNet = (props) => {
              
     }
 
-    
-
     const dateToday = () => {
         var today = new Date
         var datee = verifyDay( today.getDate())+'/'+(verifyMounth(today.getMonth() ))  + '/' +today.getFullYear()
@@ -239,9 +234,6 @@ const TestNet = (props) => {
         return datee
     }
 
-
- 
-   
        const chargerData = () => { 
         toggleshow1()
         toggleDisplay2()
@@ -277,7 +269,7 @@ const TestNet = (props) => {
            <th scope="col">Categorie</th>
            <th scope="col">Nom produit</th>
            <th scope="col">Poids(Kg) </th>
-           <th scope="col">Nombre</th>
+           <th scope="col">Quantité</th>
            <th scope="col">Date</th>
            <th scope="col">Heure</th>
          </tr>
@@ -350,7 +342,7 @@ table2 = (
           <th scope="col">Categorie</th>
           <th scope="col">Nom produit</th>
           <th scope="col">Poids(Kg) </th>
-          <th scope="col">Nombre</th>
+          <th scope="col">Quantité</th>
           <th scope="col">Date</th>
           <th scope="col">Heure</th>
           <th scope="col">entrepot</th>
@@ -413,77 +405,161 @@ table2 = (
 
     
 
-    return (  
-        <> 
-            {!toggle && 
-                <section id="etape_section"> 
-                <div className="container"> 
-                     
-                        
-                            <div className="input-group col-sm-10" style={{width:"90%", marginLeft:"5%", marginRight:"15%"  }}> 
-                                <input type="text" className="form-control" placeholder="ID boxe"  aria-describedby="button-addon2" value={id} onChange={(e)=> setId(e.target.value)}/> 
-                                <button className="btn" style={{background: '#7B170F'}} type="button" id="button-addon2" onClick={(e) => getProcess(e)} > 
-                                    <i className="bi bi-check-lg" style={{color: "white" , fontSize:"20px"}}></i> 
-                                </button> 
-                            </div> 
-                         
-                     
-                    <div style={{width:"90%", height:"600px", marginLeft:"5%", marginRight:"15%" , marginTop:"30px", backgroundColor: "white" , borderRadius:"10px" }}>
-                        <label 
-                                style={{  padding: "5px", marginRight:"20px" , borderBottom: `${(buttonColor===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor===true) ? '#7B170F' : 'white'  }`}}
-                                onClick={chargerData} >
-                            <a className="nav-link "  style={{ color: `${(buttonColor===true) ? '#7B170F' : 'black'  }`}} href='#'>Produits en attente</a> 
-                        </label>
-    
-                        <label 
-                                style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }` , padding: "5px" , borderBottom: `${(buttonColor2===true) ? '2px solid' : '0px solid'  }`,  borderBottomColor: `${(buttonColor2===true) ? '7B170F' : 'white'  }`}}
-                                onClick={chargerDataEnStock}
-                                >
-                                   <a className="nav-link " style={{ color: `${(buttonColor2===true) ? '#7B170F' : 'black'  }`}} href='#'> Produits en Stock</a></label>
-    
-                        <p style={{ borderBottom:  '1px solid' , borderBottomColor: "#BBBABA"}}/>
-    
-                    
-                    
-                        <div className="divTab" style={{width:"100%", height:"500px" , margin:"0px" , overflow : 'auto'}}> 
-                        
-                                {buttonColor && table}
-                                {buttonColor2 && table2}
-     
-                                
-                        </div> 
-    
-                    </div> 
-                             
-                        
-                    
+    return (
+      <>
+        {!toggle && (
+          <section id="etape_section">
+            <div className="container">
+              <div
+                className="input-group col-sm-10"
+                style={{ width: "90%", marginLeft: "5%", marginRight: "15%" }}
+              >
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="ID boxe"
+                  aria-describedby="button-addon2"
+                  value={id}
+                  onChange={(e) => setId(e.target.value)}
+                />
+                <button
+                  className="btn"
+                  style={{ background: "#7B170F" }}
+                  type="button"
+                  id="button-addon2"
+                  onClick={(e) => getProcess(e)}
+                >
+                  <i
+                    className="bi bi-check-lg"
+                    style={{ color: "white", fontSize: "20px" }}
+                  ></i>
+                </button>
+              </div>
+
+              <div
+                style={{
+                  width: "90%",
+                  height: "600px",
+                  marginLeft: "5%",
+                  marginRight: "15%",
+                  marginTop: "30px",
+                  backgroundColor: "white",
+                  borderRadius: "10px",
+                }}
+              >
+                <label
+                  style={{
+                    padding: "5px",
+                    marginRight: "20px",
+                    borderBottom: `${
+                      buttonColor === true ? "2px solid" : "0px solid"
+                    }`,
+                    borderBottomColor: `${
+                      buttonColor === true ? "#7B170F" : "white"
+                    }`,
+                  }}
+                  onClick={chargerData}
+                >
+                  <a
+                    className="nav-link "
+                    style={{
+                      color: `${buttonColor === true ? "#7B170F" : "black"}`,
+                    }}
+                    href="#"
+                  >
+                    Produits en attente
+                  </a>
+                </label>
+
+                <label
+                  style={{
+                    color: `${buttonColor2 === true ? "#7B170F" : "black"}`,
+                    padding: "5px",
+                    borderBottom: `${
+                      buttonColor2 === true ? "2px solid" : "0px solid"
+                    }`,
+                    borderBottomColor: `${
+                      buttonColor2 === true ? "7B170F" : "white"
+                    }`,
+                  }}
+                  onClick={chargerDataEnStock}
+                >
+                  {tableDonneesStocker.length !==0 &&
+                  <span
+                    className="position-absolute top-5 start-5 translate-middle p-2 bg-danger border border-light rounded-circle"
+                    style={{ fontSize: "11px", fontStyle: "normal" }}
+                  >
+                    <span className="visually-hidden">unread messages</span>
+                  </span>}
+                  <a
+                    className="nav-link "
+                    style={{
+                      color: `${buttonColor2 === true ? "#7B170F" : "black"}`,
+                    }}
+                    href="#"
+                  >
+                    {" "}
+                    Produits en Stock
+                  </a>{" "}
+                </label>
+
+                <p
+                  style={{
+                    borderBottom: "1px solid",
+                    borderBottomColor: "#BBBABA",
+                  }}
+                />
+
+                <div
+                  className="divTab"
+                  style={{
+                    width: "100%",
+                    height: "500px",
+                    margin: "0px",
+                    overflow: "auto",
+                  }}
+                >
+                  {buttonColor && table}
+                  {buttonColor2 && table2}
                 </div>
-                
-     
-                {show &&<ModelReponse show={show} handleClose={handleClose} handleShow={handleShow} 
-                              message={message}  
-                              titre={"nettoyage"}  
-                              />} 
-     
-                {show2 && <ModalSortieStock  
-                                    show2={show2}  
-                                    handleClose2={handleClose2}  
-                                    handleShow2={handleShow2}  
-                                    id={id} 
-                                    process={process}  
-                                    toggleshow={toggleshow}  
-                                    etape={'nettoyage'} 
-                                    BtnV = {props.nettoypBtnV}
-                                  />} 
-            </section>
-            
-            
-            } 
-            {toggle && <Nettoyage id={id} process={process} test={test} toggleDisplay = {toggleDisplay} nettoypBtn={props.nettoypBtn} />} 
-             
-             
-        </> 
-     ); 
+              </div>
+            </div>
+
+            {show && (
+              <ModelReponse
+                show={show}
+                handleClose={handleClose}
+                handleShow={handleShow}
+                message={message}
+                titre={"nettoyage"}
+              />
+            )}
+
+            {show2 && (
+              <ModalSortieStock
+                show2={show2}
+                handleClose2={handleClose2}
+                handleShow2={handleShow2}
+                id={id}
+                process={process}
+                toggleshow={toggleshow}
+                etape={"nettoyage"}
+                BtnV={props.nettoypBtnV}
+              />
+            )}
+          </section>
+        )}
+        {toggle && (
+          <Nettoyage
+            id={id}
+            process={process}
+            test={test}
+            toggleDisplay={toggleDisplay}
+            nettoypBtn={props.nettoypBtn}
+          />
+        )}
+      </>
+    ); 
 } 
   
 export default TestNet; 

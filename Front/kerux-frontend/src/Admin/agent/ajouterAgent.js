@@ -256,7 +256,7 @@ export default function AjouterAgent() {
           </div>
         </div>
 
-        {fk_role !== "4" && (
+        {fk_role !== "3" && (
           <div className="mb-3 row">
             <label htmlFor="inputPassword" className="col-sm-3 col-form-label">
               Mot de passe <span style={{ color: "red" }}>*</span>

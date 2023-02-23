@@ -69,19 +69,19 @@ export default function Boxes(props) {
                     props.onNombreChange(event.target.value);
                   }}
                 />
-                {(props.nombre === 0 ||
-                  props.nombre === "0" ||
-                  props.nombre === "") && (
-                  <p style={{ color: "red", fontSize: "11px" }}>
-                    {" "}
-                    *Veillez ajouter le nombre{" "}
-                  </p>
-                )}
+                {props.erreurNombre === true &&
+                  (props.nombre === 0 ||
+                    props.nombre === "0" ||
+                    props.nombre === "") && (
+                    <p style={{ color: "red", fontSize: "11px" }}>
+                      {" "}
+                      *Veillez ajouter le nombre{" "}
+                    </p>
+                  )}
               </div>
             </>
           )}
         </div>
-        
       </div>
     </>
   );

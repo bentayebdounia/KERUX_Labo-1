@@ -90,54 +90,82 @@ const ModalConfirmCoup = (props) => {
         
     }
 
-    return ( 
-        <>
-            <Modal show={props.show2} onHide={props.handleClose2}> 
-                <Modal.Header closeButton>
-                <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                     
-                <div class="list-group">
-                    
-                    <span  className="list-group-item  list-group-item-light"> <span className='attributs'>Categorie:</span> {props.categorie}</span>
-                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Type de produit:</span> {props.typeProd} </span>
-                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Agent:</span> 
-                        
-                            {props.agents.map((value, key) => {
-                                                return (
-                                                    
-                                                <li > {value.id_personne} . {value.nom} {value.prenom} </li>
-                                                    
-                                                )
-                                            })}
-                        
-                    </span>
-                    <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Poids:</span> {props.poids /1000} Kg</span>
-                    {props.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
-                    
-                </div>
-                   
-                </Modal.Body>
-                <Modal.Footer>
-                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={props.handleClose2}>Non</button>
-                        <button type="button" className="btn btn-success" onClick={(e)=>confirmCoupage(e)}>Oui</button>
-                </Modal.Footer>
-                
-            </Modal>
+    return (
+      <>
+        <Modal show={props.show2} onHide={props.handleClose2}>
+          <Modal.Header closeButton>
+            <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div class="list-group">
+              <span className="list-group-item  list-group-item-light">
+                {" "}
+                <span className="attributs">Categorie:</span> {props.categorie}
+              </span>
+              <span className="list-group-item  list-group-item-light">
+                {" "}
+                <span className="attributs">Type de produit:</span>{" "}
+                {props.typeProd}{" "}
+              </span>
+              <span className="list-group-item  list-group-item-light">
+                {" "}
+                <span className="attributs">Agent:</span>
+                {props.agents.map((value, key) => {
+                  return (
+                    <li>
+                      {" "}
+                      {value.id_personne} . {value.nom} {value.prenom}{" "}
+                    </li>
+                  );
+                })}
+              </span>
+              <span className="list-group-item list-group-item-action list-group-item-light">
+                {" "}
+                <span className="attributs">Poids:</span> {props.poids / 1000}{" "}
+                Kg
+              </span>
+              {props.categorie === "poulet" && (
+                <span className="list-group-item list-group-item-action list-group-item-light">
+                  {" "}
+                  <span className="attributs">Nombre:</span> {props.nombre}
+                </span>
+              )}
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <button
+              type="button"
+              className="btn btn-danger"
+              data-bs-dismiss="modal"
+              onClick={props.handleClose2}
+            >
+              Non
+            </button>
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={(e) => confirmCoupage(e)}
+            >
+              Oui
+            </button>
+          </Modal.Footer>
+        </Modal>
 
-             <ModalQStock 
-                                show3={show3} 
-                                handleClose3={handleClose3} 
-                                handleShow3={handleShow3}  
-                                result={resulte} 
-                                toggleDisplay = {props.toggleDisplay}
-                                PorcentagePoids = { props.PorcentagePoids}
-                                poids= {props.poids} nombre= {props.nombre} categorie={props.categorie}
-                                btnC= {props.btnC}
-                                />
-        </>
-     );
+        <ModalQStock
+          show3={show3}
+          handleClose3={handleClose3}
+          handleShow3={handleShow3}
+          result={resulte}
+          toggleDisplay={props.toggleDisplay}
+          PorcentagePoids={props.PorcentagePoids}
+          poids={props.poids}
+          nombre={props.nombre}
+          categorie={props.categorie}
+          btnC={props.btnC}
+          produit={props.typeProd}
+        />
+      </>
+    );
 }
  
 export default ModalConfirmCoup;

@@ -50,6 +50,7 @@ const Nettoyage = (props) => {
     //get personnes
     useEffect(()=>{
         
+        
             ServiceAdmin.getPersonneByNomOrPrenom(agent, agent)
             .then((res) => {
                 setAgentNettoyage(res.data)

@@ -40,6 +40,8 @@ const AjouterFournisseur = (props) => {
 
   const verificetionChamp = () => {
     if (
+      idFournisseur !== "" &&
+      idFournisseur.length <= 2 &&
       nomFournisseur !== "" &&
       categorie !== "" &&
       formJuridique !== "" &&
@@ -66,67 +68,71 @@ const AjouterFournisseur = (props) => {
     //console.log(contacts);
     //console.log(nomFournisseur, formJuridique, adresse, email,  activite, modalite, typePaiement, natureLivraison, categorie);
     if (verificetionChamp()) {
-      await ServiceFournisseur.ajouterFournisseur(
-        idFournisseur,
-        nomFournisseur,
-        formJuridique,
-        RC,
-        AI,
-        NIF,
-        NIS,
-        adresse,
-        email,
-        activite,
-        modalite,
-        typePaiement,
-        natureLivraison,
-        categorie
-      ).then((res) => {
-        
-        var i = 1
-        while ( i < contacts.length) {
-          //console.log(contacts[i].nomContact);
-          ServiceFournisseur.ajouterContact(
-            res.data.id_fournisseur,
-            contacts[i].nomContact,
-            contacts[i].numContact
-          ).then((result) => {
-            //console.log(result.data);
-          });
-          i++;
-        }
-        if (!!res.data.id_fournisseur && i === contacts.length) {
-          setIdFournisseur("")
-          setNomFournisseur("");
-          setCategorie("");
-          setFormJuridique("");
-          setRc("")
-          setAi("")
-          setNif("")
-          setNis("")
-          setAdresse("");
-          setEmail("");
-          setActivite("");
-          setModalite("");
-          setTypePaiement("");
-          setNaturelivraison("");
-          setContacts([
-            {
-              nomContact: "",
-              numContact: 0,
+      await ServiceFournisseur.getIdFournisseure(idFournisseur).then((res) => {
+        if (res.data === "ID n'existe pas") {
+          ServiceFournisseur.ajouterFournisseur(
+            idFournisseur,
+            nomFournisseur,
+            formJuridique,
+            RC,
+            AI,
+            NIF,
+            NIS,
+            adresse,
+            email,
+            activite,
+            modalite,
+            typePaiement,
+            natureLivraison,
+            categorie
+          ).then((res) => {
+            var i = 1;
+            while (i < contacts.length) {
+              //console.log(contacts[i].nomContact);
+              ServiceFournisseur.ajouterContact(
+                res.data.id_fournisseur,
+                contacts[i].nomContact,
+                contacts[i].numContact
+              ).then((result) => {
+                //console.log(result.data);
+              });
+              i++;
+            }
+            if ((res.data = "bien ajouter" && i === contacts.length)) {
+              setIdFournisseur("");
+              setNomFournisseur("");
+              setCategorie("");
+              setFormJuridique("");
+              setRc("");
+              setAi("");
+              setNif("");
+              setNis("");
+              setAdresse("");
+              setEmail("");
+              setActivite("");
+              setModalite("");
+              setTypePaiement("");
+              setNaturelivraison("");
+              setContacts([
+                {
+                  nomContact: "",
+                  numContact: 0,
 
-              date: new Date(),
-            },
-          ]);
-          setMessage(
-            "Fournisseur bien ajouter et son ID = " + res.data.id_fournisseur
-          );
-          handleShow();
-        } else {
-          setMessage("Fournisseur n'est pas bien ajouter");
+                  date: new Date(),
+                },
+              ]);
+              setMessage("Fournisseur bien ajouter ");
+              handleShow();
+            } else {
+              setMessage("Fournisseur n'est pas bien ajouter");
+              handleShow();
+            }
+          });
+        }
+        else {
+          setMessage("Le ID fournisseur exist déjà");
           handleShow();
         }
-        
       });
     } else {
       setMessage("Veillez remplir les champs");
@@ -210,10 +216,16 @@ const AjouterFournisseur = (props) => {
                   onChange={(e) => setIdFournisseur(e.target.value)}
                   required
                 />
-                {verifier === false && nomFournisseur === "" && (
+                {verifier === false && idFournisseur === "" && (
                   <p style={{ color: "red", fontSize: "11px" }}>
                     {" "}
-                    *Veillez saisir le nom de fournisseur{" "}
+                    *Veillez saisir le id de fournisseur{" "}
+                  </p>
+                )}
+                {idFournisseur.length > 2 && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    *L'id de fournisseur peux pas avoir plus de 2 caractère{" "}
                   </p>
                 )}
               </div>

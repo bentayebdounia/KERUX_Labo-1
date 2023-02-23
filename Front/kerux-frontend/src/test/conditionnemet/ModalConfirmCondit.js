@@ -82,54 +82,87 @@ const ModalConfirmCondit = (props) => {
         
     }
 
-    return ( 
-        <>
-            <Modal show={props.show} onHide={props.handleClose}> 
-                <Modal.Header closeButton>
-                <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                <div class="list-group">
-                    <span  className="list-group-item ">  <span className='attributs'>ID boxe:</span>  {props.id_box} </span>
-                    <span  className="list-group-item  list-group-item-light"> <span className='attributs'>Categorie:</span> {props.process.categorie}</span>
-                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Type de produit:</span> {props.process.nom_produit} </span>
-                    <span className="list-group-item  list-group-item-light"> <span className='attributs'>Agent:</span> 
-                        
-                            {props.agents.map((value, key) => {
-                                                return (
-                                                    
-                                                <li > {value.id_personne} . {value.nom} {value.prenom} </li>
-                                                    
-                                                )
-                                            })}
-                        
-                    </span>
-                    <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Poids:</span> {props.poids /1000} Kg</span>
-                    {props.process.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
-                    
-                </div>
-        
-                </Modal.Body>
-                <Modal.Footer>
-                        <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={props.handleClose}>Non</button>
-                        <button type="button" className="btn btn-success" onClick={(e)=>confirmNCondit(e)}>Oui</button>
-                </Modal.Footer>
-            </Modal>
+    return (
+      <>
+        <Modal show={props.show} onHide={props.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div class="list-group">
+              <span className="list-group-item ">
+                {" "}
+                <span className="attributs">ID boxe:</span> {props.id_box}{" "}
+              </span>
+              <span className="list-group-item  list-group-item-light">
+                {" "}
+                <span className="attributs">Categorie:</span>{" "}
+                {props.process.categorie}
+              </span>
+              <span className="list-group-item  list-group-item-light">
+                {" "}
+                <span className="attributs">Type de produit:</span>{" "}
+                {props.process.nom_produit}{" "}
+              </span>
+              <span className="list-group-item  list-group-item-light">
+                {" "}
+                <span className="attributs">Agent:</span>
+                {props.agents.map((value, key) => {
+                  return (
+                    <li>
+                      {" "}
+                      {value.id_personne} . {value.nom} {value.prenom}{" "}
+                    </li>
+                  );
+                })}
+              </span>
+              <span className="list-group-item list-group-item-action list-group-item-light">
+                {" "}
+                <span className="attributs">Poids:</span> {props.poids / 1000}{" "}
+                Kg
+              </span>
+              {props.process.categorie === "poulet" && (
+                <span className="list-group-item list-group-item-action list-group-item-light">
+                  {" "}
+                  <span className="attributs">Nombre:</span> {props.nombre}
+                </span>
+              )}
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <button
+              type="button"
+              className="btn btn-danger"
+              data-bs-dismiss="modal"
+              onClick={props.handleClose}
+            >
+              Non
+            </button>
+            <button
+              type="button"
+              className="btn btn-success"
+              onClick={(e) => confirmNCondit(e)}
+            >
+              Oui
+            </button>
+          </Modal.Footer>
+        </Modal>
 
-            <ModalQStock 
-                            show3={show3} 
-                            handleClose3={handleClose3} 
-                            handleShow3={handleShow3} 
-                            result={result} 
-                            toggleDisplay = {props.toggleDisplay} 
-                            PorcentagePoids = {props.PorcentagePoids}
-                            poids= {props.poids} 
-                            nombre= {props.nombre} 
-                            categorie={props.process.categorie}
-                            btnC={props.btnC}
-                            />
-        </>
-     );
+        <ModalQStock
+          show3={show3}
+          handleClose3={handleClose3}
+          handleShow3={handleShow3}
+          result={result}
+          toggleDisplay={props.toggleDisplay}
+          PorcentagePoids={props.PorcentagePoids}
+          poids={props.poids}
+          nombre={props.nombre}
+          categorie={props.process.categorie}
+          produuit={props.process.nom_produit}
+          btnC={props.btnC}
+        />
+      </>
+    );
 }
  
 export default ModalConfirmCondit;

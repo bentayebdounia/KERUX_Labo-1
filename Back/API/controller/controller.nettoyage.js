@@ -72,7 +72,17 @@ const generieIdNettoyage = (id) => {
       }
       const year = today.getFullYear().toString().split('');
     
-    var n = (id.substring(0,6)+""+datt+""+ year[3]+""+id.substring(10)+"2")  
+    var n =
+      id.substring(0, 5) +
+      "" +
+      datt +
+      "" +
+      year[2] +
+      "" +
+      year[3] +
+      "" +
+      id.substring(9,12) +
+      "2";  
     return n
 }
 

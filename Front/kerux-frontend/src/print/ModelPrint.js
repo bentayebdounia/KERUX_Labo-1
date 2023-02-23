@@ -18,9 +18,13 @@ function TESTPRINT(props){
               <span style={{ fontWeight: "bold" }}>Qantite: </span>{" "}
               {props.nombre !== null && props.nombre !== 0 && props.nombre}{" "}
             </span>
-            <span className="col-10">
-              <span style={{ fontWeight: "bold" }}>Description: </span>
+            <span className="col-6">
+              <span style={{ fontWeight: "bold" }}>Categorie: </span>
               {props.categorie}{" "}
+            </span>
+            <span className="col-6">
+              <span style={{ fontWeight: "bold" }}>Produit: </span>
+              {props.produit}{" "}
             </span>
             <span className="col-10">
               {" "}

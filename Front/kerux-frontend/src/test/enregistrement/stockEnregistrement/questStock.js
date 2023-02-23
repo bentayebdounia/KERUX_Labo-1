@@ -20,13 +20,14 @@ const ModalQStock = (props) => {
 
   return (
     <>
-      <Modal show={props.show} onHide={props.handleClose}
-      >
+      <Modal show={props.show} onHide={props.handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Message de stock</Modal.Title>
+          <Modal.Title style={{ color: "#7B170F" }}>
+           Message de stock
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <h3> Voulez-vous vraiment ajouter ces boxes au stock? </h3>
+          <h3> Voulez-vous vraiment ajouter les box au stock? </h3>
         </Modal.Body>
         <Modal.Footer>
           <button

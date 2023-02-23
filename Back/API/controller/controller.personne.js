@@ -67,10 +67,7 @@ getId = (req, res) => {
   const id = parseInt(req.params.id_personne);
   pool.query(queries.getPersonneById, [id], (error, result) => {
     const notExiste = result.rows.length;
-    if (!notExiste) {
-      res.send("ID n'existe pas");
-    } //res.send("ID existe")
-    else res.status(200).json(result.rows);
+    res.status(200).json(result.rows);
     //console.log(result.rows[1]);
   });
 };

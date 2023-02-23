@@ -24,7 +24,7 @@ const Login=() => {
         if (id.length > 0 && password.length > 0){
             console.log("bienvenue");
             LoginServer.getPersonneById(id).then(res =>{
-                if (res.data === "ID n'existe pas"){
+                if (res.data.length===0){
                     
                     setMessage("ID n'existe pas")
                     handleShow()
@@ -54,9 +54,9 @@ const Login=() => {
     
                                 localStorage.setItem ('login', JSON.stringify(logIn))
                                 console.log(res.data[0].nom , res.data[0].prenom);
-                                if ( result.data.nom_role ==='Admin')
+                                if ( result.data.nom_role ==='admin')
                                     history.push(  { pathname:'/admin' }  );
-                                else if(result.data.nom_role ==='Agent de saisie') history.push(  { pathname:'/test' }  );
+                                else if(result.data.nom_role ==='agent de saisie') history.push(  { pathname:'/test' }  );
                                      else {
                                         setMessage("Cet agent peut pas connecter à cet application ")
                                         handleShow()

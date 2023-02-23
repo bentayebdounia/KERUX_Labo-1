@@ -86,7 +86,7 @@ const TestCoupage = (props) => {
     indexOfFirstPost,
     indexOfLastPost
   );
-
+console.log(currentPosts2);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const [boxCoupageTab, setBoxcoupagetab] = useState([]);
@@ -151,7 +151,7 @@ const TestCoupage = (props) => {
     return heure;
   };
   const generateId = (fk_proditFourni, id_nettoyage) => {
-    var n = id_nettoyage.substring(0, 6);
+    var n = id_nettoyage.substring(0, 5);
     var id = fk_proditFourni + "id" + dateNow() + "" + TimeNow() + "-" + n;
     //console.log("id_generate= "+id);
     return id;
@@ -208,8 +208,7 @@ const TestCoupage = (props) => {
     );
   }
 
-  const verificationBox = (resData,poidData) =>{
-
+  const verificationBox = (resData, poidData) => {
     setProcess(resData);
     if (boxCoupageTab.length === 0) {
       handleShow2(true);
@@ -246,8 +245,7 @@ const TestCoupage = (props) => {
         handleShow(true);
       }
     }
-
-  }
+  };
 
   const verificateBoxBloquant = (resData, poidData) => {
     setProcess(resData);
@@ -543,8 +541,7 @@ const TestCoupage = (props) => {
             </tr>
           </thead>
           <tbody>
-            {((produitBloquant === false && produitBloquantStock === false) ||
-              produitBloquantStock === true) &&
+            {
               currentPosts2.map((p, key) => (
                 <tr
                   key={key}
@@ -718,6 +715,14 @@ const TestCoupage = (props) => {
                 }}
                 onClick={chargerDataEnStock}
               >
+                {tableDonneesStocker.length !== 0 && (
+                  <span
+                    className="position-absolute top-5 start-5 translate-middle p-2 bg-danger border border-light rounded-circle"
+                    style={{ fontSize: "11px", fontStyle: "normal" }}
+                  >
+                    <span className="visually-hidden">unread messages</span>
+                  </span>
+                )}
                 <a
                   className="nav-link "
                   style={{

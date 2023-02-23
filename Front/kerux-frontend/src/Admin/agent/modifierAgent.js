@@ -232,14 +232,14 @@ const ModifierAgent = (props) => {
           </div>
         </div>
 
-        {fk_role !== "4" && (
+        {fk_role !== "3" && (
           <div className="mb-3 row">
             <label htmlFor="inputPassword" className="col-sm-3 col-form-label">
               Mot de passe
             </label>
             <div className="col-sm-9">
               <input
-                type="password"
+                type="text"
                 className="form-control"
                 id="password"
                 value={mot_passe}

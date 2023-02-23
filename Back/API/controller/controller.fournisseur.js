@@ -22,6 +22,7 @@ ajouterFournisseur = (req, res) => {
   pool.query(
     queries.ajouterFourniseur,
     [
+      id_fournisseur,
       nom_fournisseur,
       forme_juridique,
       adresse_fournisseur,
@@ -38,8 +39,13 @@ ajouterFournisseur = (req, res) => {
       n_i_s,
     ],
     (error, result) => {
-      if (error) throw error;
+      if (error) {
+        
+        console.log(error);
+      };
+      
       res.status(200).send("bien ajouter");
+
     }
   );
 };
@@ -99,6 +105,16 @@ ajouterContact = (req, res) => {
     }
   );
 };
+getIdFournisseur = (req, res) => {
+  const id_fournisseur = req.params.id_fournisseur
+  pool.query(queries.getIdFournisseur, [id_fournisseur], (error, result) => {
+    if (error) throw error;
+    const notExiste = result.rows.length;
+    if (!notExiste) {
+      res.send("ID n'existe pas");
+    } else res.send("ID existe");
+  });
+}
 
 getFournisseurByNom = (req, res) => {
   const categorie = req.params.categorie;
@@ -141,4 +157,5 @@ module.exports = {
   getFournisseurByNom,
   getAllFournisseur,
   getFournisseurByNomCategorie,
+  getIdFournisseur
 };

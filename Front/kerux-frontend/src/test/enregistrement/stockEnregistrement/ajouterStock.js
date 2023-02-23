@@ -97,7 +97,13 @@ const AjouterStock = (props) => {
         //onHide={props.handleClose}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Ajouter au stock</Modal.Title>
+          <Modal.Title style={{ color: "#7B170F" }}>
+            <i
+              className="bi bi-plus-lg"
+              style={{ color: "#7B170F", fontSize: "25px" }}
+            ></i>{" "}
+            Ajouter au stock
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div style={{ margin: "5%", marginRight: "5%" }}>
@@ -153,11 +159,11 @@ const AjouterStock = (props) => {
                         }}
                       ></input>
                     </th>
-                    <th scope="col">ID</th>
+                    <th scope="col">ID produit</th>
                     <th scope="col">Categorie</th>
                     <th scope="col">Nom produit</th>
                     <th scope="col">Poids(Kg)</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Quantité</th>
                   </tr>
                 </thead>
                 <tbody>

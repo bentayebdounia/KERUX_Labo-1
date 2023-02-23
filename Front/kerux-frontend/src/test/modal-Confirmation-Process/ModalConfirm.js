@@ -154,6 +154,7 @@ const ModalConfirmNet = (props) => {
         poids={props.poids}
         nombre={props.nombre}
         categorie={props.categorie}
+        produit={props.typeProd}
       />
     </>
   );

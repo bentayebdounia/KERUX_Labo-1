@@ -273,7 +273,7 @@ const ModalAjoutBoxes = (props) => {
               className="bi bi-plus-lg"
               style={{ color: "#7B170F", fontSize: "25px" }}
             ></i>{" "}
-            Ajouter des boxes
+            Ajouter des box
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
