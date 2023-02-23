@@ -11,6 +11,10 @@ const ListFournisseur = () => {
   const [nomFournisseur, setNomFournisseur] = useState("");
   const [categorie, setCategorie] = useState("");
   const [formJuridique, setFormJuridique] = useState("");
+  const [RC, setRc] = useState("");
+  const [AI, setAi] = useState("");
+  const [NIF, setNif] = useState("");
+  const [NIS, setNis] = useState("");
   const [adresse, setAdresse] = useState();
   const [email, setEmail] = useState("");
   const [activite, setActivite] = useState("");
@@ -61,7 +65,11 @@ const ListFournisseur = () => {
     modalite_paiement,
     type_paiement,
     nature_livraison,
-    categorie
+    categorie,
+    rc,
+    ai,
+    nif,
+    nis
 
   ) => {
     // e.preventDefault();
@@ -69,6 +77,10 @@ const ListFournisseur = () => {
     setNomFournisseur(nom_fournisseur);
     setCategorie(categorie)
     setFormJuridique(forme_juridique);
+    setRc(rc)
+    setAi(ai)
+    setNif(nif)
+    setNis(nis)
     setAdresse(adresse_fournisseur);
     setEmail(email);
     setActivite(activite);
@@ -111,9 +123,14 @@ const ListFournisseur = () => {
                   <tr>
                     <th scope="col">ID fournisseur</th>
                     <th scope="col">Nom fournisseur</th>
-                    <th scope="col">Forme juridique </th>
+
                     <th scope="col">Adresse fournisseurs</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Forme juridique </th>
+                    <th scope="col">R.C</th>
+                    <th scope="col">A.I</th>
+                    <th scope="col">N.I.F</th>
+                    <th scope="col">N.I.S</th>
                     <th scope="col">Activite</th>
                     <th scope="col">Modalite de paiement</th>
                     <th scope="col">Type de paiement</th>
@@ -127,9 +144,13 @@ const ListFournisseur = () => {
                     <tr key={key}>
                       <td>{fournisseur.id_fournisseur}</td>
                       <td>{fournisseur.nom_fournisseur}</td>
-                      <td>{fournisseur.forme_juridique}</td>
                       <td>{fournisseur.adresse_fournisseur}</td>
                       <td>{fournisseur.email}</td>
+                      <td>{fournisseur.forme_juridique}</td>
+                      <td>{fournisseur.r_c}</td>
+                      <td>{fournisseur.a_i}</td>
+                      <td>{fournisseur.n_i_f}</td>
+                      <td>{fournisseur.n_i_s}</td>
                       <td>{fournisseur.activite}</td>
                       <td>{fournisseur.modalite_paiement}</td>
                       <td>{fournisseur.type_paiement}</td>
@@ -148,7 +169,11 @@ const ListFournisseur = () => {
                               fournisseur.modalite_paiement,
                               fournisseur.type_paiement,
                               fournisseur.nature_livraison,
-                              fournisseur.categorie
+                              fournisseur.categorie,
+                              fournisseur.r_c,
+                              fournisseur.a_i,
+                              fournisseur.n_i_f,
+                              fournisseur.n_i_s
                             )
                           }
                           type="button"
@@ -175,6 +200,10 @@ const ListFournisseur = () => {
             nomFournisseur={nomFournisseur}
             categorie={categorie}
             formJuridique={formJuridique}
+            rc={RC}
+            ai={AI}
+            nif={NIF}
+            nis={NIS}
             adress={adresse}
             email={email}
             activite={activite}

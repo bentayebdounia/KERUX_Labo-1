@@ -114,7 +114,7 @@ const generieIdConditionnement = (id, cle) => {
 
   const year = today.getFullYear().toString().split("");
 
-  var n = id.substring(0, 6) + "" + datt + "" + year[3] + "" + cle;
+  var n = id.substring(0, 6) + "" + datt + "" + year[3] + "" + cle+"4";
   return n;
 };
 

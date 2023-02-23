@@ -8,6 +8,10 @@ const ModifierFournisseur = (props) => {
   const [nomFournisseur, setNomFournisseur] = useState(props.nomFournisseur);
   const [categorie, setCategorie] = useState(props.categorie);
   const [formJuridique, setFormJuridique] = useState(props.formJuridique);
+  const [RC, setRc] = useState(props.rc);
+  const [AI, setAi] = useState(props.ai);
+  const [NIF, setNif] = useState(props.nif);
+  const [NIS, setNis] = useState(props.nis);
   const [adresse, setAdresse] = useState(props.adress);
   const [email, setEmail] = useState(props.email);
   const [activite, setActivite] = useState(props.activite);
@@ -26,7 +30,10 @@ const ModifierFournisseur = (props) => {
       activite !== "" &&
       modalite !== "" &&
       typePaiement !== "" &&
-      natureLivraison !== ""
+      natureLivraison !== "" &&
+      RC !== "" &&
+      AI !== "" &&
+      NIF !== ""
     ) {
       setVerifier(true);
       return true;
@@ -47,22 +54,28 @@ const ModifierFournisseur = (props) => {
         modalite,
         typePaiement,
         natureLivraison,
-        categorie
+        categorie,
+        RC,
+        AI,
+        NIF,
+        NIS
       );
-      setIdfournisseur('')
-      setNomFournisseur('')
-      setCategorie('')
-      setFormJuridique('')
-      setAdresse('')
-      setEmail('')
-      setActivite('')
-      setModalite('')
-      setTypePaiement('')
-      setNaturelivraison('')
+      setIdfournisseur("");
+      setNomFournisseur("");
+      setCategorie("");
+      setFormJuridique("");
+      setAdresse("");
+      setEmail("");
+      setActivite("");
+      setModalite("");
+      setTypePaiement("");
+      setNaturelivraison("");
+      setRc("");
+      setAi("");
+      setNif("");
+      setNis("");
 
-      props.handleClose()
-
-
+      props.handleClose();
     }
   };
 
@@ -139,6 +152,28 @@ const ModifierFournisseur = (props) => {
         </div>
 
         <div className="mb-3 row">
+          <label htmlFor="email" className="col-sm-2 col-form-label ">
+            Email
+          </label>
+          <div className="col-sm-10">
+            <input
+              type="text"
+              className="form-control"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            {verifier === false && email === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez saisir l'email de fournisseur{" "}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="mb-3 row">
           <label htmlFor="formeJuridique" className="col-sm-2 col-form-label">
             Forme juridique
           </label>
@@ -166,24 +201,87 @@ const ModifierFournisseur = (props) => {
         </div>
 
         <div className="mb-3 row">
-          <label htmlFor="email" className="col-sm-2 col-form-label ">
-            Email
+          <label htmlFor="adrFournisseur" className="col-sm-2 col-form-label ">
+            R.C <span style={{ color: "red" }}>*</span>
           </label>
-          <div className="col-sm-10">
+          <div className="col-4 ">
             <input
               type="text"
               className="form-control"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="adrFournisseur"
+              value={RC}
+              onChange={(e) => setRc(e.target.value)}
               required
             />
-            {verifier === false && email === "" && (
+            {verifier === false && RC === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
-                *Veillez saisir l'email de fournisseur{" "}
+                *Veillez saisir le R.C{" "}
               </p>
             )}
+          </div>
+
+          <label
+            htmlFor="adrFournisseur"
+            className="col-sm-2 col-form-label "
+            style={{ paddingLeft: "100px" }}
+          >
+            A.I <span style={{ color: "red" }}>*</span>
+          </label>
+          <div className="col-sm-4">
+            <input
+              type="number"
+              className="form-control"
+              id="adrFournisseur"
+              value={AI}
+              onChange={(e) => setAi(e.target.value)}
+              required
+            />
+            {verifier === false && AI === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez saisir le A.I{" "}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className="mb-3 row">
+          <label htmlFor="adrFournisseur" className="col-sm-2 col-form-label ">
+            N.I.F <span style={{ color: "red" }}>*</span>
+          </label>
+          <div className="col-4 ">
+            <input
+              type="number"
+              className="form-control"
+              id="adrFournisseur"
+              value={NIF}
+              onChange={(e) => setNif(e.target.value)}
+              required
+            />
+            {verifier === false && RC === "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Veillez saisir le N.I.F{" "}
+              </p>
+            )}
+          </div>
+
+          <label
+            htmlFor="adrFournisseur"
+            className="col-sm-2 col-form-label "
+            style={{ paddingLeft: "100px" }}
+          >
+            N.I.S
+          </label>
+          <div className="col-sm-4">
+            <input
+              type="number"
+              className="form-control"
+              id="adrFournisseur"
+              value={NIS}
+              onChange={(e) => setNis(e.target.value)}
+              required
+            />
           </div>
         </div>
 

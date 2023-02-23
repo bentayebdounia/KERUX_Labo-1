@@ -16,6 +16,10 @@ class ServiceFournisseur {
   ajouterFournisseur(
     nom_fournisseur,
     forme_juridique,
+    RC,
+    AI,
+    NIF,
+    NIS,
     adresse_fournisseur,
     email,
     activite,
@@ -34,6 +38,10 @@ class ServiceFournisseur {
       type_paiement,
       nature_livraison,
       categorie,
+      RC,
+      AI,
+      NIF,
+      NIS,
     };
 
     return axios.post(AJOUTER_FOURNISSEUR, fournisseur);
@@ -52,9 +60,13 @@ class ServiceFournisseur {
     modalite_paiement,
     type_paiement,
     nature_livraison,
-    categorie
-    
+    categorie,
+    r_c,
+    a_i,
+    n_i_f,
+    n_i_s
   ) {
+
     const fournisseur = {
       nom_fournisseur,
       forme_juridique,
@@ -65,7 +77,13 @@ class ServiceFournisseur {
       type_paiement,
       nature_livraison,
       categorie,
+      r_c,
+      a_i,
+      n_i_f,
+      n_i_s,
     };
+    console.log(id_fournisseur);
+    console.log(fournisseur);
     return axios.put(MODIFIER_FOURNISSEUR + "/" + id_fournisseur, fournisseur);
   }
   getFournisseurByCategorie(categorie) {

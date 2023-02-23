@@ -32,7 +32,6 @@ ajouterFournisseur = (req, res) => {
       nature_livraison,
       categorie,
       date_enregistement,
-      ,
       r_c,
       a_i,
       n_i_f,
@@ -61,7 +60,7 @@ updateFournisseur = (req, res) => {
     r_c,
     a_i,
     n_i_f,
-    n_i_s,
+    n_i_s
   } = req.body;
 
   pool.query(

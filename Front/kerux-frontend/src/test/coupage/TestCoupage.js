@@ -3,7 +3,7 @@ import CoupageService from "../../service/service.coupage";
 import Coupage from "./coupage";
 import ModelReponse from "../../Models/Model.repense";
 import BoxCoupage from "./boxCoupage";
-import ModalSortieStock from "../Stock/Modal.sortieStock";
+import ModalSortieStock from "./Stock_coupage/Modal.sortieStock";
 import Pagination from "../pagination/pagination";
 import moment from "moment";
 import serviceAlert from "../../service/service.alert";
@@ -208,6 +208,99 @@ const TestCoupage = (props) => {
     );
   }
 
+  const verificationBox = (resData,poidData) =>{
+
+    setProcess(resData);
+    if (boxCoupageTab.length === 0) {
+      handleShow2(true);
+      ajouterBoxCouper(
+        resData.fk_proditfourni,
+        resData.id_enregistrement,
+        boxes[0].id_box,
+        resData.id_process
+      );
+      //console.log("nombre= "+res.data.nombre);
+      setPoids(poids + poidData);
+      setNombre(nombre + resData.nombre);
+      ajouterBox();
+    } else {
+      console.log(boxCoupageTab);
+      var found = boxCoupageTab.find(
+        ({ id_nettoyage }) => id_nettoyage === boxes[0].id_box
+      );
+      console.log(found);
+      if (found === undefined) {
+        handleShow2(true);
+        ajouterBoxCouper(
+          resData.fk_proditfourni,
+          resData.id_enregistrement,
+          boxes[0].id_box,
+          resData.id_process
+        );
+        //console.log("nombre= "+res.data.nombre);
+        setPoids(poids + poidData);
+        setNombre(nombre + resData.nombre);
+        ajouterBox();
+      } else {
+        setMessage("Vous avez déjà selectionné ce produit");
+        handleShow(true);
+      }
+    }
+
+  }
+
+  const verificateBoxBloquant = (resData, poidData) => {
+    setProcess(resData);
+    if (boxCoupageTab.length === 0) {
+      //ajouter le box couper et generer un identifiant
+      ajouterBoxCouper(
+        resData.fk_proditfourni,
+        resData.id_enregistrement,
+        boxes[0].id_box,
+        resData.id_process
+      );
+      //  console.log("nombre= "+res.data.nombre);
+      setPoids(poids + poidData);
+      setNombre(nombre + resData.nombre);
+      ajouterBox();
+    } else {
+      console.log(boxes);
+      var found = boxCoupageTab.find(
+        ({ id_nettoyage }) => id_nettoyage === boxes[0].id_box
+      );
+      console.log(found);
+
+      if (found === undefined) {
+        var found2 = boxCoupageTab.find(
+          ({ id_nettoyage }) =>
+            id_nettoyage.substring(0, 6) === boxes[0].id_box.substring(0, 6)
+        );
+        console.log(found2);
+        if (found2 !== undefined) {
+          //ajouter le box couper et generer un identifiant
+          ajouterBoxCouper(
+            resData.fk_proditfourni,
+            resData.id_enregistrement,
+            boxes[0].id_box,
+            resData.id_process
+          );
+          //  console.log("nombre= "+res.data.nombre);
+          setPoids(poids + poidData);
+          setNombre(nombre + resData.nombre);
+          ajouterBox();
+        } else {
+          setMessage(
+            "Veillez entrer des boxes qui ont le meme id bon et id produit"
+          );
+          handleShow(true);
+        }
+      } else {
+        setMessage("Vous avez déjà selectionné ce produit");
+        handleShow(true);
+      }
+    }
+  };
+
   const plusId = (e) => {
     e.preventDefault();
     console.log("box.id_box== " + boxes[0].id_box);
@@ -222,46 +315,12 @@ const TestCoupage = (props) => {
             handleShow(true);
           } else if (res.data.fk_stock === null) {
             console.log(test);
-            setProcess(res.data);
-            if (boxCoupageTab.length === 0) {
-              handleShow2(true);
-              ajouterBoxCouper(
-                res.data.fk_proditfourni,
-                res.data.id_enregistrement,
-                boxes[0].id_box,
-                res.data.id_process
-              );
-              //console.log("nombre= "+res.data.nombre);
-              setPoids(poids + res.data.poids);
-              setNombre(nombre + res.data.nombre);
-              ajouterBox();
-            } else {
-              console.log(boxCoupageTab);
-              var found = boxCoupageTab.find(
-                ({ id_nettoyage }) => id_nettoyage === boxes[0].id_box
-              );
-              console.log(found);
-              if (found === undefined) {
-                handleShow2(true);
-                ajouterBoxCouper(
-                  res.data.fk_proditfourni,
-                  res.data.id_enregistrement,
-                  boxes[0].id_box,
-                  res.data.id_process
-                );
-                //console.log("nombre= "+res.data.nombre);
-                setPoids(poids + res.data.poids);
-                setNombre(nombre + res.data.nombre);
-                ajouterBox();
-              } else {
-                setMessage("Vous avez déjà selectionné ce produit");
-                handleShow(true);
-              }
-            }
+            verificationBox(res.data, res.data.poids);
             // props.nettoypBtnV()
           } else {
-            setProcess(res.data);
+            //setProcess(res.data);
             handleShow2();
+            verificationBox(res.data, res.data.poids);
           }
         });
     } else {
@@ -274,60 +333,12 @@ const TestCoupage = (props) => {
             handleShow(true);
           } else if (res.data.fk_stock === null) {
             //console.log(test);
-            setProcess(res.data);
-            if (boxCoupageTab.length === 0) {
-              //ajouter le box couper et generer un identifiant
-              ajouterBoxCouper(
-                res.data.fk_proditfourni,
-                res.data.id_enregistrement,
-                boxes[0].id_box,
-                res.data.id_process
-              );
-              //  console.log("nombre= "+res.data.nombre);
-              setPoids(poids + res.data.poids);
-              setNombre(nombre + res.data.nombre);
-              ajouterBox();
-            } else {
-              console.log(boxes);
-              var found = boxCoupageTab.find(
-                ({ id_nettoyage }) => id_nettoyage === boxes[0].id_box
-              );
-              console.log(found);
-
-              if (found === undefined) {
-                var found2 = boxCoupageTab.find(
-                  ({ id_nettoyage }) =>
-                    id_nettoyage.substring(0, 6) ===
-                    boxes[0].id_box.substring(0, 6)
-                );
-                console.log(found2);
-                if (found2 !== undefined) {
-                  //ajouter le box couper et generer un identifiant
-                  ajouterBoxCouper(
-                    res.data.fk_proditfourni,
-                    res.data.id_enregistrement,
-                    boxes[0].id_box,
-                    res.data.id_process
-                  );
-                  //  console.log("nombre= "+res.data.nombre);
-                  setPoids(poids + res.data.poids);
-                  setNombre(nombre + res.data.nombre);
-                  ajouterBox();
-                } else {
-                  setMessage(
-                    "Veillez entrer des boxes qui ont le meme id bon et id produit"
-                  );
-                  handleShow(true);
-                }
-              } else {
-                setMessage("Vous avez déjà selectionné ce produit");
-                handleShow(true);
-              }
-            }
+            verificateBoxBloquant(res.data, res.data.poids);
             // props.nettoypBtnV()
           } else {
-            setProcess(res.data);
+            //setProcess(res.data);
             handleShow2();
+            verificateBoxBloquant(res.data, res.data.poids);
           }
         });
     }

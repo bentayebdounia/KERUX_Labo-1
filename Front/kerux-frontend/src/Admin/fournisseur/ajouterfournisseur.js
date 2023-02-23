@@ -3,6 +3,7 @@ import Contact from "./contact";
 import ServiceFournisseur from "../../service/service.fournisseur";
 import ModelReponse from "../../Models/Model.repense";
 const AjouterFournisseur = (props) => {
+  const [idFournisseur, setIdFournisseur] = useState("");
   const [nomFournisseur, setNomFournisseur] = useState("");
   const [categorie, setCategorie] = useState("");
   const [formJuridique, setFormJuridique] = useState("");
@@ -47,7 +48,10 @@ const AjouterFournisseur = (props) => {
       activite !== "" &&
       modalite !== "" &&
       typePaiement !== "" &&
-      natureLivraison !== ""
+      natureLivraison !== "" &&
+      RC !== "" &&
+      AI !== "" &&
+      NIF !== ""
     ) {
       setVerifier(true);
       return true;
@@ -63,8 +67,13 @@ const AjouterFournisseur = (props) => {
     //console.log(nomFournisseur, formJuridique, adresse, email,  activite, modalite, typePaiement, natureLivraison, categorie);
     if (verificetionChamp()) {
       await ServiceFournisseur.ajouterFournisseur(
+        idFournisseur,
         nomFournisseur,
         formJuridique,
+        RC,
+        AI,
+        NIF,
+        NIS,
         adresse,
         email,
         activite,
@@ -87,9 +96,14 @@ const AjouterFournisseur = (props) => {
           i++;
         }
         if (!!res.data.id_fournisseur && i === contacts.length) {
+          setIdFournisseur("")
           setNomFournisseur("");
           setCategorie("");
           setFormJuridique("");
+          setRc("")
+          setAi("")
+          setNif("")
+          setNis("")
           setAdresse("");
           setEmail("");
           setActivite("");
@@ -185,7 +199,31 @@ const AjouterFournisseur = (props) => {
                 htmlFor="nomFournisseur"
                 className="col-sm-2 col-form-label "
               >
-                Nom Fournisseur
+                ID Fournisseur <span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="nomFournisseur"
+                  value={idFournisseur}
+                  onChange={(e) => setIdFournisseur(e.target.value)}
+                  required
+                />
+                {verifier === false && nomFournisseur === "" && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    *Veillez saisir le nom de fournisseur{" "}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <label
+                htmlFor="nomFournisseur"
+                className="col-sm-2 col-form-label "
+              >
+                Nom Fournisseur <span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
                 <input
@@ -207,7 +245,7 @@ const AjouterFournisseur = (props) => {
 
             <div className="mb-3 row">
               <label htmlFor="activite" className="col-sm-2 col-form-label ">
-                Activite
+                Activite <span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
                 <input
@@ -232,7 +270,7 @@ const AjouterFournisseur = (props) => {
                 htmlFor="adrFournisseur"
                 className="col-sm-2 col-form-label "
               >
-                Adresse fournisseur
+                Adresse fournisseur <span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
                 <input
@@ -253,11 +291,40 @@ const AjouterFournisseur = (props) => {
             </div>
 
             <div className="mb-3 row">
+              <label htmlFor="email" className="col-sm-2 col-form-label ">
+                Email <span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="col-sm-10">
+                <input
+                  type="text"
+                  className="form-control"
+                  id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                {verifier === false && email === "" && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    *Veillez saisir l'email de fournisseur{" "}
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="mb-3 row">
+              <label htmlFor="contact" className="col-sm-2 col-form-label ">
+                Contact <span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="col-sm-10">{contact_}</div>
+            </div>
+
+            <div className="mb-3 row">
               <label
                 htmlFor="formeJuridique"
                 className="col-sm-2 col-form-label"
               >
-                Forme juridique
+                Forme juridique <span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
                 <select
@@ -283,131 +350,93 @@ const AjouterFournisseur = (props) => {
             </div>
 
             <div className="mb-3 row">
-              <div className="col-4 row">
-                <label
-                  htmlFor="adrFournisseur"
-                  className="col-sm-4 col-form-label "
-                >
-                  R.C
-                </label>
-                <div className="col-sm-8">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="adrFournisseur"
-                    value={RC}
-                    onChange={(e) => setRc(e.target.value)}
-                    required
-                  />
-                  {verifier === false && RC === "" && (
-                    <p style={{ color: "red", fontSize: "11px" }}>
-                      {" "}
-                      *Veillez saisir le R.C{" "}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="col-3 row">
-                <label
-                  htmlFor="adrFournisseur"
-                  className="col-sm-4 col-form-label "
-                >
-                  A.I
-                </label>
-                <div className="col-sm-8">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="adrFournisseur"
-                    value={AI}
-                    onChange={(e) => setAi(e.target.value)}
-                    required
-                  />
-                  {verifier === false && AI === "" && (
-                    <p style={{ color: "red", fontSize: "11px" }}>
-                      {" "}
-                      *Veillez saisir le A.I{" "}
-                    </p>
-                  )}
-                </div>
-              </div>
-              <div className="col-3 row">
-                <label
-                  htmlFor="adrFournisseur"
-                  className="col-sm-4 col-form-label "
-                >
-                  N.I.F
-                </label>
-                <div className="col-sm-8">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="adrFournisseur"
-                    value={NIF}
-                    onChange={(e) => setNif(e.target.value)}
-                    required
-                  />
-                  {verifier === false && RC === "" && (
-                    <p style={{ color: "red", fontSize: "11px" }}>
-                      {" "}
-                      *Veillez saisir le N.I.F{" "}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="col-3 row">
-                <label
-                  htmlFor="adrFournisseur"
-                  className="col-sm-4 col-form-label "
-                >
-                  N.I.S
-                </label>
-                <div className="col-sm-8">
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="adrFournisseur"
-                    value={NIF}
-                    onChange={(e) => setNif(e.target.value)}
-                    required
-                  />
-                  {verifier === false && RC === "" && (
-                    <p style={{ color: "red", fontSize: "11px" }}>
-                      {" "}
-                      *Veillez saisir le N.I.S{" "}
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-            <div className="mb-3 row">
-              <label htmlFor="contact" className="col-sm-2 col-form-label ">
-                Contact
+              <label
+                htmlFor="adrFournisseur"
+                className="col-sm-2 col-form-label "
+              >
+                R.C <span style={{ color: "red" }}>*</span>
               </label>
-              <div className="col-sm-10">{contact_}</div>
-            </div>
-
-            <div className="mb-3 row">
-              <label htmlFor="email" className="col-sm-2 col-form-label ">
-                Email
-              </label>
-              <div className="col-sm-10">
+              <div className="col-4 ">
                 <input
                   type="text"
                   className="form-control"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  id="adrFournisseur"
+                  value={RC}
+                  onChange={(e) => setRc(e.target.value)}
                   required
                 />
-                {verifier === false && email === "" && (
+                {verifier === false && RC === "" && (
                   <p style={{ color: "red", fontSize: "11px" }}>
                     {" "}
-                    *Veillez saisir l'email de fournisseur{" "}
+                    *Veillez saisir le R.C{" "}
                   </p>
                 )}
+              </div>
+
+              <label
+                htmlFor="adrFournisseur"
+                className="col-sm-2 col-form-label "
+                style={{ paddingLeft: "100px" }}
+              >
+                A.I <span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="col-sm-4">
+                <input
+                  type="number"
+                  className="form-control"
+                  id="adrFournisseur"
+                  value={AI}
+                  onChange={(e) => setAi(e.target.value)}
+                  required
+                />
+                {verifier === false && AI === "" && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    *Veillez saisir le A.I{" "}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="mb-3 row">
+              <label
+                htmlFor="adrFournisseur"
+                className="col-sm-2 col-form-label "
+              >
+                N.I.F <span style={{ color: "red" }}>*</span>
+              </label>
+              <div className="col-4 ">
+                <input
+                  type="number"
+                  className="form-control"
+                  id="adrFournisseur"
+                  value={NIF}
+                  onChange={(e) => setNif(e.target.value)}
+                  required
+                />
+                {verifier === false && RC === "" && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    *Veillez saisir le N.I.F{" "}
+                  </p>
+                )}
+              </div>
+
+              <label
+                htmlFor="adrFournisseur"
+                className="col-sm-2 col-form-label "
+                style={{ paddingLeft: "100px" }}
+              >
+                N.I.S
+              </label>
+              <div className="col-sm-4">
+                <input
+                  type="number"
+                  className="form-control"
+                  id="adrFournisseur"
+                  value={NIS}
+                  onChange={(e) => setNis(e.target.value)}
+                  required
+                />
               </div>
             </div>
 
@@ -416,7 +445,7 @@ const AjouterFournisseur = (props) => {
                 htmlFor="modalitePaiement"
                 className="col-sm-2 col-form-label "
               >
-                Modalite de paiement
+                Modalite de paiement<span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
                 <select
@@ -450,7 +479,7 @@ const AjouterFournisseur = (props) => {
                 htmlFor="typePaiement"
                 className="col-sm-2 col-form-label "
               >
-                Type de paiement
+                Type de paiement <span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
                 <select
@@ -479,7 +508,7 @@ const AjouterFournisseur = (props) => {
                 htmlFor="natureLivraison"
                 className="col-sm-2 col-form-label "
               >
-                Nature de livraison
+                Nature de livraison <span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
                 <input
@@ -501,7 +530,7 @@ const AjouterFournisseur = (props) => {
 
             <div className="mb-3 row">
               <label htmlFor="categorie" className="col-sm-2 col-form-label ">
-                Categorie{" "}
+                Categorie <span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
                 <select
