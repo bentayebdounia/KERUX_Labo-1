@@ -14,8 +14,8 @@ router.get(
 );
 router.get("/getAllFournisseur", fournisseur.getAllFournisseur);
 router.get(
-  "/getFournisseurByNomCategorie/:nom_fournisseur/:categorie",
-  fournisseur.getFournisseurByNomCategorie
+  "/getFournisseurByNomcategorieId/:nom_fournisseur/:categorie/:id_fournisseur",
+  fournisseur.getFournisseurByNom_Activite_Id
 );
 router.get("/getIdFournisseur/:id_fournisseur", fournisseur.getIdFournisseur);
 

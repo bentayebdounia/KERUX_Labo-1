@@ -450,11 +450,11 @@ console.log(currentPosts2);
           <thead style={{ backgroundColor: "#16161" }}>
             <tr>
               <th scope="col"></th>
-              <th scope="col">ID </th>
+              <th scope="col">ID box</th>
               <th scope="col">Categorie</th>
               <th scope="col">Nom produit</th>
               <th scope="col">Poids(Kg) </th>
-              <th scope="col">Nombre</th>
+              <th scope="col">Quantité</th>
               <th scope="col">Date</th>
               <th scope="col">Heure</th>
             </tr>
@@ -530,56 +530,55 @@ console.log(currentPosts2);
           <thead style={{ backgroundColor: "#16161" }}>
             <tr>
               <th scope="col"></th>
-              <th scope="col">ID </th>
+              <th scope="col">ID box</th>
               <th scope="col">Categorie</th>
               <th scope="col">Nom produit</th>
               <th scope="col">Poids(Kg) </th>
-              <th scope="col">Nombre</th>
+              <th scope="col">Quantité</th>
               <th scope="col">Date</th>
               <th scope="col">Heure</th>
               <th scope="col">entrepot</th>
             </tr>
           </thead>
           <tbody>
-            {
-              currentPosts2.map((p, key) => (
-                <tr
-                  key={key}
-                  style={{
-                    background: `${
-                      dateNow(p.date_alert) <= dateToday() ? "#E8C4C4" : "white"
-                    }`,
-                  }}
-                >
-                  <td>
-                    <input
-                      onChange={(event) => {
-                        let checked = event.target.checked;
-                        setEnstock(
-                          tableDonneesStocker.map((data) => {
-                            if (p.id_gnerate === data.id_gnerate) {
-                              data.select = checked;
-                              boxes[0].id_box = p.id_gnerate;
-                            } else data.select = "";
+            {currentPosts2.map((p, key) => (
+              <tr
+                key={key}
+                style={{
+                  background: `${
+                    dateNow(p.date_alert) <= dateToday() ? "#E8C4C4" : "white"
+                  }`,
+                }}
+              >
+                <td>
+                  <input
+                    onChange={(event) => {
+                      let checked = event.target.checked;
+                      setEnstock(
+                        tableDonneesStocker.map((data) => {
+                          if (p.id_gnerate === data.id_gnerate) {
+                            data.select = checked;
+                            boxes[0].id_box = p.id_gnerate;
+                          } else data.select = "";
 
-                            return data;
-                          })
-                        );
-                      }}
-                      type="checkbox"
-                      checked={p.select}
-                    ></input>
-                  </td>
-                  <td>{p.id_gnerate}</td>
-                  <td>{p.categorie}</td>
-                  <td>{p.nom_produit}</td>
-                  <td>{p.poids / 1000}</td>
-                  <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
-                  <td>{dateModif(p.datee)}</td>
-                  <td>{p.heure}</td>
-                  <td>{p.nom_entrepot}</td>
-                </tr>
-              ))}
+                          return data;
+                        })
+                      );
+                    }}
+                    type="checkbox"
+                    checked={p.select}
+                  ></input>
+                </td>
+                <td>{p.id_gnerate}</td>
+                <td>{p.categorie}</td>
+                <td>{p.nom_produit}</td>
+                <td>{p.poids / 1000}</td>
+                <td>{p.nombre !== null && p.nombre !== 0 && p.nombre}</td>
+                <td>{dateModif(p.datee)}</td>
+                <td>{p.heure}</td>
+                <td>{p.nom_entrepot}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
         {currentPosts2.length !== 0 && (

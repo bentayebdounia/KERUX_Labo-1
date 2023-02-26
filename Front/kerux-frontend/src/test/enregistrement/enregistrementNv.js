@@ -92,7 +92,7 @@ const Enregistrement = (props) => {
       nombreRester: parseInt(nombre_fourni),
     };
     produitsFourni.push(prod);
-    localStorage.setItem("produitsFournis", JSON.stringify(produitsFourni));
+    sessionStorage.setItem("produitsFournis", JSON.stringify(produitsFourni));
 
     setIdprod(idprod + 1);
     console.log(produitFourni);
@@ -126,7 +126,7 @@ const Enregistrement = (props) => {
       poids_fourni !== 0 &&
       unite !== ""
     ) {
-      if (categorie === "poulet") {
+      if (nom_produit === "poulet-entier") {
         if (
           nombre_fourni !== "" &&
           nombre_fourni !== "0" &&
@@ -139,7 +139,7 @@ const Enregistrement = (props) => {
           )
             plus();
           else {
-            setMessage("le nombre est incorrect");
+            setMessage("la quantité est incorrect");
             handleShow2();
           }
         } else setErreurnombre(true);
@@ -162,7 +162,7 @@ const Enregistrement = (props) => {
 
   const mettreJourTabeauProduit = () => {
     setProduitsfourni(
-      JSON.parse(localStorage.getItem("produitsFournis") || "[]")
+      JSON.parse(sessionStorage.getItem("produitsFournis") || "[]")
     );
   };
 
@@ -182,40 +182,41 @@ const Enregistrement = (props) => {
 
   const supprimerProduitFourni = (id) => {
     var tab = [];
-    tab = JSON.parse(localStorage.getItem("produitsFournis"));
+    tab = JSON.parse(sessionStorage.getItem("produitsFournis"));
     for (var i = 0; i < tab.length; i++) {
       if (tab[i].id_prod === id) {
         tab.splice(i, 1);
       }
     }
 
-    localStorage.setItem("produitsFournis", JSON.stringify(tab));
-    localStorage.removeItem("boxes" + id);
+    sessionStorage.setItem("produitsFournis", JSON.stringify(tab));
+    sessionStorage.removeItem("boxes" + id);
     setProduitsfourni(
-      JSON.parse(localStorage.getItem("produitsFournis") || "[]")
+      JSON.parse(sessionStorage.getItem("produitsFournis") || "[]")
     );
   };
+
   const modifierPoidsRester = (idProd, poidRester) => {
     var tab = [];
-    tab = JSON.parse(localStorage.getItem("produitsFournis"));
+    tab = JSON.parse(sessionStorage.getItem("produitsFournis"));
     for (let i = 0; i < tab.length; i++) {
       if (tab[i].id_prod === idProd) tab[i].poidsRester = poidRester;
     }
 
     setP(poidRester);
-    localStorage.setItem("produitsFournis", JSON.stringify(tab));
+    sessionStorage.setItem("produitsFournis", JSON.stringify(tab));
     setProduitsfourni(
-      JSON.parse(localStorage.getItem("produitsFournis") || "[]")
+      JSON.parse(sessionStorage.getItem("produitsFournis") || "[]")
     );
   };
   const modifierNombreRester = (idProd, nombreRester) => {
     var tab = [];
-    tab = JSON.parse(localStorage.getItem("produitsFournis"));
+    tab = JSON.parse(sessionStorage.getItem("produitsFournis"));
     for (let i = 0; i < tab.length; i++) {
       if (tab[i].id_prod === idProd) tab[i].nombreRester = nombreRester;
     }
     setN(nombreRester);
-    localStorage.setItem("produitsFournis", JSON.stringify(tab));
+    sessionStorage.setItem("produitsFournis", JSON.stringify(tab));
   };
 
   if (categorie === "poulet") {

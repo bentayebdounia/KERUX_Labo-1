@@ -86,13 +86,13 @@ const ModalConfirmCondit = (props) => {
       <>
         <Modal show={props.show} onHide={props.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
+            <Modal.Title>Voulez-vous valider cet étape? </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div class="list-group">
               <span className="list-group-item ">
                 {" "}
-                <span className="attributs">ID boxe:</span> {props.id_box}{" "}
+                <span className="attributs">ID box:</span> {props.id_box}{" "}
               </span>
               <span className="list-group-item  list-group-item-light">
                 {" "}
@@ -124,7 +124,7 @@ const ModalConfirmCondit = (props) => {
               {props.process.categorie === "poulet" && (
                 <span className="list-group-item list-group-item-action list-group-item-light">
                   {" "}
-                  <span className="attributs">Nombre:</span> {props.nombre}
+                  <span className="attributs">Quantité:</span> {props.nombre}
                 </span>
               )}
             </div>

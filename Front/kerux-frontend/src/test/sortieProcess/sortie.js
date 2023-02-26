@@ -108,7 +108,7 @@ const Sortie = (props) => {
     nbr = (
       <>
         <label htmlFor="nombre" className="col-sm-2 col-form-label">
-          Nombre
+          Quantité
         </label>
         <div className="col-sm-10">
           <input

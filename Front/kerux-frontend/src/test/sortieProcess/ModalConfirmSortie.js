@@ -90,7 +90,7 @@ const ModalConfirmNet = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                 <div class="list-group">
-                    <span  className="list-group-item ">  <span className='attributs'>ID boxe:</span>  {props.id_box} </span>
+                    <span  className="list-group-item ">  <span className='attributs'>ID box:</span>  {props.id_box} </span>
                     <span  className="list-group-item  list-group-item-light"> <span className='attributs'>Categorie:</span> {props.categorie}</span>
                     <span className="list-group-item  list-group-item-light"> <span className='attributs'>Type de produit:</span> {props.typeProd} </span>
                     <span className="list-group-item  list-group-item-light"> <span className='attributs'>Agent:</span> 
@@ -105,7 +105,7 @@ const ModalConfirmNet = (props) => {
                         
                     </span>
                     <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Poids:</span> {props.poids /1000} Kg</span>
-                    {props.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Nombre:</span> {props.nombre }</span>}
+                    {props.categorie ==='poulet' && <span className="list-group-item list-group-item-action list-group-item-light"> <span className='attributs'>Quantité:</span> {props.nombre }</span>}
                     
                 </div>
 

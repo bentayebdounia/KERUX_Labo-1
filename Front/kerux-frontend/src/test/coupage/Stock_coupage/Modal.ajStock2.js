@@ -85,7 +85,7 @@ const ModalAjouterStock = (props) => {
         <>
             <Modal show={props.show4} onHide={props.handleClose4}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Ajoutre au stock</Modal.Title>
+                    <Modal.Title>Ajouter au stock</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>

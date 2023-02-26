@@ -22,7 +22,7 @@ const AffichageBoxes = (props) => {
 
   var n = props.id;
   const [boxe, setBoxe] = useState(
-    JSON.parse(localStorage.getItem("boxes" + props.id) || "[]").map((d) => {
+    JSON.parse(sessionStorage.getItem("boxes" + props.id) || "[]").map((d) => {
       return {
         select: false,
         categorie: d.categorie,
@@ -43,7 +43,7 @@ const AffichageBoxes = (props) => {
   };
   const supprimerbox = (id) => {
     var tab = [];
-    tab = JSON.parse(localStorage.getItem("boxes" + props.id));
+    tab = JSON.parse(sessionStorage.getItem("boxes" + props.id));
     for (var i = 0; i < tab.length; i++) {
       if (tab[i].id_prod === id) {
         tab.splice(i, 1);
@@ -82,7 +82,7 @@ const AffichageBoxes = (props) => {
     } else if (nombre !== "" && poids !== "" && champtVerify()) {
       const today = new Date();
       var tab = [];
-      tab = JSON.parse(localStorage.getItem("boxes" + props.id));
+      tab = JSON.parse(sessionStorage.getItem("boxes" + props.id));
       //console.log(boxe);
       const n = entrepots.find(
         ({ id_entrepot }) => id_entrepot === parseInt(entrepot)
@@ -146,7 +146,7 @@ const AffichageBoxes = (props) => {
         }
       }
       console.log(tab);
-      localStorage.setItem("boxes" + props.id, JSON.stringify(tab));
+      sessionStorage.setItem("boxes" + props.id, JSON.stringify(tab));
       setPoids("");
       setNombre("");
       setEntrepot("");

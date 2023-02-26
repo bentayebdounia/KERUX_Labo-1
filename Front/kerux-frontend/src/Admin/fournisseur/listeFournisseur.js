@@ -9,7 +9,6 @@ const ListFournisseur = () => {
   const [fournisseur, setFournisseur] = useState("");
   const [idFournisseur, setIdfournisseur] = useState("");
   const [nomFournisseur, setNomFournisseur] = useState("");
-  const [categorie, setCategorie] = useState("");
   const [formJuridique, setFormJuridique] = useState("");
   const [RC, setRc] = useState("");
   const [AI, setAi] = useState("");
@@ -44,7 +43,7 @@ const ListFournisseur = () => {
 
   const getFournisseur = () => {
     serviceFournisseur
-      .getFournisseurByNomOrCategorie(rechercheValue, rechercheValue)
+      .getFournisseurByNomOrActiviteOrId(rechercheValue, rechercheValue)
       .then((res) => {
         setFournisseurs(res.data);
       });
@@ -65,7 +64,6 @@ const ListFournisseur = () => {
     modalite_paiement,
     type_paiement,
     nature_livraison,
-    categorie,
     rc,
     ai,
     nif,
@@ -75,7 +73,6 @@ const ListFournisseur = () => {
     // e.preventDefault();
     setIdfournisseur(id_fournisseur);
     setNomFournisseur(nom_fournisseur);
-    setCategorie(categorie)
     setFormJuridique(forme_juridique);
     setRc(rc)
     setAi(ai)
@@ -123,7 +120,7 @@ const ListFournisseur = () => {
                   <tr>
                     <th scope="col">ID fournisseur</th>
                     <th scope="col">Nom fournisseur</th>
-
+                    <th scope="col">Activité</th>
                     <th scope="col">Adresse fournisseurs</th>
                     <th scope="col">Email</th>
                     <th scope="col">Forme juridique </th>
@@ -131,11 +128,9 @@ const ListFournisseur = () => {
                     <th scope="col">A.I</th>
                     <th scope="col">N.I.F</th>
                     <th scope="col">N.I.S</th>
-                    <th scope="col">Activite</th>
                     <th scope="col">Modalite de paiement</th>
                     <th scope="col">Type de paiement</th>
                     <th scope="col">Nature de livraison</th>
-                    <th scope="col">Categorie</th>
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
@@ -144,6 +139,7 @@ const ListFournisseur = () => {
                     <tr key={key}>
                       <td>{fournisseur.id_fournisseur}</td>
                       <td>{fournisseur.nom_fournisseur}</td>
+                      <td>{fournisseur.activite}</td>
                       <td>{fournisseur.adresse_fournisseur}</td>
                       <td>{fournisseur.email}</td>
                       <td>{fournisseur.forme_juridique}</td>
@@ -151,11 +147,9 @@ const ListFournisseur = () => {
                       <td>{fournisseur.a_i}</td>
                       <td>{fournisseur.n_i_f}</td>
                       <td>{fournisseur.n_i_s}</td>
-                      <td>{fournisseur.activite}</td>
                       <td>{fournisseur.modalite_paiement}</td>
                       <td>{fournisseur.type_paiement}</td>
                       <td>{fournisseur.nature_livraison}</td>
-                      <td>{fournisseur.categorie}</td>
                       <td>
                         <input
                           onClick={(e) =>
@@ -169,7 +163,6 @@ const ListFournisseur = () => {
                               fournisseur.modalite_paiement,
                               fournisseur.type_paiement,
                               fournisseur.nature_livraison,
-                              fournisseur.categorie,
                               fournisseur.r_c,
                               fournisseur.a_i,
                               fournisseur.n_i_f,
@@ -198,7 +191,6 @@ const ListFournisseur = () => {
           <ModifierFournisseur
             id_fournisseur={idFournisseur}
             nomFournisseur={nomFournisseur}
-            categorie={categorie}
             formJuridique={formJuridique}
             rc={RC}
             ai={AI}

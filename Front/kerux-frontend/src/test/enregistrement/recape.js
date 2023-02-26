@@ -10,14 +10,15 @@ const Recape = (props) => {
   const [stock, setStock] = useState();
   var [boxe, setBoxe] = useState([]);
   var produitFourni = [];
-  produitFourni = JSON.parse(localStorage.getItem("produitsFournis") || "[]");
+  produitFourni = JSON.parse(sessionStorage.getItem("produitsFournis") || "[]");
   const result = [];
   const [result2, setResult2] = useState({
     id_gnerate: "",
     poids: "",
     nombre: "",
     categorie: "",
-    produit:""
+    produit: "",
+    entrepot: "",
   });
   const billRef = useRef(null);
 
@@ -68,7 +69,7 @@ const Recape = (props) => {
     //console.log(produitFourni[i].id_prod)
     boxe = boxe.concat(
       JSON.parse(
-        localStorage.getItem("boxes" + produitFourni[i].id_prod) || "[]"
+        sessionStorage.getItem("boxes" + produitFourni[i].id_prod) || "[]"
       )
     );
   }
@@ -107,16 +108,16 @@ const Recape = (props) => {
 
   const ajouterBoxe = async (id_produit, id) => {
     var box = [];
-    box = JSON.parse(localStorage.getItem("boxes" + id) || "[]");
+    box = JSON.parse(sessionStorage.getItem("boxes" + id) || "[]");
     console.log(box);
 
     //var boxes= []
     var i = 0;
 
     while (i < box.length) {
-      console.log(i + 1);
+     
       var cle = ajouterCle(box[i].categorie, box[i].nom_produit, i + 1);
-      console.log(cle);
+      
       if (box[i].id_stock === null || box[i].id_stock === "") {
         await EnregistrementService.ajouerEnregistrement(
           box[i].categorie,
@@ -135,10 +136,11 @@ const Recape = (props) => {
             nombre: res.data.nombre,
             categorie: res.data.categorie,
             produit: res.data.nom_produit,
+            entrepot : "",
             ref: createRef(),
           });
 
-          console.log(result);
+         // console.log(result);
 
           serviceAlert
             .ajouterAlert(res.data.id_process, dateAlert())
@@ -163,6 +165,8 @@ const Recape = (props) => {
             poids: res.data.poids,
             nombre: res.data.nombre,
             categorie: res.data.categorie,
+            produit: res.data.nom_produit,
+            entrepot: box[i].stock,
             ref: createRef(),
           });
 
@@ -217,12 +221,12 @@ const Recape = (props) => {
 
   const supprimerProduitFourni = () => {
     var tab = [];
-    tab = JSON.parse(localStorage.getItem("produitsFournis"));
+    tab = JSON.parse(sessionStorage.getItem("produitsFournis"));
     for (var i = 0; i < tab.length; i++) {
-      localStorage.removeItem("boxes" + tab[i].id_prod);
+      sessionStorage.removeItem("boxes" + tab[i].id_prod);
     }
     console.log(tab);
-    localStorage.removeItem("produitsFournis");
+    sessionStorage.removeItem("produitsFournis");
   };
 
   const valider = () => {

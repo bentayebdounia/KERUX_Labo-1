@@ -11,9 +11,9 @@ const AjouterStock = (props) => {
   const [selection, setSelection] = useState([]);
   // const [stock , setStock] = useState(JSON.parse (localStorage.getItem('boxes'+props.id)))
   var tab = [];
-  tab = JSON.parse(localStorage.getItem("boxes" + props.id));
+  tab = JSON.parse(sessionStorage.getItem("boxes" + props.id));
   const [boxe, setBoxe] = useState(
-    JSON.parse(localStorage.getItem("boxes" + props.id)).map((d, key) => {
+    JSON.parse(sessionStorage.getItem("boxes" + props.id)).map((d, key) => {
       return {
         select: false,
         cle: key,
@@ -40,7 +40,7 @@ const AjouterStock = (props) => {
 //ajouter le produit au stock
   const ajout =  () => {
     var tab = [];
-    tab = JSON.parse(localStorage.getItem("boxes" + props.id));
+    tab = JSON.parse(sessionStorage.getItem("boxes" + props.id));
     console.log(entrepots);
     console.log(entrepot);
 
@@ -62,7 +62,7 @@ const AjouterStock = (props) => {
     }
     console.log(tab);
 
-    localStorage.setItem("boxes" + props.id, JSON.stringify(tab));
+    sessionStorage.setItem("boxes" + props.id, JSON.stringify(tab));
     eliminate()
     
 

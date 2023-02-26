@@ -265,7 +265,7 @@ const TestNet = (props) => {
          <tr>
            <th scope="col"></th>
 
-           <th scope="col">ID </th>
+           <th scope="col">ID box</th>
            <th scope="col">Categorie</th>
            <th scope="col">Nom produit</th>
            <th scope="col">Poids(Kg) </th>

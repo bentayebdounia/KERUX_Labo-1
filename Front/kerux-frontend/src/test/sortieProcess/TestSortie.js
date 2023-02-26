@@ -223,11 +223,11 @@ const TestSortie = (props) => {
           <thead style={{ backgroundColor: "#16161" }}>
             <tr>
               <th scope="col"></th>
-              <th scope="col">ID </th>
+              <th scope="col">ID box</th>
               <th scope="col">Categorie</th>
               <th scope="col">Nom produit</th>
               <th scope="col">Poids(Kg) </th>
-              <th scope="col">Nombre</th>
+              <th scope="col">Quantité</th>
               <th scope="col">Date</th>
               <th scope="col">Heure</th>
             </tr>
@@ -295,11 +295,11 @@ const TestSortie = (props) => {
           <thead style={{ backgroundColor: "#16161" }}>
             <tr>
               <th scope="col"></th>
-              <th scope="col">ID </th>
+              <th scope="col">ID box</th>
               <th scope="col">Categorie</th>
               <th scope="col">Nom produit</th>
               <th scope="col">Poids(Kg) </th>
-              <th scope="col">Nombre</th>
+              <th scope="col">Quantité</th>
               <th scope="col">Date</th>
               <th scope="col">Heure</th>
               <th scope="col">entrepot</th>

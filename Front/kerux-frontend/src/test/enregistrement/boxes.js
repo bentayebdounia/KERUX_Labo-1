@@ -57,7 +57,7 @@ export default function Boxes(props) {
           {props.categorie === "poulet" && (
             <>
               <div className="col-1">
-                <label htmlFor="nbr">Nombre </label>
+                <label htmlFor="nbr">Quantité </label>
               </div>
               <div className="col-4">
                 <input
@@ -75,7 +75,7 @@ export default function Boxes(props) {
                     props.nombre === "") && (
                     <p style={{ color: "red", fontSize: "11px" }}>
                       {" "}
-                      *Veillez ajouter le nombre{" "}
+                      *Veillez ajouter la quantité{" "}
                     </p>
                   )}
               </div>

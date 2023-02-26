@@ -62,7 +62,7 @@ const Conditionnement = (props) => {
       prenom: "",
     },
   ]);
-  const [agentNettoyageSelect, setAgentnettoyageselect] = useState([]);
+  const agentNettoyageSelect=[]
   const [listeAgentMarinade, setListe_agentMarinade] = useState([]);
   const [marinade, setMarinade] = useState(false);
   const [micuissan, seMicuissan] = useState(false);
@@ -178,7 +178,7 @@ const Conditionnement = (props) => {
     nbr = (
       <>
         <label htmlFor="nombre" className="col-sm-2 col-form-label">
-          Nombre
+          Quantité
         </label>
         <div className="col-sm-10">
           <input

@@ -41,6 +41,7 @@ const ListeEntrepot = (props) => {
     return a;
   };
 
+  
   const modifier = (
     id,
     nomEntrepot,
@@ -57,9 +58,11 @@ const ListeEntrepot = (props) => {
     setAir_stockage(airStockage);
     setCapacite(capacite);
     setAdresse(adresse);
-    setExist(exist)
+    setExist(exist);
 
     handleShow();
+   
+
   };
 
   const annuler = () => {
@@ -90,8 +93,8 @@ const ListeEntrepot = (props) => {
             <table className="table table-bordered">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">ID</th>
+                
+                  <th scope="col">ID entrepot</th>
                   <th scope="col">Nom d'entrepot</th>
                   <th scope="col">Type d'entrepot</th>
                   <th scope="col">Air de stockage</th>
@@ -105,7 +108,7 @@ const ListeEntrepot = (props) => {
               <tbody>
                 {entrepots.map((p, key) => (
                   <tr key={key + 1}>
-                    <td>{key}</td>
+                   
                     <td>{p.id_entrepot}</td>
                     <td>{p.nom_entrepot}</td>
                     <td>{p.type_entrepot}</td>
@@ -174,6 +177,7 @@ const ListeEntrepot = (props) => {
               capacite={capacite}
               adresse={adresse}
               exist={exist}
+              showRacine= {props.handleShow}
             />
           )}
         </Modal.Body>

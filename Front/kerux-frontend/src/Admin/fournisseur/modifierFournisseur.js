@@ -6,7 +6,6 @@ import serviceFournisseur from "../../service/service.fournisseur";
 const ModifierFournisseur = (props) => {
   const [idFournisseur, setIdfournisseur] = useState(props.id_fournisseur);
   const [nomFournisseur, setNomFournisseur] = useState(props.nomFournisseur);
-  const [categorie, setCategorie] = useState(props.categorie);
   const [formJuridique, setFormJuridique] = useState(props.formJuridique);
   const [RC, setRc] = useState(props.rc);
   const [AI, setAi] = useState(props.ai);
@@ -23,14 +22,10 @@ const ModifierFournisseur = (props) => {
   const verificetionChamp = () => {
     if (
       nomFournisseur !== "" &&
-      categorie !== "" &&
       formJuridique !== "" &&
       adresse !== "" &&
-      email !== "" &&
       activite !== "" &&
-      modalite !== "" &&
-      typePaiement !== "" &&
-      natureLivraison !== "" &&
+      modalite !== "" &&  
       RC !== "" &&
       AI !== "" &&
       NIF !== ""
@@ -54,7 +49,6 @@ const ModifierFournisseur = (props) => {
         modalite,
         typePaiement,
         natureLivraison,
-        categorie,
         RC,
         AI,
         NIF,
@@ -62,7 +56,6 @@ const ModifierFournisseur = (props) => {
       );
       setIdfournisseur("");
       setNomFournisseur("");
-      setCategorie("");
       setFormJuridique("");
       setAdresse("");
       setEmail("");
@@ -87,7 +80,7 @@ const ModifierFournisseur = (props) => {
       <Modal.Body>
         <div className="mb-3 row">
           <label htmlFor="nomFournisseur" className="col-sm-2 col-form-label ">
-            Nom Fournisseur
+            Nom Fournisseur 
           </label>
           <div className="col-sm-10">
             <input
@@ -109,17 +102,42 @@ const ModifierFournisseur = (props) => {
 
         <div className="mb-3 row">
           <label htmlFor="activite" className="col-sm-2 col-form-label ">
-            Activite
+            Activite 
           </label>
           <div className="col-sm-10">
-            <input
-              type="text"
-              className="form-control"
-              id="activite"
-              value={activite}
-              onChange={(e) => setActivite(e.target.value)}
-              required
-            />
+            {(activite === "fournisseur de poulet" ||
+              activite === "fournisseur des legumes" ||
+              activite === " ") && (
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                id="activite"
+                value={activite}
+                onChange={(e) => setActivite(e.target.value)}
+                required
+              >
+                <option selected></option>
+                <option value="fournisseur de poulet">
+                  Fournisseur de poulet
+                </option>
+                <option value="fournisseur des legumes">
+                  Fournisseur des legumes
+                </option>
+                <option value="">Autre</option>
+              </select>
+            )}
+            {activite !== "fournisseur de poulet" &&
+              activite !== "fournisseur des legumes" &&
+              activite !== " " && (
+                <input
+                  type="text"
+                  className="form-control"
+                  id="adrFournisseur"
+                  value={activite}
+                  onChange={(e) => setActivite(e.target.value)}
+                  required
+                />
+              )}
             {verifier === false && activite === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
@@ -164,18 +182,12 @@ const ModifierFournisseur = (props) => {
               onChange={(e) => setEmail(e.target.value)}
               required
             />
-            {verifier === false && email === "" && (
-              <p style={{ color: "red", fontSize: "11px" }}>
-                {" "}
-                *Veillez saisir l'email de fournisseur{" "}
-              </p>
-            )}
           </div>
         </div>
 
         <div className="mb-3 row">
           <label htmlFor="formeJuridique" className="col-sm-2 col-form-label">
-            Forme juridique
+            Forme juridique 
           </label>
           <div className="col-sm-10">
             <select
@@ -202,7 +214,7 @@ const ModifierFournisseur = (props) => {
 
         <div className="mb-3 row">
           <label htmlFor="adrFournisseur" className="col-sm-2 col-form-label ">
-            R.C <span style={{ color: "red" }}>*</span>
+            R.C 
           </label>
           <div className="col-4 ">
             <input
@@ -226,7 +238,7 @@ const ModifierFournisseur = (props) => {
             className="col-sm-2 col-form-label "
             style={{ paddingLeft: "100px" }}
           >
-            A.I <span style={{ color: "red" }}>*</span>
+            A.I 
           </label>
           <div className="col-sm-4">
             <input
@@ -247,7 +259,7 @@ const ModifierFournisseur = (props) => {
         </div>
         <div className="mb-3 row">
           <label htmlFor="adrFournisseur" className="col-sm-2 col-form-label ">
-            N.I.F <span style={{ color: "red" }}>*</span>
+            N.I.F 
           </label>
           <div className="col-4 ">
             <input
@@ -334,12 +346,6 @@ const ModifierFournisseur = (props) => {
               <option value="par cheque">par chèque</option>
               <option value="par espece">par espèce</option>
             </select>
-            {verifier === false && typePaiement === "" && (
-              <p style={{ color: "red", fontSize: "11px" }}>
-                {" "}
-                *Veillez saisir le type de paiement{" "}
-              </p>
-            )}
           </div>
         </div>
 
@@ -356,42 +362,6 @@ const ModifierFournisseur = (props) => {
               onChange={(e) => setNaturelivraison(e.target.value)}
               required
             />
-            {verifier === false && natureLivraison === "" && (
-              <p style={{ color: "red", fontSize: "11px" }}>
-                {" "}
-                *Veillez saisir la nature de livraison{" "}
-              </p>
-            )}
-          </div>
-        </div>
-
-        <div className="mb-3 row">
-          <label htmlFor="categorie" className="col-sm-2 col-form-label ">
-            Categorie{" "}
-          </label>
-          <div className="col-sm-10">
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              id="categorie"
-              value={categorie}
-              onChange={(e) => setCategorie(e.target.value)}
-              required
-            >
-              <option selected></option>
-              <option value="fournisseur de poulet">
-                Fournisseur de poulet
-              </option>
-              <option value="fournisseur des legumes">
-                Fournisseur des legumes
-              </option>
-            </select>
-            {verifier === false && categorie === "" && (
-              <p style={{ color: "red", fontSize: "11px" }}>
-                {" "}
-                *Veillez saisir la categorie{" "}
-              </p>
-            )}
           </div>
         </div>
       </Modal.Body>

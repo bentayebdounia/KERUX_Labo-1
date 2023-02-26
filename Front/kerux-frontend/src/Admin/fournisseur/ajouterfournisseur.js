@@ -10,11 +10,11 @@ const AjouterFournisseur = (props) => {
   const [RC, setRc] = useState("");
   const [AI, setAi] = useState("");
   const [NIF, setNif] = useState("");
-  const [NIS, setNis] = useState("");
+  const [NIS, setNis] = useState(null);
 
   const [adresse, setAdresse] = useState();
   const [email, setEmail] = useState("");
-  const [activite, setActivite] = useState("");
+  const [activite, setActivite] = useState(" ");
   const [modalite, setModalite] = useState("");
   const [typePaiement, setTypePaiement] = useState("");
   const [natureLivraison, setNaturelivraison] = useState("");
@@ -43,14 +43,10 @@ const AjouterFournisseur = (props) => {
       idFournisseur !== "" &&
       idFournisseur.length <= 2 &&
       nomFournisseur !== "" &&
-      categorie !== "" &&
       formJuridique !== "" &&
       adresse !== "" &&
-      email !== "" &&
       activite !== "" &&
       modalite !== "" &&
-      typePaiement !== "" &&
-      natureLivraison !== "" &&
       RC !== "" &&
       AI !== "" &&
       NIF !== ""
@@ -84,7 +80,7 @@ const AjouterFournisseur = (props) => {
             modalite,
             typePaiement,
             natureLivraison,
-            categorie
+            
           ).then((res) => {
             var i = 1;
             while (i < contacts.length) {
@@ -101,7 +97,6 @@ const AjouterFournisseur = (props) => {
             if ((res.data = "bien ajouter" && i === contacts.length)) {
               setIdFournisseur("");
               setNomFournisseur("");
-              setCategorie("");
               setFormJuridique("");
               setRc("");
               setAi("");
@@ -128,8 +123,7 @@ const AjouterFournisseur = (props) => {
               handleShow();
             }
           });
-        }
-        else {
+        } else {
           setMessage("Le ID fournisseur exist déjà");
           handleShow();
         }
@@ -260,14 +254,39 @@ const AjouterFournisseur = (props) => {
                 Activite <span style={{ color: "red" }}>*</span>
               </label>
               <div className="col-sm-10">
-                <input
-                  type="text"
-                  className="form-control"
-                  id="activite"
-                  value={activite}
-                  onChange={(e) => setActivite(e.target.value)}
-                  required
-                />
+                {(activite === "fournisseur de poulet" ||
+                  activite === "fournisseur des legumes" ||
+                  activite === " ") && (
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    id="activite"
+                    value={activite}
+                    onChange={(e) => setActivite(e.target.value)}
+                    required
+                  >
+                    <option selected></option>
+                    <option value="fournisseur de poulet">
+                      Fournisseur de poulet
+                    </option>
+                    <option value="fournisseur des legumes">
+                      Fournisseur des legumes
+                    </option>
+                    <option value="">Autre</option>
+                  </select>
+                )}
+                {(activite !== "fournisseur de poulet" &&
+                  activite !== "fournisseur des legumes" &&
+                  activite !== " ") && (
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="adrFournisseur"
+                    value={activite}
+                    onChange={(e) => setActivite(e.target.value)}
+                    required
+                  />
+                )}
                 {verifier === false && activite === "" && (
                   <p style={{ color: "red", fontSize: "11px" }}>
                     {" "}
@@ -304,7 +323,7 @@ const AjouterFournisseur = (props) => {
 
             <div className="mb-3 row">
               <label htmlFor="email" className="col-sm-2 col-form-label ">
-                Email <span style={{ color: "red" }}>*</span>
+                Email 
               </label>
               <div className="col-sm-10">
                 <input
@@ -315,12 +334,6 @@ const AjouterFournisseur = (props) => {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                {verifier === false && email === "" && (
-                  <p style={{ color: "red", fontSize: "11px" }}>
-                    {" "}
-                    *Veillez saisir l'email de fournisseur{" "}
-                  </p>
-                )}
               </div>
             </div>
 
@@ -491,7 +504,7 @@ const AjouterFournisseur = (props) => {
                 htmlFor="typePaiement"
                 className="col-sm-2 col-form-label "
               >
-                Type de paiement <span style={{ color: "red" }}>*</span>
+                Type de paiement 
               </label>
               <div className="col-sm-10">
                 <select
@@ -506,12 +519,6 @@ const AjouterFournisseur = (props) => {
                   <option value="par cheque">par chèque</option>
                   <option value="par espece">par espèce</option>
                 </select>
-                {verifier === false && typePaiement === "" && (
-                  <p style={{ color: "red", fontSize: "11px" }}>
-                    {" "}
-                    *Veillez saisir le type de paiement{" "}
-                  </p>
-                )}
               </div>
             </div>
 
@@ -520,7 +527,7 @@ const AjouterFournisseur = (props) => {
                 htmlFor="natureLivraison"
                 className="col-sm-2 col-form-label "
               >
-                Nature de livraison <span style={{ color: "red" }}>*</span>
+                Nature de livraison 
               </label>
               <div className="col-sm-10">
                 <input
@@ -531,42 +538,6 @@ const AjouterFournisseur = (props) => {
                   onChange={(e) => setNaturelivraison(e.target.value)}
                   required
                 />
-                {verifier === false && natureLivraison === "" && (
-                  <p style={{ color: "red", fontSize: "11px" }}>
-                    {" "}
-                    *Veillez saisir la nature de livraison{" "}
-                  </p>
-                )}
-              </div>
-            </div>
-
-            <div className="mb-3 row">
-              <label htmlFor="categorie" className="col-sm-2 col-form-label ">
-                Categorie <span style={{ color: "red" }}>*</span>
-              </label>
-              <div className="col-sm-10">
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                  id="categorie"
-                  value={categorie}
-                  onChange={(e) => setCategorie(e.target.value)}
-                  required
-                >
-                  <option selected></option>
-                  <option value="fournisseur de poulet">
-                    Fournisseur de poulet
-                  </option>
-                  <option value="fournisseur des legumes">
-                    Fournisseur des legumes
-                  </option>
-                </select>
-                {verifier === false && categorie === "" && (
-                  <p style={{ color: "red", fontSize: "11px" }}>
-                    {" "}
-                    *Veillez saisir la categorie{" "}
-                  </p>
-                )}
               </div>
             </div>
 

@@ -13,15 +13,29 @@ const AjouterEntrepot = (props) => {
 
     const [verifier , setVerifier] = useState()
 
-    const verificetionChamp = () => {
-        if((nomEntrepot !=='' ) && type !=='' && airStock !=='' && capacite !=='' && adr !==''){
-            
-            setVerifier(true);
-            return true }
-        else {
-            setVerifier(false);
-            return false 
-        }
+  const verificetionChamp = () => {
+       if (
+         nomEntrepot !== "" &&
+         (type === "chambre froide" ) &&
+         airStock !== "" &&
+         capacite !== "" &&
+         adr !== ""
+       ) {
+         setVerifier(true);
+         return true;
+       } else if (
+         nomEntrepot !== "" &&
+         (type !== "chambre froide" && type !== "") &&
+         airStock === "" &&
+         capacite !== "" &&
+         adr !== ""
+       ) {
+         setVerifier(true);
+         return true;
+       } else {
+         setVerifier(false);
+         return false;
+       }
        
     }
     
@@ -85,7 +99,6 @@ const AjouterEntrepot = (props) => {
                 )}
               </div>
             </div>
-
             <div className="mb-3 row">
               <label htmlFor="typeEntrepot" className="col-sm-2 col-form-label">
                 Type d'entrepot<span style={{ color: "red" }}>*</span>
@@ -110,36 +123,39 @@ const AjouterEntrepot = (props) => {
                 )}
               </div>
             </div>
-
-            <div className="mb-3 row">
-              <label htmlFor="airStockage" className="col-sm-2 col-form-label">
-                L'air de stockage<span style={{ color: "red" }}>*</span>
-              </label>
-              <div className="col-sm-10">
-                <select
-                  className="form-select"
-                  aria-label="Default select example"
-                  id="airStockage"
-                  value={airStock}
-                  onChange={(e) => setAirStock(e.target.value)}
+            {type === "chambre froide" && (
+              <div className="mb-3 row">
+                <label
+                  htmlFor="airStockage"
+                  className="col-sm-2 col-form-label"
                 >
-                  <option selected></option>
-                  <option value="Refrigerer -positif">
-                    Refrigerer -positif
-                  </option>
-                  <option value="Refrigerer -negatif">
-                    Refrigerer -negatif
-                  </option>
-                </select>
-                {verifier === false && airStock === "" && (
-                  <p style={{ color: "red", fontSize: "11px" }}>
-                    {" "}
-                    *Veillez selectionner l'air de stockage{" "}
-                  </p>
-                )}
+                  Air de stockage<span style={{ color: "red" }}>*</span>
+                </label>
+                <div className="col-sm-10">
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    id="airStockage"
+                    value={airStock}
+                    onChange={(e) => setAirStock(e.target.value)}
+                  >
+                    <option selected></option>
+                    <option value="Refrigerer -positif">
+                      Refrigerer -positif
+                    </option>
+                    <option value="Refrigerer -negatif">
+                      Refrigerer -negatif
+                    </option>
+                  </select>
+                  {verifier === false && airStock === "" && (
+                    <p style={{ color: "red", fontSize: "11px" }}>
+                      {" "}
+                      *Veillez selectionner l'air de stockage{" "}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-
+            )}
             <div className="mb-3 row">
               <label htmlFor="capacite" className="col-sm-2 col-form-label ">
                 Capacite<span style={{ color: "red" }}>*</span>

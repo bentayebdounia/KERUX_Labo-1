@@ -57,7 +57,7 @@ const ModalAjoutBoxes = (props) => {
 
   const [tableboxe, setTableboxe] = useState([]);
   useEffect(() => {
-    setTableboxe(JSON.parse(localStorage.getItem("boxes" + props.id) || "[]"));
+    setTableboxe(JSON.parse(sessionStorage.getItem("boxes" + props.id) || "[]"));
   }, []);
 
   //console.log("produitFourni: "+ props.produitFourni);  props.produitFourni.nombre_fourni
@@ -121,7 +121,7 @@ const ModalAjoutBoxes = (props) => {
       props.poidsRestant
     ) {
       //alert(boxe[0].unite)
-      if (props.categorie === "poulet") {
+      if (props.type === "poulet-entier") {
         if (nbrAccumuler + parseFloat(boxe[0].nombre) <= props.nombreRestant) {
           if (
             boxe[0].poids === 0 ||
@@ -157,12 +157,12 @@ const ModalAjoutBoxes = (props) => {
               console.log(transforme(boxe[0].unite, boxe[0].poids));
               plus();
             } else {
-              setMsg("Veillez verifier le poid");
+              setMsg("Veillez le poids ou la quantité");
               handleShow();
             }
           }
         } else {
-          setMsg("Le nombre incorrecte");
+          setMsg("La quantité est incorrecte");
           handleShow();
         }
       }
@@ -186,9 +186,7 @@ const ModalAjoutBoxes = (props) => {
         }
       }
     } else {
-      setMsg(
-        " " + transforme(boxe[0].unite, boxe[0].poids) + ">" + poidsAccumuler
-      );
+      setMsg("Veillez vérifier vous entrées");
       handleShow();
     }
   };
@@ -213,13 +211,13 @@ const ModalAjoutBoxes = (props) => {
           date_alert: "",
         };
         tableboxe.push(b);
-        localStorage.setItem("boxes" + props.id, JSON.stringify(tableboxe));
+        sessionStorage.setItem("boxes" + props.id, JSON.stringify(tableboxe));
 
         i = i + 1;
       }
 
       var tab = [];
-      tab = JSON.parse(localStorage.getItem("produitsFournis"));
+      tab = JSON.parse(sessionStorage.getItem("produitsFournis"));
       for (var i = 0; i < tab.length; i++) {
         if (tab[i].id_prod === props.id) {
           tab[i].poidsRester = props.poidsRestant - poidsAccumuler;
@@ -232,7 +230,7 @@ const ModalAjoutBoxes = (props) => {
 
       setBoxe([...nboxe]);
       //props.poidsRestant((props.poids-poidsRester)/1000)
-      localStorage.setItem("produitsFournis", JSON.stringify(tab));
+      sessionStorage.setItem("produitsFournis", JSON.stringify(tab));
       handleShowQstock();
       // props.handleClose()
       boxe[0].poids = "";

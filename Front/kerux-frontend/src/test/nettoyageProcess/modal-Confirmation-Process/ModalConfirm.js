@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 
 import Modal from "react-bootstrap/Modal";
 import NettoyageService from "../../service/service.nettoyage";
-import ModalQStock from "../Stock/Modal.ajouterEnStock";
-import Service_AgentProcess from "../../service/service.agentProcess";
-import serviceAlert from "../../service/service.alert";
+import ModalQStock from "./../Stock/Modal.ajouterEnStock";
+import Service_AgentProcess from "./service/service.agentProcess";
+import serviceAlert from "./service/service.alert";
 import "./modalConfirm.css";
 //import Print from './print';
 const ModalConfirmNet = (props) => {
@@ -85,13 +85,13 @@ const ModalConfirmNet = (props) => {
     <>
       <Modal size="l" show={props.show2} onHide={props.handleClose2}>
         <Modal.Header closeButton>
-          <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
+          <Modal.Title>Voulez-vous valider cet étape? </Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div class="list-group">
             <span className="list-group-item ">
               {" "}
-              <span className="attributs">ID boxe:</span> {props.id}{" "}
+              <span className="attributs">ID box:</span> {props.id}{" "}
             </span>
             <span className="list-group-item  list-group-item-light">
               {" "}
@@ -121,7 +121,7 @@ const ModalConfirmNet = (props) => {
             {props.categorie === "poulet" && (
               <span className="list-group-item list-group-item-action list-group-item-light">
                 {" "}
-                <span className="attributs">Nombre:</span> {props.nombre}
+                <span className="attributs">Quantité:</span> {props.nombre}
               </span>
             )}
           </div>

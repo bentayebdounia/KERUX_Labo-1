@@ -13,7 +13,6 @@ ajouterFournisseur = (req, res) => {
     modalite_paiement,
     type_paiement,
     nature_livraison,
-    categorie,
     r_c,
     a_i,
     n_i_f,
@@ -31,7 +30,6 @@ ajouterFournisseur = (req, res) => {
       modalite_paiement,
       type_paiement,
       nature_livraison,
-      categorie,
       date_enregistement,
       r_c,
       a_i,
@@ -61,8 +59,7 @@ updateFournisseur = (req, res) => {
     activite,
     modalite_paiement,
     type_paiement,
-    nature_livraison,
-    categorie,
+    nature_livraison,   
     r_c,
     a_i,
     n_i_f,
@@ -80,7 +77,6 @@ updateFournisseur = (req, res) => {
       modalite_paiement,
       type_paiement,
       nature_livraison,
-      categorie,
       r_c,
       a_i,
       n_i_f,
@@ -137,12 +133,13 @@ getAllFournisseur = (req, res) => {
   });
 };
 
-getFournisseurByNomCategorie = (req, res) => {
+getFournisseurByNom_Activite_Id = (req, res) => {
   const nom_fournisseur = req.params.nom_fournisseur;
   const categorie = req.params.categorie;
+  const id_fournisseur = req.params.id_fournisseur;
   pool.query(
-    queries.getFournisseurByNomOrCategorie,
-    [nom_fournisseur + "%", categorie + "%"],
+    queries.getFournisseurByNomOrActiviteieOrid,
+    [nom_fournisseur + "%", categorie + "%", id_fournisseur],
     (error, result) => {
       if (error) throw error;
       res.status(200).json(result.rows);
@@ -156,6 +153,6 @@ module.exports = {
   ajouterContact,
   getFournisseurByNom,
   getAllFournisseur,
-  getFournisseurByNomCategorie,
-  getIdFournisseur
+  getFournisseurByNom_Activite_Id,
+  getIdFournisseur,
 };

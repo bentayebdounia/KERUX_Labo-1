@@ -1,6 +1,6 @@
 import React ,{useState,useEffect} from 'react'
 import ModalListAgent from '../../Models/modalListAgent'
-import ModalConfirmNet from '../modal-Confirmation-Process/ModalConfirm'
+import ModalConfirmNet from './modal-Confirmation-Process/ModalConfirm'
 import ModelReponse from '../../Models/Model.repense'
 import ServiceAdmin from '../../service/serviceAdmin'
 import './agentBarRecherch.css'
@@ -92,7 +92,7 @@ const Nettoyage = (props) => {
    
     if(props.process.categorie==="poulet"){
         nbr=(<>
-                    <label htmlFor="nombre" className="col-sm-2 col-form-label">Nombre</label>
+                    <label htmlFor="nombre" className="col-sm-2 col-form-label">Quantité</label>
                     <div className="col-sm-10">
                     <input type="number"  className="form-control" id="nombre" value={nombre} onChange={(e)=> setNombre(e.target.value)} required/>
                     </div>

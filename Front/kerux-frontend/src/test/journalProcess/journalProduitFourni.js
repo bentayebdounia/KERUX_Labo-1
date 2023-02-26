@@ -209,7 +209,7 @@ const JournalProduitsFournis = (props) => {
                   <th scope="col">Categorie</th>
                   <th scope="col">Produit</th>
                   <th scope="col">Poids(Kg) </th>
-                  <th scope="col">Nombre</th>
+                  <th scope="col">Quantité</th>
 
                   <th scope="col">Date</th>
                   <th scope="col">Heure</th>

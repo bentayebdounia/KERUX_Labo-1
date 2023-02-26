@@ -11,27 +11,41 @@ const ModifierEntrepot = (props) => {
   const [capacite, setCapacite] = useState(props.capacite);
   const [adr, setAdr] = useState(props.adresse);
   const [exist, setExist] = useState(props.exist);
+  const [verifier, setVerifier] = useState();
   const toggleSwitch = () => {
     setExist(!exist);
   };
-  const verificetionChamp = () => {
-    if (
-      nomEntrepot !== "" &&
-      type !== "" &&
-      airStock !== "" &&
-      capacite !== "" &&
-      adr !== ""
-    ) {
-      //console.log(verifier);
-      return true;
-    } else {
-      //console.log(verifier);
-      return false;
-    }
-  };
+ const verificetionChamp = () => {
+   if (
+     nomEntrepot !== "" &&
+     type === "chambre froide" &&
+     airStock !== "" &&
+     capacite !== "" &&
+     adr !== ""
+   ) {
+      //alert(verifier);
+     setVerifier(true);
+     return true;
+   } else if (
+     nomEntrepot !== "" &&
+     type !== "chambre froide" &&
+     type !== "" &&
+     airStock === "" &&
+     capacite !== "" &&
+     adr !== ""
+   ) {
+     alert(verifier);
+     setVerifier(true);
+     return true;
+   } else {
+     setVerifier(false);
+     return false;
+   }
+ };
 
   const modifier = async (e) => {
-    if (verificetionChamp) {
+    
+    if (verificetionChamp() === true) {
       await serviceEntrepot.updateEntrepot(
         nomEntrepot,
         type,
@@ -49,6 +63,7 @@ const ModifierEntrepot = (props) => {
       setExist("");
 
       props.handleClose();
+      props.showRacine()
     }
   };
 
@@ -71,7 +86,7 @@ const ModifierEntrepot = (props) => {
               onChange={(e) => setNomEtrepot(e.target.value)}
             />
 
-            {verificetionChamp() === false && nomEntrepot === "" && (
+            {verifier === false && nomEntrepot === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
                 *Veillez saisir le nom de l'entrepot
@@ -96,7 +111,7 @@ const ModifierEntrepot = (props) => {
               <option value="chambre froide">Chambre froide</option>
               <option value="entrepot">Entrepot</option>
             </select>
-            {verificetionChamp() === false && type === "" && (
+            {verifier === false && type === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
                 *Veillez selectionner un type d'entrepot
@@ -105,34 +120,36 @@ const ModifierEntrepot = (props) => {
           </div>
         </div>
 
-        <div className="mb-3 row">
-          <label htmlFor="airStockage" className="col-sm-2 col-form-label">
-            L'air de stockage
-          </label>
-          <div className="col-sm-10">
-            <select
-              className="form-select"
-              aria-label="Default select example"
-              id="airStockage"
-              value={airStock}
-              onChange={(e) => setAirStock(e.target.value)}
-            >
-              <option selected></option>
-              <option value="Refrigerer -positif">Refrigerer -positif</option>
-              <option value="Refrigerer -negatif">Refrigerer -negatif</option>
-            </select>
-            {verificetionChamp() === false && airStock === "" && (
-              <p style={{ color: "red", fontSize: "11px" }}>
-                {" "}
-                *Veillez selectionner l'air de stockage{" "}
-              </p>
-            )}
+        {type === "chambre froide" && (
+          <div className="mb-3 row">
+            <label htmlFor="airStockage" className="col-sm-2 col-form-label">
+              Air de stockage
+            </label>
+            <div className="col-sm-10">
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                id="airStockage"
+                value={airStock}
+                onChange={(e) => setAirStock(e.target.value)}
+              >
+                <option selected></option>
+                <option value="Refrigerer -positif">Refrigerer -positif</option>
+                <option value="Refrigerer -negatif">Refrigerer -negatif</option>
+              </select>
+              {verifier === false && airStock === "" && (
+                <p style={{ color: "red", fontSize: "11px" }}>
+                  {" "}
+                  *Veillez selectionner l'air de stockage{" "}
+                </p>
+              )}
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="mb-3 row">
           <label htmlFor="capacite" className="col-sm-2 col-form-label ">
-            Capacite
+            Capacité
           </label>
           <div className="col-sm-10">
             <input
@@ -142,10 +159,10 @@ const ModifierEntrepot = (props) => {
               value={capacite}
               onChange={(e) => setCapacite(e.target.value)}
             />
-            {verificetionChamp() === false && capacite === "" && (
+            {verifier === false && capacite === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
-                *Veillez saisir la capacite
+                *Veillez saisir la capacité
               </p>
             )}
           </div>
@@ -162,7 +179,7 @@ const ModifierEntrepot = (props) => {
               value={adr}
               onChange={(e) => setAdr(e.target.value)}
             />
-            {verificetionChamp() === false && adr === "" && (
+            {verifier === false && adr === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
                 *Veillez saisir l'adresse'

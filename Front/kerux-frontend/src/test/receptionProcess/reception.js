@@ -62,7 +62,7 @@ const Reception = (props) => {
 
     const getVlue =() =>{
         
-            serviceFournisseur.getFournisseurByNomOrCategorie(nom_fournisseur,nom_fournisseur)
+            serviceFournisseur.getFournisseurByNomOrActiviteOrId(nom_fournisseur,nom_fournisseur)
             .then((res) => {
                 setFournisseur2(res.data)
          })

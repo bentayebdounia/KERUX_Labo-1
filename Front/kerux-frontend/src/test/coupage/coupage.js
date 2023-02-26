@@ -52,7 +52,7 @@ const Coupage = (props) => {
         prenom: ""
     }])
 
-    const [agentNettoyageSelect, setAgentnettoyageselect] = useState([])
+    const agentNettoyageSelect = []
     //get personnes
     useEffect(() => {
         
@@ -156,7 +156,7 @@ const Coupage = (props) => {
         )
         nbr=(
                 <>
-                    <label htmlFor="nombre" className="col-sm-2 col-form-label">Nombre</label>
+                    <label htmlFor="nombre" className="col-sm-2 col-form-label">Quantité</label>
                     <div className="col-sm-10">
                     <input type="number"  className="form-control" id="nombre" value={nombre} onChange={(e)=> setNombre(e.target.value)} required/>
                     

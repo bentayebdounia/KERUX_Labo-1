@@ -94,7 +94,7 @@ const ModalConfirmCoup = (props) => {
       <>
         <Modal show={props.show2} onHide={props.handleClose2}>
           <Modal.Header closeButton>
-            <Modal.Title>Voulez-vous valider ce process? </Modal.Title>
+            <Modal.Title>Voulez-vous valider cet étape? </Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <div class="list-group">
@@ -127,7 +127,7 @@ const ModalConfirmCoup = (props) => {
               {props.categorie === "poulet" && (
                 <span className="list-group-item list-group-item-action list-group-item-light">
                   {" "}
-                  <span className="attributs">Nombre:</span> {props.nombre}
+                  <span className="attributs">Quantité:</span> {props.nombre}
                 </span>
               )}
             </div>
