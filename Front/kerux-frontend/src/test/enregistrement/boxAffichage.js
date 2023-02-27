@@ -172,7 +172,7 @@ const AffichageBoxes = (props) => {
               <table className="table table-bordered">
                 <thead>
                   <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">ID </th>
                     <th scope="col">Categorie</th>
                     <th scope="col">Nom produit</th>
                     <th scope="col">Poids(Kg) </th>

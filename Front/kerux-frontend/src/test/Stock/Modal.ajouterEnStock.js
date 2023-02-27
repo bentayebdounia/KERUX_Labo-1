@@ -3,7 +3,6 @@ import Modal from "react-bootstrap/Modal";
 import ServiceEntrepot from "../../service/service.entrepot";
 import ModalAjouterStock from "./Modal.ajStock2";
 import "../../print/modelPrint.css";
-
 import { Bill } from "../../print/bill";
 import { useReactToPrint } from "react-to-print";
 import "../coupage/appp.css";
@@ -41,7 +40,7 @@ const ModalQStock = (props) => {
   });
 
   const getEntrepot = () => {
-    handleBillPrint();
+    //handleBillPrint();
     handleShow4();
     props.handleClose3();
   };
@@ -89,8 +88,8 @@ const ModalQStock = (props) => {
             type="button"
             className="btn btn-success"
             onClick={() => {
-              getEntrepot();
-              handleBillPrint();
+            getEntrepot();
+            //handleBillPrint();
             }}
           >
             Oui
@@ -105,6 +104,10 @@ const ModalQStock = (props) => {
           handleShow4={handleShow4}
           entrepot={entrepot}
           result={props.result}
+          poids={props.poids}
+          nombre={props.nombre}
+          categorie={props.categorie}
+          produit={props.produit}
           toggleDisplay={props.toggleDisplay}
         />
       )}

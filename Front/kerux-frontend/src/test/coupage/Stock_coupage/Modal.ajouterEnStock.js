@@ -41,7 +41,7 @@ const ModalQStock = (props) => {
   });
 
   const getEntrepot = () => {
-    handleBillPrint();
+    //handleBillPrint();
     handleShow4();
     props.handleClose3();
   };
@@ -74,7 +74,12 @@ const ModalQStock = (props) => {
         <Modal.Body>
           <h3> Voulez-vous vraiment ajouter ce box au stock? </h3>
           <div style={{ display: "none" }}>
-            <Bill ref={billRef} id={props.result} categorie={props.categorie} produit={props.produit} />
+            <Bill
+              ref={billRef}
+              id={props.result}
+              categorie={props.categorie}
+              produit={props.produit}
+            />
           </div>
         </Modal.Body>
         <Modal.Footer>
@@ -101,6 +106,10 @@ const ModalQStock = (props) => {
         handleClose4={handleClose4}
         handleShow4={handleShow4}
         result={props.result}
+        poids={props.poids}
+        nombre={props.nombre}
+        categorie={props.categorie}
+        produit={props.produit}
         PorcentagePoids={props.PorcentagePoids}
         toggleDisplay={props.toggleDisplay}
       />

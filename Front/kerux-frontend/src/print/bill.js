@@ -9,6 +9,7 @@ export const Bill = forwardRef((props, ref) => (
       nombre={props.id.nombre}
       categorie={props.categorie}
       produit={props.produit}
+      entrepot= {props.entrepot}
     />
   </div>
 ));

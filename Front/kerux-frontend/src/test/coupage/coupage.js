@@ -55,8 +55,9 @@ const Coupage = (props) => {
     const agentNettoyageSelect = []
     //get personnes
     useEffect(() => {
-        
-          ServiceAdmin.getPersonneByNomOrPrenom(agent, agent).then((res) => {
+       
+        ServiceAdmin.getPersonneByNomOrPrenom(agent, agent).then((res) => {
+             
             setAgentNettoyage(res.data);
             console.log(agentNettoyage);
           });

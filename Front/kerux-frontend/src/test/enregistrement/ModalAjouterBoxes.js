@@ -57,7 +57,9 @@ const ModalAjoutBoxes = (props) => {
 
   const [tableboxe, setTableboxe] = useState([]);
   useEffect(() => {
-    setTableboxe(JSON.parse(sessionStorage.getItem("boxes" + props.id) || "[]"));
+    setTableboxe(
+      JSON.parse(sessionStorage.getItem("boxes" + props.id) || "[]")
+    );
   }, []);
 
   //console.log("produitFourni: "+ props.produitFourni);  props.produitFourni.nombre_fourni
@@ -344,7 +346,7 @@ const ModalAjoutBoxes = (props) => {
                     <div
                       className="col-sm-10 mb-3"
                       id="produitFourni"
-                      style={{backgroundColor: '#f0f0f0' ,width:"90%"}}
+                      style={{ backgroundColor: "#f0f0f0", width: "90%" }}
                       key={key}
                     >
                       <Boxes

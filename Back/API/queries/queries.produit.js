@@ -13,7 +13,8 @@ const updateProduit =
   "UPDATE produit SET nom_produit= $1, duree_experation= $2  WHERE id_produit= $3 "; 
 
 // get produit
-const getProduit = "SELECT * FROM produit"
+const getProduit =
+  "SELECT * FROM produit, categorie WHERE fk_categorie=id_categorie";
 
 // get produit by categorie 
 const getProduitByCategorie = "SELECT * FROM produit, categorie WHERE fk_categorie=id_categorie AND nom_categorie=$1"

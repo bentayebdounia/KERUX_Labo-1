@@ -33,10 +33,10 @@ const Enregistrement = (props) => {
   const [idprod, setIdprod] = useState(1);
 
   const [produitsFourni, setProduitsfourni] = useState([]);
-  const [categorie, setCategorie] = useState();
-  const [nom_produit, setNom_produit] = useState();
-  const [poids_fourni, setPoids_fourni] = useState();
-  const [nombre_fourni, setNombre_fourni] = useState();
+  const [categorie, setCategorie] = useState("");
+  const [nom_produit, setNom_produit] = useState("");
+  const [poids_fourni, setPoids_fourni] = useState("");
+  const [nombre_fourni, setNombre_fourni] = useState("");
   const [unite, setUnite] = useState("kg");
   var nbr, TypePoulet, TypeLegume;
 

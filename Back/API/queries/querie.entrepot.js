@@ -7,9 +7,11 @@ const getAllEnrepots = "SELECT * FROM entrepot ORDER BY id_entrepot"
 const updateEntrepot =
   "UPDATE entrepot SET nom_entrepot=$1, type_entrepot= $2, capacite=$3,  air_stockage=$4, adresse =$5,  exist=$6  WHERE id_entrepot =$7 ";
 
-module.exports={
-    ajouterEntrepot,
-    getEnrepot,
-    getAllEnrepots,
-    updateEntrepot
-}
+const getNom_entrepotById = "SELECT nom_entrepot FROM entrepot WHERE id_entrepot = $1"
+module.exports = {
+  ajouterEntrepot,
+  getEnrepot,
+  getAllEnrepots,
+  updateEntrepot,
+  getNom_entrepotById,
+};

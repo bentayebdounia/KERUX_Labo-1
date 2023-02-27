@@ -40,9 +40,18 @@ updateEntrepot = (req, res) => {
     );
 }
 
-module.exports = {
-    ajouterEntrepot,
-    getEntrepot,
-    getAllEntrepot,
-    updateEntrepot
+getNom_entrepotById = (req, res) => {
+    const id_entrepot = req.params.id_entrepot;
+    pool.query(queries.getNom_entrepotById, [id_entrepot], (error, result) => {
+      if (error) throw error;
+      res.status(200).json(result.rows);
+    });
 }
+
+module.exports = {
+  ajouterEntrepot,
+  getEntrepot,
+  getAllEntrepot,
+  updateEntrepot,
+  getNom_entrepotById,
+};

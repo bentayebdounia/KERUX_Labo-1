@@ -36,7 +36,7 @@ function TESTPRINT(props) {
               value={props.id}
               width={1}
               height={60}
-              fontSize={10}
+              fontSize={12}
             />{" "}
           </span>
         </div>
