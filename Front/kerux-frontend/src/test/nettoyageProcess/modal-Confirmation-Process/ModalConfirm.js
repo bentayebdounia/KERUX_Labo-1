@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import Modal from "react-bootstrap/Modal";
-import NettoyageService from "../../service/service.nettoyage";
-import ModalQStock from "./../Stock/Modal.ajouterEnStock";
-import Service_AgentProcess from "./service/service.agentProcess";
-import serviceAlert from "./service/service.alert";
+import NettoyageService from "../../../service/service.nettoyage";
+import ModalQStock from "../../Stock/Modal.ajouterEnStock";
+import Service_AgentProcess from "../../../service/service.agentProcess";
+import serviceAlert from "../../../service/service.alert";
 import "./modalConfirm.css";
 //import Print from './print';
 const ModalConfirmNet = (props) => {

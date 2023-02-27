@@ -15,17 +15,19 @@ function TESTPRINT(props){
               {parseFloat(props.poids) / 1000}Kg{" "}
             </span>
             <span className="col-6">
-              <span style={{ fontWeight: "bold" }}>Qantite: </span>{" "}
-              {props.nombre !== null && props.nombre !== 0 && props.nombre}{" "}
+              <span>Cat: </span>
+              {props.categorie}
             </span>
             <span className="col-6">
-              <span style={{ fontWeight: "bold" }}>Categorie: </span>
-              {props.categorie}{" "}
+              <span>Prod: </span>
+              {props.produit}
             </span>
-            <span className="col-6">
-              <span style={{ fontWeight: "bold" }}>Produit: </span>
-              {props.produit}{" "}
-            </span>
+            {props.entrepot !== "" && (
+              <span className="col-6">
+                <span>stock: </span>
+                {props.entrepot}
+              </span>
+            )}
             <span className="col-10">
               {" "}
               <Barcode
