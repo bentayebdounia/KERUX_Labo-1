@@ -158,7 +158,7 @@ const ModalConfirmCondit = (props) => {
           poids={props.poids}
           nombre={props.nombre}
           categorie={props.process.categorie}
-          produuit={props.process.nom_produit}
+          produit={props.process.nom_produit}
           btnC={props.btnC}
         />
       </>

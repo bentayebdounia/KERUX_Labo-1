@@ -45,6 +45,9 @@ getstatProduitProcess = (req, res) => {
     }
   );
 };
+getTableStatProduitProcess = (req, res) => {
+
+}
 
 module.exports = {
   getCategorieProduitFourni,
