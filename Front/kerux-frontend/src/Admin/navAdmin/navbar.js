@@ -1,8 +1,6 @@
 import React ,{useState} from 'react'
 import { Link} from 'react-router-dom'
 import AjouterEntrepot from '../entrepot/ajouterEntrepot'
-import ModifierAlert from '../alert/modifierAlert'
-
 import './navbar.css'
 import ListeAlerte from '../alert/listeAlertes'
 import ListeEntrepot from '../entrepot/listeEntrepot'

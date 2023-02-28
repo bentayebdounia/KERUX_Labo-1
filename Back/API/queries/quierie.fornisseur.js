@@ -17,6 +17,8 @@ const getFournisseurByCategorie = "SELECT * FROM fournisseur WHERE categorie ILI
 const getAllFournisseur = "SELECT * FROM fournisseur ORDER BY id_fournisseur"
 
 const getFournisseurByNomOrActiviteieOrid = "SELECT * FROM fournisseur WHERE nom_fournisseur ILIKE $1 OR activite ILIKE $2 OR id_fournisseur=$3"
+const getAllFournisseurPage =
+  "SELECT * FROM fournisseur ORDER BY id_fournisseur LIMIT $1 OFFSET $2";
 
 module.exports = {
   ajouterFourniseur,
@@ -26,4 +28,5 @@ module.exports = {
   getFournisseurByCategorie,
   getAllFournisseur,
   getFournisseurByNomOrActiviteieOrid,
+  getAllFournisseurPage,
 };

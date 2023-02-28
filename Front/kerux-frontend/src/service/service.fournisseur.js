@@ -9,6 +9,9 @@ const GET_FOURNISSEUR_BY_CATEGORIE =
   "http://localhost:8080/fournisseur/getFournisseurbyCategorie";
 const GET_ALL_FOURNISSEUR =
   "http://localhost:8080/fournisseur/getAllFournisseur";
+
+const GET_PAGE_FOURNISSEUR =
+  "http://localhost:8080/fournisseur/getPageFounisseur/";
 const GET_FOURNISSEUR_BY_NOM_Activite_Id =
   "http://localhost:8080/fournisseur/getFournisseurByNomcategorieId/";
 
@@ -29,8 +32,7 @@ class ServiceFournisseur {
     activite,
     modalite_paiement,
     type_paiement,
-    nature_livraison,
-  
+    nature_livraison
   ) {
     const fournisseur = {
       id_fournisseur,
@@ -93,6 +95,10 @@ class ServiceFournisseur {
 
   getAllFournisseur() {
     return axios.get(GET_ALL_FOURNISSEUR);
+  }
+
+  getPageFournisseur(limit, offset) {
+    return axios.get(GET_PAGE_FOURNISSEUR+limit+"/"+offset);
   }
 
   getFournisseurByNomOrActiviteOrId(nom_fournisseur, categoroie) {

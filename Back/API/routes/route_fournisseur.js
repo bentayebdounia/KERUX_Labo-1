@@ -18,5 +18,6 @@ router.get(
   fournisseur.getFournisseurByNom_Activite_Id
 );
 router.get("/getIdFournisseur/:id_fournisseur", fournisseur.getIdFournisseur);
+router.get("/getPageFounisseur/:limit/:offset" , fournisseur.getAllFournisseurPage)
 
 module.exports = router;

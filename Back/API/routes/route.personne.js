@@ -9,6 +9,7 @@ router.get("/getPersonne/nom/:nom", personne.getNom);
 router.get("/getPersonne/prenom/:prenom", personne.getPrenom);
 router.get("/login/:id_personne/:mot_passe", personne.Login);
 router.get("/getPersonne/", personne.getAllPersonne);
+router.get("/getPagePersonne/:limit/:offset", personne.getPagePersonne);
 router.get("/getByNomOrPrenom/:nom/:prenom", personne.getPersonneByNomOrPnom);
 
 module.exports = router;

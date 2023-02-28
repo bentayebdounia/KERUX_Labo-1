@@ -105,6 +105,15 @@ getAllPersonne = (req, res) => {
   });
 };
 
+getPagePersonne = (req, res) => {
+  const limit = req.params.limit;
+  const offset = req.params.offset;
+  pool.query(queries.getPagePersonnes, [limit, offset], (error, result) => {
+    if (error) throw error;
+    res.status(200).json(result.rows);
+  });
+};
+
 Login = (req, res) => {
   const id = parseInt(req.params.id_personne);
   const password = req.params.mot_passe;
@@ -138,6 +147,7 @@ module.exports = {
   getId,
   Login,
   getAllPersonne,
+  getPagePersonne,
   getNom,
   getPrenom,
   getPersonneByNomOrPnom,

@@ -10,7 +10,10 @@ const ListProduit = () => {
     const [produits2, setProduits2] = useState([])
     //const [produits, setProduits] = useState([])
     //const [produit, setProduit] = useState('')
-    
+    const [postsPerPage] = useState(4);
+
+    const [offset, setOffset] = useState(0);
+  
 
   useEffect(() => {
     serviceProduit.getCategorie()
@@ -22,7 +25,7 @@ const ListProduit = () => {
 
   useEffect(() => {
     if (categorie === "") {
-      serviceProduit.getProduit().then((res) => {
+      serviceProduit.getPageProduit(postsPerPage,offset).then((res) => {
         setProduits(res.data);
       });
     } else {
@@ -32,7 +35,7 @@ const ListProduit = () => {
       });
     }
 
-  },[categorie])
+  },[categorie,offset])
     
     return (
       <>
@@ -85,6 +88,69 @@ const ListProduit = () => {
                       ))}
                     </tbody>
                   </table>
+                
+              
+              {/* Pagination */}
+              <nav className="d-flex justify-content-center">
+                <ul className="pagination">
+                  {offset > 0 && (
+                    <li className="page-item">
+                      <a
+                        onClick={() => setOffset(offset - 4)}
+                        href="#"
+                        className="page-link"
+                        style={{ color: "#7B170F" }}
+                      >
+                        precident
+                      </a>
+                    </li>
+                  )}
+
+                  <li className="page-item">
+                    <a
+                      onClick={() => {
+                        setOffset(0);
+                      }}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      1
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      onClick={() => {
+                        setOffset(4);
+                      }}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      2
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      ......
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      onClick={() => setOffset(offset + 4)}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      suivant
+                    </a>
+                  </li>
+                </ul>
+              </nav>
                 </div>
               </div>
             </section>

@@ -1,4 +1,4 @@
-import React ,{useState,useEffect} from 'react'
+import React ,{useState} from 'react'
 import { Link } from 'react-router-dom'
 import AjouterAgent from '../agent/ajouterAgent'
 import ListeAgent from '../agent/listeAgent'

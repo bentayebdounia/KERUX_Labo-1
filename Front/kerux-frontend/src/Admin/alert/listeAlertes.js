@@ -22,35 +22,36 @@ const ListeAlerte = (props) => {
   const currentAlert = alerts.slice(indexOfFirstPost, indexOfLastPost);
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  //fonction date 
   const dateAlert = (n) => {
     const d = new Date();
 
     return d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + (d.getDate() + n);
   };
 
+  // recupération des alerts existes dans la bdd
   useEffect(() => {
     serviceAlert.alertDataPrimary(dateAlert(0)).then((res) => {
       setAlerts(res.data);
     });
   });
 
+  //fonction de structurer la date pour l'afficher au tableau
   const dateNow = (d) => {
-    var date = moment.utc(d).format("DD-MM-YY");
+    var date = moment.utc(d).format("DD-MM-YYYY");
     const words = date.split("-");
     var a = parseInt(words[0]) + 1 + "-" + words[1] + "-" + words[2];
     //console.log(a+1)
     return a;
   };
 
+  //fonction  de modification --recuperer les données de l'alert pour les modifier 
   const modifier = (id, etape) => {
     setId_box(id);
     setEtape(etape);
     handleShow();
   };
 
-  const annuler = () => {
-    props.handleClose();
-  };
 
   return (
     <>
@@ -72,6 +73,8 @@ const ListeAlerte = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+
+          
           <div className="divTab" style={{ width: "100%", margin: "0px" }}>
             <table className="table table-bordered">
               <thead>
@@ -126,13 +129,15 @@ const ListeAlerte = (props) => {
           </div>
         </Modal.Body>
       </Modal>
-     { show &&
-      <ModifierAlert
-        show={show}
-        handleClose={handleClose}
-        etp={etape}
-        id={idBox}
-      />}
+      {/* appel de composant de modification d'alert */}
+      {show && (
+        <ModifierAlert
+          show={show}
+          handleClose={handleClose}
+          etp={etape}
+          id={idBox}
+        />
+      )}
     </>
   );
 };

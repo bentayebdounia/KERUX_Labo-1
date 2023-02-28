@@ -22,25 +22,27 @@ export default function ListeAgent() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(6);
-  //les operation de pagination
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = personnes.slice(indexOfFirstPost, indexOfLastPost);
   
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const [postsPerPage] = useState(4);
 
+  const [offset, setOffset] = useState(0);
+  
+  
+
+  //recuperer les agent enregistrer à la bdd
   useEffect(()=>{
     getAllPersonne()
-  },[])
+  },[offset])
 
+  //la fonction de recupération des agents de la bdd
   const getAllPersonne = () => {
-    ServiceAdmin.getPersonne().then((res) => {
+    ServiceAdmin.getPagePersonne(postsPerPage,offset).then((res) => {
       setPersonnes(res.data);
       //console.log(res.data);
     });
   };
+
+  //recupérer des agents par "id" / "nom" / "prenom"
   function getElement() {
     if (role === "") getAllPersonne();
     else if (role === "id") {
@@ -59,6 +61,7 @@ export default function ListeAgent() {
     }
   }
 
+  //fonction pour afficher proprement la date de naissance d'un agent
   const dateNow = (date1) => {
     var date = moment.utc(date1).format("DD-MM-YYYY");
     const words = date.split("-");
@@ -76,6 +79,7 @@ export default function ListeAgent() {
     });
   };
 
+  //fonction d'émigration les données d'un agent pour le modifier
   const modifier = (id, nom, prenom, dateN, adr, tel,fonction, role, mot_passe) => {
     // e.preventDefault();
     setId(id);
@@ -89,6 +93,8 @@ export default function ListeAgent() {
     setPassword(mot_passe);
     handleShow();
   };
+
+    
   return (
     <div>
       <h1 id="titre">Liste des agent</h1>
@@ -128,6 +134,7 @@ export default function ListeAgent() {
               </button>
             </div>
 
+            {/* Liste des agents */}
             <div className="divTab">
               <table className="table table-bordered">
                 <thead>
@@ -145,7 +152,7 @@ export default function ListeAgent() {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentPosts.map((personne, key) => (
+                  {personnes.map((personne, key) => (
                     <tr key={key}>
                       <td>{personne.id_personne}</td>
                       <td>{personne.nom}</td>
@@ -181,16 +188,73 @@ export default function ListeAgent() {
                   ))}
                 </tbody>
               </table>
-              <Pagination
-                postsPerPage={postsPerPage}
-                totalPosts={personnes.length}
-                paginate={paginate}
-              />
+              {/* Pagination */}
+              <nav className="d-flex justify-content-center">
+                <ul className="pagination">
+                  {offset > 0 && (
+                    <li className="page-item">
+                      <a
+                        onClick={() => setOffset(offset - 4)}
+                        href="#"
+                        className="page-link"
+                        style={{ color: "#7B170F" }}
+                      >
+                        precident
+                      </a>
+                    </li>
+                  )}
+
+                  <li className="page-item">
+                    <a
+                      onClick={() => {
+                        setOffset(0);
+                      }}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      1
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      onClick={() => {
+                        setOffset(4);
+                      }}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      2
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      ......
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      onClick={() => setOffset(offset + 4)}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      suivant
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </div>
         </section>
       </div>
 
+      {/** appel de compsant de modification */}
       {show && (
         <ModifierAgent
           id={id}
@@ -199,7 +263,7 @@ export default function ListeAgent() {
           dateN={dateN}
           adr={adr}
           tel={tel}
-          fonction = {fonction}
+          fonction={fonction}
           role={role_agent}
           password={password}
           show={show}

@@ -6,10 +6,10 @@ import seviceStatistique from '../../service/sevice.statistique'
 
 
 const StatistiqueProduitFourni = (props) => {
-     const [poulet, setPoulet] = useState(calassificate('poulet'))
-     const [legume, setLegume] = useState(calassificate('legume'))
+     const [poulet] = useState(calassificate('poulet'))
+     const [legume] = useState(calassificate('legume'))
     
-    
+    console.log(poulet);
       // setPoulet(calassificate('poulet'))
       // setLegume(calassificate('legume'))
  /*  

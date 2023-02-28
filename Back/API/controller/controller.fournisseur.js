@@ -133,6 +133,15 @@ getAllFournisseur = (req, res) => {
   });
 };
 
+getAllFournisseurPage = (req, res) => {
+  const limit = req.params.limit
+  const offset = req.params.offset
+  pool.query(queries.getAllFournisseurPage, [limit, offset], (error, result) => {
+    if (error) throw error;
+    res.status(200).json(result.rows);
+  } );
+}
+
 getFournisseurByNom_Activite_Id = (req, res) => {
   const nom_fournisseur = req.params.nom_fournisseur;
   const categorie = req.params.categorie;
@@ -153,6 +162,7 @@ module.exports = {
   ajouterContact,
   getFournisseurByNom,
   getAllFournisseur,
+  getAllFournisseurPage,
   getFournisseurByNom_Activite_Id,
   getIdFournisseur,
 };

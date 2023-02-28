@@ -17,7 +17,6 @@ export default function AjouterAgent() {
 
   const [fk_role, setFk_role] = useState("");
 
-
   const [verifier, setVerifier] = useState();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -25,12 +24,14 @@ export default function AjouterAgent() {
   const [message , setMessage ] = useState("")
 
  
-
+//recuperer les roles des agent de la bdd
   useEffect(() => {
     serviceRole.getRole().then((res) => {
       setRole(res.data);
     });
   }, []);
+
+//verifier les champs
   const verificetionChamp = () => {
     if (
       nom !== "" &&
@@ -61,6 +62,7 @@ export default function AjouterAgent() {
     }
   };
 
+  //ajouter l'agent à la bdd
   const saveAgent = (e) => {
     e.preventDefault();
 
@@ -76,9 +78,9 @@ export default function AjouterAgent() {
       
     };
     if (verificetionChamp()) {
-      console.log("agent =>" + JSON.stringify(agent));
+      //console.log("agent =>" + JSON.stringify(agent));
       serviceAdmin.ajouterAgent(agent).then((res) => {
-        console.log(res.data);
+       // console.log(res.data);
         if (!! res.data.id_personne ) {
           setNom("");
           setPrenom("");

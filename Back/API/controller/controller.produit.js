@@ -43,6 +43,15 @@ getProduit = (req, res) => {
   });
 };
 
+getPageProduit = (req, res) => {
+  const limit = req.params.limit;
+  const offset = req.params.offset;
+  pool.query(queries.getPageProduit, [limit, offset], (error, result) => {
+    if (error) throw error;
+    res.status(200).json(result.rows);
+  });
+};
+
 getProduitBy_Categorie = (req, res) => {
   const nom_categorie = req.params.nom_categorie;
   pool.query(
@@ -69,6 +78,7 @@ module.exports = {
   postProduit,
   updateProduit,
   getProduit,
+  getPageProduit,
   getProduitBy_Categorie,
   getCategorie,
 };

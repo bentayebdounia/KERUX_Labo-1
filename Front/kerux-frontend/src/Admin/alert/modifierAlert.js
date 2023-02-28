@@ -74,7 +74,7 @@ const ModifierAlert = (props) => {
                   aria-label="Default select example"
                   id="etape"
                   value={etape}
-                  onChange={(e) => setEtape(e.target.value)}
+                  
                 >
                   <option value=""></option>
                   <option value="enregistrement">Enregistrement</option>
@@ -91,7 +91,7 @@ const ModifierAlert = (props) => {
                   type="text"
                   className="form-control "
                   value={idBoxe}
-                  onChange={(e) => setIdboxe(e.target.value)}
+                  
                 />
               </div>
 

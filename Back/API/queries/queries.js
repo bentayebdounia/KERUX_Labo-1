@@ -23,6 +23,7 @@ const getRoleByNom = "SELECT id_role FROM role WHERE nom_role = $1";
 const getPersonneByNomOrPrenom =
   "SELECT id_personne, nom , prenom  FROM personne WHERE nom ILIKE $1 OR prenom ILIKE $2";
 
+const getPagePersonnes = "SELECT * FROM personne  LIMIT $1 OFFSET $2";
 /////// Stock *********************************
 // --ajouter  au stock
 const ajouterStock =
@@ -109,6 +110,7 @@ module.exports = {
   postPersonne,
   updatePersonne,
   getPersonneById,
+  getPagePersonnes,
 
   Login,
 

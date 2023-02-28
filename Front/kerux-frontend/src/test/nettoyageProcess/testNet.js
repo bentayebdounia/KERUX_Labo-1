@@ -42,7 +42,8 @@ const TestNet = (props) => {
         categorie: "", 
         nom_produit: "", 
         stock: "", 
-        etape: "" 
+       etape: "",
+        poids:""
     }) 
 
     var  table ,table2 

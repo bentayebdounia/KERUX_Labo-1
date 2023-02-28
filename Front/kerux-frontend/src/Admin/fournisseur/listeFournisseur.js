@@ -25,20 +25,16 @@ const ListFournisseur = () => {
    const handleClose = () => setShow(false);
    const handleShow = () => setShow(true);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(6);
-  //les operation de pagination
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = fournisseurs.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+ 
+  const [postsPerPage] = useState(4);
+ 
+  const [offset, setOffset] = useState(0);
+
   useEffect(() => {
-    
-      serviceFournisseur.getAllFournisseur().then((res) => {
-        setFournisseurs(res.data);
-      });
-    
-  },[])
+    serviceFournisseur.getPageFournisseur(postsPerPage, offset).then((res) => {
+      setFournisseurs(res.data);
+    });
+  }, [offset]);
   
 
   const getFournisseur = () => {
@@ -135,7 +131,7 @@ const ListFournisseur = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {currentPosts.map((fournisseur, key) => (
+                  {fournisseurs.map((fournisseur, key) => (
                     <tr key={key}>
                       <td>{fournisseur.id_fournisseur}</td>
                       <td>{fournisseur.nom_fournisseur}</td>
@@ -179,11 +175,67 @@ const ListFournisseur = () => {
                   ))}
                 </tbody>
               </table>
-              <Pagination
-                postsPerPage={postsPerPage}
-                totalPosts={fournisseurs.length}
-                paginate={paginate}
-              />
+              {/* Pagination */}
+              <nav className="d-flex justify-content-center">
+                <ul className="pagination">
+                  {offset > 0 && (
+                    <li className="page-item">
+                      <a
+                        onClick={() => setOffset(offset-4)}
+                        href="#"
+                        className="page-link"
+                        style={{ color: "#7B170F" }}
+                      >
+                        precident
+                      </a>
+                    </li>
+                  )}
+
+                  <li className="page-item">
+                    <a
+                      onClick={() => {
+                        setOffset(0)
+                      }}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      1
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      onClick={() => {
+                        setOffset(4)
+                      }}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      2
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      ......
+                    </a>
+                  </li>
+                  <li className="page-item">
+                    <a
+                      onClick={() => setOffset(offset+4)}
+                      href="#"
+                      className="page-link"
+                      style={{ color: "#7B170F" }}
+                    >
+                      suivant
+                    </a>
+                  </li>
+                </ul>
+              </nav>
             </div>
           </section>
         </div>

@@ -14,12 +14,15 @@ const ModifierAgent = (props) => {
   const [verifier, setVerifier] = useState();
   const [fk_role, setFk_role] = useState(props.role);
   const [fonction, setFonction] = useState(props.fonction);
+
+  //récuperer les roles des agent de la bdd
   useEffect(() => {
     serviceRole.getRole().then((res) => {
       setRole(res.data);
     });
   }, []);
 
+  //fonction de verificetion des champs
   const verificetionChamp = () => {
     if (
       nom !== "" &&
@@ -48,6 +51,7 @@ const ModifierAgent = (props) => {
     }
   };
 
+  //fonction de modification d'agent
   const modifier = async (e) => {
     if (verificetionChamp) {
       await serviceAdmin.MODIFIERAgent(

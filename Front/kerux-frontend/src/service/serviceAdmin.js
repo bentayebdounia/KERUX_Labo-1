@@ -8,7 +8,7 @@ const AGENT_API_GETBYID = "http://localhost:8080/agent/getPersonne/"
 const AGENT_API_GETBYNOM = "http://localhost:8080/agent/getPersonne/nom/"
 const AGENT_API_GETBYPRENOM = "http://localhost:8080/agent/getPersonne/prenom/"
 const AGENT_API_GETBYNOMORPRENOM = "http://localhost:8080/agent/getByNomOrPrenom/"
-
+const AGENT_API_GET_PAGE_AGENT = "http://localhost:8080/agent/getPagePersonne/";
 class ServiceAdmin {
   ajouterAgent(agent) {
     return axios.post(AGENT_API_Ajouter, agent);
@@ -24,7 +24,6 @@ class ServiceAdmin {
     fonction,
     fk_role,
     mot_passe
-    
   ) {
     const agent = {
       nom,
@@ -34,8 +33,7 @@ class ServiceAdmin {
       adresse,
       fonction,
       fk_role,
-      mot_passe
-      
+      mot_passe,
     };
     console.log(agent);
     return axios.put(AGENT_API_MODIFIER + id_personne, agent);
@@ -43,6 +41,9 @@ class ServiceAdmin {
 
   getPersonne() {
     return axios.get(AGENT_API_GETALL);
+  }
+  getPagePersonne(limit,offset) {
+    return axios.get(AGENT_API_GET_PAGE_AGENT+limit+"/"+offset);
   }
 
   getPersonneById(id) {
