@@ -5,6 +5,7 @@ import ModalAjoutBoxes from "./ModalAjouterBoxes";
 import AffichageBoxes from "./boxAffichage";
 import Recape from "./recape";
 import Reception from "../receptionProcess/reception";
+import serviceProduit from "../../service/service.produit";
 import "./enreg.css";
 import "../styleCss/btn.css";
 import "../styleCss/tableau.css";
@@ -35,10 +36,11 @@ const Enregistrement = (props) => {
   const [produitsFourni, setProduitsfourni] = useState([]);
   const [categorie, setCategorie] = useState("");
   const [nom_produit, setNom_produit] = useState("");
+  const [produits, setProduit] = useState([])
   const [poids_fourni, setPoids_fourni] = useState("");
   const [nombre_fourni, setNombre_fourni] = useState("");
   const [unite, setUnite] = useState("kg");
-  var nbr, TypePoulet, TypeLegume;
+  var nbr, TypePoulet, TypeLegume, TypeAutre;
 
   const [poids, setPoids] = useState(0);
   const [produitFourni, setProduitForuni] = useState({
@@ -76,6 +78,12 @@ const Enregistrement = (props) => {
     //return produitFourni
    },[]) // l'erreur est la ***********************************************************************************************************************
 */
+
+useEffect (()=>{
+  serviceProduit.getProduitByCategorie(categorie).then((res) => {
+    setProduit(res.data)
+  });
+},[categorie])
   function plus() {
     setConteur(conteur + 1);
 
@@ -271,6 +279,17 @@ const Enregistrement = (props) => {
       </>
     );
   }
+  if(categorie==="autre"){
+    TypeAutre = (
+      <>
+        <option value={""}>  </option>
+        {produits.map((prod) => (
+          <option value={prod.nom_produit}> {prod.nom_produit} </option>
+        ))}
+      </>
+    );
+
+  }
 
   return (
     <>
@@ -341,6 +360,7 @@ const Enregistrement = (props) => {
                       >
                         {TypePoulet}
                         {TypeLegume}
+                        {TypeAutre}
                       </select>
                       {erreurProduit === true && nom_produit === "" && (
                         <p style={{ color: "red", fontSize: "11px" }}>

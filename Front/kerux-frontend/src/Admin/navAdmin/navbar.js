@@ -10,9 +10,7 @@ import ListeEntrepot from '../entrepot/listeEntrepot'
 const Navbar = () => {
   
     var user = JSON.parse (localStorage.getItem('login'))
-    const [Modifieralert , setModifieralert] = useState(false)
-    const ShowModifierAlert = () => setModifieralert(true)
-    const DisplayModifierAlert = () => setModifieralert(false)
+    
 
     const [show2, setShow2] = useState(false)
     const handleClose2 = () => setShow2(false)
@@ -42,7 +40,6 @@ const Navbar = () => {
                 Alertes
               </Link>
               <ul className="dropdown-menu menubar" style={{marginLeft:"34%"}}>
-                <li> <button className="dropdown-item"  type="button"  onClick={ShowModifierAlert}>Modifier alerte</button> </li>
                 <li> <button className="dropdown-item"  type="button" onClick={handleShow3} >Liste des aletes</button> </li>
               </ul>
 
@@ -75,12 +72,7 @@ const Navbar = () => {
             </div>
         </nav>
         
-        {
-          Modifieralert && <ModifierAlert show = {ShowModifierAlert} 
-                                          handleClose={DisplayModifierAlert} 
-                                          
-                            />
-        }
+        
         {show3 && <ListeAlerte 
                             show={show3} 
                             handleClose={handleClose3} 

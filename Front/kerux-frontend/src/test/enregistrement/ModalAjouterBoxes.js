@@ -349,8 +349,9 @@ const ModalAjoutBoxes = (props) => {
                       style={{ backgroundColor: "#f0f0f0", width: "90%" }}
                       key={key}
                     >
+                      
                       <Boxes
-                        key={key}
+                        cle={key}
                         categorie={props.categorie}
                         n_produit={props.type}
                         nom_produit={box.nom_produit}

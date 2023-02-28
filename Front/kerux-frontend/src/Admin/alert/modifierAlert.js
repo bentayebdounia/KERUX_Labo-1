@@ -5,8 +5,8 @@ import serviceActuelProcess from "../../service/sevice.actuelProcess";
 import serviceAlert from "../../service/service.alert";
 const ModifierAlert = (props) => {
   const [dateAlert, setDatealert] = useState("");
-  const [etape, setEtape] = useState(props.etape);
-  const [idBoxe, setIdboxe] = useState(props.idBox);
+  const [etape, setEtape] = useState(props.etp);
+  const [idBoxe, setIdboxe] = useState(props.id);
   const [message, setMessage] = useState();
 
   const [show, setShow] = useState(false);
@@ -75,7 +75,6 @@ const ModifierAlert = (props) => {
                   id="etape"
                   value={etape}
                   onChange={(e) => setEtape(e.target.value)}
-                  required
                 >
                   <option value=""></option>
                   <option value="enregistrement">Enregistrement</option>
@@ -87,7 +86,7 @@ const ModifierAlert = (props) => {
               </div>
 
               <div className="col-sm-4">
-                <label className="col-sm-3 form-label">ID de boxe</label>
+                <label className="col-sm-3 form-label">ID de box</label>
                 <input
                   type="text"
                   className="form-control "

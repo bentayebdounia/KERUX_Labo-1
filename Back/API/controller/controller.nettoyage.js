@@ -81,7 +81,7 @@ const generieIdNettoyage = (id) => {
       "" +
       year[3] +
       "" +
-      id.substring(9,12) +
+      id.substring(9,13) +
       "2";  
     return n
 }

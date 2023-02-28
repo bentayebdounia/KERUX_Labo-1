@@ -10,7 +10,7 @@ const dateNow = () => {
     "-" +
     (today.getMonth() + 1) +
     "-" +
-    (today.getDate() + 1);
+    (today.getDate() );
 
   return datee;
 };

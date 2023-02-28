@@ -155,7 +155,7 @@ const ModalAjouterStock = (props) => {
               onChange={(e) => setDatealert(e.target.value)}
             />
           </div>
-          <div >
+          <div style={{ display: "none" }}>
             <Bill
               ref={billRef}
               id={props.result}

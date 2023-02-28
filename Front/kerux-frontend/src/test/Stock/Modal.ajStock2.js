@@ -9,7 +9,7 @@ import ModelReponse from "../../Models/Model.repense";
 
 const ModalAjouterStock = (props) => {
   const [entrepots, setEntrepots] = useState([]);
-  const [entrepot, setEntrepot] = useState();
+  const [entrepot, setEntrepot] = useState("");
   const [nom_entrepot, setNom_entrepot] = useState("");
   const [stock, setStock] = useState();
   const [dateAlert, setDatealert] = useState("");

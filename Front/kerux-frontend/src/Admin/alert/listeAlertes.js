@@ -77,7 +77,7 @@ const ListeAlerte = (props) => {
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">ID boxe</th>
+                  <th scope="col">ID box</th>
                   <th scope="col">Categorie</th>
                   <th scope="col">Nom produit</th>
                   <th scope="col">Poids</th>
@@ -126,8 +126,13 @@ const ListeAlerte = (props) => {
           </div>
         </Modal.Body>
       </Modal>
-
-      <ModifierAlert show={ show} handleClose={handleClose} etape={etape} idBox={idBox} />
+     { show &&
+      <ModifierAlert
+        show={show}
+        handleClose={handleClose}
+        etp={etape}
+        id={idBox}
+      />}
     </>
   );
 };
