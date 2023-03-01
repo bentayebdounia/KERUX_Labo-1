@@ -24,10 +24,8 @@ const ModalSortieStock = (props) => {
        ).then((res) => {
          console.log(res.data);
        });
-
        props.handleClose2();
        props.toggleshow();
-
        props.BtnV();
      };
 
