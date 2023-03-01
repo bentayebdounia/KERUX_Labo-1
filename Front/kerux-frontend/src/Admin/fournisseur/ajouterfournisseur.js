@@ -65,7 +65,7 @@ const AjouterFournisseur = (props) => {
     //console.log(nomFournisseur, formJuridique, adresse, email,  activite, modalite, typePaiement, natureLivraison, categorie);
     if (verificetionChamp()) {
       await ServiceFournisseur.getIdFournisseure(idFournisseur).then((res) => {
-        if (res.data === "ID n'existe pas") {
+        if (res.data.length !== 0) {
           ServiceFournisseur.ajouterFournisseur(
             idFournisseur,
             nomFournisseur,
@@ -81,14 +81,14 @@ const AjouterFournisseur = (props) => {
             typePaiement,
             natureLivraison,
             
-          ).then((res) => {
+          ).then(async (res) => {
             var i = 1;
             while (i < contacts.length) {
               //console.log(contacts[i].nomContact);
-              ServiceFournisseur.ajouterContact(
-                res.data.id_fournisseur,
+              await ServiceFournisseur.ajouterContact(
+                res.data[0].id_fournisseur,
                 contacts[i].nomContact,
-                contacts[i].numContact
+               parseInt (contacts[i].numContact)
               ).then((result) => {
                 //console.log(result.data);
               });

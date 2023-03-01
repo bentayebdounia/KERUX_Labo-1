@@ -37,12 +37,22 @@ const ListeAlerte = (props) => {
   });
 
   //fonction de structurer la date pour l'afficher au tableau
-  const dateNow = (d) => {
-    var date = moment.utc(d).format("DD-MM-YYYY");
+
+  const dateModif = (date1) => {
+    var date = moment.utc(date1).format("DD-MM-YYYY");
     const words = date.split("-");
-    var a = parseInt(words[0]) + 1 + "-" + words[1] + "-" + words[2];
-    //console.log(a+1)
-    return a;
+    //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
+
+    var d = new Date(words[2], words[1] - 1, words[0]);
+    var nextDay = new Date(d.getTime());
+    nextDay.setDate(d.getDate() + 1);
+    // console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+    return nextDay.toLocaleString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
   };
 
   //fonction  de modification --recuperer les données de l'alert pour les modifier 
@@ -73,8 +83,6 @@ const ListeAlerte = (props) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
-          
           <div className="divTab" style={{ width: "100%", margin: "0px" }}>
             <table className="table table-bordered">
               <thead>
@@ -83,7 +91,7 @@ const ListeAlerte = (props) => {
                   <th scope="col">ID box</th>
                   <th scope="col">Categorie</th>
                   <th scope="col">Nom produit</th>
-                  <th scope="col">Poids</th>
+                  <th scope="col">Poids(Kg)</th>
                   <th scope="col">Nombre</th>
                   <th scope="col">Date</th>
                   <th scope="col">Heure</th>
@@ -99,11 +107,11 @@ const ListeAlerte = (props) => {
                     <td>{p.id_gnerate}</td>
                     <td>{p.categorie}</td>
                     <td>{p.nom_produit}</td>
-                    <td>{p.poids}</td>
+                    <td>{p.poids / 1000}</td>
                     <td>{p.nombre}</td>
-                    <td>{dateNow(p.datee)}</td>
+                    <td>{dateModif(p.datee)}</td>
                     <td>{p.heure}</td>
-                    <td>{dateNow(p.date_alert)}</td>
+                    <td>{dateModif(p.date_alert)}</td>
                     <td>{p.etape}</td>
                     <td>
                       <input

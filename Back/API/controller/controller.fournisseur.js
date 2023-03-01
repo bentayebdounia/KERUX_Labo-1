@@ -42,7 +42,7 @@ ajouterFournisseur = (req, res) => {
         console.log(error);
       };
       
-      res.status(200).send("bien ajouter");
+      res.status(200).json(result.rows[0]);
 
     }
   );

@@ -30,6 +30,8 @@ const ModifierAgent = (props) => {
       date_naissance !== "" &&
       adresse !== "" &&
       num_tel !== "" &&
+      num_tel.length === 10 &&
+      num_tel[0] === "0" &&
       role !== ""
     ) {
       if (fk_role !== "4") {
@@ -45,7 +47,7 @@ const ModifierAgent = (props) => {
         return true;
       }
     } else {
-      setPassword("");
+      //setPassword("");
       setVerifier(false);
       return false;
     }
@@ -53,7 +55,7 @@ const ModifierAgent = (props) => {
 
   //fonction de modification d'agent
   const modifier = async (e) => {
-    if (verificetionChamp) {
+    if (verificetionChamp()===true) {
       await serviceAdmin.MODIFIERAgent(
         props.id,
         nom,
@@ -180,10 +182,16 @@ const ModifierAgent = (props) => {
               value={num_tel}
               onChange={(e) => setTel(e.target.value)}
             />
-            {verifier === false && num_tel === "" && (
+            {verifier === false  && ( num_tel === "" || num_tel.length <10) && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
-                *Veillez saisir le numero de telephone
+                *Veillez saisir le numéro de téléphone
+              </p>
+            )}
+            {(num_tel.length > 10 || num_tel[0] !== "0") && num_tel !== "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Le numéro de téléphone est incorrect
               </p>
             )}
           </div>

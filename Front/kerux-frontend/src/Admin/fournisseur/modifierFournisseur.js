@@ -75,7 +75,7 @@ const ModifierFournisseur = (props) => {
   return (
     <Modal size="xl" show={props.show} onHide={props.handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Modifier Agent</Modal.Title>
+        <Modal.Title>Modifier Fournisseur</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="mb-3 row">

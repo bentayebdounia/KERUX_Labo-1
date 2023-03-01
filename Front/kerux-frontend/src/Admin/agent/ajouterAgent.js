@@ -39,9 +39,12 @@ export default function AjouterAgent() {
       date_naissance !== "" &&
       adresse !== "" &&
       num_tel !== "" &&
+      num_tel.length === 10 &&
+      num_tel[0] === "0" &&
       fk_role !== "" &&
       fonction !== "" && 
-      carteIdentite !==""
+      carteIdentite !== ""
+      
     ) {
       if (fk_role !== "4") {
         if (mot_passe !== "") {
@@ -56,7 +59,7 @@ export default function AjouterAgent() {
         return true;
       }
     } else {
-      setPassword("");
+     // setPassword("");
       setVerifier(false);
       return false;
     }
@@ -142,7 +145,7 @@ export default function AjouterAgent() {
             {verifier === false && prenom === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
-                *Veillez saisir le prenom
+                *Veillez saisir le prénom
               </p>
             )}
           </div>
@@ -202,10 +205,16 @@ export default function AjouterAgent() {
               value={num_tel}
               onChange={(e) => setTel(e.target.value)}
             />
-            {verifier === false && num_tel === "" && (
+            {verifier === false &&( num_tel === "" || num_tel.length <10) && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
-                *Veillez saisir le numero de telephone
+                *Veillez saisir le numéro de telephone
+              </p>
+            )}
+            {(num_tel.length > 10 || num_tel[0] !== "0") && num_tel !== "" && (
+              <p style={{ color: "red", fontSize: "11px" }}>
+                {" "}
+                *Le numéro de téléphone est incorrect
               </p>
             )}
           </div>
@@ -252,7 +261,7 @@ export default function AjouterAgent() {
             {verifier === false && fk_role === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
-                *Veillez selectionner le role
+                *Veillez séléctionner le role
               </p>
             )}
           </div>
@@ -301,7 +310,7 @@ export default function AjouterAgent() {
             {verifier === false && carteIdentite === "" && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
-                *Veillez selectionner le scanne de la carte d'identité
+                *Veillez séléctionner le scanne de la carte d'identité
               </p>
             )}
           </div>

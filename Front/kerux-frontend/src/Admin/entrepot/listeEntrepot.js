@@ -41,6 +41,23 @@ const ListeEntrepot = (props) => {
     return a;
   };
 
+  const dateModif = (date1) => {
+    var date = moment.utc(date1).format("DD-MM-YYYY");
+    const words = date.split("-");
+    //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
+
+    var d = new Date(words[2], words[1] - 1, words[0]);
+    var nextDay = new Date(d.getTime());
+    nextDay.setDate(d.getDate() + 1);
+    // console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+
+    return nextDay.toLocaleString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+  };
+
   
   const modifier = (
     id,
@@ -93,14 +110,15 @@ const ListeEntrepot = (props) => {
             <table className="table table-bordered">
               <thead>
                 <tr>
-                
                   <th scope="col">ID entrepot</th>
                   <th scope="col">Nom d'entrepot</th>
                   <th scope="col">Type d'entrepot</th>
                   <th scope="col">Air de stockage</th>
                   <th scope="col">Capacité</th>
                   <th scope="col">Adress</th>
-                  <th scope="col">Date d'enregistrement d'entrepot</th>
+                  <th scope="col">Date d'enregistrement d'ent
+                    
+                    repot</th>
                   <th scope="col">L'existance</th>
                   <th scope="col">Action</th>
                 </tr>
@@ -108,16 +126,13 @@ const ListeEntrepot = (props) => {
               <tbody>
                 {entrepots.map((p, key) => (
                   <tr key={key + 1}>
-                   
                     <td>{p.id_entrepot}</td>
                     <td>{p.nom_entrepot}</td>
                     <td>{p.type_entrepot}</td>
                     <td>{p.air_stockage}</td>
                     <td>{p.capacite}</td>
-                    <td>
-                      {p.adresse} 
-                    </td>
-                    <td>{dateNow(p.date_enregistrement_entrepot)}</td>
+                    <td>{p.adresse}</td>
+                    <td>{dateModif(p.date_enregistement_entrepot)}</td>
                     {p.exist === true && (
                       <td>
                         <i
@@ -177,7 +192,7 @@ const ListeEntrepot = (props) => {
               capacite={capacite}
               adresse={adresse}
               exist={exist}
-              showRacine= {props.handleShow}
+              showRacine={props.handleShow}
             />
           )}
         </Modal.Body>

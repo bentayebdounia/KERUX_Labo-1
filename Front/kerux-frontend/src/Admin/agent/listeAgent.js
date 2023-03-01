@@ -22,21 +22,18 @@ export default function ListeAgent() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
   const [postsPerPage] = useState(4);
 
   const [offset, setOffset] = useState(0);
-  
-  
 
   //recuperer les agent enregistrer à la bdd
-  useEffect(()=>{
-    getAllPersonne()
-  },[offset])
+  useEffect(() => {
+    getAllPersonne();
+  }, [offset]);
 
   //la fonction de recupération des agents de la bdd
   const getAllPersonne = () => {
-    ServiceAdmin.getPagePersonne(postsPerPage,offset).then((res) => {
+    ServiceAdmin.getPagePersonne(postsPerPage, offset).then((res) => {
       setPersonnes(res.data);
       //console.log(res.data);
     });
@@ -61,8 +58,9 @@ export default function ListeAgent() {
     }
   }
 
-  //fonction pour afficher proprement la date de naissance d'un agent
-  const dateNow = (date1) => {
+  //fonction de structurer la date pour l'afficher au tableau
+
+  const dateModif = (date1) => {
     var date = moment.utc(date1).format("DD-MM-YYYY");
     const words = date.split("-");
     //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
@@ -70,7 +68,7 @@ export default function ListeAgent() {
     var d = new Date(words[2], words[1] - 1, words[0]);
     var nextDay = new Date(d.getTime());
     nextDay.setDate(d.getDate() + 1);
-    //console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
+    // console.log(nextDay.toLocaleString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }));
 
     return nextDay.toLocaleString("fr-FR", {
       day: "2-digit",
@@ -80,7 +78,17 @@ export default function ListeAgent() {
   };
 
   //fonction d'émigration les données d'un agent pour le modifier
-  const modifier = (id, nom, prenom, dateN, adr, tel,fonction, role, mot_passe) => {
+  const modifier = (
+    id,
+    nom,
+    prenom,
+    dateN,
+    adr,
+    tel,
+    fonction,
+    role,
+    mot_passe
+  ) => {
     // e.preventDefault();
     setId(id);
     setNom(nom);
@@ -88,13 +96,12 @@ export default function ListeAgent() {
     setDate_n(dateN);
     setAdr(adr);
     setTel(tel);
-    setFonction (fonction)
+    setFonction(fonction);
     setRole_agent(role);
     setPassword(mot_passe);
     handleShow();
   };
 
-    
   return (
     <div>
       <h1 id="titre">Liste des agent</h1>
@@ -157,9 +164,9 @@ export default function ListeAgent() {
                       <td>{personne.id_personne}</td>
                       <td>{personne.nom}</td>
                       <td>{personne.prenom}</td>
-                      <td>{dateNow(personne.date_naissance)}</td>
+                      <td>{dateModif( personne.date_naissance)}</td>
                       <td>{personne.adresse}</td>
-                      <td>{personne.num_tel}</td>
+                      <td>{"0" + personne.num_tel}</td>
                       <td>{personne.fonction}</td>
                       <td>{personne.fk_role}</td>
                       <td>{personne.mot_passe}</td>
@@ -172,7 +179,7 @@ export default function ListeAgent() {
                               personne.prenom,
                               personne.date_naissance,
                               personne.adresse,
-                              personne.num_tel,
+                              "0" + personne.num_tel,
                               personne.fonction,
                               personne.fk_role,
                               personne.mot_passe
