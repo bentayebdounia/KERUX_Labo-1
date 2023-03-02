@@ -10,8 +10,8 @@ const AjouterFournisseur = (props) => {
   const [RC, setRc] = useState("");
   const [AI, setAi] = useState("");
   const [NIF, setNif] = useState("");
-  const [NIS, setNis] = useState(null);
-
+  const [NIS, setNis] = useState("");
+  const [RIP , setRip] = useState("")
   const [adresse, setAdresse] = useState();
   const [email, setEmail] = useState("");
   const [activite, setActivite] = useState(" ");
@@ -79,8 +79,7 @@ const AjouterFournisseur = (props) => {
             activite,
             modalite,
             typePaiement,
-            natureLivraison,
-            
+            natureLivraison
           ).then(async (res) => {
             var i = 1;
             while (i < contacts.length) {
@@ -88,7 +87,7 @@ const AjouterFournisseur = (props) => {
               await ServiceFournisseur.ajouterContact(
                 res.data[0].id_fournisseur,
                 contacts[i].nomContact,
-               parseInt (contacts[i].numContact)
+                parseInt(contacts[i].numContact)
               ).then((result) => {
                 //console.log(result.data);
               });
@@ -140,6 +139,7 @@ const AjouterFournisseur = (props) => {
         return (
           <div className="row gy-2 gx-2 align-items-left" key={key}>
             <Contact
+            cle={key}
               nomContact={contact.nomContact}
               onNomContactChange={(newnomContact) => {
                 const newContacts = [...contacts];
@@ -153,7 +153,7 @@ const AjouterFournisseur = (props) => {
                 setContacts(newContacts);
               }}
             />
-            <div className="col-sm-3">
+            <div className="col-sm-2">
               {key === 0 && (
                 <button
                   className="btn btn-dark btn-outline-dark "
@@ -275,18 +275,18 @@ const AjouterFournisseur = (props) => {
                     <option value="">Autre</option>
                   </select>
                 )}
-                {(activite !== "fournisseur de poulet" &&
+                {activite !== "fournisseur de poulet" &&
                   activite !== "fournisseur des legumes" &&
-                  activite !== " ") && (
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="adrFournisseur"
-                    value={activite}
-                    onChange={(e) => setActivite(e.target.value)}
-                    required
-                  />
-                )}
+                  activite !== " " && (
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="adrFournisseur"
+                      value={activite}
+                      onChange={(e) => setActivite(e.target.value)}
+                      required
+                    />
+                  )}
                 {verifier === false && activite === "" && (
                   <p style={{ color: "red", fontSize: "11px" }}>
                     {" "}
@@ -323,7 +323,7 @@ const AjouterFournisseur = (props) => {
 
             <div className="mb-3 row">
               <label htmlFor="email" className="col-sm-2 col-form-label ">
-                Email 
+                Email
               </label>
               <div className="col-sm-10">
                 <input
@@ -396,6 +396,12 @@ const AjouterFournisseur = (props) => {
                     *Veillez saisir le R.C{" "}
                   </p>
                 )}
+                {RC.length > 20 && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    * R.C incorrect{" "}
+                  </p>
+                )}
               </div>
 
               <label
@@ -420,6 +426,12 @@ const AjouterFournisseur = (props) => {
                     *Veillez saisir le A.I{" "}
                   </p>
                 )}
+                {AI.length > 11 && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    * A.I incorrect{" "}
+                  </p>
+                )}
               </div>
             </div>
             <div className="mb-3 row">
@@ -438,10 +450,16 @@ const AjouterFournisseur = (props) => {
                   onChange={(e) => setNif(e.target.value)}
                   required
                 />
-                {verifier === false && RC === "" && (
+                {verifier === false && NIF === "" && NIF.length < 15 && (
                   <p style={{ color: "red", fontSize: "11px" }}>
                     {" "}
                     *Veillez saisir le N.I.F{" "}
+                  </p>
+                )}
+                {NIF.length > 20 && (
+                  <p style={{ color: "red", fontSize: "11px" }}>
+                    {" "}
+                    * N.I.F incorrect{" "}
                   </p>
                 )}
               </div>
@@ -463,6 +481,12 @@ const AjouterFournisseur = (props) => {
                   required
                 />
               </div>
+              {NIS.length > 15 && (
+                <p style={{ color: "red", fontSize: "11px" }}>
+                  {" "}
+                  * N.I.S incorrect{" "}
+                </p>
+              )}
             </div>
 
             <div className="mb-3 row">
@@ -472,7 +496,7 @@ const AjouterFournisseur = (props) => {
               >
                 Modalite de paiement<span style={{ color: "red" }}>*</span>
               </label>
-              <div className="col-sm-10">
+              <div className="col-sm-4">
                 <select
                   className="form-select"
                   aria-label="Default select example"
@@ -482,13 +506,8 @@ const AjouterFournisseur = (props) => {
                   required
                 >
                   <option selected></option>
-                  <option value="versement a l'avance">
-                    versement à l'avance
-                  </option>
-                  <option value="versement par tranche">
-                    versement par tranche
-                  </option>
-                  <option value="versement cash">versement cash</option>
+                  <option value="par cheque">par chèque</option>
+                  <option value="par espece">par espèce</option>
                 </select>
                 {verifier === false && modalite === "" && (
                   <p style={{ color: "red", fontSize: "11px" }}>
@@ -497,6 +516,33 @@ const AjouterFournisseur = (props) => {
                   </p>
                 )}
               </div>
+              {modalite === "par cheque" && (
+                <>
+                  <label
+                    htmlFor="modalitePaiement"
+                    className="col-sm-2 col-form-label "
+                    style={{ paddingLeft: "100px" }}
+                  >
+                    R.I.P <span style={{ color: "red" }}>*</span>
+                  </label>
+                  <div className="col-sm-4">
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="adrFournisseur"
+                      value={RIP}
+                      onChange={(e) => setRip(e.target.value)}
+                      required
+                    />
+                    {RIP.length > 20 && (
+                      <p style={{ color: "red", fontSize: "11px" }}>
+                        {" "}
+                        * R.I.P incorrect{" "}
+                      </p>
+                    )}
+                  </div>
+                </>
+              )}
             </div>
 
             <div className="mb-3 row">
@@ -504,21 +550,18 @@ const AjouterFournisseur = (props) => {
                 htmlFor="typePaiement"
                 className="col-sm-2 col-form-label "
               >
-                Type de paiement 
+                Type de paiement
               </label>
               <div className="col-sm-10">
-                <select
-                  className="form-select"
+                <input
+                  className="form-control"
+                  type="text"
                   aria-label="Default select example"
                   id="typePaiement"
                   value={typePaiement}
                   onChange={(e) => setTypePaiement(e.target.value)}
                   required
-                >
-                  <option selected></option>
-                  <option value="par cheque">par chèque</option>
-                  <option value="par espece">par espèce</option>
-                </select>
+                />
               </div>
             </div>
 
@@ -527,7 +570,7 @@ const AjouterFournisseur = (props) => {
                 htmlFor="natureLivraison"
                 className="col-sm-2 col-form-label "
               >
-                Nature de livraison 
+                Nature de livraison
               </label>
               <div className="col-sm-10">
                 <input
