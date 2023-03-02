@@ -80,7 +80,7 @@ const ModifierFournisseur = (props) => {
       <Modal.Body>
         <div className="mb-3 row">
           <label htmlFor="nomFournisseur" className="col-sm-2 col-form-label ">
-            Nom Fournisseur 
+            Nom Fournisseur
           </label>
           <div className="col-sm-10">
             <input
@@ -102,7 +102,7 @@ const ModifierFournisseur = (props) => {
 
         <div className="mb-3 row">
           <label htmlFor="activite" className="col-sm-2 col-form-label ">
-            Activite 
+            Activite
           </label>
           <div className="col-sm-10">
             {(activite === "fournisseur de poulet" ||
@@ -187,7 +187,7 @@ const ModifierFournisseur = (props) => {
 
         <div className="mb-3 row">
           <label htmlFor="formeJuridique" className="col-sm-2 col-form-label">
-            Forme juridique 
+            Forme juridique
           </label>
           <div className="col-sm-10">
             <select
@@ -214,7 +214,7 @@ const ModifierFournisseur = (props) => {
 
         <div className="mb-3 row">
           <label htmlFor="adrFournisseur" className="col-sm-2 col-form-label ">
-            R.C 
+            R.C
           </label>
           <div className="col-4 ">
             <input
@@ -238,7 +238,7 @@ const ModifierFournisseur = (props) => {
             className="col-sm-2 col-form-label "
             style={{ paddingLeft: "100px" }}
           >
-            A.I 
+            A.I
           </label>
           <div className="col-sm-4">
             <input
@@ -259,7 +259,7 @@ const ModifierFournisseur = (props) => {
         </div>
         <div className="mb-3 row">
           <label htmlFor="adrFournisseur" className="col-sm-2 col-form-label ">
-            N.I.F 
+            N.I.F
           </label>
           <div className="col-4 ">
             <input
@@ -372,7 +372,7 @@ const ModifierFournisseur = (props) => {
           id="ajouterbtn"
           onClick={(e) => modifier(e)}
         >
-          MODIFIER
+          CONFIRMER
         </button>
       </Modal.Footer>
     </Modal>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ServiceAdmin from "../../service/serviceAdmin";
 import ModifierAgent from "./modifierAgent";
 import moment from "moment";
-import Pagination from "../../test/pagination/pagination";
+
 //import ServiceRole from '../../service/service.role'
 
 export default function ListeAgent() {
@@ -39,6 +39,8 @@ export default function ListeAgent() {
     });
   };
 
+ 
+
   //recupérer des agents par "id" / "nom" / "prenom"
   function getElement() {
     if (role === "") getAllPersonne();
@@ -62,6 +64,7 @@ export default function ListeAgent() {
 
   const dateModif = (date1) => {
     var date = moment.utc(date1).format("DD-MM-YYYY");
+    
     const words = date.split("-");
     //var a = parseInt(words[0])+'-'+(words[1])+'-'+(words[2])
 
@@ -75,6 +78,12 @@ export default function ListeAgent() {
       month: "2-digit",
       year: "numeric",
     });
+  };
+
+  const dateModif2 = (date) => {
+
+    const words = date.split("/");
+    return words[2] + "-" + words[1] + "-" + words[0];
   };
 
   //fonction d'émigration les données d'un agent pour le modifier
@@ -164,11 +173,11 @@ export default function ListeAgent() {
                       <td>{personne.id_personne}</td>
                       <td>{personne.nom}</td>
                       <td>{personne.prenom}</td>
-                      <td>{dateModif( personne.date_naissance)}</td>
+                      <td>{dateModif(personne.date_naissance)}</td>
                       <td>{personne.adresse}</td>
                       <td>{"0" + personne.num_tel}</td>
                       <td>{personne.fonction}</td>
-                      <td>{personne.fk_role}</td>
+                      <td>{personne.nom_role}</td>
                       <td>{personne.mot_passe}</td>
                       <td>
                         <input
@@ -177,7 +186,7 @@ export default function ListeAgent() {
                               personne.id_personne,
                               personne.nom,
                               personne.prenom,
-                              personne.date_naissance,
+                              dateModif(personne.date_naissance),
                               personne.adresse,
                               "0" + personne.num_tel,
                               personne.fonction,
@@ -267,7 +276,7 @@ export default function ListeAgent() {
           id={id}
           nom={nom}
           prenom={prenom}
-          dateN={dateN}
+          dateN={dateModif2(dateN)}
           adr={adr}
           tel={tel}
           fonction={fonction}

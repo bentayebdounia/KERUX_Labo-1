@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import serviceEntrepot from "../../service/service.entrepot";
 
 const ModifierEntrepot = (props) => {
-
   const [nomEntrepot, setNomEtrepot] = useState(props.nom_entrepot);
   const [type, setType] = useState(props.type_entrepot);
   const [airStock, setAirStock] = useState(props.air_stockage);
@@ -15,36 +14,33 @@ const ModifierEntrepot = (props) => {
   const toggleSwitch = () => {
     setExist(!exist);
   };
- const verificetionChamp = () => {
-   if (
-     nomEntrepot !== "" &&
-     type === "chambre froide" &&
-     airStock !== "" &&
-     capacite !== "" &&
-     adr !== ""
-   ) {
+  const verificetionChamp = () => {
+    if (
+      nomEntrepot !== "" &&
+      type === "chambre froide" &&
+      airStock !== "" &&
+      adr !== ""
+    ) {
       //alert(verifier);
-     setVerifier(true);
-     return true;
-   } else if (
-     nomEntrepot !== "" &&
-     type !== "chambre froide" &&
-     type !== "" &&
-     airStock === "" &&
-     capacite !== "" &&
-     adr !== ""
-   ) {
-     alert(verifier);
-     setVerifier(true);
-     return true;
-   } else {
-     setVerifier(false);
-     return false;
-   }
- };
+      setVerifier(true);
+      return true;
+    } else if (
+      nomEntrepot !== "" &&
+      type !== "chambre froide" &&
+      type !== "" &&
+      airStock === "" &&
+      adr !== ""
+    ) {
+      alert(verifier);
+      setVerifier(true);
+      return true;
+    } else {
+      setVerifier(false);
+      return false;
+    }
+  };
 
   const modifier = async (e) => {
-    
     if (verificetionChamp() === true) {
       await serviceEntrepot.updateEntrepot(
         nomEntrepot,
@@ -63,7 +59,7 @@ const ModifierEntrepot = (props) => {
       setExist("");
 
       props.handleClose();
-      props.showRacine()
+      props.showRacine();
     }
   };
 
@@ -159,12 +155,6 @@ const ModifierEntrepot = (props) => {
               value={capacite}
               onChange={(e) => setCapacite(e.target.value)}
             />
-            {verifier === false && capacite === "" && (
-              <p style={{ color: "red", fontSize: "11px" }}>
-                {" "}
-                *Veillez saisir la capacité
-              </p>
-            )}
           </div>
         </div>
         <div className="mb-3 row">
@@ -219,7 +209,7 @@ const ModifierEntrepot = (props) => {
           id="ajouterbtn"
           onClick={(e) => modifier(e)}
         >
-          MODIFIER
+          CONFIRMER
         </button>
       </Modal.Footer>
     </Modal>

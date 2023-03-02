@@ -18,8 +18,7 @@ export default function Contact(props){
             <input
               type="text"
               class="form-control"
-              id="produit"
-              style={{ height: "50px" }}
+              id="poids"
               value={props.nomContact}
               onChange={(event) => {
                 props.onNomContactChange(event.target.value);
@@ -31,8 +30,7 @@ export default function Contact(props){
             <input
               type="text"
               class="form-control"
-              id="produit"
-              style={{ height: "50px" }}
+              id="poids"
               value={props.nomContact}
             />
           )}
@@ -52,13 +50,12 @@ export default function Contact(props){
                 type="text"
                 class="form-control"
                 id="poids"
-                style={{ height: "50px" }}
                 value={props.numContact}
                 onChange={(event) => {
                   props.onNumContactChange(event.target.value);
                 }}
               />
-              {(props.numContact).length > 10 && (
+              {props.numContact.length > 10 && (
                 <p style={{ color: "red", fontSize: "11px" }}>
                   {" "}
                   * Numero de telephone incorrect{" "}
@@ -72,7 +69,6 @@ export default function Contact(props){
               type="text"
               class="form-control"
               id="poids"
-              style={{ height: "50px" }}
               value={props.numContact}
             />
           )}

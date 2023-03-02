@@ -4,7 +4,7 @@ import ModelReponse from "../../Models/Model.repense";
 import serviceActuelProcess from "../../service/sevice.actuelProcess";
 import serviceAlert from "../../service/service.alert";
 const ModifierAlert = (props) => {
-  const [dateAlert, setDatealert] = useState("");
+  const [dateAlert, setDatealert] = useState(props.date_alert);
   const [etape, setEtape] = useState(props.etp);
   const [idBoxe, setIdboxe] = useState(props.id);
   const [message, setMessage] = useState();
@@ -29,6 +29,7 @@ const ModifierAlert = (props) => {
           setEtape("");
           setIdboxe("");
           setDatealert("");
+          props.handleClose();
         }
       });
     }
@@ -67,14 +68,13 @@ const ModifierAlert = (props) => {
             <div className="mb-2 row">
               <div className="col-sm-4">
                 <label htmlFor="etape" className="col-sm-1 form-label">
-                  Etape 
+                  Etape
                 </label>
                 <select
                   className="form-select"
                   aria-label="Default select example"
                   id="etape"
                   value={etape}
-                  
                 >
                   <option value=""></option>
                   <option value="enregistrement">Enregistrement</option>
@@ -87,12 +87,7 @@ const ModifierAlert = (props) => {
 
               <div className="col-sm-4">
                 <label className="col-sm-3 form-label">ID de box</label>
-                <input
-                  type="text"
-                  className="form-control "
-                  value={idBoxe}
-                  
-                />
+                <input type="text" className="form-control " value={idBoxe} />
               </div>
 
               <div className="col-sm-4">
@@ -121,7 +116,7 @@ const ModifierAlert = (props) => {
             className="btn btn-success"
             onClick={() => chercher()}
           >
-            MODIFIER
+            CONFIRMER
           </button>
         </Modal.Footer>
       </Modal>

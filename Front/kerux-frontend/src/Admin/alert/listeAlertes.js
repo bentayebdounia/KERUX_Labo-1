@@ -9,6 +9,7 @@ const ListeAlerte = (props) => {
   const [alerts, setAlerts] = useState([]);
   const [etape, setEtape] = useState("");
   const [idBox, setId_box] = useState("");
+  const [date_alert, setDate_alert] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(6);
 
@@ -55,10 +56,16 @@ const ListeAlerte = (props) => {
     });
   };
 
+  const dateModif2 = (date) => {
+    const words = date.split("/");
+    return words[2] + "-" + words[1] + "-" + words[0];
+  };
+
   //fonction  de modification --recuperer les données de l'alert pour les modifier 
-  const modifier = (id, etape) => {
+  const modifier = (id, etape, dateAlert) => {
     setId_box(id);
     setEtape(etape);
+    setDate_alert(dateAlert)
     handleShow();
   };
 
@@ -103,7 +110,7 @@ const ListeAlerte = (props) => {
               <tbody>
                 {currentAlert.map((p, key) => (
                   <tr key={key + 1}>
-                    <td>{key}</td>
+                    <td>{key+1}</td>
                     <td>{p.id_gnerate}</td>
                     <td>{p.categorie}</td>
                     <td>{p.nom_produit}</td>
@@ -115,11 +122,14 @@ const ListeAlerte = (props) => {
                     <td>{p.etape}</td>
                     <td>
                       <input
-                        onClick={(e) => modifier(p.id_gnerate, p.etape)}
+                        onClick={
+                          ((e) => modifier(p.id_gnerate, p.etape,
+                          dateModif(p.date_alert)))
+                        }
                         type="button"
                         className="btn"
                         style={{ background: "#4f8b2a", color: "white" }}
-                        value="MODIFIER"
+                        value="CONFIRMER"
                       ></input>
                     </td>
                   </tr>
@@ -144,6 +154,7 @@ const ListeAlerte = (props) => {
           handleClose={handleClose}
           etp={etape}
           id={idBox}
+          date_alert={dateModif2(date_alert)}
         />
       )}
     </>

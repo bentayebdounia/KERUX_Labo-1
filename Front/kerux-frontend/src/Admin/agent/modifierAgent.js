@@ -22,6 +22,8 @@ const ModifierAgent = (props) => {
     });
   }, []);
 
+
+  
   //fonction de verificetion des champs
   const verificetionChamp = () => {
     if (
@@ -34,7 +36,7 @@ const ModifierAgent = (props) => {
       num_tel[0] === "0" &&
       role !== ""
     ) {
-      if (fk_role !== "4") {
+      if (fk_role !== "3" && fk_role !== 3) {
         if (mot_passe !== "") {
           setVerifier(true);
           return true;
@@ -47,7 +49,7 @@ const ModifierAgent = (props) => {
         return true;
       }
     } else {
-      //setPassword("");
+      setPassword("");
       setVerifier(false);
       return false;
     }
@@ -182,7 +184,7 @@ const ModifierAgent = (props) => {
               value={num_tel}
               onChange={(e) => setTel(e.target.value)}
             />
-            {verifier === false  && ( num_tel === "" || num_tel.length <10) && (
+            {verifier === false && (num_tel === "" || num_tel.length < 10) && (
               <p style={{ color: "red", fontSize: "11px" }}>
                 {" "}
                 *Veillez saisir le numéro de téléphone
@@ -244,7 +246,7 @@ const ModifierAgent = (props) => {
           </div>
         </div>
 
-        {fk_role !== "3" && (
+        {fk_role !== "3" && fk_role !== 3 && (
           <div className="mb-3 row">
             <label htmlFor="inputPassword" className="col-sm-3 col-form-label">
               Mot de passe
@@ -275,7 +277,7 @@ const ModifierAgent = (props) => {
           id="ajouterbtn"
           onClick={(e) => modifier(e)}
         >
-          MODIFIER
+          CONFIRMER
         </button>
       </Modal.Footer>
     </Modal>

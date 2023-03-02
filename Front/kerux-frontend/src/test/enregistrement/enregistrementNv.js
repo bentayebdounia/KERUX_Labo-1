@@ -309,9 +309,9 @@ useEffect (()=>{
                   </div>
 
                   <div className="contenerProd col-4">
-                    <label id="categorie"> Recepteur: </label>
+                    <label id="categorie"> Activité fournisseur: </label>
 
-                    <label id="categorieValue">{props.recepteur} </label>
+                    <label id="categorieValue">{props.activite} </label>
                   </div>
 
                   <div className="contenerProd col-4">

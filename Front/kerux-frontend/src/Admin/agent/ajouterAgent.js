@@ -46,7 +46,7 @@ export default function AjouterAgent() {
       carteIdentite !== ""
       
     ) {
-      if (fk_role !== "4") {
+      if (fk_role !== "3") {
         if (mot_passe !== "") {
           setVerifier(true);
           return true;
@@ -59,7 +59,7 @@ export default function AjouterAgent() {
         return true;
       }
     } else {
-     // setPassword("");
+      //setPassword("");
       setVerifier(false);
       return false;
     }

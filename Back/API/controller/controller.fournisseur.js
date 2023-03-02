@@ -17,6 +17,7 @@ ajouterFournisseur = (req, res) => {
     a_i,
     n_i_f,
     n_i_s,
+    rip
   } = req.body;
   pool.query(
     queries.ajouterFourniseur,
@@ -35,6 +36,7 @@ ajouterFournisseur = (req, res) => {
       a_i,
       n_i_f,
       n_i_s,
+      rip
     ],
     (error, result) => {
       if (error) {
@@ -63,7 +65,8 @@ updateFournisseur = (req, res) => {
     r_c,
     a_i,
     n_i_f,
-    n_i_s
+    n_i_s,
+    rip
   } = req.body;
 
   pool.query(
@@ -81,6 +84,7 @@ updateFournisseur = (req, res) => {
       a_i,
       n_i_f,
       n_i_s,
+      rip,
       id_fournisseur,
     ],
     (error, result) => {

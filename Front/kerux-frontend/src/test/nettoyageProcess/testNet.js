@@ -485,13 +485,6 @@ table2 = (
                   }}
                   onClick={chargerDataEnStock}
                 >
-                  {tableDonneesStocker.length !==0 &&
-                  <span
-                    className="position-absolute top-5 start-5 translate-middle p-2 bg-danger border border-light rounded-circle"
-                    style={{ fontSize: "11px", fontStyle: "normal" }}
-                  >
-                    <span className="visually-hidden">unread messages</span>
-                  </span>}
                   <a
                     className="nav-link "
                     style={{
@@ -503,6 +496,14 @@ table2 = (
                     Produits en Stock
                   </a>{" "}
                 </label>
+                {tableDonneesStocker.length !== 0 && (
+                  <span
+                    className="position-absolute top-5 start-5 translate-middle p-2 bg-danger border border-light rounded-circle"
+                    style={{ fontSize: "11px", fontStyle: "normal" }}
+                  >
+                    <span className="visually-hidden">unread messages</span>
+                  </span>
+                )}
 
                 <p
                   style={{

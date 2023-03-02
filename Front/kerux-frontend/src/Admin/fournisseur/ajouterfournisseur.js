@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Contact from "./contact";
 import ServiceFournisseur from "../../service/service.fournisseur";
 import ModelReponse from "../../Models/Model.repense";
+import ModalHeader from "react-bootstrap/esm/ModalHeader";
 const AjouterFournisseur = (props) => {
   const [idFournisseur, setIdFournisseur] = useState("");
   const [nomFournisseur, setNomFournisseur] = useState("");
@@ -47,9 +48,33 @@ const AjouterFournisseur = (props) => {
       adresse !== "" &&
       activite !== "" &&
       modalite !== "" &&
+      modalite === "par espece" &&
       RC !== "" &&
+      RC.length === 20 &&
       AI !== "" &&
-      NIF !== ""
+      AI.length === 11 &&
+      NIF !== "" &&
+      NIF.length === 20
+    ) {
+      setVerifier(true);
+      return true;
+    } else if (
+      idFournisseur !== "" &&
+      idFournisseur.length <= 2 &&
+      nomFournisseur !== "" &&
+      formJuridique !== "" &&
+      adresse !== "" &&
+      activite !== "" &&
+      modalite !== "" &&
+      modalite === "par cheque" &&
+      RIP !== "" &&
+      RIP.length === 20 &&
+      RC !== "" &&
+      RC.length === 20 &&
+      AI !== "" &&
+      AI.length === 11 &&
+      NIF !== "" &&
+      NIF.length === 20
     ) {
       setVerifier(true);
       return true;
@@ -137,9 +162,9 @@ const AjouterFournisseur = (props) => {
     <>
       {contacts.map((contact, key) => {
         return (
-          <div className="row gy-2 gx-2 align-items-left" key={key}>
+          <div className="row gy-2 gx-2 align-items-left mb-2" key={key}>
             <Contact
-            cle={key}
+              cle={key}
               nomContact={contact.nomContact}
               onNomContactChange={(newnomContact) => {
                 const newContacts = [...contacts];
@@ -159,25 +184,47 @@ const AjouterFournisseur = (props) => {
                   className="btn btn-dark btn-outline-dark "
                   type="button"
                   id="button-addon2"
+                  style={{
+                    height: "38px",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
                   onClick={() => {
-                    const newContacts = [...contacts];
+                    if (
+                      contacts[0].nomContact !== "" &&
+                      contacts[0].numContact !== 0 &&
+                      contacts[0].numContact.length === 10
+                    ) {
+                      const newContacts = [...contacts];
 
-                    newContacts.push({
-                      nomContact: "",
-                      numContact: 0,
-                      date: new Date(),
-                    });
+                      newContacts.push({
+                        nomContact: "",
+                        numContact: 0,
+                        date: new Date(),
+                      });
 
-                    setContacts(
-                      newContacts.sort((a, b) => {
-                        if (a.date < b.date) return 1;
-                        if (a.date > b.date) return -1;
-                        return 0;
-                      })
-                    );
+                      setContacts(
+                        newContacts.sort((a, b) => {
+                          if (a.date < b.date) return 1;
+                          if (a.date > b.date) return -1;
+                          return 0;
+                        })
+                      );
+                    } else {
+                      setMessage("Veiller remplir les champs de contact");
+                      handleShow();
+                    }
                   }}
                 >
-                  <i className="bi bi-plus-lg" style={{ color: "white" }}></i>
+                  <i
+                    className="bi bi-plus-lg"
+                    style={{
+                      color: "white",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      
+                    }}
+                  ></i>
                 </button>
               )}
             </div>
