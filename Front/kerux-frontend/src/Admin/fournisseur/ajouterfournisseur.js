@@ -90,7 +90,9 @@ const AjouterFournisseur = (props) => {
     //console.log(nomFournisseur, formJuridique, adresse, email,  activite, modalite, typePaiement, natureLivraison, categorie);
     if (verificetionChamp()) {
       await ServiceFournisseur.getIdFournisseure(idFournisseur).then((res) => {
-        if (res.data.length !== 0) {
+        console.log("verification ID");
+        console.log((res.data));
+        if (res.data !== "ID existe") {
           ServiceFournisseur.ajouterFournisseur(
             idFournisseur,
             nomFournisseur,
@@ -106,6 +108,7 @@ const AjouterFournisseur = (props) => {
             typePaiement,
             natureLivraison
           ).then(async (res) => {
+            console.log(res.data);
             var i = 1;
             while (i < contacts.length) {
               //console.log(contacts[i].nomContact);
@@ -118,7 +121,10 @@ const AjouterFournisseur = (props) => {
               });
               i++;
             }
-            if ((res.data = "bien ajouter" && i === contacts.length)) {
+            if (
+              res.data === "fournisseur bien ajouter" &&
+              i === contacts.length
+            ) {
               setIdFournisseur("");
               setNomFournisseur("");
               setFormJuridique("");

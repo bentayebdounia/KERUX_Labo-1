@@ -44,8 +44,8 @@ ajouterFournisseur = (req, res) => {
         console.log(error);
       };
       
-      res.status(200).json(result.rows[0]);
-
+      res.status(200).send("fournisseur bien ajouter");
+      
     }
   );
 };

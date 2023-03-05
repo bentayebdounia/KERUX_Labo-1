@@ -45,9 +45,10 @@ CREATE TABLE fournisseur (
     nature_livraison VARCHAR (100) ,
     date_enregistement DATE,
     r_c VARCHAR (100),
-    a_i INT ,
-    n_i_f INT,
-    n_i_s INT
+    a_i VARCHAR ,
+    n_i_f VARCHAR,
+    n_i_s VARCHAR,
+    rip VARCHAR
 
 );
 

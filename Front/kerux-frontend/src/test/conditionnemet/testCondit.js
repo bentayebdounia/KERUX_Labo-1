@@ -459,9 +459,10 @@ const TestCondit = (props) => {
 
             {tableDonneesStocker.length !== 0 && (
               <span
-                className="position-absolute top-5 start-5 translate-middle p-2 bg-danger border border-light rounded-circle"
+                className="position-absolute top-5 start-5 translate-middle p-2 badge rounded-pill bg-danger text-light"
                 style={{ fontSize: "11px", fontStyle: "normal" }}
               >
+                {tableDonneesStocker.length}
                 <span className="visually-hidden">unread messages</span>
               </span>
             )}

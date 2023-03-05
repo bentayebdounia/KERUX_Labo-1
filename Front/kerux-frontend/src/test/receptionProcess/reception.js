@@ -145,7 +145,7 @@ const Reception = (props) => {
               >
                 <p>
                   {" "}
-                  {value.id_fournisseur}. {value.nom_fournisseur}
+                  {value.id_fournisseur}|{"   "}{value.nom_fournisseur}
                 </p>
               </a>
             );

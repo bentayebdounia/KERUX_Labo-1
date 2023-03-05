@@ -311,7 +311,7 @@ const Conditionnement = (props) => {
                       aria-valuemax="100"
                     >
                       {" "}
-                      {PorcentagePoids}{" "}
+                      {PorcentagePoids} %{" "}
                     </div>
                   </div>
                 </label>

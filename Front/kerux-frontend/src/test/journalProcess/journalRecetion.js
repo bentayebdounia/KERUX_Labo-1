@@ -182,6 +182,31 @@ const JournalReception = (props) => {
               />
             )}
           </div>
+          <div style={{ textAlign: "center", marginTop: "10px" }}>
+            <button
+              className="btn btn-outline-secondary me-3"
+              type="button"
+              id="button-addon2"
+              style={{ background: "rgb(123, 23, 15)", width: "80px" }}
+              onClick={window.print}
+            >
+              <i
+                className="bi bi-printer-fill"
+                style={{ fontSize: "1.25rem" }}
+              ></i>
+            </button>
+            <button
+              className="btn btn-outline-secondary"
+              type="button"
+              id="button-addon2"
+              style={{ background: "rgb(123, 23, 15)", width: "80px" }}
+            >
+              <i
+                className="bi bi-filetype-csv"
+                style={{ fontSize: "1.25rem" }}
+              ></i>
+            </button>
+          </div>
         </div>
       </Modal.Body>
     </Modal>

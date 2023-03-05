@@ -280,71 +280,134 @@ const JournalNettoyage = (props) => {
             ));
         }
     
-    return ( 
-        <Modal size="xl" scrollable={true} show={props.show} onHide={()=> {props.handleClose(); setComboBox ('') ; setSerchValue('')}}>
-            <Modal.Header closeButton>
-            <Modal.Title style={{color: "#7B170F" }}><i className="bi bi-journals" style={{color: "#7B170F" , fontSize:"25px"}} ></i> Journal {props.journalprocess}</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <div style={{margin:"5%", marginRight:"5%"}}>
-                    <div className="mb-4 row agent">
-                        <select className="form-select" aria-label="Default select example" id="roleAgent" style={{width:"20%" , marginLeft:"30px"}} value={comboBox} onChange={(e)=> setComboBox(e.target.value)} >
-                            <option  selected></option>
-                            <option value="id_gnerate">ID</option>
-                            <option value="categorie">categorie</option>
-                            <option value="nom_produit">nom de Produit</option>
-                        </select>
-                    
-                        <div className="input-group col-sm-9">
-                            <input type="text" className="form-control"  aria-label="Recipient's username" aria-describedby="button-addon2" value={serchValue} onChange={(e)=> setSerchValue(e.target.value)} />
-                            <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={(e) => recherche(e)} style={{background:'rgb(123, 23, 15)'}}>
-                                <i className="bi bi-search" style={{fontSize: "1.25rem"}}></i>
-                            </button>
-                        </div>
-                    </div>
+    return (
+      <Modal
+        size="xl"
+        scrollable={true}
+        show={props.show}
+        onHide={() => {
+          props.handleClose();
+          setComboBox("");
+          setSerchValue("");
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title style={{ color: "#7B170F" }}>
+            <i
+              className="bi bi-journals"
+              style={{ color: "#7B170F", fontSize: "25px" }}
+            ></i>{" "}
+            Journal {props.journalprocess}
+          </Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div style={{ margin: "5%", marginRight: "5%" }}>
+            <div className="mb-4 row agent">
+              <select
+                className="form-select"
+                aria-label="Default select example"
+                id="roleAgent"
+                style={{ width: "20%", marginLeft: "30px" }}
+                value={comboBox}
+                onChange={(e) => setComboBox(e.target.value)}
+              >
+                <option selected></option>
+                <option value="id_gnerate">ID</option>
+                <option value="categorie">categorie</option>
+                <option value="nom_produit">nom de Produit</option>
+              </select>
 
-                        <div className="divTab" style={{width:"100%" , margin:"0px"}}>
-                            <table className="table table-bordered"  >
-                            <thead>
-                                <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">ID</th>
-                                <th scope="col">Categorie</th>
-                                <th scope="col">Nom produit</th>
-                                <th scope="col">Poids(Kg) </th>
-                                <th scope="col">Quantité</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Heure</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {tableGeneral}
-                                {tableCondition}
-                                
-                            </tbody>
-                            </table>
+              <div className="input-group col-sm-9">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-label="Recipient's username"
+                  aria-describedby="button-addon2"
+                  value={serchValue}
+                  onChange={(e) => setSerchValue(e.target.value)}
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                  onClick={(e) => recherche(e)}
+                  style={{ background: "rgb(123, 23, 15)" }}
+                >
+                  <i
+                    className="bi bi-search"
+                    style={{ fontSize: "1.25rem" }}
+                  ></i>
+                </button>
+              </div>
+            </div>
 
-                            {comboBox==='' && process.length>6 &&
-                                <Pagination
-                                    postsPerPage={postsPerPage}
-                                    totalPosts={process.length}
-                                    paginate={paginate}
-                                />}
-                            {(comboBox==='id_gnerate'|| comboBox==='categorie' || comboBox==='nom_produit') && processRecherche.length>6 &&
-                                <Pagination
-                                    postsPerPage={postsPerPage}
-                                    totalPosts={processRecherche.length}
-                                    paginate={paginate}
-                                />}
-                        </div>
-                    </div>
+            <div className="divTab" style={{ width: "100%", margin: "0px" }}>
+              <table className="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">Categorie</th>
+                    <th scope="col">Nom produit</th>
+                    <th scope="col">Poids(Kg) </th>
+                    <th scope="col">Quantité</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Heure</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tableGeneral}
+                  {tableCondition}
+                </tbody>
+              </table>
 
-                
-                   
-            </Modal.Body>
-            
+              {comboBox === "" && process.length > 6 && (
+                <Pagination
+                  postsPerPage={postsPerPage}
+                  totalPosts={process.length}
+                  paginate={paginate}
+                />
+              )}
+              {(comboBox === "id_gnerate" ||
+                comboBox === "categorie" ||
+                comboBox === "nom_produit") &&
+                processRecherche.length > 6 && (
+                  <Pagination
+                    postsPerPage={postsPerPage}
+                    totalPosts={processRecherche.length}
+                    paginate={paginate}
+                  />
+                )}
+            </div>
+            <div style={{ textAlign: "center", marginTop: "10px" }}>
+              <button
+                className="btn btn-outline-secondary me-3"
+                type="button"
+                id="button-addon2"
+                style={{ background: "rgb(123, 23, 15)", width: "80px" }}
+                onClick={window.print}
+              >
+                <i
+                  className="bi bi-printer-fill"
+                  style={{ fontSize: "1.25rem" }}
+                ></i>
+              </button>
+              <button
+                className="btn btn-outline-secondary"
+                type="button"
+                id="button-addon2"
+                style={{ background: "rgb(123, 23, 15)", width: "80px" }}
+              >
+                <i
+                  className="bi bi-filetype-csv"
+                  style={{ fontSize: "1.25rem" }}
+                ></i>
+              </button>
+            </div>
+          </div>
+        </Modal.Body>
       </Modal>
-     );
+    );
 }
  
 export default JournalNettoyage;
